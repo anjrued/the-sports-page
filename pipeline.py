@@ -174,7 +174,7 @@ Write a punchy opinion column about a current sports topic.
 Generate the complete JSON newspaper now."""
 
     message = client.messages.create(
-        model="claude-sonnet-4-5-20251001",
+        model="claude-sonnet-4-6",
         max_tokens=4000,
         system=EDITOR_SYSTEM,
         messages=[{"role": "user", "content": prompt}],
