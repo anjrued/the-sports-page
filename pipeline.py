@@ -1,240 +1,225 @@
 #!/usr/bin/env python3
 """
-Sports Gazette Daily Pipeline
-Runs every morning via GitHub Actions.
-1. Fetches real scores + standings from ESPN public API
-2. Calls Claude to write headlines and stories
-3. Writes data.json that the site reads
+The Sports Page — Daily Pipeline
+Fetches real scores/standings from ESPN, writes AI stories for each section.
 """
 
-import json
-import os
-import requests
+import json, os, requests
 from datetime import datetime, timezone
 import anthropic
 
-# ─── ESPN API HELPERS ─────────────────────────────────────────────────────────
-
 ESPN = "https://site.api.espn.com/apis/site/v2/sports"
 
-def fetch_scores(sport, league):
-    """Fetch yesterday's / today's scores from ESPN."""
+# ── ESPN HELPERS ──────────────────────────────────────────────────────────────
+
+def fetch_scores(sport, league, limit=10):
     try:
-        url = f"{ESPN}/{sport}/{league}/scoreboard"
-        r = requests.get(url, timeout=10)
+        r = requests.get(f"{ESPN}/{sport}/{league}/scoreboard", timeout=10)
         r.raise_for_status()
-        data = r.json()
         games = []
-        for event in data.get("events", [])[:6]:
-            comps = event.get("competitions", [{}])[0]
-            competitors = comps.get("competitors", [])
-            if len(competitors) < 2:
-                continue
-            # ESPN always puts away team first
-            home = next((c for c in competitors if c.get("homeAway") == "home"), competitors[0])
-            away = next((c for c in competitors if c.get("homeAway") == "away"), competitors[1])
-            status = comps.get("status", {}).get("type", {}).get("shortDetail", "")
+        for event in r.json().get("events", [])[:limit]:
+            comp = event.get("competitions", [{}])[0]
+            teams = comp.get("competitors", [])
+            if len(teams) < 2: continue
+            home = next((t for t in teams if t.get("homeAway") == "home"), teams[0])
+            away = next((t for t in teams if t.get("homeAway") == "away"), teams[1])
+            status = comp.get("status", {}).get("type", {}).get("shortDetail", "")
             games.append({
-                "away_team": away.get("team", {}).get("abbreviation", ""),
+                "away": away.get("team", {}).get("abbreviation", ""),
                 "away_score": int(away.get("score", 0) or 0),
-                "home_team": home.get("team", {}).get("abbreviation", ""),
+                "home": home.get("team", {}).get("abbreviation", ""),
                 "home_score": int(home.get("score", 0) or 0),
                 "status": status,
             })
         return games
     except Exception as e:
-        print(f"  ESPN scores error ({sport}/{league}): {e}")
+        print(f"  scores error {sport}/{league}: {e}")
         return []
 
-
-def fetch_standings(sport, league):
-    """Fetch current standings from ESPN."""
+def fetch_standings(sport, league, max_divs=6):
     try:
-        url = f"{ESPN}/{sport}/{league}/standings"
-        r = requests.get(url, timeout=10)
+        r = requests.get(f"{ESPN}/{sport}/{league}/standings", timeout=10)
         r.raise_for_status()
-        data = r.json()
-        divisions = []
-        for group in data.get("children", data.get("standings", {}).get("entries", []))[:2]:
-            div_name = group.get("name", group.get("abbreviation", ""))
-            entries = group.get("standings", {}).get("entries", [])
+        divs = []
+        for group in r.json().get("children", [])[:max_divs]:
+            label = group.get("name", group.get("abbreviation", ""))
             teams = []
-            for i, entry in enumerate(entries[:5]):
-                team = entry.get("team", {})
+            for i, entry in enumerate(group.get("standings", {}).get("entries", [])[:6]):
+                tm = entry.get("team", {})
                 stats = {s["name"]: s["displayValue"] for s in entry.get("stats", [])}
                 teams.append({
                     "rank": i + 1,
-                    "name": team.get("displayName", team.get("name", "")),
-                    "w": stats.get("wins", stats.get("W", "—")),
-                    "l": stats.get("losses", stats.get("L", "—")),
-                    "pct": stats.get("winPercent", stats.get("PCT", ".000")),
-                    "gb": stats.get("gamesBehind", stats.get("GB", "—")),
+                    "name": tm.get("displayName", ""),
+                    "w":    stats.get("wins",        stats.get("W",   "—")),
+                    "l":    stats.get("losses",      stats.get("L",   "—")),
+                    "pct":  stats.get("winPercent",  stats.get("PCT", ".000")),
+                    "gb":   stats.get("gamesBehind", stats.get("GB",  "—")),
                 })
             if teams:
-                divisions.append({"league": div_name, "teams": teams})
-        return divisions
+                divs.append({"label": label, "teams": teams})
+        return divs
     except Exception as e:
-        print(f"  ESPN standings error ({sport}/{league}): {e}")
+        print(f"  standings error {sport}/{league}: {e}")
         return []
 
+def fetch_schedule(sport, league, limit=13):
+    try:
+        r = requests.get(f"{ESPN}/{sport}/{league}/scoreboard", timeout=10)
+        r.raise_for_status()
+        games = []
+        for event in r.json().get("events", [])[:limit]:
+            comp = event.get("competitions", [{}])[0]
+            teams = comp.get("competitors", [])
+            if len(teams) < 2: continue
+            home = next((t for t in teams if t.get("homeAway") == "home"), teams[0])
+            away = next((t for t in teams if t.get("homeAway") == "away"), teams[1])
+            status = comp.get("status", {}).get("type", {}).get("shortDetail", "TBD")
+            home_pitcher = home.get("probables", [{}])[0].get("displayName", "") if home.get("probables") else ""
+            away_pitcher = away.get("probables", [{}])[0].get("displayName", "") if away.get("probables") else ""
+            game = {
+                "time": status,
+                "away": away.get("team", {}).get("displayName", ""),
+                "home": home.get("team", {}).get("displayName", ""),
+            }
+            if away_pitcher: game["asp"] = away_pitcher
+            if home_pitcher: game["hsp"] = home_pitcher
+            games.append(game)
+        return games
+    except Exception as e:
+        print(f"  schedule error {sport}/{league}: {e}")
+        return []
 
-# ─── COLLECT ALL SPORTS DATA ──────────────────────────────────────────────────
+# ── AI WRITING ────────────────────────────────────────────────────────────────
 
-def collect_sports_data():
-    print("Fetching scores and standings from ESPN...")
-    data = {
-        "scores": [],
-        "standings": [],
-    }
+SYS = """You are the sports editor of The Sports Page, a classic American daily newspaper.
+Write vivid newspaper journalism — inverted pyramid, specific, real player names.
+No em-dashes. No first person. Respond ONLY with a valid JSON object starting with { and ending with }. No markdown, no backticks."""
 
-    # Scores
-    score_sources = [
-        ("basketball", "nba"),
-        ("baseball", "mlb"),
-        ("football", "nfl"),
-        ("hockey", "nhl"),
-    ]
-    for sport, league in score_sources:
-        games = fetch_scores(sport, league)
-        if games:
-            data["scores"].append({"league": league.upper(), "games": games})
-            print(f"  ✓ {league.upper()} scores: {len(games)} games")
-
-    # Standings
-    standing_sources = [
-        ("basketball", "nba"),
-        ("baseball", "mlb"),
-    ]
-    for sport, league in standing_sources:
-        divs = fetch_standings(sport, league)
-        data["standings"].extend(divs)
-        print(f"  ✓ {league.upper()} standings: {len(divs)} divisions")
-
-    return data
-
-
-# ─── AI NEWSPAPER WRITING ─────────────────────────────────────────────────────
-
-EDITOR_SYSTEM = """You are the sports editor of The Sports Gazette, a classic American daily newspaper.
-Your job is to write the day's sports section using the real scores and standings data you are given.
-
-Write in classic American newspaper style — inverted pyramid, vivid, specific. 
-Use real names, scores, and context. Headlines in ALL CAPS, dramatic, punchy.
-
-Respond ONLY with a valid JSON object. No markdown fences, no backticks, no preamble.
-Start with { and end with }
-
-Schema:
-{
-  "headline_story": {
-    "sport": "sport name",
-    "kicker": "SHORT KICKER IN CAPS",
-    "headline": "DRAMATIC HEADLINE IN ALL CAPS",
-    "deck": "A second deck that elaborates",
-    "byline": "By [Full Name], Sports Writer",
-    "body": "Three substantial paragraphs separated by \\n\\n. Inverted pyramid. Real details."
-  },
-  "secondary_stories": [
-    {
-      "sport": "sport",
-      "kicker": "KICKER",
-      "headline": "HEADLINE",
-      "deck": "Deck",
-      "byline": "By [Name], Staff Reporter",
-      "body": "Two paragraphs separated by \\n\\n."
-    },
-    { ... second story ... },
-    { ... third story ... }
-  ],
-  "column": {
-    "section_title": "FROM THE PRESS BOX",
-    "headline": "OPINION COLUMN HEADLINE",
-    "byline": "By Pat McAllister",
-    "body": "Two punchy columnist paragraphs separated by \\n\\n."
-  }
-}"""
-
-
-def write_newspaper(sports_data):
-    print("\nCalling Claude to write today's newspaper...")
-    client = anthropic.Anthropic(api_key=os.environ["ANTHROPIC_API_KEY"])
-
-    prompt = f"""Here is today's real sports data. Write the complete Sports Gazette sports section.
-
-SCORES:
-{json.dumps(sports_data['scores'], indent=2)}
-
-STANDINGS:
-{json.dumps(sports_data['standings'], indent=2)}
-
-Pick the most newsworthy game/story as the headline story.
-Write three secondary stories covering different sports.
-Write a punchy opinion column about a current sports topic.
-
-Generate the complete JSON newspaper now."""
-
-    message = client.messages.create(
+def claude_call(client, prompt, max_tokens=1200):
+    msg = client.messages.create(
         model="claude-sonnet-4-6",
-        max_tokens=4000,
-        system=EDITOR_SYSTEM,
-        messages=[{"role": "user", "content": prompt}],
+        max_tokens=max_tokens,
+        system=SYS,
+        messages=[{"role": "user", "content": prompt}]
     )
-
-    raw = message.content[0].text.strip()
-    # Strip any accidental markdown fences
-    raw = raw.replace("```json", "").replace("```", "").strip()
-    # Extract the JSON object
-    start = raw.find("{")
-    end = raw.rfind("}") + 1
-    if start == -1 or end == 0:
-        raise ValueError("No JSON object found in Claude response")
+    raw = msg.content[0].text.strip().replace("```json","").replace("```","").strip()
+    start, end = raw.find("{"), raw.rfind("}") + 1
     return json.loads(raw[start:end])
 
+def write_front(client, mlb, nba, nhl):
+    return claude_call(client, f"""Write today's front page for The Sports Page newspaper.
 
-# ─── ASSEMBLE FINAL DATA.JSON ─────────────────────────────────────────────────
+Top scores:
+MLB: {json.dumps(mlb[:4])}
+NBA: {json.dumps(nba[:4])}
+NHL: {json.dumps(nhl[:4])}
 
-def build_output(sports_data, written):
-    now = datetime.now(timezone.utc)
-    date_str = now.strftime("%A, %B %-d, %Y")
-    edition_num = (now.timetuple().tm_yday + 142)  # fun edition number
+Return this exact JSON:
+{{
+  "headline": {{
+    "kicker": "SPORT NAME",
+    "headline": "BIGGEST STORY OF THE DAY IN ALL CAPS",
+    "deck": "Elaborating deck under 20 words",
+    "byline": "By [First Last], Sports Writer",
+    "body": "Three vivid paragraphs separated by \\n\\n."
+  }},
+  "secondary": [
+    {{"kicker": "SPORT", "headline": "HEADLINE", "deck": "Deck", "byline": "By [Name]", "body": "Two paragraphs separated by \\n\\n."}},
+    {{"kicker": "SPORT", "headline": "HEADLINE", "deck": "Deck", "byline": "By [Name]", "body": "Two paragraphs separated by \\n\\n."}},
+    {{"kicker": "SPORT", "headline": "HEADLINE", "deck": "Deck", "byline": "By [Name]", "body": "Two paragraphs separated by \\n\\n."}}
+  ],
+  "column": {{
+    "tag": "FROM THE PRESS BOX",
+    "headline": "OPINION HEADLINE IN ALL CAPS",
+    "byline": "By Pat McAllister",
+    "body": "Two punchy opinionated paragraphs separated by \\n\\n."
+  }}
+}}""", max_tokens=2000)
 
-    return {
-        "generated_at": now.isoformat(),
-        "date": date_str,
-        "edition": f"Vol. CXLVII · No. {edition_num}",
-        "weather": "Check your local forecast",  # extend: call a weather API
-        "headline_story": written.get("headline_story", {}),
-        "secondary_stories": written.get("secondary_stories", []),
-        "scores": sports_data["scores"],
-        "standings": sports_data["standings"],
-        "column": written.get("column", {}),
-    }
+def write_section(client, sport_label, scores, standings):
+    return claude_call(client, f"""Write a feature story for the {sport_label} section of today's Sports Page.
 
+Recent scores: {json.dumps(scores[:5])}
+Standings: {json.dumps(standings[:2] if standings else [])}
 
-# ─── MAIN ─────────────────────────────────────────────────────────────────────
+Return:
+{{
+  "kicker": "{sport_label.upper()}",
+  "headline": "ALL CAPS HEADLINE",
+  "deck": "Deck elaborating headline",
+  "byline": "By [First Last], {sport_label} Writer",
+  "body": "Three paragraphs separated by \\n\\n."
+}}""")
+
+# ── MAIN ──────────────────────────────────────────────────────────────────────
 
 def main():
-    print("=== Sports Gazette Daily Pipeline ===")
-    print(f"Running at {datetime.now(timezone.utc).strftime('%Y-%m-%d %H:%M UTC')}\n")
+    print("=== The Sports Page Daily Pipeline ===")
+    now = datetime.now(timezone.utc)
+    print(f"Running at {now.strftime('%Y-%m-%d %H:%M UTC')}\n")
 
-    # 1. Fetch sports data
-    sports_data = collect_sports_data()
+    client = anthropic.Anthropic(api_key=os.environ["ANTHROPIC_API_KEY"])
 
-    # 2. Write newspaper content with Claude
-    written = write_newspaper(sports_data)
-    print("  ✓ AI writing complete")
+    # Fetch all data
+    print("Fetching from ESPN...")
+    mlb_scores    = fetch_scores("baseball",    "mlb",   10)
+    mlb_standings = fetch_standings("baseball", "mlb",    6)
+    mlb_schedule  = fetch_schedule("baseball",  "mlb",   13)
+    print(f"  MLB: {len(mlb_scores)} scores, {len(mlb_standings)} divs, {len(mlb_schedule)} sched")
 
-    # 3. Assemble final output
-    output = build_output(sports_data, written)
+    nba_scores    = fetch_scores("basketball",    "nba",  6)
+    nba_standings = fetch_standings("basketball", "nba",  2)
+    nba_schedule  = fetch_schedule("basketball",  "nba",  4)
+    print(f"  NBA: {len(nba_scores)} scores, {len(nba_standings)} divs")
 
-    # 4. Write to docs/data.json (served by GitHub Pages)
+    nhl_scores    = fetch_scores("hockey",    "nhl",  6)
+    nhl_standings = fetch_standings("hockey", "nhl",  2)
+    nhl_schedule  = fetch_schedule("hockey",  "nhl",  4)
+    print(f"  NHL: {len(nhl_scores)} scores, {len(nhl_standings)} divs")
+
+    nfl_standings = fetch_standings("football", "nfl", 8)
+    print(f"  NFL: {len(nfl_standings)} divs")
+
+    # Write AI stories
+    print("\nWriting stories with Claude...")
+    front      = write_front(client, mlb_scores, nba_scores, nhl_scores)
+    print("  Front page done")
+    mlb_story  = write_section(client, "Baseball",   mlb_scores, mlb_standings)
+    print("  MLB done")
+    nba_story  = write_section(client, "Basketball", nba_scores, nba_standings)
+    print("  NBA done")
+    nhl_story  = write_section(client, "Hockey",     nhl_scores, nhl_standings)
+    print("  NHL done")
+    nfl_story  = write_section(client, "Football",   [],         nfl_standings)
+    print("  NFL done")
+
+    # Assemble output
+    date_str = now.strftime("%A, %B %-d, %Y")
+    output = {
+        "date":    date_str,
+        "edition": f"Vol. CXLVIII · No. {now.timetuple().tm_yday + 133}",
+        "weather": "Check your local forecast",
+        "front": {
+            "headline":  front.get("headline", {}),
+            "secondary": front.get("secondary", []),
+            "column":    front.get("column", {}),
+            "scores": {
+                "mlb": mlb_scores[:8],
+                "nba": nba_scores[:4],
+                "nhl": nhl_scores[:4],
+            }
+        },
+        "mlb": {"story": mlb_story, "schedule": mlb_schedule, "scores": mlb_scores, "standings": mlb_standings},
+        "nba": {"story": nba_story, "schedule": nba_schedule, "scores": nba_scores, "standings": nba_standings},
+        "nhl": {"story": nhl_story, "schedule": nhl_schedule, "scores": nhl_scores, "standings": nhl_standings},
+        "nfl": {"story": nfl_story, "standings": nfl_standings},
+    }
+
     os.makedirs("docs", exist_ok=True)
     with open("docs/data.json", "w") as f:
         json.dump(output, f, indent=2)
-
-    print(f"\n✓ data.json written ({len(json.dumps(output))} bytes)")
-    print("✓ Pipeline complete. Today's edition is ready.")
-
+    print(f"\n✓ docs/data.json written ({len(json.dumps(output))} bytes)")
+    print("✓ Done.")
 
 if __name__ == "__main__":
     main()
