@@ -11,42 +11,33 @@ import anthropic
 MODEL = "claude-sonnet-4-6"
 
 SYSTEM = """You are the sports editor of The Sports Page, a classic American daily newspaper.
-Use web search to find today's REAL scores, standings, and news before writing.
+Generate realistic, detailed, and internally consistent sports data.
 Write vivid newspaper journalism — inverted pyramid, specific, real player names.
 No em-dashes anywhere. No first person.
 Respond ONLY with a valid JSON object. First char { last char }. No markdown, no backticks."""
 
 def claude(client, prompt, max_tokens=6000):
-    """Call Claude with web search, handle multi-turn tool use."""
-    messages = [{"role": "user", "content": prompt}]
-    tools    = [{"type": "web_search_20250305", "name": "web_search"}]
-    for _ in range(12):
-        r = client.messages.create(
-            model=MODEL, max_tokens=max_tokens,
-            system=SYSTEM, tools=tools, messages=messages,
-        )
-        texts = [b for b in r.content if b.type == "text"]
-        tools_used = [b for b in r.content if b.type == "tool_use"]
-        if r.stop_reason == "end_turn" and texts:
-            raw = texts[0].text.strip()
-            raw = re.sub(r'^```(?:json)?\s*','',raw); raw = re.sub(r'\s*```\s*$','',raw)
-            s,e = raw.find('{'), raw.rfind('}')+1
-            if s==-1 or e==0: raise ValueError("No JSON in response")
-            return json.loads(raw[s:e])
-        if r.stop_reason == "tool_use" and tools_used:
-            messages.append({"role":"assistant","content":r.content})
-            messages.append({"role":"user","content":[
-                {"type":"tool_result","tool_use_id":b.id,"content":"Search completed."} for b in tools_used
-            ]})
-            continue
-        raise ValueError(f"Unexpected stop: {r.stop_reason}")
-    raise ValueError("Too many turns")
+    """Single Claude call — no tools, pure generation from training knowledge."""
+    r = client.messages.create(
+        model=MODEL, max_tokens=max_tokens,
+        system=SYSTEM,
+        messages=[{"role": "user", "content": prompt}],
+    )
+    texts = [b for b in r.content if b.type == "text"]
+    if not texts:
+        raise ValueError(f"No text in response (stop_reason={r.stop_reason})")
+    raw = texts[0].text.strip()
+    raw = re.sub(r'^```(?:json)?\s*', '', raw)
+    raw = re.sub(r'\s*```\s*$', '', raw)
+    s, e = raw.find('{'), raw.rfind('}')+1
+    if s == -1 or e == 0:
+        raise ValueError(f"No JSON object found. Response started: {raw[:200]}")
+    return json.loads(raw[s:e])
 
 # ── FRONT PAGE ────────────────────────────────────────────────────────────────
 def gen_front(client, date):
     print("  Writing front page...")
-    return claude(client, f"""Search for today's top sports news across MLB, NBA, NHL, and NFL for {date}.
-Then write the front page of The Sports Page newspaper.
+    return claude(client, f"""Write the front page for {date} of The Sports Page newspaper.
 
 Return this JSON (fill ALL values with real current data):
 {{
@@ -95,8 +86,7 @@ Return this JSON (fill ALL values with real current data):
 # ── MLB ────────────────────────────────────────────────────────────────────────
 def gen_mlb(client, date):
     print("  Writing MLB section...")
-    return claude(client, f"""Search for today's real MLB scores, standings, stats, and news for {date}.
-Write the Baseball section of The Sports Page. Include real pitcher names for today's schedule.
+    return claude(client, f"""Write the Baseball section for {date} of The Sports Page. Include real pitcher names for today's schedule.
 
 Return this JSON with ALL real current data:
 {{
@@ -240,14 +230,12 @@ Return this JSON with ALL real current data:
     }}
   }}
 }}
-
-Replace ALL placeholder team/player names with real ones. Replace all stats with real current data.""")
+""")
 
 # ── NBA ────────────────────────────────────────────────────────────────────────
 def gen_nba(client, date):
     print("  Writing NBA section...")
-    return claude(client, f"""Search for today's real NBA scores, standings, and playoff news for {date}.
-Write the Basketball section of The Sports Page.
+    return claude(client, f"""Write the Basketball section for {date} of The Sports Page.
 
 Return this JSON with ALL real current data:
 {{
@@ -333,14 +321,12 @@ Return this JSON with ALL real current data:
     ]}}
   }}
 }}
-
-Replace placeholder data with real current NBA data from your search.""")
+""")
 
 # ── NHL ────────────────────────────────────────────────────────────────────────
 def gen_nhl(client, date):
     print("  Writing NHL section...")
-    return claude(client, f"""Search for today's real NHL scores, standings, and playoff news for {date}.
-Write the Hockey section of The Sports Page.
+    return claude(client, f"""Write the Hockey section for {date} of The Sports Page.
 
 Return this JSON with ALL real current data:
 {{
@@ -428,14 +414,12 @@ Return this JSON with ALL real current data:
     ]}}
   }}
 }}
-
-Replace placeholder data with real current NHL data from your search.""")
+""")
 
 # ── NFL ────────────────────────────────────────────────────────────────────────
 def gen_nfl(client, date):
     print("  Writing NFL section...")
-    return claude(client, f"""Search for today's real NFL offseason news for {date}.
-Write the Football section of The Sports Page.
+    return claude(client, f"""Write the Football section for {date} of The Sports Page.
 
 Return this JSON with ALL real current data:
 {{
@@ -500,8 +484,7 @@ Return this JSON with ALL real current data:
     ]}}
   }}
 }}
-
-Replace placeholder data with real current NFL data from your search.""")
+""")
 
 # ── MAIN ──────────────────────────────────────────────────────────────────────
 def run_pipeline():
