@@ -1,255 +1,388 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>The Sports Gazette</title>
-  <link rel="preconnect" href="https://fonts.googleapis.com" />
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;0,900;1,400;1,700&family=Libre+Baskerville:ital,wght@0,400;0,700;1,400&family=UnifrakturMaguntia&display=swap" rel="stylesheet" />
-  <style>
-    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
-    body {
-      background: #BDB8AC;
-      min-height: 100vh;
-      font-family: 'Libre Baskerville', Georgia, serif;
-    }
-
-    /* LOADING */
-    #loading-screen {
-      min-height: 100vh;
-      background: #F4EFE3;
-      display: flex; flex-direction: column;
-      align-items: center; justify-content: center;
-      gap: 18px; padding: 24px;
-    }
-    .loading-masthead { font-family: 'UnifrakturMaguntia', cursive; font-size: clamp(2rem,8vw,4.5rem); color: #111; }
-    .loading-rule { width: 200px; border: none; border-top: 1px solid #111; }
-    .loading-msg { font-style: italic; color: #777; font-size: 0.82rem; font-family: 'Libre Baskerville', serif; }
-    #paper-wrap { display: none; }
-
-    /* PAPER */
-    .paper {
-      max-width: 1120px; margin: 0 auto;
-      background-color: #F4EFE3;
-      background-image: repeating-linear-gradient(0deg, transparent, transparent 31px, rgba(0,0,0,0.018) 31px, rgba(0,0,0,0.018) 32px);
-      color: #111; padding: 18px 22px 24px;
-    }
-
-    /* MASTHEAD */
-    .masthead { text-align: center; border-top: 5px double #111; border-bottom: 1px solid #111; padding: 10px 0 8px; }
-    .masthead-name { font-family: 'UnifrakturMaguntia', cursive; font-size: clamp(2.6rem,9vw,6rem); line-height: 1; letter-spacing: 1px; }
-    .tagline { font-size: 0.58rem; letter-spacing: 3.5px; text-transform: uppercase; color: #555; margin-top: 3px; }
-
-    /* DATELINE */
-    .dateline {
-      display: flex; justify-content: space-between; align-items: center;
-      font-size: 0.6rem; letter-spacing: 0.4px; text-transform: uppercase;
-      border-top: 2px solid #111; border-bottom: 2px solid #111;
-      padding: 3px 2px; margin-top: 1px; margin-bottom: 10px;
-    }
-    .dateline span:nth-child(2) { font-weight: 700; }
-    .dateline span:last-child { text-align: right; }
-
-    .kicker { display: block; font-size: 0.52rem; letter-spacing: 2.5px; text-transform: uppercase; color: #8B0000; font-weight: 700; margin-bottom: 2px; }
-
-    /* MAIN GRID */
-    .main-grid { display: grid; grid-template-columns: 1fr 210px; gap: 0; border-bottom: 2px solid #111; padding-bottom: 14px; margin-bottom: 14px; }
-    .main-left { border-right: 1.5px solid #111; padding-right: 18px; }
-
-    /* HEADLINE STORY */
-    .hl-story { border-bottom: 1.5px solid #111; padding-bottom: 14px; margin-bottom: 14px; }
-    .hl-head { font-family: 'Playfair Display', serif; font-size: clamp(1.6rem,4vw,3rem); font-weight: 900; line-height: 1.04; margin-bottom: 5px; letter-spacing: -0.5px; }
-    .hl-deck { font-family: 'Playfair Display', serif; font-size: clamp(0.82rem,1.8vw,1rem); font-style: italic; color: #333; margin-bottom: 5px; line-height: 1.35; border-bottom: 1px solid #ccc; padding-bottom: 4px; }
-    .byline { font-size: 0.6rem; text-transform: uppercase; letter-spacing: 1px; color: #666; margin-bottom: 9px; }
-    .hl-body { font-size: 0.8rem; line-height: 1.74; column-count: 2; column-gap: 16px; column-rule: 1px solid #ccc; text-align: justify; hyphens: auto; }
-    .hl-body p + p { text-indent: 1.3em; }
-
-    /* SECONDARY */
-    .sec-divider { font-size: 0.58rem; text-transform: uppercase; letter-spacing: 2px; text-align: center; color: #666; border-top: 1px solid #ccc; border-bottom: 1px solid #ccc; padding: 3px 0; margin-bottom: 10px; }
-    .sec-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 0 14px; }
-    .sec-story { border-right: 1px solid #ccc; padding-right: 14px; }
-    .sec-story:last-child { border-right: none; padding-right: 0; }
-    .sec-head { font-family: 'Playfair Display', serif; font-size: clamp(0.88rem,1.6vw,1.15rem); font-weight: 700; line-height: 1.1; margin-bottom: 3px; }
-    .sec-deck { font-family: 'Playfair Display', serif; font-size: 0.73rem; font-style: italic; color: #444; margin-bottom: 3px; border-bottom: 1px solid #ddd; padding-bottom: 3px; }
-    .sec-byline { font-size: 0.54rem; text-transform: uppercase; letter-spacing: 1px; color: #777; margin-bottom: 6px; }
-    .sec-body { font-size: 0.74rem; line-height: 1.68; text-align: justify; hyphens: auto; }
-    .sec-body p + p { text-indent: 1em; }
-
-    /* SIDEBAR */
-    .col-head { font-family: 'Playfair Display', serif; font-size: 0.72rem; font-weight: 700; text-transform: uppercase; letter-spacing: 1px; border-top: 2px solid #111; border-bottom: 2px solid #111; padding: 2px 4px; margin-bottom: 8px; }
-    .league-lbl { font-size: 0.52rem; font-weight: 700; text-transform: uppercase; letter-spacing: 1.8px; color: #8B0000; margin: 7px 4px 2px; }
-    .game { padding: 3px 4px; border-bottom: 1px solid #e0ddd5; }
-    .game-row { display: flex; justify-content: space-between; font-size: 0.69rem; line-height: 1.5; }
-    .team-name { flex: 1; }
-    .team-score { font-weight: 700; min-width: 22px; text-align: right; }
-    .game-status { font-size: 0.54rem; color: #888; font-style: italic; text-align: right; padding-top: 1px; }
-
-    /* STANDINGS */
-    .standings-tbl { width: 100%; border-collapse: collapse; font-size: 0.62rem; margin-bottom: 10px; }
-    .standings-tbl th { text-align: left; font-weight: 700; text-transform: uppercase; letter-spacing: 0.4px; border-bottom: 1px solid #111; padding: 1px 2px; font-size: 0.54rem; }
-    .standings-tbl th:not(:first-child):not(:nth-child(2)) { text-align: right; }
-    .standings-tbl td { padding: 2px 2px; border-bottom: 1px solid #e8e5dd; vertical-align: middle; }
-    .standings-tbl td:not(:first-child):not(:nth-child(2)) { text-align: right; }
-    .standings-tbl tr:first-child td { font-weight: 700; }
-    .rank-cell { color: #888; width: 14px; font-size: 0.58rem; }
-    .name-cell { max-width: 95px; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
-
-    /* OPINION */
-    .opinion { display: grid; grid-template-columns: auto 1fr; gap: 0 16px; border-top: 3px double #111; padding-top: 12px; }
-    .opinion-label { display: flex; flex-direction: column; gap: 4px; border-right: 1.5px solid #111; padding-right: 16px; }
-    .opinion-overtitle { font-size: 0.52rem; font-weight: 700; letter-spacing: 2px; text-transform: uppercase; color: #8B0000; }
-    .opinion-title { font-family: 'Playfair Display', serif; font-size: 1.4rem; font-style: italic; font-weight: 400; line-height: 1.1; white-space: nowrap; }
-    .col-headline { font-family: 'Playfair Display', serif; font-size: clamp(1rem,2vw,1.3rem); font-weight: 700; line-height: 1.1; margin-bottom: 4px; }
-    .col-byline { font-size: 0.58rem; text-transform: uppercase; letter-spacing: 1px; color: #666; margin-bottom: 8px; border-bottom: 1px solid #ccc; padding-bottom: 3px; }
-    .col-body { font-size: 0.79rem; line-height: 1.74; text-align: justify; hyphens: auto; column-count: 2; column-gap: 16px; column-rule: 1px solid #ccc; }
-    .col-body p + p { text-indent: 1.3em; }
-
-    /* FOOTER */
-    .footer { display: flex; justify-content: space-between; align-items: center; border-top: 2px solid #111; margin-top: 14px; padding-top: 7px; font-size: 0.58rem; color: #777; text-transform: uppercase; letter-spacing: 0.5px; }
-
-    /* MOBILE */
-    @media (max-width: 760px) {
-      .paper { padding: 12px 14px 20px; }
-      .main-grid { grid-template-columns: 1fr; }
-      .main-left { border-right: none; padding-right: 0; border-bottom: 2px solid #111; padding-bottom: 14px; margin-bottom: 14px; }
-      .hl-body { column-count: 1; }
-      .sec-grid { grid-template-columns: 1fr; gap: 12px 0; }
-      .sec-story { border-right: none; padding-right: 0; border-bottom: 1px solid #ccc; padding-bottom: 12px; }
-      .sec-story:last-child { border-bottom: none; }
-      .opinion { grid-template-columns: 1fr; }
-      .opinion-label { border-right: none; padding-right: 0; flex-direction: row; align-items: center; border-bottom: 1px solid #111; padding-bottom: 6px; margin-bottom: 10px; gap: 8px; }
-      .col-body { column-count: 1; }
-      .dateline { flex-direction: column; gap: 2px; text-align: center; }
-      .dateline span { text-align: center !important; }
-    }
-    @media (max-width: 480px) {
-      .masthead-name { font-size: 2.2rem; }
-    }
-  </style>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width,initial-scale=1.0"/>
+<title>The Sports Page</title>
+<link rel="preconnect" href="https://fonts.googleapis.com"/>
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin/>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;0,900;1,400;1,700&family=Libre+Baskerville:ital,wght@0,400;0,700;1,400&family=UnifrakturMaguntia&display=swap" rel="stylesheet"/>
+<style>
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+body{background:#fff;font-family:'Libre Baskerville',Georgia,serif;color:#111}
+/* LOADING */
+#loading{min-height:100vh;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:16px;padding:24px;background:#fff}
+.ld-name{font-family:'UnifrakturMaguntia',cursive;font-size:clamp(2rem,8vw,5rem);color:#111}
+.ld-rule{width:200px;border:none;border-top:1px solid #111}
+.ld-msg{font-style:italic;color:#666;font-size:.82rem}
+#paper{display:none;max-width:1200px;margin:0 auto}
+/* MASTHEAD */
+.masthead{text-align:center;border-top:6px double #111;padding:12px 24px 8px}
+.mast-name{font-family:'UnifrakturMaguntia',cursive;font-size:clamp(2.6rem,9vw,6.5rem);line-height:1;letter-spacing:2px}
+.mast-tag{font-size:.56rem;letter-spacing:4px;text-transform:uppercase;color:#444;margin-top:2px}
+.mast-rule{border:none;border-top:1px solid #111;margin:6px 0 0}
+/* NAV */
+.sec-nav{display:flex;border-top:3px solid #111;border-bottom:3px solid #111;overflow-x:auto;scrollbar-width:none}
+.sec-nav::-webkit-scrollbar{display:none}
+.nav-btn{flex:1;min-width:80px;padding:8px 10px;font-family:'Libre Baskerville',serif;font-size:.6rem;font-weight:700;text-transform:uppercase;letter-spacing:1.5px;background:none;border:none;border-right:1px solid #bbb;cursor:pointer;color:#444;white-space:nowrap;transition:all .12s}
+.nav-btn:last-child{border-right:none}
+.nav-btn:hover{background:#e8e8e8;color:#111}
+.nav-btn.active{background:#111;color:#fff}
+/* DATELINE */
+.dateline{display:flex;justify-content:space-between;align-items:center;padding:3px 24px;border-bottom:2px solid #111;font-size:.55rem;text-transform:uppercase;letter-spacing:.5px;color:#444}
+.dateline-mid{font-weight:700;color:#111;font-size:.58rem}
+/* PAGE */
+.page{padding:16px 24px 40px;display:none}
+.page.active{display:block}
+/* SECTION LABEL */
+.sec-label{font-size:.58rem;font-weight:700;text-transform:uppercase;letter-spacing:2.5px;border-top:3px solid #111;border-bottom:1px solid #111;padding:3px 0;margin:18px 0 10px}
+.sec-rule{border:none;border-top:1px solid #ccc;margin:12px 0}
+/* FLAG / KICKER */
+.flag{display:inline-block;font-family:'Libre Baskerville',serif;font-size:.5rem;font-weight:700;letter-spacing:3px;text-transform:uppercase;color:#fff;background:#111;padding:2px 7px;margin-bottom:4px}
+/* HEADLINES */
+h1.hl{font-family:'Playfair Display',serif;font-size:clamp(1.8rem,4vw,3.2rem);font-weight:900;line-height:1.02;letter-spacing:-.5px;margin-bottom:5px}
+h2.hl{font-family:'Playfair Display',serif;font-size:clamp(1.1rem,2.5vw,1.5rem);font-weight:900;line-height:1.05;margin-bottom:4px}
+h3.hl{font-family:'Playfair Display',serif;font-size:clamp(.9rem,1.8vw,1.1rem);font-weight:700;line-height:1.1;margin-bottom:3px}
+.deck{font-family:'Playfair Display',serif;font-size:.88rem;font-style:italic;color:#333;line-height:1.4;margin-bottom:4px;border-bottom:1px solid #ccc;padding-bottom:4px}
+.byline{font-size:.54rem;text-transform:uppercase;letter-spacing:1px;color:#555;margin-bottom:8px}
+/* BODY TEXT */
+.body{font-size:.79rem;line-height:1.75;text-align:justify;hyphens:auto}
+.body p+p{text-indent:1.3em}
+.body-2col{column-count:2;column-gap:18px;column-rule:1px solid #ccc}
+.body-3col{column-count:3;column-gap:16px;column-rule:1px solid #ccc}
+/* FRONT GRID */
+.front-grid{display:grid;grid-template-columns:1fr 190px;gap:0;padding-bottom:16px;border-bottom:2px solid #111;margin-bottom:14px}
+.front-left{border-right:1.5px solid #111;padding-right:18px}
+.front-right{padding-left:10px}
+/* SCORES SIDEBAR */
+.scores-head{font-family:'Playfair Display',serif;font-size:.68rem;font-weight:700;text-transform:uppercase;letter-spacing:1px;border-top:2px solid #111;border-bottom:2px solid #111;padding:2px 0;margin-bottom:6px}
+.scores-sport{font-size:.48rem;font-weight:700;text-transform:uppercase;letter-spacing:2px;color:#555;margin:7px 0 2px;border-bottom:1px solid #bbb;padding-bottom:1px}
+.score-game{padding:2px 0;border-bottom:1px solid #ddd}
+.score-row{display:flex;justify-content:space-between;font-size:.65rem;line-height:1.55}
+.score-team{flex:1}
+.score-val{font-weight:700;min-width:18px;text-align:right;font-family:monospace}
+.score-status{font-size:.48rem;color:#666;font-style:italic;text-align:right}
+/* SECONDARY STORIES */
+.sec-stories{display:grid;grid-template-columns:repeat(3,1fr);gap:0;margin-bottom:14px}
+.sec-story{border-right:1px solid #bbb;padding:0 14px}
+.sec-story:first-child{padding-left:0}
+.sec-story:last-child{border-right:none;padding-right:0}
+/* OPINION */
+.opinion{display:grid;grid-template-columns:80px 1fr;gap:0 14px;border-top:3px double #111;padding-top:12px;margin-top:16px}
+.op-label{border-right:1.5px solid #111;padding-right:14px;display:flex;flex-direction:column;gap:4px}
+.op-tag{font-size:.48rem;font-weight:700;letter-spacing:2px;text-transform:uppercase}
+.op-title{font-family:'Playfair Display',serif;font-size:1.3rem;font-style:italic;line-height:1.1}
+/* SPORT MAIN GRID */
+.sport-grid{display:grid;grid-template-columns:1fr 220px;gap:0;padding-bottom:14px;border-bottom:2px solid #111;margin-bottom:14px}
+.sport-left{border-right:1.5px solid #111;padding-right:18px}
+.sport-right{padding-left:8px}
+/* SCHEDULE */
+.sched-head{font-family:'Playfair Display',serif;font-size:.7rem;font-weight:700;text-transform:uppercase;letter-spacing:1px;border-top:2px solid #111;border-bottom:2px solid #111;padding:2px 0;margin-bottom:6px}
+.sched-item{padding:5px 0;border-bottom:1px dotted #bbb}
+.sched-time{font-size:.52rem;text-transform:uppercase;letter-spacing:.8px;color:#666;margin-bottom:1px}
+.sched-matchup{font-family:'Playfair Display',serif;font-size:.85rem;font-weight:700;margin-bottom:1px}
+.sched-pitchers{font-size:.64rem;font-style:italic;color:#444}
+/* SCORES TABLE */
+.scores-section-head{font-family:'Playfair Display',serif;font-size:.68rem;font-weight:700;text-transform:uppercase;letter-spacing:1px;border-top:2px solid #111;border-bottom:2px solid #111;padding:2px 0;margin:14px 0 6px}
+.game-block{padding:4px 0;border-bottom:1px solid #ddd}
+.game-row{display:flex;justify-content:space-between;font-size:.68rem;line-height:1.55}
+.game-team{flex:1}
+.game-score{font-weight:700;min-width:22px;text-align:right;font-family:monospace}
+.game-status{font-size:.5rem;color:#666;font-style:italic;text-align:right;padding-top:1px}
+/* STANDINGS */
+.std-wrap{overflow-x:auto;-webkit-overflow-scrolling:touch}
+.std-div-label{font-size:.54rem;font-weight:700;text-transform:uppercase;letter-spacing:2px;margin:12px 0 3px;padding-bottom:2px;border-bottom:1px solid #aaa}
+table.std{width:100%;border-collapse:collapse;font-size:.61rem;min-width:360px}
+.std th{text-align:right;font-weight:700;font-size:.52rem;text-transform:uppercase;border-top:1px solid #111;border-bottom:2px solid #111;padding:2px 4px;background:#e8e8e8;white-space:nowrap}
+.std th:first-child{text-align:left}
+.std td{padding:2px 4px;border-bottom:1px solid #e0e0e0;text-align:right;white-space:nowrap}
+.std td:first-child{text-align:left}
+.std tr:first-child td{font-weight:700}
+/* TWO COLUMN LAYOUT */
+.two-col{display:grid;grid-template-columns:1fr 1fr;gap:0 20px}
+/* FOOTER */
+.footer{border-top:3px double #111;padding:7px 24px;display:flex;justify-content:space-between;font-size:.54rem;color:#555;text-transform:uppercase;letter-spacing:.5px;background:#f0f0f0}
+/* MOBILE */
+@media(max-width:760px){
+  .page{padding:10px 14px 28px}
+  .dateline{flex-direction:column;gap:1px;text-align:center;padding:3px 14px}
+  .front-grid,.sport-grid{grid-template-columns:1fr}
+  .front-left,.sport-left{border-right:none;padding-right:0;border-bottom:2px solid #111;padding-bottom:14px;margin-bottom:12px}
+  .front-right,.sport-right{padding-left:0}
+  .body-2col,.body-3col{column-count:1}
+  .sec-stories{grid-template-columns:1fr}
+  .sec-story{border-right:none;padding:0;border-bottom:1px solid #bbb;padding-bottom:12px;margin-bottom:12px}
+  .sec-story:last-child{border-bottom:none}
+  .opinion{grid-template-columns:1fr}
+  .op-label{border-right:none;flex-direction:row;align-items:center;gap:8px;border-bottom:1px solid #111;padding-bottom:5px;margin-bottom:8px}
+  .two-col{grid-template-columns:1fr}
+  .footer{flex-direction:column;gap:2px;text-align:center;padding:7px 14px}
+}
+@media(max-width:480px){.mast-name{font-size:2.4rem}.nav-btn{font-size:.54rem;padding:7px 8px}}
+</style>
 </head>
 <body>
-  <div id="loading-screen">
-    <div class="loading-masthead">The Sports Gazette</div>
-    <hr class="loading-rule" />
-    <p class="loading-msg">Setting type on the presses…</p>
+
+<div id="loading">
+  <div class="ld-name">The Sports Page</div>
+  <hr class="ld-rule"/>
+  <p class="ld-msg">Setting type on the presses...</p>
+</div>
+
+<div id="paper">
+  <div class="masthead">
+    <div class="mast-name">The Sports Page</div>
+    <div class="mast-tag">All the Sports News Fit to Print &middot; Est. 2026</div>
+    <hr class="mast-rule"/>
   </div>
 
-  <div id="paper-wrap"></div>
+  <nav class="sec-nav">
+    <button class="nav-btn active" onclick="showSection('front')">Front Page</button>
+    <button class="nav-btn" onclick="showSection('mlb')">Baseball</button>
+    <button class="nav-btn" onclick="showSection('nba')">Basketball</button>
+    <button class="nav-btn" onclick="showSection('nhl')">Hockey</button>
+    <button class="nav-btn" onclick="showSection('nfl')">Football</button>
+  </nav>
 
-  <script>
-    async function loadEdition() {
-      try {
-        const r = await fetch('data.json?t=' + Date.now());
-        const d = await r.json();
-        renderNewspaper(d);
-      } catch (e) {
-        document.getElementById('loading-screen').innerHTML =
-          '<h2 style="font-family:serif">The presses are down.</h2><p style="font-style:italic;margin-top:12px">' + e.message + '</p>';
-      }
-    }
+  <div class="dateline">
+    <span id="dl-edition"></span>
+    <span class="dateline-mid" id="dl-date"></span>
+    <span id="dl-weather"></span>
+  </div>
 
-    function paras(text) {
-      if (!text) return '';
-      return text.split(/\n\n+/).filter(Boolean).map(p => `<p>${p.trim()}</p>`).join('');
-    }
+  <div id="front" class="page active"></div>
+  <div id="mlb"   class="page"></div>
+  <div id="nba"   class="page"></div>
+  <div id="nhl"   class="page"></div>
+  <div id="nfl"   class="page"></div>
 
-    function renderNewspaper(d) {
-      const hl = d.headline_story || {};
-      const sec = d.secondary_stories || [];
-      const scores = d.scores || [];
-      const standings = d.standings || [];
-      const col = d.column || {};
+  <div class="footer">
+    <span>&copy; The Sports Page &middot; Est. 2026</span>
+    <span>Updated Daily &middot; Powered by Claude AI</span>
+  </div>
+</div>
 
-      const scoresHTML = scores.map(league => `
-        <div class="league-lbl">${league.league}</div>
-        ${(league.games || []).map(g => `
-          <div class="game">
-            <div class="game-row"><span class="team-name">${g.away_team}</span><span class="team-score">${g.away_score}</span></div>
-            <div class="game-row"><span class="team-name">${g.home_team}</span><span class="team-score">${g.home_score}</span></div>
-            <div class="game-status">${g.status || 'Final'}</div>
-          </div>`).join('')}
-      `).join('');
+<script>
+// ── HELPERS ──────────────────────────────────────────────────────────────────
 
-      const standingsHTML = standings.map(div => `
-        <div class="league-lbl">${div.league}</div>
-        <table class="standings-tbl">
-          <thead><tr><th></th><th>Team</th><th>W</th><th>L</th><th>Pct</th><th>GB</th></tr></thead>
-          <tbody>
-            ${(div.teams || []).map(t => `
-              <tr><td class="rank-cell">${t.rank}</td><td class="name-cell">${t.name}</td><td>${t.w}</td><td>${t.l}</td><td>${t.pct}</td><td>${t.gb}</td></tr>
-            `).join('')}
-          </tbody>
-        </table>
-      `).join('');
+function el(tag, cls, html) {
+  const e = document.createElement(tag);
+  if (cls) e.className = cls;
+  if (html !== undefined) e.innerHTML = html;
+  return e;
+}
 
-      const html = `
-        <div class="paper">
-          <div class="masthead">
-            <div class="masthead-name">The Sports Gazette</div>
-            <div class="tagline">All the Sports News Fit to Print &middot; Est. 1877</div>
-          </div>
-          <div class="dateline">
-            <span>${d.edition || 'Vol. CXLVII'}</span>
-            <span>${d.date || ''}</span>
-            <span>${d.weather || ''} &middot; Price: Five Cents</span>
-          </div>
+function paras(text) {
+  if (!text) return '';
+  return text.split(/\n\n+/).filter(Boolean).map(p => `<p>${p.trim()}</p>`).join('');
+}
 
-          <div class="main-grid">
-            <div class="main-left">
-              <div class="hl-story">
-                <span class="kicker">${hl.kicker || ''}</span>
-                <h1 class="hl-head">${hl.headline || ''}</h1>
-                ${hl.deck ? `<p class="hl-deck">${hl.deck}</p>` : ''}
-                ${hl.byline ? `<p class="byline">${hl.byline}</p>` : ''}
-                <div class="hl-body">${paras(hl.body)}</div>
-              </div>
+function showSection(id) {
+  document.querySelectorAll('.page').forEach(p => p.classList.remove('active'));
+  document.querySelectorAll('.nav-btn').forEach(b => b.classList.remove('active'));
+  document.getElementById(id).classList.add('active');
+  event.currentTarget.classList.add('active');
+}
 
-              <div class="sec-divider">&#9670; More From the Sports Desk &#9670;</div>
-              <div class="sec-grid">
-                ${sec.map(s => `
-                  <div class="sec-story">
-                    <span class="kicker">${s.kicker || ''}</span>
-                    <h2 class="sec-head">${s.headline || ''}</h2>
-                    ${s.deck ? `<p class="sec-deck">${s.deck}</p>` : ''}
-                    ${s.byline ? `<p class="sec-byline byline">${s.byline}</p>` : ''}
-                    <div class="sec-body">${paras(s.body)}</div>
-                  </div>`).join('')}
-              </div>
-            </div>
+// ── RENDER HELPERS ───────────────────────────────────────────────────────────
 
-            <div class="main-right">
-              ${scoresHTML ? `<div class="col-head">Yesterday's Scores</div>${scoresHTML}` : ''}
-              ${standingsHTML ? `<div class="col-head" style="margin-top:14px">Standings</div>${standingsHTML}` : ''}
-            </div>
-          </div>
+function renderScoreGame(g) {
+  return `<div class="game-block">
+    <div class="game-row"><span class="game-team">${g.away||g.away_team||''}</span><span class="game-score">${g.away_score||g.as||0}</span></div>
+    <div class="game-row"><span class="game-team">${g.home||g.home_team||''}</span><span class="game-score">${g.home_score||g.hs||0}</span></div>
+    <div class="game-status">${g.status||g.note||'Final'}</div>
+  </div>`;
+}
 
-          ${col.headline ? `
-          <div class="opinion">
-            <div class="opinion-label">
-              <span class="opinion-overtitle">${col.section_title || 'Press Box'}</span>
-              <span class="opinion-title">Opinion</span>
-            </div>
-            <div>
-              <h2 class="col-headline">${col.headline}</h2>
-              ${col.byline ? `<p class="col-byline">${col.byline}</p>` : ''}
-              <div class="col-body">${paras(col.body)}</div>
-            </div>
-          </div>` : ''}
+function renderSidebar(scores) {
+  if (!scores) return '';
+  let html = `<div class="scores-head">Yesterday's Scores</div>`;
+  const sports = [['mlb','Baseball'],['nba','Basketball'],['nhl','Hockey'],['nfl','Football']];
+  sports.forEach(([key, label]) => {
+    const games = scores[key];
+    if (!games || !games.length) return;
+    html += `<div class="scores-sport">${label}</div>`;
+    games.forEach(g => {
+      html += `<div class="score-game">
+        <div class="score-row"><span class="score-team">${g.away||g.away_team||''}</span><span class="score-val">${g.away_score||g.as||0}</span></div>
+        <div class="score-row"><span class="score-team">${g.home||g.home_team||''}</span><span class="score-val">${g.home_score||g.hs||0}</span></div>
+        <div class="score-status">${g.status||g.note||''}</div>
+      </div>`;
+    });
+  });
+  return html;
+}
 
-          <div class="footer">
-            <span>&copy; The Sports Gazette &middot; All Rights Reserved</span>
-            <span>Updated daily &middot; Powered by Claude AI</span>
-          </div>
-        </div>
-      `;
+function renderStory(s, headingLevel, bodyClass) {
+  if (!s) return '';
+  return `
+    <span class="flag">${s.kicker||''}</span>
+    <h${headingLevel} class="hl" style="margin-top:4px">${s.headline||''}</h${headingLevel}>
+    ${s.deck ? `<p class="deck">${s.deck}</p>` : ''}
+    ${s.byline ? `<p class="byline">${s.byline}</p>` : ''}
+    <div class="body ${bodyClass||''}">${paras(s.body||'')}</div>`;
+}
 
-      document.getElementById('paper-wrap').innerHTML = html;
-      document.getElementById('loading-screen').style.display = 'none';
-      document.getElementById('paper-wrap').style.display = 'block';
-    }
+function renderSchedule(games, label) {
+  if (!games || !games.length) return '';
+  let html = `<div class="sched-head">${label||"Today's Games"}</div>`;
+  games.forEach(g => {
+    html += `<div class="sched-item">
+      <div class="sched-time">${g.time||''}</div>
+      <div class="sched-matchup">${g.away||''} at ${g.home||''}</div>
+      ${(g.asp||g.hsp) ? `<div class="sched-pitchers">${g.asp||''} vs. ${g.hsp||''}</div>` : ''}
+      ${g.note ? `<div style="font-size:.52rem;font-weight:700;text-transform:uppercase;margin-top:1px">${g.note}</div>` : ''}
+    </div>`;
+  });
+  return html;
+}
 
-    loadEdition();
-  </script>
+function renderScores(games, label) {
+  if (!games || !games.length) return '';
+  let html = `<div class="scores-section-head">${label||"Scores"}</div>`;
+  games.forEach(g => { html += renderScoreGame(g); });
+  return html;
+}
+
+function renderStandings(divisions, hasSplit) {
+  if (!divisions || !divisions.length) return '';
+  let html = '';
+  divisions.forEach(div => {
+    html += `<div class="std-div-label">${div.label||''}</div>
+    <div class="std-wrap"><table class="std">
+      <thead><tr>
+        <th style="text-align:left;min-width:130px">Team</th>
+        <th>W</th><th>L</th><th>Pct</th><th>GB</th>
+        ${hasSplit ? '<th>L10</th><th>Str</th><th>Home</th><th>Away</th>' : ''}
+        ${div.teams[0]&&div.teams[0].note ? '<th style="text-align:left;min-width:110px">Status</th>' : ''}
+      </tr></thead><tbody>`;
+    div.teams.forEach(t => {
+      html += `<tr>
+        <td style="text-align:left">${t.name||''}</td>
+        <td>${t.w||''}</td><td>${t.l||''}</td><td>${t.pct||''}</td><td>${t.gb||''}</td>
+        ${hasSplit ? `<td>${t.l10||''}</td><td>${t.strk||''}</td><td>${t.home||''}</td><td>${t.away||''}</td>` : ''}
+        ${t.note ? `<td style="text-align:left;font-size:.52rem;color:#555;font-style:italic">${t.note}</td>` : ''}
+      </tr>`;
+    });
+    html += '</tbody></table></div>';
+  });
+  return html;
+}
+
+// ── FRONT PAGE ────────────────────────────────────────────────────────────────
+
+function buildFront(d) {
+  const f = d.front || {};
+  const hl = f.headline || {};
+  const sec = f.secondary || [];
+  const col = f.column || {};
+  const scores = f.scores || {};
+
+  // Combine all scores for sidebar
+  const allScores = {};
+  if (scores.mlb && scores.mlb.length) allScores.mlb = scores.mlb;
+  if (scores.nba && scores.nba.length) allScores.nba = scores.nba;
+  if (scores.nhl && scores.nhl.length) allScores.nhl = scores.nhl;
+
+  const div = document.getElementById('front');
+  div.innerHTML = `
+    <div class="front-grid">
+      <div class="front-left">
+        ${renderStory(hl, 1, 'body-2col')}
+      </div>
+      <div class="front-right">
+        ${renderSidebar(allScores)}
+      </div>
+    </div>
+
+    <div class="sec-label">More From the Sports Desk</div>
+    <div class="sec-stories">
+      ${sec.map(s => `<div class="sec-story">
+        <span class="flag">${s.kicker||''}</span>
+        <h3 class="hl" style="margin-top:4px">${s.headline||''}</h3>
+        ${s.deck ? `<p class="deck" style="font-size:.76rem">${s.deck}</p>` : ''}
+        ${s.byline ? `<p class="byline">${s.byline}</p>` : ''}
+        <div class="body" style="font-size:.72rem;line-height:1.65">${paras(s.body||'')}</div>
+      </div>`).join('')}
+    </div>
+
+    <div class="opinion">
+      <div class="op-label">
+        <span class="op-tag">${col.tag||'Press Box'}</span>
+        <span class="op-title">Opinion</span>
+      </div>
+      <div>
+        <h2 class="hl" style="font-size:clamp(1rem,2vw,1.25rem)">${col.headline||''}</h2>
+        ${col.byline ? `<p class="byline">${col.byline}</p>` : ''}
+        <div class="body body-2col">${paras(col.body||'')}</div>
+      </div>
+    </div>`;
+}
+
+// ── SPORT PAGE ────────────────────────────────────────────────────────────────
+
+function buildSport(id, d, opts) {
+  const s = d[id] || {};
+  const story = s.story || {};
+  const hasSplit = opts.hasSplit || false;
+  const scoreLabel = opts.scoreLabel || "Yesterday's Scores";
+  const schedLabel = opts.schedLabel || "Today's Games";
+  const stdLabel   = opts.stdLabel   || "Standings";
+
+  const stdCount = (s.standings || []).length;
+  const stdClass = stdCount > 3 ? 'two-col' : '';
+
+  document.getElementById(id).innerHTML = `
+    <div class="sport-grid">
+      <div class="sport-left">
+        ${renderStory(story, 1, 'body-2col')}
+      </div>
+      <div class="sport-right">
+        ${s.schedule && s.schedule.length ? renderSchedule(s.schedule, schedLabel) : ''}
+        ${s.scores && s.scores.length ? renderScores(s.scores, scoreLabel) : ''}
+      </div>
+    </div>
+
+    <div class="sec-label">${stdLabel}</div>
+    <div class="${stdClass}">
+      ${renderStandings(s.standings || [], hasSplit)}
+    </div>`;
+}
+
+// ── LOAD & INIT ───────────────────────────────────────────────────────────────
+
+async function init() {
+  try {
+    const res = await fetch('data.json?t=' + Date.now());
+    if (!res.ok) throw new Error(`HTTP ${res.status}`);
+    const d = await res.json();
+
+    // Dateline
+    document.getElementById('dl-edition').textContent = d.edition || '';
+    document.getElementById('dl-date').textContent    = d.date    || '';
+    document.getElementById('dl-weather').textContent = (d.weather || '') + ' · Five Cents';
+
+    // Build all sections
+    buildFront(d);
+    buildSport('mlb', d, { hasSplit: true, scoreLabel: "Yesterday's Box Scores", schedLabel: "Today's Schedule", stdLabel: "Standings" });
+    buildSport('nba', d, { hasSplit: false, scoreLabel: "Scores", schedLabel: "Today's Games", stdLabel: "Playoff Standings" });
+    buildSport('nhl', d, { hasSplit: true,  scoreLabel: "Scores", schedLabel: "Today's Games", stdLabel: "Standings" });
+    buildSport('nfl', d, { hasSplit: false, scoreLabel: "Scores", schedLabel: "Offseason Calendar", stdLabel: "Final Standings" });
+
+    // Show paper
+    document.getElementById('loading').style.display = 'none';
+    document.getElementById('paper').style.display   = 'block';
+
+  } catch (err) {
+    document.getElementById('loading').innerHTML = `
+      <div class="ld-name">The Sports Page</div>
+      <hr class="ld-rule"/>
+      <p style="font-style:italic;color:#555">The presses are down.</p>
+      <p style="font-size:.7rem;color:#999;margin-top:8px">${err.message}</p>`;
+  }
+}
+
+document.addEventListener('DOMContentLoaded', init);
+</script>
 </body>
 </html>
