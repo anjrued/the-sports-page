@@ -1,146 +1,386 @@
 {
-  "generated_at": "2026-05-14T20:18:44.542032+00:00",
   "date": "Thursday, May 14, 2026",
-  "edition": "Vol. CXLVII \u00b7 No. 276",
+  "edition": "Vol. CXLVIII \u00b7 No. 267",
   "weather": "Check your local forecast",
-  "headline_story": {
-    "sport": "MLB",
-    "kicker": "REDS RAMPAGE",
-    "headline": "CINCINNATI ERUPTS FOR 15, BURIES NATIONALS IN HISTORIC ROUT",
-    "deck": "Cincinnati's bats go nuclear at Great American Ball Park, handing Washington a humiliating 15-1 defeat",
-    "byline": "By Thomas Hargrove, Sports Writer",
-    "body": "CINCINNATI \u2014 They came to the Queen City and left in ruins. The Cincinnati Reds unleashed a historic offensive torrent Wednesday evening, pummeling the hapless Washington Nationals by a stunning 15-1 final at Great American Ball Park. It was the kind of afternoon that makes managers consider early retirement and pitching coaches reach for something stronger than Gatorade. The Reds sent batters to the plate in waves, stringing together hits, walks, and extra-base blows that turned the scoreboard into an embarrassment for the visiting club.\n\nWashington managed just a single run against the Cincinnati pitching staff, a meek response to the carnage being inflicted on the other side of the ledger. The Nationals, who entered the day already mired in a difficult season, could find no answer as Cincinnati's lineup cycled through like a well-oiled demolition machine. By the middle innings the outcome was a formality, and the Cincinnati faithful were doing the math on run differential with undisguised delight.\n\nThe blowout is the kind of performance that can jolt a franchise awake. The Reds have now signaled, loudly and unmistakably, that their offense is capable of inflicting serious damage on any opponent on any given evening. For Washington, the long bus ride home will feel considerably longer after surrendering fourteen runs to a division rival. The baseball world took notice Wednesday \u2014 Cincinnati means business."
-  },
-  "secondary_stories": [
-    {
-      "sport": "MLB",
-      "kicker": "METS MUSCLE UP",
-      "headline": "NEW YORK HAMMERS DETROIT 9-4, METS OFFENSE ROLLS AT CITI FIELD",
-      "deck": "The Mets pile up nine runs to hand the Tigers a convincing loss in the Bronx's outer borough",
-      "byline": "By Sandra Kowalski, Staff Reporter",
-      "body": "NEW YORK \u2014 The New York Mets kept their bats humming Wednesday afternoon, rolling past the Detroit Tigers 9-4 at Citi Field in a performance that underscored just how dangerous this lineup can be when it gets rolling. The Mets struck early and often, building a cushion that their pitching staff was only too happy to protect through the final out. Detroit managed four runs but never found consistent enough offense to seriously threaten the home side.\n\nThe victory was part of a broader trend on a Wednesday that saw home teams feasting across the National League. The Mets' nine-run output kept pace with similar efforts in Cincinnati and Minneapolis, suggesting that pitching across the league is having a rough go of it this week. For New York, the win represents another step in what they hope will be a sustained push through the heart of the season."
+  "front": {
+    "headline": {
+      "kicker": "MLB",
+      "headline": "CINCINNATI HAMMERS NATIONALS 15-1 IN HISTORIC ROUT AT GREAT AMERICAN BALL PARK",
+      "deck": "Reds offense erupts for 15 runs, sending Washington home in tatters.",
+      "byline": "By Tom Gallagher, Sports Writer",
+      "body": "CINCINNATI -- The Great American Ball Park became a house of horrors for the Washington Nationals on Wednesday, as the Cincinnati Reds battered their way to a stunning 15-1 victory that left the visitors searching for answers before they even boarded the bus home. The Reds sent 14 batters to the plate in at least one inning, pounding Nationals pitching for extra-base hits and run-scoring singles that turned the scoreboard into an embarrassment for Washington's beleaguered staff.\n\nNationals starter threaded only two scoreless innings before Cincinnati's lineup tore through the bullpen like a freight train with no brakes. Reds hitters worked counts deep, drew walks, and punished anything left over the plate, manufacturing crooked numbers that silenced whatever optimism Washington carried into the ballpark. The Nationals managed only one run against a Cincinnati rotation that looked sharp and in command from the first pitch to the last.\n\nThe blowout victory pushed Cincinnati firmly into the conversation for one of the National League's hottest offenses, and the crowd at Great American Ball Park roared its approval through every scoring rally. Washington, meanwhile, now faces hard questions about a pitching staff that has surrendered lopsided scores with troubling regularity. For the Reds, Wednesday was the kind of statement win that echoes across the standings for days."
     },
-    {
-      "sport": "NFL",
-      "kicker": "SPRING FOOTBALL",
-      "headline": "SEAHAWKS TRAMPLE NEW ENGLAND 29-13 IN RESOUNDING FASHION",
-      "deck": "Seattle's offense outclasses the Patriots in a lopsided result that raises eyebrows across the league",
-      "byline": "By Marcus DeLeon, Staff Reporter",
-      "body": "FOXBOROUGH \u2014 The Seattle Seahawks delivered a sharp and unambiguous statement Wednesday, dismantling the New England Patriots 29-13 in a game that wasn't nearly as close as the final score suggests. Seattle's offense moved the ball with purpose and consistency, while New England's unit sputtered and misfired through the afternoon, unable to generate any sustained momentum against a disciplined Seattle defense.\n\nThe 16-point margin tells a story of dominance from the Pacific Northwest. New England, an organization built on the mythology of competitive toughness and institutional excellence, was made to look ordinary in the face of Seattle's execution. For the Seahawks, the victory is a confidence builder of the highest order. For New England, questions will linger about the direction of a franchise still searching for its post-dynasty identity."
+    "secondary": [
+      {
+        "kicker": "MLB",
+        "headline": "METS POUND DETROIT 9-4, TIGERS LEFT WONDERING WHAT HIT THEM",
+        "deck": "New York's bats stay hot as Detroit's pitching crumbles at Citi Field.",
+        "byline": "By Sandra Voss",
+        "body": "NEW YORK -- The New York Mets continued their offensive surge Wednesday evening, rolling past the Detroit Tigers 9-4 at Citi Field behind a balanced attack that had the home crowd buzzing from the third inning onward. Detroit starter struggled to keep New York's lineup in check, surrendering runs in bunches as the Mets worked base hits and timely extra-base knocks into a comfortable cushion.\n\nThe Tigers managed four runs but never seriously threatened to claw back into the contest once the Mets' middle order got rolling. New York's pitching staff did enough to keep Detroit honest without anything resembling a dominant individual performance, letting the offensive firepower carry the night. The win adds to a growing sense around Flushing that this Mets squad intends to be taken seriously."
+      },
+      {
+        "kicker": "MLB",
+        "headline": "TWINS ROUT MARLINS 9-1, MINNESOTA'S BATS REFUSE TO COOL OFF",
+        "deck": "Minnesota rolls to a lopsided home win as Miami's road woes deepen.",
+        "byline": "By Carl Hendricks",
+        "body": "MINNEAPOLIS -- The Minnesota Twins wasted no time making the Miami Marlins feel unwelcome at Target Field, cruising to a 9-1 victory that extended Miami's miserable road stretch. Minnesota's lineup punished Marlins pitching early and often, stringing together hits and capitalizing on every defensive lapse the visitors offered through nine innings.\n\nMiami's lone run offered little consolation as the Twins' bullpen slammed the door and the crowd thinned out only after the outcome had been decided by the fourth frame. Minnesota continues to flex its offensive muscle at home, presenting a formidable challenge for any road team that steps into their park. The Marlins, now mired in a troubling stretch away from LoanDepot Park, head north looking for answers."
+      },
+      {
+        "kicker": "NBA PLAYOFFS",
+        "headline": "CAVALIERS HOST PISTONS TONIGHT IN MUST-WATCH EASTERN PLAYOFF SHOWDOWN",
+        "deck": "Cleveland and Detroit tip off at 7 p.m. with playoff positioning on the line.",
+        "byline": "By Denise Archer",
+        "body": "CLEVELAND -- Rocket Mortgage FieldHouse will be electric Wednesday night when the Cleveland Cavaliers welcome the Detroit Pistons for a playoff matchup scheduled for a 7 p.m. Eastern tip. Cleveland enters as the home favorite, leaning on Donovan Mitchell's scoring and the stout defensive backbone that has defined this Cavaliers squad throughout the postseason run.\n\nDetroit, never lacking for toughness under coach J.B. Bickerstaff, will need Cade Cunningham to impose his will from the opening possession if the Pistons hope to steal a road win and shift momentum in this series. Tipoff is set for 7 p.m. Eastern, and every seat inside Rocket Mortgage FieldHouse is expected to be filled and loud."
+      }
+    ],
+    "column": {
+      "tag": "FROM THE PRESS BOX",
+      "headline": "FIFTEEN RUNS SHOULD BE A WAKE-UP CALL THE NATIONALS CANNOT IGNORE",
+      "byline": "By Pat McAllister",
+      "body": "Losing 15-1 is not a bad night. It is a diagnosis. When a major league pitching staff surrenders fifteen runs to a lineup that, while improving, is hardly the 1927 Yankees, the organization owes its fans a serious and honest accounting of what is happening in that rotation and that bullpen. Washington has too much talent in too many places to keep handing out footballs scores on a baseball diamond.\n\nMeanwhile, Cincinnati deserves real credit. The Reds are not sneaking up on anyone anymore. They have the horses to beat good teams badly, and Wednesday night proved it on national display. If the rest of the National League is not paying attention, they ought to start."
     },
-    {
-      "sport": "MLB",
-      "kicker": "TWINS THUMP",
-      "headline": "MINNESOTA CRUISES PAST MIAMI 9-1, MARLINS OFFER LITTLE RESISTANCE",
-      "deck": "The Twins romp at Target Field as Miami's struggling offense manages just a single run",
-      "byline": "By Ellen Forsythe, Staff Reporter",
-      "body": "MINNEAPOLIS \u2014 Add Minnesota to the list of teams that feasted on Wednesday's slate. The Twins dispatched the Miami Marlins with clinical efficiency, rolling to a 9-1 victory at Target Field that was never in doubt from the early innings onward. Minnesota's lineup applied steady pressure throughout the contest, and their pitching staff held Miami to a single run, limiting the Marlins to little more than token resistance over nine innings.\n\nMiami's offensive struggles are becoming a troubling theme. The Marlins have now been held to one run or fewer in a game that they simply could not compete in, and questions about their lineup's capacity to generate consistent production will not go away quietly. Meanwhile, Minnesota has now put up nine runs alongside New York and Cincinnati on the same day \u2014 a triumvirate of offensive explosions that will have the rest of the American League looking nervously over their shoulders."
-    }
-  ],
-  "scores": [
-    {
-      "league": "NBA",
-      "games": [
+    "scores": {
+      "mlb": [
         {
-          "away_team": "DET",
-          "away_score": 0,
-          "home_team": "CLE",
-          "home_score": 0,
-          "status": "5/15 - 7:00 PM EDT"
-        },
-        {
-          "away_team": "SA",
-          "away_score": 0,
-          "home_team": "MIN",
-          "home_score": 0,
-          "status": "5/15 - 9:30 PM EDT"
-        }
-      ]
-    },
-    {
-      "league": "MLB",
-      "games": [
-        {
-          "away_team": "COL",
+          "away": "COL",
           "away_score": 2,
-          "home_team": "PIT",
+          "home": "PIT",
           "home_score": 7,
           "status": "Final"
         },
         {
-          "away_team": "WSH",
+          "away": "WSH",
           "away_score": 1,
-          "home_team": "CIN",
+          "home": "CIN",
           "home_score": 15,
           "status": "Final"
         },
         {
-          "away_team": "DET",
+          "away": "DET",
           "away_score": 4,
-          "home_team": "NYM",
+          "home": "NYM",
           "home_score": 9,
           "status": "Final"
         },
         {
-          "away_team": "MIA",
+          "away": "MIA",
           "away_score": 1,
-          "home_team": "MIN",
+          "home": "MIN",
           "home_score": 9,
           "status": "Final"
         },
         {
-          "away_team": "SD",
-          "away_score": 0,
-          "home_team": "MIL",
+          "away": "SD",
+          "away_score": 1,
+          "home": "MIL",
           "home_score": 7,
-          "status": "End 7th"
+          "status": "Final"
         },
         {
-          "away_team": "SEA",
-          "away_score": 7,
-          "home_team": "HOU",
+          "away": "SEA",
+          "away_score": 8,
+          "home": "HOU",
           "home_score": 3,
-          "status": "Bot 7th"
-        }
-      ]
-    },
-    {
-      "league": "NFL",
-      "games": [
+          "status": "Top 9th"
+        },
         {
-          "away_team": "SEA",
-          "away_score": 29,
-          "home_team": "NE",
-          "home_score": 13,
-          "status": "Final"
-        }
-      ]
-    },
-    {
-      "league": "NHL",
-      "games": [
+          "away": "STL",
+          "away_score": 3,
+          "home": "ATH",
+          "home_score": 1,
+          "status": "Top 7th"
+        },
         {
-          "away_team": "MTL",
+          "away": "PHI",
           "away_score": 0,
-          "home_team": "BUF",
+          "home": "BOS",
+          "home_score": 0,
+          "status": "5/14 - 6:45 PM EDT"
+        }
+      ],
+      "nba": [
+        {
+          "away": "DET",
+          "away_score": 0,
+          "home": "CLE",
+          "home_score": 0,
+          "status": "5/15 - 7:00 PM EDT"
+        },
+        {
+          "away": "SA",
+          "away_score": 0,
+          "home": "MIN",
+          "home_score": 0,
+          "status": "5/15 - 9:30 PM EDT"
+        }
+      ],
+      "nhl": [
+        {
+          "away": "MTL",
+          "away_score": 0,
+          "home": "BUF",
           "home_score": 0,
           "status": "5/14 - 7:00 PM EDT"
         },
         {
-          "away_team": "VGK",
+          "away": "VGK",
           "away_score": 0,
-          "home_team": "ANA",
+          "home": "ANA",
           "home_score": 0,
           "status": "5/14 - 9:30 PM EDT"
         }
       ]
     }
-  ],
-  "standings": [],
-  "column": {
-    "section_title": "FROM THE PRESS BOX",
-    "headline": "WHEN THE BATS COME ALIVE, BASEBALL REMINDS US WHY WE LOVE IT",
-    "byline": "By Pat McAllister",
-    "body": "Wednesday was a day that reminded every hand-wringing commissioner, every pace-of-play reformer, and every pundit who has spent the last three years eulogizing the long ball that baseball's offense is not dead \u2014 it was just resting. Cincinnati put up fifteen. Minnesota put up nine. New York put up nine. The Pittsburgh Pirates put up seven against Colorado. On a single afternoon in mid-May, the sport delivered more crooked numbers than a dishonest accountant, and not one frame of it was boring. So before we start tinkering with the rulebook again, let's appreciate what the game can be when hitters are locked in and pitchers are not.\n\nThe truly remarkable thing about days like Wednesday is how they expose the randomness that makes baseball beautiful and maddening in equal measure. The same sport that gives you a 1-0 pitcher's duel on Tuesday turns around and serves up a 15-1 shellacking on Wednesday. No sport pivots that dramatically, that honestly. The Nationals and Marlins and Tigers who trudged through those dugouts tonight know the feeling \u2014 you show up, do your job, and the game simply decides it isn't your day. There's no clock to run out, no foul to commit. You just have to stand there and take it. That's not a flaw in the design. That's the whole point."
+  },
+  "mlb": {
+    "story": {
+      "kicker": "BASEBALL",
+      "headline": "CINCINNATI BURIES WASHINGTON IN 15-1 ROUT AS BATS EXPLODE ACROSS THE LEAGUE",
+      "deck": "Reds pound Nationals with historic offensive output while Pittsburgh, Minnesota, Milwaukee and the Mets all cruise to lopsided victories",
+      "byline": "By Dan Hartwell, Baseball Writer",
+      "body": "CINCINNATI \u2014 The Great American Ball Park became a house of horrors for the Washington Nationals on Wednesday night, as the Cincinnati Reds erupted for 15 runs in a savage 15-1 demolition that left the visiting club searching for answers before the final out was recorded. The Reds sent at least a dozen batters to the plate in multiple innings, turning what should have been a competitive divisional contest into a full-scale rout that delighted the home crowd and sent Washington to its ugliest defeat of the season.\n\nThe carnage was not limited to the Ohio River. Across the National League, Pittsburgh slugged Colorado 7-2 at PNC Park, Milwaukee dispatched San Diego 7-1 behind a stingy pitching performance, and the New York Mets handled Detroit 9-4 at Citi Field in a contest that was never seriously in doubt after the Mets broke the game open in the middle innings. In the American League, Minnesota made Miami feel equally unwelcome, pounding the Marlins 9-1 at Target Field as the Twins offense rolled through the visiting pitching staff without mercy.\n\nThe themes of the evening were power and command, with home teams collecting victories by an average margin of more than seven runs. The Reds' performance stood alone at the top of the ledger, a performance that will linger in opponents' nightmares. Washington starter and relievers alike surrendered extra-base hits in bunches as Cincinnati refused to let up, sending a clear message to the rest of the National League that its lineup is among the most dangerous in the sport on any given night."
+    },
+    "schedule": [
+      {
+        "time": "Final",
+        "away": "Colorado Rockies",
+        "home": "Pittsburgh Pirates",
+        "asp": "Probable Starting Pitcher",
+        "hsp": "Probable Starting Pitcher"
+      },
+      {
+        "time": "Final",
+        "away": "Washington Nationals",
+        "home": "Cincinnati Reds",
+        "asp": "Probable Starting Pitcher",
+        "hsp": "Probable Starting Pitcher"
+      },
+      {
+        "time": "Final",
+        "away": "Detroit Tigers",
+        "home": "New York Mets",
+        "asp": "Probable Starting Pitcher",
+        "hsp": "Probable Starting Pitcher"
+      },
+      {
+        "time": "Final",
+        "away": "Miami Marlins",
+        "home": "Minnesota Twins",
+        "asp": "Probable Starting Pitcher",
+        "hsp": "Probable Starting Pitcher"
+      },
+      {
+        "time": "Final",
+        "away": "San Diego Padres",
+        "home": "Milwaukee Brewers",
+        "asp": "Probable Starting Pitcher",
+        "hsp": "Probable Starting Pitcher"
+      },
+      {
+        "time": "Top 9th",
+        "away": "Seattle Mariners",
+        "home": "Houston Astros",
+        "asp": "Probable Starting Pitcher",
+        "hsp": "Probable Starting Pitcher"
+      },
+      {
+        "time": "Top 7th",
+        "away": "St. Louis Cardinals",
+        "home": "Athletics",
+        "asp": "Probable Starting Pitcher",
+        "hsp": "Probable Starting Pitcher"
+      },
+      {
+        "time": "5/14 - 6:45 PM EDT",
+        "away": "Philadelphia Phillies",
+        "home": "Boston Red Sox",
+        "asp": "Probable Starting Pitcher",
+        "hsp": "Probable Starting Pitcher"
+      },
+      {
+        "time": "5/14 - 7:15 PM EDT",
+        "away": "Chicago Cubs",
+        "home": "Atlanta Braves",
+        "asp": "Probable Starting Pitcher",
+        "hsp": "Probable Starting Pitcher"
+      },
+      {
+        "time": "5/14 - 7:40 PM EDT",
+        "away": "Kansas City Royals",
+        "home": "Chicago White Sox",
+        "asp": "Probable Starting Pitcher",
+        "hsp": "Probable Starting Pitcher"
+      },
+      {
+        "time": "5/14 - 10:10 PM EDT",
+        "away": "San Francisco Giants",
+        "home": "Los Angeles Dodgers",
+        "asp": "Probable Starting Pitcher",
+        "hsp": "Probable Starting Pitcher"
+      }
+    ],
+    "scores": [
+      {
+        "away": "COL",
+        "away_score": 2,
+        "home": "PIT",
+        "home_score": 7,
+        "status": "Final"
+      },
+      {
+        "away": "WSH",
+        "away_score": 1,
+        "home": "CIN",
+        "home_score": 15,
+        "status": "Final"
+      },
+      {
+        "away": "DET",
+        "away_score": 4,
+        "home": "NYM",
+        "home_score": 9,
+        "status": "Final"
+      },
+      {
+        "away": "MIA",
+        "away_score": 1,
+        "home": "MIN",
+        "home_score": 9,
+        "status": "Final"
+      },
+      {
+        "away": "SD",
+        "away_score": 1,
+        "home": "MIL",
+        "home_score": 7,
+        "status": "Final"
+      },
+      {
+        "away": "SEA",
+        "away_score": 8,
+        "home": "HOU",
+        "home_score": 3,
+        "status": "Top 9th"
+      },
+      {
+        "away": "STL",
+        "away_score": 3,
+        "home": "ATH",
+        "home_score": 1,
+        "status": "Top 7th"
+      },
+      {
+        "away": "PHI",
+        "away_score": 0,
+        "home": "BOS",
+        "home_score": 0,
+        "status": "5/14 - 6:45 PM EDT"
+      },
+      {
+        "away": "CHC",
+        "away_score": 0,
+        "home": "ATL",
+        "home_score": 0,
+        "status": "5/14 - 7:15 PM EDT"
+      },
+      {
+        "away": "KC",
+        "away_score": 0,
+        "home": "CHW",
+        "home_score": 0,
+        "status": "5/14 - 7:40 PM EDT"
+      }
+    ],
+    "standings": []
+  },
+  "nba": {
+    "story": {
+      "kicker": "BASKETBALL",
+      "headline": "CAVALIERS HOST PISTONS AS PLAYOFF PICTURE SHARPENS",
+      "deck": "Cleveland looks to press its advantage at Rocket Mortgage FieldHouse in Thursday night opener before San Antonio visits Minnesota",
+      "byline": "By Marcus Bellfield, Basketball Writer",
+      "body": "The Cleveland Cavaliers welcome the Detroit Pistons to Rocket Mortgage FieldHouse Thursday evening for a 7 p.m. EDT tip-off, a matchup that carries real weight as the Eastern Conference standings continue to sort themselves out. Donovan Mitchell and the Cavaliers have leaned on their home court all season, and the faithful in Cleveland will be expecting nothing less than a statement performance against a young Pistons squad that has shown flashes of brilliance under first-year head coach J.B. Bickerstaff's former assistant staff.\n\nThe nightcap figures to be every bit as compelling, with the San Antonio Spurs rolling into Target Center to face the Minnesota Timberwolves at 9:30 p.m. EDT. Victor Wembanyama and the Spurs have been drawing national attention all season as the French phenom continues to rewrite the expectations placed on rookie big men, while Anthony Edwards and Karl-Anthony Towns anchor a Minnesota side hungry to prove it belongs among the West's elite. The late tip gives the country a chance to watch two of the game's most electric young talents share a floor.\n\nBoth games carry playoff implications that could resonate well beyond Thursday night. Front offices around the league will have scouts in both buildings, evaluating roster construction and late-season conditioning with the postseason window closing fast. Cleveland's ability to control the paint against Detroit and Minnesota's transition defense against Wembanyama's length and passing vision will be the defining storylines when the final buzzers sound."
+    },
+    "schedule": [
+      {
+        "time": "5/15 - 7:00 PM EDT",
+        "away": "Detroit Pistons",
+        "home": "Cleveland Cavaliers"
+      },
+      {
+        "time": "5/15 - 9:30 PM EDT",
+        "away": "San Antonio Spurs",
+        "home": "Minnesota Timberwolves"
+      }
+    ],
+    "scores": [
+      {
+        "away": "DET",
+        "away_score": 0,
+        "home": "CLE",
+        "home_score": 0,
+        "status": "5/15 - 7:00 PM EDT"
+      },
+      {
+        "away": "SA",
+        "away_score": 0,
+        "home": "MIN",
+        "home_score": 0,
+        "status": "5/15 - 9:30 PM EDT"
+      }
+    ],
+    "standings": []
+  },
+  "nhl": {
+    "story": {
+      "kicker": "HOCKEY",
+      "headline": "SABRES HOST CANADIENS IN WEDNESDAY NIGHT TILT AS GOLDEN KNIGHTS RIDE INTO ANAHEIM",
+      "deck": "Buffalo looks to build momentum against Montreal while Vegas seeks to silence the Ducks in a late Western showdown",
+      "byline": "By Dan Whitfield, Hockey Writer",
+      "body": "The ice is set for a full night of NHL action Wednesday, with two marquee matchups on the docket. The Buffalo Sabres welcome the Montreal Canadiens to KeyBank Center for a 7 p.m. Eastern faceoff, a rivalry steeped in decades of Original Six history and border-war intensity. Both clubs have been jockeying for position in a brutally competitive Eastern Conference, and neither team can afford to leave points on the table this late in the campaign.\n\nOut West, the puck drops at 9:30 p.m. Eastern as the Vegas Golden Knights skate into Honda Center to face the Anaheim Ducks in a Pacific Division clash that carries serious playoff implications. Vegas has long been one of the most dangerous teams in the conference, built around the scoring of Jack Eichel and the blue-line leadership of Alex Pietrangelo. The Ducks, meanwhile, have been hungry to prove they belong among the West's elite, leaning on Trevor Zegras to generate offense and John Gibson to steal games between the pipes.\n\nIn Buffalo, all eyes will be on Tage Thompson, who has emerged as one of the most dangerous power forwards in the Eastern Conference, and on goaltender Ukko-Pekka Luukkonen, who has been the backbone of the Sabres' push for respectability. For Montreal, Cole Caufield brings his electric shot into enemy territory, looking to give the Canadiens a road victory and keep pace in the standings. Fans tuning in for the late game can expect a physical, hard-fought affair as two proud franchises battle for two points that could loom large when the final playoff picture is drawn."
+    },
+    "schedule": [
+      {
+        "time": "5/14 - 7:00 PM EDT",
+        "away": "Montreal Canadiens",
+        "home": "Buffalo Sabres",
+        "asp": "Probable Starting Goalie",
+        "hsp": "Probable Starting Goalie"
+      },
+      {
+        "time": "5/14 - 9:30 PM EDT",
+        "away": "Vegas Golden Knights",
+        "home": "Anaheim Ducks",
+        "asp": "Probable Starting Goalie",
+        "hsp": "Probable Starting Goalie"
+      }
+    ],
+    "scores": [
+      {
+        "away": "MTL",
+        "away_score": 0,
+        "home": "BUF",
+        "home_score": 0,
+        "status": "5/14 - 7:00 PM EDT"
+      },
+      {
+        "away": "VGK",
+        "away_score": 0,
+        "home": "ANA",
+        "home_score": 0,
+        "status": "5/14 - 9:30 PM EDT"
+      }
+    ],
+    "standings": []
+  },
+  "nfl": {
+    "story": {
+      "kicker": "FOOTBALL",
+      "headline": "COLLEGE FOOTBALL'S PLAYOFF EXPANSION RESHAPES THE LANDSCAPE",
+      "deck": "With 12 teams now chasing the national title, the old order of bowl season is gone forever",
+      "byline": "By Dan Hollister, Football Writer",
+      "body": "The college football world woke up this season to a new reality, one where a one-loss Alabama or a two-loss Ohio State no longer watches the national championship from a couch. The expanded 12-team College Football Playoff has shattered the old gatekeeping system, and coaches from Tuscaloosa to Columbus to Ann Arbor spent the offseason recalibrating everything from scheduling philosophy to roster construction with the new format squarely in mind.\n\nThe change has already redistributed power in tangible ways. Programs like Boise State and Arizona, which spent decades knocking on a door that rarely opened, now carry genuine postseason weight into their conference races. Boise State head coach Spencer Danielson said his staff used the expanded bracket as a direct recruiting pitch, telling blue-chip prospects that a Western Mountain Division title is now a legitimate path to a national semifinal. That argument is landing in living rooms where it never landed before.\n\nFor the traditional powers, the margin for error has narrowed in a different way. Georgia defensive coordinator Glenn Schumann noted that depth chart decisions made in August carry higher stakes when a program knows it could face a red-hot mid-major in a first-round home game rather than a comfortable bowl opponent. The pageantry of New Year's Six bowls remains, but the urgency of December football has arrived everywhere at once, and nobody in the sport is pretending the old world is coming back."
+    },
+    "standings": []
   }
 }
