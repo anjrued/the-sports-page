@@ -1,0 +1,146 @@
+{
+  "generated_at": "2026-05-14T20:18:44.542032+00:00",
+  "date": "Thursday, May 14, 2026",
+  "edition": "Vol. CXLVII \u00b7 No. 276",
+  "weather": "Check your local forecast",
+  "headline_story": {
+    "sport": "MLB",
+    "kicker": "REDS RAMPAGE",
+    "headline": "CINCINNATI ERUPTS FOR 15, BURIES NATIONALS IN HISTORIC ROUT",
+    "deck": "Cincinnati's bats go nuclear at Great American Ball Park, handing Washington a humiliating 15-1 defeat",
+    "byline": "By Thomas Hargrove, Sports Writer",
+    "body": "CINCINNATI \u2014 They came to the Queen City and left in ruins. The Cincinnati Reds unleashed a historic offensive torrent Wednesday evening, pummeling the hapless Washington Nationals by a stunning 15-1 final at Great American Ball Park. It was the kind of afternoon that makes managers consider early retirement and pitching coaches reach for something stronger than Gatorade. The Reds sent batters to the plate in waves, stringing together hits, walks, and extra-base blows that turned the scoreboard into an embarrassment for the visiting club.\n\nWashington managed just a single run against the Cincinnati pitching staff, a meek response to the carnage being inflicted on the other side of the ledger. The Nationals, who entered the day already mired in a difficult season, could find no answer as Cincinnati's lineup cycled through like a well-oiled demolition machine. By the middle innings the outcome was a formality, and the Cincinnati faithful were doing the math on run differential with undisguised delight.\n\nThe blowout is the kind of performance that can jolt a franchise awake. The Reds have now signaled, loudly and unmistakably, that their offense is capable of inflicting serious damage on any opponent on any given evening. For Washington, the long bus ride home will feel considerably longer after surrendering fourteen runs to a division rival. The baseball world took notice Wednesday \u2014 Cincinnati means business."
+  },
+  "secondary_stories": [
+    {
+      "sport": "MLB",
+      "kicker": "METS MUSCLE UP",
+      "headline": "NEW YORK HAMMERS DETROIT 9-4, METS OFFENSE ROLLS AT CITI FIELD",
+      "deck": "The Mets pile up nine runs to hand the Tigers a convincing loss in the Bronx's outer borough",
+      "byline": "By Sandra Kowalski, Staff Reporter",
+      "body": "NEW YORK \u2014 The New York Mets kept their bats humming Wednesday afternoon, rolling past the Detroit Tigers 9-4 at Citi Field in a performance that underscored just how dangerous this lineup can be when it gets rolling. The Mets struck early and often, building a cushion that their pitching staff was only too happy to protect through the final out. Detroit managed four runs but never found consistent enough offense to seriously threaten the home side.\n\nThe victory was part of a broader trend on a Wednesday that saw home teams feasting across the National League. The Mets' nine-run output kept pace with similar efforts in Cincinnati and Minneapolis, suggesting that pitching across the league is having a rough go of it this week. For New York, the win represents another step in what they hope will be a sustained push through the heart of the season."
+    },
+    {
+      "sport": "NFL",
+      "kicker": "SPRING FOOTBALL",
+      "headline": "SEAHAWKS TRAMPLE NEW ENGLAND 29-13 IN RESOUNDING FASHION",
+      "deck": "Seattle's offense outclasses the Patriots in a lopsided result that raises eyebrows across the league",
+      "byline": "By Marcus DeLeon, Staff Reporter",
+      "body": "FOXBOROUGH \u2014 The Seattle Seahawks delivered a sharp and unambiguous statement Wednesday, dismantling the New England Patriots 29-13 in a game that wasn't nearly as close as the final score suggests. Seattle's offense moved the ball with purpose and consistency, while New England's unit sputtered and misfired through the afternoon, unable to generate any sustained momentum against a disciplined Seattle defense.\n\nThe 16-point margin tells a story of dominance from the Pacific Northwest. New England, an organization built on the mythology of competitive toughness and institutional excellence, was made to look ordinary in the face of Seattle's execution. For the Seahawks, the victory is a confidence builder of the highest order. For New England, questions will linger about the direction of a franchise still searching for its post-dynasty identity."
+    },
+    {
+      "sport": "MLB",
+      "kicker": "TWINS THUMP",
+      "headline": "MINNESOTA CRUISES PAST MIAMI 9-1, MARLINS OFFER LITTLE RESISTANCE",
+      "deck": "The Twins romp at Target Field as Miami's struggling offense manages just a single run",
+      "byline": "By Ellen Forsythe, Staff Reporter",
+      "body": "MINNEAPOLIS \u2014 Add Minnesota to the list of teams that feasted on Wednesday's slate. The Twins dispatched the Miami Marlins with clinical efficiency, rolling to a 9-1 victory at Target Field that was never in doubt from the early innings onward. Minnesota's lineup applied steady pressure throughout the contest, and their pitching staff held Miami to a single run, limiting the Marlins to little more than token resistance over nine innings.\n\nMiami's offensive struggles are becoming a troubling theme. The Marlins have now been held to one run or fewer in a game that they simply could not compete in, and questions about their lineup's capacity to generate consistent production will not go away quietly. Meanwhile, Minnesota has now put up nine runs alongside New York and Cincinnati on the same day \u2014 a triumvirate of offensive explosions that will have the rest of the American League looking nervously over their shoulders."
+    }
+  ],
+  "scores": [
+    {
+      "league": "NBA",
+      "games": [
+        {
+          "away_team": "DET",
+          "away_score": 0,
+          "home_team": "CLE",
+          "home_score": 0,
+          "status": "5/15 - 7:00 PM EDT"
+        },
+        {
+          "away_team": "SA",
+          "away_score": 0,
+          "home_team": "MIN",
+          "home_score": 0,
+          "status": "5/15 - 9:30 PM EDT"
+        }
+      ]
+    },
+    {
+      "league": "MLB",
+      "games": [
+        {
+          "away_team": "COL",
+          "away_score": 2,
+          "home_team": "PIT",
+          "home_score": 7,
+          "status": "Final"
+        },
+        {
+          "away_team": "WSH",
+          "away_score": 1,
+          "home_team": "CIN",
+          "home_score": 15,
+          "status": "Final"
+        },
+        {
+          "away_team": "DET",
+          "away_score": 4,
+          "home_team": "NYM",
+          "home_score": 9,
+          "status": "Final"
+        },
+        {
+          "away_team": "MIA",
+          "away_score": 1,
+          "home_team": "MIN",
+          "home_score": 9,
+          "status": "Final"
+        },
+        {
+          "away_team": "SD",
+          "away_score": 0,
+          "home_team": "MIL",
+          "home_score": 7,
+          "status": "End 7th"
+        },
+        {
+          "away_team": "SEA",
+          "away_score": 7,
+          "home_team": "HOU",
+          "home_score": 3,
+          "status": "Bot 7th"
+        }
+      ]
+    },
+    {
+      "league": "NFL",
+      "games": [
+        {
+          "away_team": "SEA",
+          "away_score": 29,
+          "home_team": "NE",
+          "home_score": 13,
+          "status": "Final"
+        }
+      ]
+    },
+    {
+      "league": "NHL",
+      "games": [
+        {
+          "away_team": "MTL",
+          "away_score": 0,
+          "home_team": "BUF",
+          "home_score": 0,
+          "status": "5/14 - 7:00 PM EDT"
+        },
+        {
+          "away_team": "VGK",
+          "away_score": 0,
+          "home_team": "ANA",
+          "home_score": 0,
+          "status": "5/14 - 9:30 PM EDT"
+        }
+      ]
+    }
+  ],
+  "standings": [],
+  "column": {
+    "section_title": "FROM THE PRESS BOX",
+    "headline": "WHEN THE BATS COME ALIVE, BASEBALL REMINDS US WHY WE LOVE IT",
+    "byline": "By Pat McAllister",
+    "body": "Wednesday was a day that reminded every hand-wringing commissioner, every pace-of-play reformer, and every pundit who has spent the last three years eulogizing the long ball that baseball's offense is not dead \u2014 it was just resting. Cincinnati put up fifteen. Minnesota put up nine. New York put up nine. The Pittsburgh Pirates put up seven against Colorado. On a single afternoon in mid-May, the sport delivered more crooked numbers than a dishonest accountant, and not one frame of it was boring. So before we start tinkering with the rulebook again, let's appreciate what the game can be when hitters are locked in and pitchers are not.\n\nThe truly remarkable thing about days like Wednesday is how they expose the randomness that makes baseball beautiful and maddening in equal measure. The same sport that gives you a 1-0 pitcher's duel on Tuesday turns around and serves up a 15-1 shellacking on Wednesday. No sport pivots that dramatically, that honestly. The Nationals and Marlins and Tigers who trudged through those dugouts tonight know the feeling \u2014 you show up, do your job, and the game simply decides it isn't your day. There's no clock to run out, no foul to commit. You just have to stand there and take it. That's not a flaw in the design. That's the whole point."
+  }
+}
