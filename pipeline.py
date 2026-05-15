@@ -272,28 +272,61 @@ def fmt_mlb_standings(raw):
     div_order = ["AL East","AL Central","AL West","NL East","NL Central","NL West"]
     divs = {}
     if not raw:
+        print("    Standings: no raw data")
         return []
-    for rec in raw.get("records", []):
-        div = rec.get("division",{}).get("name","")
+    records = raw.get("records", [])
+    print(f"    Standings: {len(records)} division records found")
+    for rec in records:
+        # Division name can be nested differently depending on API version
+        div_obj = rec.get("division", {})
+        div = div_obj.get("name", div_obj.get("nameShort", ""))
+        if not div:
+            # Try alternate path
+            div = rec.get("divisionName", "")
         teams = []
-        for i, tr in enumerate(rec.get("teamRecords",[])):
-            splits = {s["type"]:s for s in tr.get("records",{}).get("splitRecords",[])}
-            ho = splits.get("home",{}); aw = splits.get("away",{}); lt = splits.get("lastTen",{})
-            gb = tr.get("gamesBack","—")
+        for i, tr in enumerate(rec.get("teamRecords", [])):
+            # splitRecords
+            split_list = tr.get("records", {}).get("splitRecords", [])
+            splits = {s.get("type", s.get("splitType","")): s for s in split_list}
+            ho = splits.get("home", {}); aw = splits.get("away", {})
+            lt = splits.get("lastTen", splits.get("last10", {}))
+            gb_raw = tr.get("gamesBack", tr.get("gamesBehind", "—"))
+            gb = "-" if str(gb_raw) in ["0.0","0","0.00"] else str(gb_raw)
+            # streak
+            streak_obj = tr.get("streak", {})
+            strk = streak_obj.get("streakCode", "") or (
+                ("W" if streak_obj.get("streakType","")=="wins" else "L") +
+                str(streak_obj.get("streakNumber",""))
+                if streak_obj else ""
+            )
+            # pct
+            pct_raw = tr.get("winningPercentage", tr.get("pct", ".000"))
+            if pct_raw and not str(pct_raw).startswith("."):
+                try:
+                    pct_raw = f"{float(pct_raw):.3f}"
+                except Exception:
+                    pass
             teams.append({
                 "rank": i+1,
-                "name": tr.get("team",{}).get("name",""),
-                "w": tr.get("wins",0),
-                "l": tr.get("losses",0),
-                "pct": tr.get("winningPercentage",".000"),
-                "gb": "-" if gb in ["0.0","0"] else gb,
-                "l10": f"{lt.get('wins',0)}-{lt.get('losses',0)}",
-                "strk": tr.get("streak",{}).get("streakCode",""),
+                "name": tr.get("team", {}).get("name", ""),
+                "w":    tr.get("wins", 0),
+                "l":    tr.get("losses", 0),
+                "pct":  str(pct_raw),
+                "gb":   gb,
+                "l10":  f"{lt.get('wins',0)}-{lt.get('losses',0)}",
+                "strk": strk,
                 "home": f"{ho.get('wins',0)}-{ho.get('losses',0)}",
                 "away": f"{aw.get('wins',0)}-{aw.get('losses',0)}",
             })
-        divs[div] = {"label": div, "teams": teams}
-    return [divs[d] for d in div_order if d in divs]
+        if div and teams:
+            divs[div] = {"label": div, "teams": teams}
+            print(f"      {div}: {len(teams)} teams")
+    result = [divs[d] for d in div_order if d in divs]
+    # If none matched the expected names, return whatever we have
+    if not result and divs:
+        print(f"    Warning: div names didn't match expected. Got: {list(divs.keys())}")
+        result = list(divs.values())
+    return result
 
 def fmt_mlb_leaders_side(season, league_id, label):
     cat_map = [
@@ -827,25 +860,39 @@ Return JSON: {{"kicker":"NHL PLAYOFFS","headline":"HEADLINE ALL CAPS","deck":"Un
 
 def fmt_nhl_standings(raw):
     if not raw:
+        print("    NHL Standings: no raw data")
         return []
     east = {"label":"Eastern Conference","teams":[]}
     west = {"label":"Western Conference","teams":[]}
-    for t in raw.get("standings",[]):
-        conf = t.get("conferenceName","")
-        l10w = t.get("l10Wins",0); l10l = t.get("l10Losses",0); l10ot = t.get("l10OtLosses",0)
+    standings = raw.get("standings", [])
+    print(f"    NHL Standings: {len(standings)} teams")
+    for t in standings:
+        conf = t.get("conferenceName","") or t.get("conferenceAbbrev","")
+        l10w  = int(t.get("l10Wins",0) or 0)
+        l10l  = int(t.get("l10Losses",0) or 0)
+        l10ot = int(t.get("l10OtLosses",0) or 0)
+        # Team name — try multiple fields
+        name = (t.get("teamName",{}) or {}).get("default","") or                (t.get("teamCommonName",{}) or {}).get("default","") or                t.get("teamName","") or t.get("name","")
+        pctg = t.get("pointPctg", t.get("winPctg", 0)) or 0
+        try:
+            pct_str = f".{str(round(float(pctg)*1000)).zfill(3)}"
+        except Exception:
+            pct_str = ".000"
+        streak_code = t.get("streakCode","") or ""
+        streak_count = t.get("streakCount","") or ""
         entry = {
             "rank": int(t.get("conferenceSequence",0) or 0),
-            "name": t.get("teamName",{}).get("default","") or t.get("teamCommonName",{}).get("default",""),
+            "name": name,
             "w":    int(t.get("wins",0) or 0),
             "l":    int(t.get("losses",0) or 0),
-            "pct":  f".{str(round(float(t.get('pointPctg',0))*1000)).zfill(3)}",
+            "pct":  pct_str,
             "gb":   "—",
             "l10":  f"{l10w}-{l10l+l10ot}",
-            "strk": f"{t.get('streakCode','')}{t.get('streakCount','')}",
-            "home": f"{t.get('homeWins',0)}-{t.get('homeLosses',0)+t.get('homeOtLosses',0)}",
-            "away": f"{t.get('roadWins',0)}-{t.get('roadLosses',0)+t.get('roadOtLosses',0)}",
+            "strk": f"{streak_code}{streak_count}",
+            "home": f"{t.get('homeWins',0)}-{int(t.get('homeLosses',0) or 0)+int(t.get('homeOtLosses',0) or 0)}",
+            "away": f"{t.get('roadWins',0)}-{int(t.get('roadLosses',0) or 0)+int(t.get('roadOtLosses',0) or 0)}",
         }
-        if "East" in conf:
+        if "East" in conf or conf in ["E","Eastern"]:
             east["teams"].append(entry)
         else:
             west["teams"].append(entry)
