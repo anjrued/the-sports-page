@@ -16,6 +16,7 @@ MODEL = "claude-sonnet-4-6"
 SYSTEM = """You are the sports editor of The Sports Page, a classic American daily newspaper.
 Write vivid newspaper journalism — inverted pyramid, specific, real player names.
 No em-dashes. No first person.
+Use ONLY the byline provided in the JSON template — do not invent other author names.
 Respond ONLY with a valid JSON object. First char { last char }. No markdown, no backticks."""
 
 # ── SHARED HELPERS ────────────────────────────────────────────────────────────
@@ -123,13 +124,14 @@ def mlb_standings(season):
         "hydrate": "team,record,streak",
     })
 
-def mlb_leaders_for(season, league_id, category, limit=8):
+def mlb_leaders_for(season, league_id, category, limit=10):
     data = api_get(f"{MLB}/stats/leaders", {
         "leaderCategories": category,
         "season": season,
         "leagueId": league_id,
         "sportId": 1,
         "limit": limit,
+        "playerPool": "Qualified",
     })
     if not data:
         return []
@@ -341,7 +343,7 @@ def fmt_mlb_leaders_side(season, league_id, label):
     ]
     cats = []
     for api_cat, display, cols in cat_map:
-        leaders = mlb_leaders_for(season, league_id, api_cat, limit=8)
+        leaders = mlb_leaders_for(season, league_id, api_cat, limit=10)
         rows = []
         for ldr in leaders:
             name = ldr.get("person",{}).get("fullName","")
@@ -391,7 +393,7 @@ def build_mlb(client, today_str, yesterday_str, mlb_season):
                 notes   = fmt_mlb_notes(box_raw)
 
         box_scores.append({"title": title, "linescore": ls,
-                            "batting": batting, "pitching": pitching if i < 3 else [],
+                            "batting": batting,
                             "notes": notes})
         time.sleep(0.2)
 
@@ -408,9 +410,10 @@ def build_mlb(client, today_str, yesterday_str, mlb_season):
     # Claude writes story
     print("    Writing MLB story...")
     scores_txt = "; ".join(b["title"] for b in box_scores[:6])
-    story = claude_call(client, f"""Write the lead baseball story for today's Sports Page.
-Yesterday's results: {scores_txt}
-Return JSON: {{"kicker":"BASEBALL","headline":"HEADLINE ALL CAPS","deck":"Under 20 words","byline":"By [Name], Baseball Writer","body":"Three paragraphs separated by \\n\\n."}}""")
+    story = claude_call(client, f"""Write the lead baseball story for The Sports Page dated {today_str}.
+These are the ACTUAL MLB games from {yesterday_str}: {scores_txt}
+Write ONLY about these specific real games — do not reference any other games or historical events.
+Return JSON: {{"kicker":"BASEBALL","headline":"HEADLINE ALL CAPS","deck":"Under 20 words","byline":"By Andrew Dobrow, Baseball Writer","body":"Three vivid paragraphs separated by \\n\\n."}}""")
 
     return {"story": story, "schedule": schedule,
             "boxScores": box_scores, "standings": standings, "leaders": leaders}
@@ -665,7 +668,7 @@ def build_nba(client, today_str, yesterday_str, nba_season):
     )
     story = claude_call(client, f"""Write the lead basketball story for today's Sports Page.
 Yesterday's NBA results: {scores_txt if scores_txt else 'No games yesterday'}
-Return JSON: {{"kicker":"NBA PLAYOFFS","headline":"HEADLINE ALL CAPS","deck":"Under 20 words","byline":"By [Name], Basketball Writer","body":"Three paragraphs separated by \\n\\n."}}""")
+Return JSON: {{"kicker":"NBA PLAYOFFS","headline":"HEADLINE ALL CAPS","deck":"Under 20 words","byline":"By Andrew Dobrow, Basketball Writer","body":"Three paragraphs separated by \\n\\n."}}""")
 
     return {"story": story, "schedule": schedule,
             "boxScores": box_scores, "standings": standings, "leaders": leaders}
@@ -690,7 +693,7 @@ def nba_leaders_side(client, season, conf_filter, label):
             )
             df = obj.league_leaders.get_data_frame()
             rows = []
-            for _, row in df.head(8).iterrows():
+            for _, row in df.head(10).iterrows():
                 rows.append([
                     row.get("PLAYER",""),
                     row.get("TEAM",""),
@@ -708,7 +711,7 @@ def nba_leaders_side(client, season, conf_filter, label):
 def nba_fallback(client):
     """Fallback NBA section if nba_api unavailable."""
     story = claude_call(client, """Write a brief NBA playoffs story for today's Sports Page.
-Return JSON: {"kicker":"NBA PLAYOFFS","headline":"HEADLINE","deck":"Deck","byline":"By Staff","body":"Two paragraphs separated by \\n\\n."}""")
+Return JSON: {"kicker":"NBA PLAYOFFS","headline":"HEADLINE","deck":"Deck","byline":"By Andrew Dobrow","body":"Two paragraphs separated by \\n\\n."}""")
     return {"story": story, "schedule": [], "boxScores": [],
             "standings": [], "leaders": {"left": {"label":"Eastern Conference","cats":[]}, "right": {"label":"Western Conference","cats":[]}}}
 
@@ -746,14 +749,23 @@ def build_nhl(client, today_str, yesterday_str, nhl_season_id):
                     time_str = et.strftime("%-I:%M %p ET")
                 except Exception:
                     pass
-                note = g.get("seriesStatus","") or g.get("gameType","")
+                series = g.get("seriesStatus",{})
+                if isinstance(series, dict) and series:
+                    top  = series.get("topSeedTeamAbbrev","")
+                    bot  = series.get("bottomSeedTeamAbbrev","")
+                    tw   = series.get("topSeedWins",0)
+                    bw   = series.get("bottomSeedWins",0)
+                    title= series.get("seriesTitle","")
+                    note = f"{title}: {top} leads {tw}-{bw}" if tw > bw else                            f"{title}: {bot} leads {bw}-{tw}" if bw > tw else                            f"{title}: Tied {tw}-{bw}"
+                else:
+                    note = str(series) if series else ""
                 entry = {
                     "time": time_str,
                     "away": away.get("name",{}).get("default","") or away.get("fullName",""),
                     "home": home.get("name",{}).get("default","") or home.get("fullName",""),
                 }
                 if note:
-                    entry["note"] = str(note)
+                    entry["note"] = note
                 schedule.append(entry)
 
     # Box scores
@@ -835,7 +847,7 @@ def build_nhl(client, today_str, yesterday_str, nhl_season_id):
             notes = ""
 
         box_scores.append({"title": title, "linescore": ls,
-                            "batting": batting, "pitching": pitching if i < 3 else [],
+                            "batting": batting,
                             "notes": notes})
 
     # Standings
@@ -853,7 +865,7 @@ def build_nhl(client, today_str, yesterday_str, nhl_season_id):
     scores_txt = "; ".join(b["title"] for b in box_scores[:4])
     story = claude_call(client, f"""Write the lead hockey story for today's Sports Page.
 Yesterday's NHL results: {scores_txt if scores_txt else 'No games yesterday'}
-Return JSON: {{"kicker":"NHL PLAYOFFS","headline":"HEADLINE ALL CAPS","deck":"Under 20 words","byline":"By [Name], Hockey Writer","body":"Three paragraphs separated by \\n\\n."}}""")
+Return JSON: {{"kicker":"NHL PLAYOFFS","headline":"HEADLINE ALL CAPS","deck":"Under 20 words","byline":"By Andrew Dobrow, Hockey Writer","body":"Three paragraphs separated by \\n\\n."}}""")
 
     return {"story": story, "schedule": schedule,
             "boxScores": box_scores, "standings": standings, "leaders": leaders}
@@ -912,7 +924,7 @@ def fmt_nhl_leaders_side(conf_abbr, label, season_id):
         for game_type in ["3","2"]:
             data = api_get(
                 f"https://api-web.nhle.com/v1/skater-stats-leaders/{season_id}/{game_type}",
-                params={"categories": cat, "limit": 8}
+                params={"categories": cat, "limit": 10}
             )
             if data and data.get(cat):
                 rows = []
@@ -933,7 +945,7 @@ def fmt_nhl_leaders_side(conf_abbr, label, season_id):
     for game_type in ["3","2"]:
         data = api_get(
             f"https://api-web.nhle.com/v1/goalie-stats-leaders/{season_id}/{game_type}",
-            params={"categories": "savePctg", "limit": 6}
+            params={"categories": "savePctg", "limit": 10}
         )
         if data and data.get("savePctg"):
             rows = []
@@ -1025,7 +1037,7 @@ def build_nfl(client):
 
     story = claude_call(client, """Write a brief NFL offseason news story for today's Sports Page.
 Focus on real current news: trades, signings, training camp storylines.
-Return JSON: {"kicker":"NFL OFFSEASON","headline":"HEADLINE ALL CAPS","deck":"Under 20 words","byline":"By [Name], NFL Writer","body":"Three paragraphs separated by \\n\\n."}""")
+Return JSON: {"kicker":"NFL OFFSEASON","headline":"HEADLINE ALL CAPS","deck":"Under 20 words","byline":"By Andrew Dobrow, NFL Writer","body":"Three paragraphs separated by \\n\\n."}""")
 
     return {"story": story, "schedule": schedule,
             "boxScores": box_scores, "standings": standings, "leaders": leaders}
@@ -1074,13 +1086,13 @@ NHL: {'; '.join(nhl_scores) if nhl_scores else 'No games'}
 
 Return JSON:
 {{
-  "headline": {{"kicker":"SPORT","headline":"BIGGEST STORY IN ALL CAPS","deck":"Deck under 20 words","byline":"By [Name], Sports Writer","body":"Three paragraphs separated by \\n\\n."}},
+  "headline": {{"kicker":"SPORT","headline":"BIGGEST STORY IN ALL CAPS","deck":"Deck under 20 words","byline":"By Andrew Dobrow, Sports Writer","body":"Three paragraphs separated by \\n\\n."}},
   "secondary": [
-    {{"kicker":"SPORT","headline":"HEADLINE","deck":"Deck","byline":"By [Name]","body":"Two paragraphs separated by \\n\\n."}},
-    {{"kicker":"SPORT","headline":"HEADLINE","deck":"Deck","byline":"By [Name]","body":"Two paragraphs separated by \\n\\n."}},
-    {{"kicker":"SPORT","headline":"HEADLINE","deck":"Deck","byline":"By [Name]","body":"Two paragraphs separated by \\n\\n."}}
+    {{"kicker":"SPORT","headline":"HEADLINE","deck":"Deck","byline":"By Andrew Dobrow","body":"Two paragraphs separated by \\n\\n."}},
+    {{"kicker":"SPORT","headline":"HEADLINE","deck":"Deck","byline":"By Andrew Dobrow","body":"Two paragraphs separated by \\n\\n."}},
+    {{"kicker":"SPORT","headline":"HEADLINE","deck":"Deck","byline":"By Andrew Dobrow","body":"Two paragraphs separated by \\n\\n."}}
   ],
-  "column": {{"tag":"FROM THE PRESS BOX","headline":"OPINION HEADLINE","byline":"By Pat McAllister","body":"Two opinionated paragraphs separated by \\n\\n."}}
+  "column": {{"tag":"FROM THE PRESS BOX","headline":"OPINION HEADLINE","byline":"By Andrew Dobrow","body":"Two opinionated paragraphs separated by \\n\\n."}}
 }}""", max_tokens=3000)
 
     # Build scores sidebar from real data
