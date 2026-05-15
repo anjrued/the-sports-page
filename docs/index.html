@@ -1989,10 +1989,12 @@ function buildFront(overrides) {
 
 function buildSport(id, overrides) {
   const d = {mlb,nba,nhl,nfl}[id];
-  const storyData  = (overrides && overrides.story)    || d.story;
-  const schedData  = (overrides && overrides.schedule) || d.schedule;
-  const scoresData = (overrides && overrides.scores)   || d.scores;
-  const stdsData   = (overrides && overrides.standings)|| d.standings;
+  const storyData   = (overrides && overrides.story)     || d.story;
+  const schedData   = (overrides && overrides.schedule)  || d.schedule;
+  const scoresData  = (overrides && overrides.scores)    || d.scores;
+  const stdsData    = (overrides && overrides.standings) || d.standings;
+  const boxData     = (overrides && overrides.boxScores) || d.boxScores || [];
+  const leadersData = (overrides && overrides.leaders)   || d.leaders;
   const hasSplit   = id==='mlb'||id==='nhl';
   const hasBracket = id==='nba'||id==='nhl';
   const isNFL      = id==='nfl';
@@ -2012,7 +2014,7 @@ function buildSport(id, overrides) {
     ${hasBracket ? secHead('Playoff Bracket')+renderBracket(d.bracket) : ''}
     ${secHead(isNFL?'Postseason Results':'Yesterday\'s Box Scores')}
     <p style="font-size:.62rem;font-style:italic;color:#666;margin-bottom:8px">Click any game title to expand the full box score.</p>
-    ${(d.boxScores||[]).map((game,idx)=>{
+    ${boxData.map((game,idx)=>{
       const bid = `bs-${id}-${idx}`;
       const hasBatting = game.batting&&game.batting.some(t=>t.players&&t.players.length);
       const hasNFL2 = id==='nfl'&&game.nflStats;
@@ -2032,7 +2034,7 @@ function buildSport(id, overrides) {
     }).join('')}
     ${secHead(isNFL?'Final Standings':id==='nba'?'Playoff Standings':'Standings')}
     <div ${twoCol}>${renderStandings(stdsData||[],hasSplit)}</div>
-    ${d.leaders ? secHead('League Leaders')+renderLeaders(d.leaders) : ''}`;
+    ${leadersData ? secHead('League Leaders')+renderLeaders(leadersData) : ''}`;
 }
 
 function renderScores(games, label) {
