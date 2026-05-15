@@ -34,4 +34,5 @@ jobs:
           git config user.email "bot@thesportspage.example"
           git add docs/data.json
           git diff --staged --quiet || git commit -m "chore: publish $(date -u '+%Y-%m-%d') edition"
+          git pull --rebase origin main
           git push
