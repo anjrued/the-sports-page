@@ -838,6 +838,63 @@ table.ldr-tbl {
 }
 @media (max-width: 480px) { .sp-name { font-size: 2.4rem; } }
 
+
+/* ── EDITOR'S NOTE / SUPPORT MODULE ── */
+.editors-note {
+  border: 1px solid #bbb;
+  border-top: 3px solid #111;
+  padding: 12px 14px;
+  margin: 16px 0;
+  background: #fafafa;
+  font-family: 'Libre Baskerville', Georgia, serif;
+}
+.editors-note-tag {
+  font-size: .48rem;
+  font-weight: 700;
+  letter-spacing: 2.5px;
+  text-transform: uppercase;
+  color: #8B0000;
+  display: block;
+  margin-bottom: 6px;
+  border-bottom: 1px solid #ddd;
+  padding-bottom: 4px;
+}
+.editors-note-head {
+  font-family: 'Playfair Display', serif;
+  font-size: .9rem;
+  font-weight: 700;
+  font-style: italic;
+  margin-bottom: 6px;
+  line-height: 1.2;
+}
+.editors-note-body {
+  font-size: .68rem;
+  line-height: 1.7;
+  color: #333;
+  margin-bottom: 10px;
+}
+.editors-note-body p + p {
+  margin-top: 5px;
+}
+.editors-note-link {
+  display: block;
+  text-align: center;
+  font-size: .58rem;
+  font-weight: 700;
+  letter-spacing: 1.5px;
+  text-transform: uppercase;
+  color: #111;
+  border: 1px solid #111;
+  padding: 5px 10px;
+  text-decoration: none;
+  transition: background .15s, color .15s;
+  font-family: 'Libre Baskerville', serif;
+}
+.editors-note-link:hover {
+  background: #111;
+  color: #fff;
+}
+
 </style>
 </head>
 <body>
@@ -2218,6 +2275,20 @@ function renderBracket(rounds) {
 // BUILD PAGES
 // ═══════════════════════════════════════════
 
+
+function renderEditorsNote() {
+  return `<div class="editors-note">
+    <span class="editors-note-tag">From the Editor</span>
+    <p class="editors-note-head">This site is built by a lifelong sports fan who misses the ritual of reading the morning sports section.</p>
+    <div class="editors-note-body">
+      <p>No autoplay videos. No clickbait. No gambling spam.</p>
+      <p>Just scores, stories, standings, and the joy of sports.</p>
+      <p>If you'd like to help keep the presses running:</p>
+    </div>
+    <a class="editors-note-link" href="https://buymeacoffee.com/thesportspage" target="_blank" rel="noopener">Support the Sports Section</a>
+  </div>`;
+}
+
 function buildFront(overrides) {
   // Use overrides from data.json if available, else use static front data
   const hl  = (overrides && overrides.headline)  || front.headline;
@@ -2234,6 +2305,7 @@ function buildFront(overrides) {
         ${renderSidebar(sc)}
       </div>
     </div>
+    ${renderEditorsNote()}
     <hr class="sp-rule-thin"/>
     <div class="sp-sec-grid">
       ${sec.map(s=>`<div class="sp-sec-story">
@@ -2275,6 +2347,7 @@ function buildSport(id, overrides) {
     <div style="padding-bottom:14px;border-bottom:2px solid #111;margin-bottom:14px">
       ${story(storyData, 1, 'sp-hl-body')}
     </div>
+    ${renderEditorsNote()}
     <div style="margin-bottom:14px">
       ${renderSchedule(schedData, isNFL?'Offseason Calendar':'Today\'s Schedule')}
     </div>
