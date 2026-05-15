@@ -388,7 +388,7 @@ def build_nba(client, today_str, yesterday_str, nba_season):
         return None
 
     # Yesterday's scores
-    board = nba_get(scoreboardv2.ScoreBoardV2, game_date=yesterday_str, league_id="00")
+    board = nba_get(scoreboardv2.ScoreboardV2, game_date=yesterday_str, league_id="00")
     yesterday_games = []
     if board:
         try:
@@ -412,7 +412,7 @@ def build_nba(client, today_str, yesterday_str, nba_season):
             print(f"    NBA scoreboard parse error: {e}")
 
     # Today's schedule
-    today_board = nba_get(scoreboardv2.ScoreBoardV2, game_date=today_str, league_id="00")
+    today_board = nba_get(scoreboardv2.ScoreboardV2, game_date=today_str, league_id="00")
     schedule = []
     if today_board:
         try:
