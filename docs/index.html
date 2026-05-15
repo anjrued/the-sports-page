@@ -824,10 +824,13 @@ table.ldr-tbl {
 .sched-note { font-size: .52rem; font-weight: 700; text-transform: uppercase; margin-top: 1px; }
 
 /* ── RESPONSIVE ── */
+@media (min-width: 761px) {
+  .std-hide-mobile { display: table-cell !important; }
+}
 @media (max-width: 760px) {
   .sp-sport-main-grid, .sp-front-grid { grid-template-columns: 1fr; }
   /* Hide extra standings columns on mobile — show only Team W L Pct GB */
-  .std-hide-mobile { display: none !important; }
+  .std-hide-mobile { display: none; }
   .sp-sport-left { border-right: none; padding-right: 0; border-bottom: 2px solid #111; padding-bottom: 14px; margin-bottom: 12px; }
   .sp-sport-right { padding-left: 0; }
   .sp-hl-body, .sp-op-body { column-count: 1; }
@@ -2223,7 +2226,7 @@ function renderStandings(divisions, hasSplit) {
           <thead><tr>
             <th style="${TH};text-align:left;min-width:120px">Team</th>
             <th style="${TH}">W</th><th style="${TH}">L</th><th style="${TH}">Pct</th><th style="${TH}">GB</th>
-            ${hasSplit?`<th style="${TH}" class="std-hide-mobile">L10</th><th style="${TH}" class="std-hide-mobile">Str</th><th style="${TH}" class="std-hide-mobile">Home</th><th style="${TH}" class="std-hide-mobile">Away</th>`:''}
+            ${hasSplit?`<th style="${TH}" class="std-hide-mobile" style="display:none">L10</th><th style="${TH}" class="std-hide-mobile" style="display:none">Str</th><th style="${TH}" class="std-hide-mobile" style="display:none">Home</th><th style="${TH}" class="std-hide-mobile" style="display:none">Away</th>`:''}
             ${hasNote?`<th style="${TH};text-align:left">Note</th>`:''}
           </tr></thead>
           <tbody>
@@ -2233,7 +2236,7 @@ function renderStandings(divisions, hasSplit) {
               <td style="${TD};font-weight:${i===0?'700':'400'}">${t.l||''}</td>
               <td style="${TD};font-weight:${i===0?'700':'400'}">${t.pct||''}</td>
               <td style="${TD};font-weight:${i===0?'700':'400'}">${t.gb||''}</td>
-              ${hasSplit?`<td style="${TD}" class="std-hide-mobile">${t.l10||''}</td><td style="${TD}" class="std-hide-mobile">${t.strk||''}</td><td style="${TD}" class="std-hide-mobile">${t.home||''}</td><td style="${TD}" class="std-hide-mobile">${t.away||''}</td>`:''}
+              ${hasSplit?`<td style="${TD}" class="std-hide-mobile" style="display:none">${t.l10||''}</td><td style="${TD}" class="std-hide-mobile" style="display:none">${t.strk||''}</td><td style="${TD}" class="std-hide-mobile" style="display:none">${t.home||''}</td><td style="${TD}" class="std-hide-mobile" style="display:none">${t.away||''}</td>`:''}
               ${t.note?`<td style="${TD};text-align:left;font-size:.52rem;color:#555;font-style:italic">${t.note}</td>`:''}
             </tr>`).join('')}
           </tbody>
