@@ -1,15 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <!-- Google tag (gtag.js) -->
-<script async src="https://www.googletagmanager.com/gtag/js?id=G-3LHZLQR5MF"></script>
-<script>
-  window.dataLayer = window.dataLayer || [];
-  function gtag(){dataLayer.push(arguments);}
-  gtag('js', new Date());
-
-  gtag('config', 'G-3LHZLQR5MF');
-</script>
 <meta charset="UTF-8"/>
 <meta name="viewport" content="width=device-width,initial-scale=1.0"/>
 <title>The Sports Page</title>
@@ -2229,10 +2220,10 @@ function renderStandings(divisions, hasSplit) {
   if (!divisions||!divisions.length||!Array.isArray(divisions)) return '';
   const TH = 'text-align:right;font-weight:700;font-size:.52rem;text-transform:uppercase;border-top:1px solid #111;border-bottom:2px solid #111;padding:2px 4px;background:#e0e0e0;white-space:nowrap';
   const TD = 'padding:2px 4px;border-bottom:1px solid #e0e0e0;text-align:right;white-space:nowrap;font-size:.61rem;font-family:"Libre Baskerville",serif';
-  return divisions.map(div => {
+
+  function renderDiv(div) {
     if (!div || !div.teams || !div.teams.length) return '';
     const hasNote = div.teams[0] && div.teams[0].note;
-    // Wrap label + table in ONE div so grid treats them as a single item
     return `<div style="margin-bottom:14px;break-inside:avoid">
       <div style="font-size:.54rem;font-weight:700;text-transform:uppercase;letter-spacing:2px;margin-bottom:4px;padding-bottom:2px;border-bottom:1px solid #aaa;color:#8B0000">${div.label||''}</div>
       <div style="overflow-x:auto;-webkit-overflow-scrolling:touch">
@@ -2240,7 +2231,7 @@ function renderStandings(divisions, hasSplit) {
           <thead><tr>
             <th style="${TH};text-align:left;min-width:140px;width:35%">Team</th>
             <th style="${TH}">W</th><th style="${TH}">L</th><th style="${TH}">Pct</th><th style="${TH}">GB</th>
-            ${hasSplit?`<th style="${TH}" class="std-hide-mobile" style="display:none">L10</th><th style="${TH}" class="std-hide-mobile" style="display:none">Str</th><th style="${TH}" class="std-hide-mobile" style="display:none">Home</th><th style="${TH}" class="std-hide-mobile" style="display:none">Away</th>`:''}
+            ${hasSplit?`<th style="${TH}" class="std-hide-mobile">L10</th><th style="${TH}" class="std-hide-mobile">Str</th><th style="${TH}" class="std-hide-mobile">Home</th><th style="${TH}" class="std-hide-mobile">Away</th>`:''}
             ${hasNote?`<th style="${TH};text-align:left">Note</th>`:''}
           </tr></thead>
           <tbody>
@@ -2250,17 +2241,38 @@ function renderStandings(divisions, hasSplit) {
               <td style="${TD};font-weight:${i===0?'700':'400'}">${t.l||''}</td>
               <td style="${TD};font-weight:${i===0?'700':'400'}">${t.pct||''}</td>
               <td style="${TD};font-weight:${i===0?'700':'400'}">${t.gb||''}</td>
-              ${hasSplit?`<td style="${TD}" class="std-hide-mobile" style="display:none">${t.l10||''}</td><td style="${TD}" class="std-hide-mobile" style="display:none">${t.strk||''}</td><td style="${TD}" class="std-hide-mobile" style="display:none">${t.home||''}</td><td style="${TD}" class="std-hide-mobile" style="display:none">${t.away||''}</td>`:''}
+              ${hasSplit?`<td style="${TD}" class="std-hide-mobile">${t.l10||''}</td><td style="${TD}" class="std-hide-mobile">${t.strk||''}</td><td style="${TD}" class="std-hide-mobile">${t.home||''}</td><td style="${TD}" class="std-hide-mobile">${t.away||''}</td>`:''}
               ${t.note?`<td style="${TD};text-align:left;font-size:.52rem;color:#555;font-style:italic">${t.note}</td>`:''}
             </tr>`).join('')}
           </tbody>
         </table>
       </div>
     </div>`;
-  }).join('');
+  }
+
+  // For MLB (6 divisions): split AL (first 3) and NL (last 3) into explicit columns
+  if (divisions.length === 6) {
+    const left  = divisions.slice(0,3);
+    const right = divisions.slice(3,6);
+    return `<div class="standings-two-col">
+      <div>${left.map(renderDiv).join('')}</div>
+      <div>${right.map(renderDiv).join('')}</div>
+    </div>`;
+  }
+
+  // For other sports (2 divisions): same two-column split
+  if (divisions.length === 2) {
+    return `<div class="standings-two-col">
+      <div>${renderDiv(divisions[0])}</div>
+      <div>${renderDiv(divisions[1])}</div>
+    </div>`;
+  }
+
+  // Default: single column
+  return `<div>${divisions.map(renderDiv).join('')}</div>`;
 }
 
-// ── LEAGUE LEADERS ───────────────────────────────────────────────────────────
+
 function renderLeaders(leaders) {
   if (!leaders) return '';
   const { left, right } = leaders;
@@ -2388,7 +2400,6 @@ function buildSport(id, overrides) {
   const hasBracket = id==='nba'||id==='nhl';
   const isNFL      = id==='nfl';
   const stdsCount  = (stdsData||[]).length;
-  const twoCol     = stdsCount > 3 ? 'class="standings-two-col"' : '';
 
   document.getElementById(id).innerHTML = `
     <div style="padding-bottom:14px;border-bottom:2px solid #111;margin-bottom:14px">
@@ -2441,7 +2452,7 @@ function buildSport(id, overrides) {
     }).join('')}
     </div>
     ${secHead(isNFL?'Final Standings':id==='nba'?'Playoff Standings':'Standings')}
-    <div ${twoCol}>${renderStandings(stdsData||[],hasSplit)}</div>
+    ${renderStandings(stdsData||[],hasSplit)}
     ${leadersData ? secHead('League Leaders')+renderLeaders(leadersData) : ''}`;
 }
 
