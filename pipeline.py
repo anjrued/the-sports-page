@@ -237,13 +237,37 @@ def fmt_mlb_batting(box, side):
     return {"team": team_name, "players": batters, "totals": totals}
 
 def fmt_mlb_notes(box):
+    """Pull game notes from multiple fields in the MLB boxscore API response."""
     notes = []
-    want = {"HR","2B","3B","SB","CS","WP","LP","SV","LOB","E","HBP","GIDP","DP","T","Att"}
+    seen = set()
+
+    # Field 1: top-level info array (WP, LP, SV, HBP, T, Att, Umpires)
+    info_want  = {"WP","LP","SV","HBP","HBP","T","Att"}
     for item in box.get("info", []):
         lbl = item.get("label","").strip()
         val = item.get("value","").strip()
-        if lbl in want and val:
+        if lbl in info_want and val and lbl not in seen:
             notes.append(f"{lbl}: {val}")
+            seen.add(lbl)
+
+    # Field 2: teams.[side].note — contains HR, 2B, 3B, SB, LOB, GIDP etc.
+    for side in ["away","home"]:
+        team_note = box.get("teams",{}).get(side,{}).get("note","")
+        if team_note:
+            # These are formatted like "HR: Judge (9). 2B: Chisholm (4)."
+            for item in team_note.split(". "):
+                item = item.strip().rstrip(".")
+                if item and ":" in item and item not in seen:
+                    notes.append(item)
+                    seen.add(item)
+
+    # Field 3: top-level notes array (some games use this)
+    for note in box.get("notes", []):
+        val = note.get("label","") or note.get("value","")
+        if val and val not in seen:
+            notes.append(val)
+            seen.add(val)
+
     return "  ".join(notes) if notes else ""
 
 def fmt_mlb_schedule(games):
@@ -1244,9 +1268,11 @@ MLB: {'; '.join(mlb_scores) if mlb_scores else 'No games'}
 NBA: {'; '.join(nba_scores) if nba_scores else 'No games'}
 NHL: {'; '.join(nhl_scores) if nhl_scores else 'No games'}
 
+IMPORTANT: Choose the single most compelling story across ALL sports as the headline — do NOT default to baseball. If the NHL or NBA had a more exciting result, lead with that. The three secondary stories must cover three DIFFERENT sports or storylines. The opinion column should comment on the biggest story of the day.
+
 Return JSON:
 {{
-  "headline": {{"kicker":"SPORT","headline":"BIGGEST STORY IN ALL CAPS","deck":"Deck under 20 words","byline":"By Andrew Dobrow, Sports Writer","body":"Three paragraphs separated by \\n\\n."}},
+  "headline": {{"kicker":"SPORT NAME","headline":"BIGGEST STORY IN ALL CAPS","deck":"Deck under 20 words","byline":"By Andrew Dobrow, Sports Writer","body":"Three paragraphs separated by \\n\\n."}},
   "secondary": [
     {{"kicker":"SPORT","headline":"HEADLINE","deck":"Deck","byline":"By Andrew Dobrow","body":"Two paragraphs separated by \\n\\n."}},
     {{"kicker":"SPORT","headline":"HEADLINE","deck":"Deck","byline":"By Andrew Dobrow","body":"Two paragraphs separated by \\n\\n."}},
