@@ -2224,14 +2224,14 @@ function renderStandings(divisions, hasSplit) {
       <div style="overflow-x:auto;-webkit-overflow-scrolling:touch">
         <table style="min-width:${hasSplit?'420px':'240px'};width:100%;border-collapse:collapse;table-layout:auto">
           <thead><tr>
-            <th style="${TH};text-align:left;min-width:120px">Team</th>
+            <th style="${TH};text-align:left;min-width:140px;width:35%">Team</th>
             <th style="${TH}">W</th><th style="${TH}">L</th><th style="${TH}">Pct</th><th style="${TH}">GB</th>
             ${hasSplit?`<th style="${TH}" class="std-hide-mobile" style="display:none">L10</th><th style="${TH}" class="std-hide-mobile" style="display:none">Str</th><th style="${TH}" class="std-hide-mobile" style="display:none">Home</th><th style="${TH}" class="std-hide-mobile" style="display:none">Away</th>`:''}
             ${hasNote?`<th style="${TH};text-align:left">Note</th>`:''}
           </tr></thead>
           <tbody>
             ${div.teams.map((t,i)=>`<tr>
-              <td style="${TD};text-align:left;font-weight:${i===0?'700':'400'}">${t.name||''}</td>
+              <td style="${TD};text-align:left;font-weight:${i===0?'700':'400'};min-width:130px">${t.name||''}</td>
               <td style="${TD};font-weight:${i===0?'700':'400'}">${t.w||''}</td>
               <td style="${TD};font-weight:${i===0?'700':'400'}">${t.l||''}</td>
               <td style="${TD};font-weight:${i===0?'700':'400'}">${t.pct||''}</td>
