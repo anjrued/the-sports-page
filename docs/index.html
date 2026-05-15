@@ -2050,8 +2050,8 @@ function renderSidebar(scores) {
   let html = `<div class="sp-score-col-head">Yesterday's Scores</div>`;
   const sports = ['nba','mlb','nhl'];
   sports.forEach(key => {
-    const games = scores[key];
-    if (!games || !games.length) return;
+    const games = (scores[key]||[]).filter(g=>(g.away||g.away_team)&&(g.home||g.home_team));
+    if (!games.length) return;
     const lbl = {nba:'NBA',mlb:'Baseball',nhl:'Hockey'}[key];
     html += `<div style="font-size:.48rem;font-weight:700;text-transform:uppercase;letter-spacing:1.8px;color:#8B0000;margin:7px 0 2px;border-bottom:1px solid #bbb;padding-bottom:1px">${lbl}</div>`;
     games.filter(g=>(g.away||g.away_team)&&(g.home||g.home_team)).forEach(g => { html += scoreGame(g); });
