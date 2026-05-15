@@ -1996,19 +1996,20 @@ function renderSidebar(scores) {
 // ── SCHEDULE ────────────────────────────────────────────────────────────────
 function renderSchedule(games, label) {
   if (!games || !games.length) return '';
-  let html = `<div class="schedule-head">${label||"Today's Games"}</div>`;
+  const GS = 'padding:6px 8px;border-bottom:1px dotted #ccc;border-right:1px dotted #ccc';
+  let html = `<div class="schedule-head">${label||"Today's Games"}</div><div style="display:grid;grid-template-columns:repeat(auto-fill,minmax(210px,1fr));border-top:1px solid #ccc">`;
   games.forEach(g => {
-    html += `<div class="sched-item">
+    html += `<div style="${GS}">
       <div class="sched-time">${g.time||''}</div>
       <div class="sched-matchup">${g.away||''} at ${g.home||''}</div>
-      ${(g.asp||g.hsp) ? `<div class="sched-pitchers">${g.asp||''} vs. ${g.hsp||''}</div>` : ''}
-      ${g.note ? `<div class="sched-note">${g.note}</div>` : ''}
+      ${(g.asp||g.hsp)?`<div class="sched-pitchers">${g.asp||''} vs. ${g.hsp||''}</div>`:''}
+      ${g.note?`<div class="sched-note">${g.note}</div>`:''}
     </div>`;
   });
+  html += '</div>';
   return html;
 }
 
-// ── BOX SCORES ───────────────────────────────────────────────────────────────
 function renderLinescore(ls, sport) {
   const isBB = sport==='mlb', isHK = sport==='nhl';
   const RS = 'font-family:"Libre Baskerville",serif;font-size:.62rem';
@@ -2140,7 +2141,7 @@ function renderNFLStats(nflStats) {
 
 // ── STANDINGS ────────────────────────────────────────────────────────────────
 function renderStandings(divisions, hasSplit) {
-  if (!divisions||!divisions.length||!Array.isArray(divisions)) return '<p style="font-style:italic;color:#999;font-size:.75rem;padding:8px 0">Standings loading...</p>';
+  if (!divisions||!divisions.length||!Array.isArray(divisions)) return '';
   const TS = 'text-align:right;font-size:.61rem;font-family:"Libre Baskerville",serif';
   const TH = 'text-align:right;font-weight:700;font-size:.52rem;text-transform:uppercase;border-top:1px solid #111;border-bottom:2px solid #111;padding:2px 4px;background:#e0e0e0;white-space:nowrap';
   const TD = 'padding:2px 4px;border-bottom:1px solid #e0e0e0;text-align:right;white-space:nowrap;font-size:.61rem;font-family:"Libre Baskerville",serif';
@@ -2262,14 +2263,11 @@ function buildSport(id, overrides) {
   const twoCol     = stdsCount > 3 ? 'style="display:grid;grid-template-columns:1fr 1fr;gap:0 20px"' : '';
 
   document.getElementById(id).innerHTML = `
-    <div class="sp-sport-main-grid" style="align-items:start">
-      <div class="sp-sport-left">
-        ${story(storyData, 1, 'sp-hl-body')}
-      </div>
-      <div class="sp-sport-right">
-        ${renderSchedule(schedData, isNFL?'Offseason Calendar':'Today\'s Schedule')}
-        ${!schedData||!schedData.length ? renderScores(scoresData||[], 'Scores') : ''}
-      </div>
+    <div style="padding-bottom:14px;border-bottom:2px solid #111;margin-bottom:14px">
+      ${story(storyData, 1, 'sp-hl-body')}
+    </div>
+    <div style="margin-bottom:14px">
+      ${renderSchedule(schedData, isNFL?'Offseason Calendar':'Today\'s Schedule')}
     </div>
     ${hasBracket ? secHead('Playoff Bracket')+renderBracket(d.bracket) : ''}
     ${secHead(isNFL?'Postseason Results':'Yesterday\'s Box Scores')}
