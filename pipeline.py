@@ -217,15 +217,23 @@ def fmt_mlb_batting(box, side):
         prefix = "" if int(order) % 100 == 0 else "a-"
         avg = season_s.get("avg", game_s.get("avg", ".000"))
         batters.append({
-            "_o": int(order),
+            "_o":  int(order),
             "name": f"{prefix}{last} {pos}",
-            "ab": game_s.get("atBats", 0),
-            "r":  game_s.get("runs", 0),
-            "h":  game_s.get("hits", 0),
-            "bi": game_s.get("rbi", 0),
-            "bb": game_s.get("baseOnBalls", 0),
-            "so": game_s.get("strikeOuts", 0),
+            "ab":  game_s.get("atBats", 0),
+            "r":   game_s.get("runs", 0),
+            "h":   game_s.get("hits", 0),
+            "bi":  game_s.get("rbi", 0),
+            "bb":  game_s.get("baseOnBalls", 0),
+            "so":  game_s.get("strikeOuts", 0),
             "avg": avg,
+            # Store for notes computation — hidden from display
+            "_hr": game_s.get("homeRuns", 0),
+            "_2b": game_s.get("doubles", 0),
+            "_3b": game_s.get("triples", 0),
+            "_sb": game_s.get("stolenBases", 0),
+            "_lob": game_s.get("leftOnBase", 0),
+            "_full": last,
+            "_season_hr": season_s.get("homeRuns", 0),
         })
     batters.sort(key=lambda x: x["_o"])
     for b in batters:
@@ -236,28 +244,50 @@ def fmt_mlb_batting(box, side):
               "bb": ts.get("baseOnBalls",0), "so": ts.get("strikeOuts",0)}
     return {"team": team_name, "players": batters, "totals": totals}
 
-def fmt_mlb_notes_from_content(content, existing_notes):
-    """Extract HR/2B/LOB notes from MLB game content endpoint."""
+def compute_batting_notes(batting, existing_notes):
+    """Compute HR/2B/3B/SB/LOB notes from batting data we already fetched."""
     try:
-        # The content endpoint has editorial summaries with game notes
-        recap = content.get("editorial",{}).get("recap",{}).get("mlb",{})
-        if not recap:
-            recap = content.get("highlights",{}).get("scoreboard",{})
-        # Try to get structured game notes from boxscore content
-        gbox = content.get("boxscore",{})
-        info_items = gbox.get("info",[]) if gbox else []
-        want = {"HR","2B","3B","SB","CS","LOB","GIDP","DP","SB"}
         extra = []
-        for item in info_items:
-            lbl = item.get("label","").strip()
-            val = item.get("value","").strip()
-            if lbl in want and val:
-                extra.append(f"{lbl}: {val}")
+        for team_data in batting:
+            players = team_data.get("players", [])
+            team_name = team_data.get("team","").split()[-1]
+
+            # Home runs
+            hrs = [(p["_full"], p.get("_season_hr",0))
+                   for p in players if p.get("_hr",0) > 0]
+            if hrs:
+                hr_str = ", ".join(f"{n} ({sh})" for n,sh in hrs)
+                extra.append(f"HR: {hr_str}")
+
+            # Doubles
+            doubles = [p["_full"] for p in players if p.get("_2b",0) > 0]
+            if doubles:
+                extra.append(f"2B: {', '.join(doubles)}")
+
+            # Triples
+            triples = [p["_full"] for p in players if p.get("_3b",0) > 0]
+            if triples:
+                extra.append(f"3B: {', '.join(triples)}")
+
+            # Stolen bases
+            sbs = [p["_full"] for p in players if p.get("_sb",0) > 0]
+            if sbs:
+                extra.append(f"SB: {', '.join(sbs)}")
+
+            # LOB
+            lob = sum(p.get("_lob",0) for p in players)
+            if lob > 0:
+                extra.append(f"LOB: {team_name} {lob}")
+
         if extra:
             sep = "  " if existing_notes else ""
             return existing_notes + sep + "  ".join(extra)
-    except Exception:
-        pass
+    except Exception as e:
+        print(f"      Notes compute error: {e}")
+    return existing_notes
+
+def fmt_mlb_notes_from_content(content, existing_notes):
+    """Unused — kept for compatibility."""
     return existing_notes
 
 def fmt_mlb_notes(box):
@@ -511,11 +541,8 @@ def build_mlb(client, today_str, yesterday_str, mlb_season):
             pitching = [fmt_mlb_pitching(box_raw,"away"),
                         fmt_mlb_pitching(box_raw,"home")]
             notes   = fmt_mlb_notes(box_raw)
-            # Supplement notes with hitting notes from game content endpoint
-            if not any(lbl in notes for lbl in ["HR","2B","LOB"]):
-                content_raw = api_get(f"{MLB}/game/{pk}/content")
-                if content_raw:
-                    notes = fmt_mlb_notes_from_content(content_raw, notes)
+            # Compute HR/2B/3B/SB/LOB from batting data we already have
+            notes = compute_batting_notes(batting, notes)
 
         box_scores.append({"title": title, "linescore": ls,
                             "batting": batting,
