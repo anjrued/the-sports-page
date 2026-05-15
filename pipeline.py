@@ -245,44 +245,39 @@ def fmt_mlb_batting(box, side):
     return {"team": team_name, "players": batters, "totals": totals}
 
 def compute_batting_notes(batting, existing_notes):
-    """Compute HR/2B/3B/SB/LOB notes from batting data we already fetched."""
+    """Compute HR/2B/3B/SB/LOB notes — all collected across both teams before output."""
     try:
-        extra = []
+        all_hrs  = []
+        all_2b   = []
+        all_3b   = []
+        all_sb   = []
         lob_entries = []
+
         for team_data in batting:
-            players = team_data.get("players", [])
+            players   = team_data.get("players", [])
             team_name = team_data.get("team","").split()[-1]
 
-            # Home runs
-            hrs = [(p["_full"], p.get("_season_hr",0))
-                   for p in players if p.get("_hr",0) > 0]
-            if hrs:
-                hr_str = ", ".join(f"{n} ({sh})" for n,sh in hrs)
-                extra.append(f"HR: {hr_str}")
+            for p in players:
+                if p.get("_hr", 0) > 0:
+                    all_hrs.append(f"{p['_full']} ({p.get('_season_hr', 0)})")
+                if p.get("_2b", 0) > 0:
+                    all_2b.append(p["_full"])
+                if p.get("_3b", 0) > 0:
+                    all_3b.append(p["_full"])
+                if p.get("_sb", 0) > 0:
+                    all_sb.append(p["_full"])
 
-            # Doubles
-            doubles = [p["_full"] for p in players if p.get("_2b",0) > 0]
-            if doubles:
-                extra.append(f"2B: {', '.join(doubles)}")
-
-            # Triples
-            triples = [p["_full"] for p in players if p.get("_3b",0) > 0]
-            if triples:
-                extra.append(f"3B: {', '.join(triples)}")
-
-            # Stolen bases
-            sbs = [p["_full"] for p in players if p.get("_sb",0) > 0]
-            if sbs:
-                extra.append(f"SB: {', '.join(sbs)}")
-
-            # Collect LOB per team — will be combined after both teams processed
-            lob = sum(p.get("_lob",0) for p in players)
+            lob = sum(p.get("_lob", 0) for p in players)
             if lob > 0:
                 lob_entries.append(f"{team_name} {lob}")
 
-        # Add combined LOB at the end
-        if lob_entries:
-            extra.append(f"LOB: {', '.join(lob_entries)}")
+        extra = []
+        if all_hrs:  extra.append(f"HR: {', '.join(all_hrs)}")
+        if all_2b:   extra.append(f"2B: {', '.join(all_2b)}")
+        if all_3b:   extra.append(f"3B: {', '.join(all_3b)}")
+        if all_sb:   extra.append(f"SB: {', '.join(all_sb)}")
+        if lob_entries: extra.append(f"LOB: {', '.join(lob_entries)}")
+
         if extra:
             sep = "  " if existing_notes else ""
             return existing_notes + sep + "  ".join(extra)
