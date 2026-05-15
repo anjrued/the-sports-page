@@ -2401,12 +2401,23 @@ function buildSport(id, overrides) {
           ${hasNFL2?renderNFLStats(game.nflStats):''}
         </div>
         ${game.notes?(()=>{
-  const noteParts = game.notes.split('  ').filter(Boolean);
-  const formatted = noteParts.map(part => {
+  // Handle both double-space and ". " separators
+  const raw = game.notes;
+  // Split on double-space, or ". " followed by an uppercase word and colon
+  let parts = raw.split('  ').filter(Boolean);
+  if (parts.length <= 1) {
+    // Try splitting on period-space before a stat label
+    parts = raw.split(/\.\s+(?=[A-Z]{1,4}:)/).filter(Boolean);
+  }
+  if (parts.length <= 1) parts = [raw];
+  const formatted = parts.map(part => {
+    part = part.replace(/\.\s*$/, '').trim();
     const colon = part.indexOf(':');
     if (colon === -1) return part;
-    return '<b>' + part.slice(0,colon) + ':</b>' + part.slice(colon+1);
-  }).join(' &nbsp;·&nbsp; ');
+    const lbl = part.slice(0, colon).trim();
+    const val = part.slice(colon + 1).trim();
+    return '<b>' + lbl + ':</b> ' + val;
+  }).filter(Boolean).join(' &nbsp;&nbsp; ');
   return '<p class="bs-notes">' + formatted + '</p>';
 })():''}
       </div>`;
