@@ -1133,14 +1133,14 @@ def fetch_nfl_leaders():
     today = date.today()
     season_year = today.year if today.month >= 9 else today.year - 1
     result = {"left": {"label":"AFC","cats":[]}, "right": {"label":"NFC","cats":[]}}
-    # Try multiple ESPN leader endpoints
+    # Try ESPN leaders endpoint — available during season (Sep-Feb), 404 in offseason
     data = api_get("https://site.api.espn.com/apis/site/v2/sports/football/nfl/leaders",
                    {"season": season_year})
     if not data or not data.get("categories"):
         data = api_get("https://site.api.espn.com/apis/site/v2/sports/football/nfl/leaders")
     if not data or not data.get("categories"):
-        data = api_get(f"https://site.api.espn.com/apis/v2/sports/football/nfl/statistics/byathlete",
-                       {"season": season_year, "seasontype": 2, "limit": 20})
+        print("    NFL leaders: endpoint unavailable (offseason)")
+        data = None
     if not data:
         return result
     cat_map = {
@@ -1324,7 +1324,7 @@ def fmt_espn_nfl_standings(raw):
                 divs.append({"label": div_name, "teams": teams})
     return divs
 
-def build_front(client, mlb_data, nba_data, nhl_data, nfl_data):
+def build_front(client, mlb_data, nba_data, nhl_data, nfl_data, today_str='today'):
     print("  Writing front page...")
     mlb_scores = [b["title"] for b in mlb_data.get("boxScores",[])[:5]]
     nba_scores = [b["title"] for b in nba_data.get("boxScores",[])[:3]]
@@ -1334,7 +1334,7 @@ def build_front(client, mlb_data, nba_data, nhl_data, nfl_data):
     nhl_ctx = '; '.join(nhl_scores) if nhl_scores else "NHL Playoffs ongoing — second round in progress"
     mlb_ctx = '; '.join(mlb_scores) if mlb_scores else "No MLB games yesterday"
 
-    content = claude_call(client, f"""You are writing the front page of The Sports Page for {now.strftime('%A, %B %-d, %Y')}.
+    content = claude_call(client, f"""You are writing the front page of The Sports Page for {today_str}.
 
 Sports context:
 MLB (yesterday\'s results): {mlb_ctx}
@@ -1396,7 +1396,7 @@ def main():
     nba = build_nba(client, today, yesterday, nba_s)
     nhl = build_nhl(client, today, yesterday, nhl_s)
     nfl = build_nfl(client)
-    front = build_front(client, mlb, nba, nhl, nfl)
+    front = build_front(client, mlb, nba, nhl, nfl, today_str=now.strftime('%A, %B %-d, %Y'))
 
     output = {
         "date":    now.strftime("%A, %B %-d, %Y"),
