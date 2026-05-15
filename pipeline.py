@@ -314,7 +314,7 @@ def build_mlb(client, today_str, yesterday_str, mlb_season):
         ar, hr = ls["away"]["r"], ls["home"]["r"]
         winner = away_name if ar > hr else home_name
         loser  = home_name if ar > hr else away_name
-        title  = f"{winner.split()[-1]}s {max(ar,hr)}, {loser.split()[-1]}s {min(ar,hr)}"
+        title  = f"{winner} {max(ar,hr)}, {loser} {min(ar,hr)}"
 
         batting, notes = [], ""
         if i < 3:  # Full box score for top 3 games
@@ -486,7 +486,7 @@ def build_nba(client, today_str, yesterday_str, nba_season):
         ar, hr = g["away_score"], g["home_score"]
         winner = g["away"] if ar > hr else g["home"]
         loser  = g["home"] if ar > hr else g["away"]
-        title  = f"{winner.split()[-1]}s {max(ar,hr)}, {loser.split()[-1]}s {min(ar,hr)}"
+        title  = f"{winner} {max(ar,hr)}, {loser} {min(ar,hr)}"
         status = g["status"]
 
         # Linescore from scoreboard
@@ -703,7 +703,7 @@ def build_nhl(client, today_str, yesterday_str, nhl_season_id):
         loser  = home_name if ar > hr else away_name
         period_desc = g.get("gameOutcome",{}).get("lastPeriodType","")
         suffix = f" ({period_desc})" if period_desc and period_desc != "REG" else ""
-        title = f"{winner.split()[-1]}s {max(ar,hr)}, {loser.split()[-1]}s {min(ar,hr)}{suffix}"
+        title = f"{winner} {max(ar,hr)}, {loser} {min(ar,hr)}{suffix}"
 
         # Build linescore from period line scores if available
         ls = {"away": {"name": away_name, "scores": [], "r": ar},
@@ -1003,9 +1003,9 @@ Return JSON:
 
     # Build scores sidebar from real data
     def fmt_scores(boxes):
-        return [{"away": b["linescore"]["away"]["name"].split()[-1],
+        return [{"away": b["linescore"]["away"]["name"],
                  "away_score": b["linescore"]["away"]["r"],
-                 "home": b["linescore"]["home"]["name"].split()[-1],
+                 "home": b["linescore"]["home"]["name"],
                  "home_score": b["linescore"]["home"]["r"],
                  "status": b.get("notes","Final")[:30]}
                 for b in boxes if b.get("linescore")]
