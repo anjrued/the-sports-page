@@ -251,10 +251,20 @@ def fmt_mlb_notes(box):
             seen.add(lbl)
 
     # Field 2: teams.[side].note — contains HR, 2B, 3B, SB, LOB, GIDP etc.
+    # Can be a string or a list of dicts depending on API version
     for side in ["away","home"]:
         team_note = box.get("teams",{}).get(side,{}).get("note","")
-        if team_note:
-            # These are formatted like "HR: Judge (9). 2B: Chisholm (4)."
+        if isinstance(team_note, list):
+            # List of dicts with label/value keys
+            for entry in team_note:
+                lbl = entry.get("label","").strip()
+                val = entry.get("value","").strip()
+                if lbl and val:
+                    item = f"{lbl}: {val}"
+                    if item not in seen:
+                        notes.append(item)
+                        seen.add(item)
+        elif isinstance(team_note, str) and team_note:
             for item in team_note.split(". "):
                 item = item.strip().rstrip(".")
                 if item and ":" in item and item not in seen:
