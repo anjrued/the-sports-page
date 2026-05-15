@@ -272,73 +272,100 @@ def fmt_mlb_schedule(games):
     return sched
 
 def fmt_mlb_standings(raw):
-    # Map all known API division name variants to short display names
-    NAME_MAP = {
-        "American League East":    "AL East",
-        "American League Central": "AL Central",
-        "American League West":    "AL West",
-        "National League East":    "NL East",
-        "National League Central": "NL Central",
-        "National League West":    "NL West",
-        "AL East": "AL East", "AL Central": "AL Central", "AL West": "AL West",
-        "NL East": "NL East", "NL Central": "NL Central", "NL West": "NL West",
+    """Convert MLB Stats API standings response to site format.
+    Uses division ID as primary key — immune to name changes."""
+    # Division ID → short label
+    DIV_ID_MAP = {
+        200: "AL West",  201: "AL East",  202: "AL Central",
+        203: "NL West",  204: "NL East",  205: "NL Central",
     }
     DIV_ORDER = ["AL East","AL Central","AL West","NL East","NL Central","NL West"]
-    divs = {}
+
     if not raw:
-        print("    Standings: no raw data")
+        print("    MLB Standings: API returned nothing")
         return []
+
     records = raw.get("records", [])
-    print(f"    Standings: {len(records)} records received")
+    print(f"    MLB Standings: {len(records)} records from API")
+
+    if not records:
+        # Print top-level keys so we can debug
+        print(f"    MLB Standings raw keys: {list(raw.keys())}")
+        return []
+
+    divs = {}
     for rec in records:
-        div_obj = rec.get("division", {})
-        raw_name = (div_obj.get("name","") or
-                    div_obj.get("nameShort","") or
-                    rec.get("divisionName",""))
-        div = NAME_MAP.get(raw_name, raw_name)
-        if not div:
-            print(f"      Skipping record — no division name. Keys: {list(rec.keys())}")
-            continue
+        # --- Determine division label ---
+        div_obj  = rec.get("division", {})
+        div_id   = div_obj.get("id")
+        div_name = div_obj.get("name", "")
+        print(f"      div id={div_id} name='{div_name}'")
+
+        if div_id and div_id in DIV_ID_MAP:
+            label = DIV_ID_MAP[div_id]
+        else:
+            # Fallback: normalise name
+            label = (div_name
+                     .replace("American League ","AL ")
+                     .replace("National League ","NL ")
+                     .replace(" Division","")
+                     .strip())
+            if not label:
+                print(f"      Skipping — could not determine division")
+                continue
+
+        # --- Build team rows ---
         teams = []
         for i, tr in enumerate(rec.get("teamRecords", [])):
             split_list = tr.get("records", {}).get("splitRecords", [])
-            splits = {s.get("type", s.get("splitType","")): s for s in split_list}
-            ho = splits.get("home", {}); aw = splits.get("away", {})
+            splits = {}
+            for s in split_list:
+                key = s.get("type") or s.get("splitType","")
+                splits[key] = s
+            ho = splits.get("home", {})
+            aw = splits.get("away", {})
             lt = splits.get("lastTen", splits.get("last10", {}))
-            gb_raw = tr.get("gamesBack", tr.get("gamesBehind", "—"))
-            gb = "-" if str(gb_raw) in ["0.0","0","0.00","-.--","—"] else str(gb_raw)
+
+            gb_raw = str(tr.get("gamesBack", tr.get("gamesBehind","—")))
+            gb = "-" if gb_raw in ["0.0","0","0.00","-.--","—",""] else gb_raw
+
             streak_obj = tr.get("streak", {})
-            strk = streak_obj.get("streakCode","") or (
-                ("W" if streak_obj.get("streakType","")=="wins" else "L") +
-                str(streak_obj.get("streakNumber",""))
-                if streak_obj else ""
-            )
-            pct_raw = tr.get("winningPercentage", tr.get("pct", ".000"))
-            if pct_raw and not str(pct_raw).startswith("."):
-                try: pct_raw = f"{float(pct_raw):.3f}"
+            strk = streak_obj.get("streakCode","")
+            if not strk and streak_obj:
+                stype = "W" if streak_obj.get("streakType","")=="wins" else "L"
+                snum  = str(streak_obj.get("streakNumber",""))
+                strk  = stype + snum
+
+            pct = tr.get("winningPercentage", tr.get("pct",".000"))
+            if pct and not str(pct).startswith("."):
+                try: pct = f"{float(pct):.3f}"
                 except: pass
+
             teams.append({
                 "rank": i+1,
                 "name": tr.get("team",{}).get("name",""),
-                "w":    tr.get("wins", 0),
-                "l":    tr.get("losses", 0),
-                "pct":  str(pct_raw),
-                "gb":   gb,
-                "l10":  f"{lt.get('wins',0)}-{lt.get('losses',0)}",
+                "w":   tr.get("wins",0),
+                "l":   tr.get("losses",0),
+                "pct": str(pct),
+                "gb":  gb,
+                "l10": f"{lt.get('wins',0)}-{lt.get('losses',0)}",
                 "strk": strk,
                 "home": f"{ho.get('wins',0)}-{ho.get('losses',0)}",
                 "away": f"{aw.get('wins',0)}-{aw.get('losses',0)}",
             })
+
         if teams:
-            divs[div] = {"label": div, "teams": teams}
-            print(f"      {div}: {len(teams)} teams")
+            divs[label] = {"label": label, "teams": teams}
+            print(f"        → {label}: {len(teams)} teams OK")
         else:
-            print(f"      {div}: no teams found")
+            print(f"        → {label}: no teamRecords found")
+
     result = [divs[d] for d in DIV_ORDER if d in divs]
     if not result and divs:
-        print(f"    Warning: using unordered divs: {list(divs.keys())}")
+        print(f"    MLB Standings fallback — using {list(divs.keys())}")
         result = list(divs.values())
-    print(f"    Standings result: {len(result)} divisions")
+
+    print(f"    MLB Standings final: {len(result)} divisions")
     return result
 
 def fmt_mlb_leaders_side(season, league_id, label):
