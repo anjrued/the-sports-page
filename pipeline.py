@@ -248,6 +248,7 @@ def compute_batting_notes(batting, existing_notes):
     """Compute HR/2B/3B/SB/LOB notes from batting data we already fetched."""
     try:
         extra = []
+        lob_entries = []
         for team_data in batting:
             players = team_data.get("players", [])
             team_name = team_data.get("team","").split()[-1]
@@ -274,11 +275,14 @@ def compute_batting_notes(batting, existing_notes):
             if sbs:
                 extra.append(f"SB: {', '.join(sbs)}")
 
-            # LOB
+            # Collect LOB per team — will be combined after both teams processed
             lob = sum(p.get("_lob",0) for p in players)
             if lob > 0:
-                extra.append(f"LOB: {team_name} {lob}")
+                lob_entries.append(f"{team_name} {lob}")
 
+        # Add combined LOB at the end
+        if lob_entries:
+            extra.append(f"LOB: {', '.join(lob_entries)}")
         if extra:
             sep = "  " if existing_notes else ""
             return existing_notes + sep + "  ".join(extra)
