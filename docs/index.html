@@ -2239,24 +2239,45 @@ function renderLeaders(leaders) {
   if (!leaders) return '';
   const { left, right } = leaders;
   if (!left || !right) return '';
-  const TH = 'text-align:left;font-weight:700;font-size:.5rem;text-transform:uppercase;border-bottom:1px solid #ccc;padding:1px 3px';
-  const TD = 'padding:2px 3px;border-bottom:1px solid #eee;font-size:.6rem;font-family:"Libre Baskerville",serif';
-  function col(side) {
+  function buildCol(side) {
     if (!side || !side.cats) return '';
-    return `<div>
-      <div style="font-family:'Playfair Display',serif;font-size:.78rem;font-weight:900;text-transform:uppercase;text-align:center;border-top:2px solid #111;border-bottom:2px solid #111;padding:3px 0;margin-bottom:8px;letter-spacing:1px">${side.label||''}</div>
-      ${(side.cats||[]).map(cat => `
-        <div style="margin-bottom:10px">
-          <div style="font-size:.54rem;font-weight:700;text-transform:uppercase;letter-spacing:1.5px;border-bottom:1px solid #999;padding-bottom:2px;margin-bottom:2px">${cat.cat||''}</div>
-          <table style="width:100%;border-collapse:collapse">
-            <thead><tr>${(cat.cols||[]).map(c=>`<th style="${TH}${c!==cat.cols[0]?';text-align:right':''}">${c}</th>`).join('')}</tr></thead>
-            <tbody>${(cat.rows||[]).slice(0,8).map(row=>`<tr>${(row||[]).map((cell,k)=>`<td style="${TD}${k>0?';text-align:right':''}">${cell}</td>`).join('')}</tr>`).join('')}</tbody>
-          </table>
-        </div>`).join('')}
-    </div>`;
+    let html = '<div>';
+    html += '<div style="font-family:Playfair Display,serif;font-size:.78rem;font-weight:900;text-transform:uppercase;text-align:center;border-top:2px solid #111;border-bottom:2px solid #111;padding:3px 0;margin-bottom:8px;letter-spacing:1px">' + (side.label||'') + '</div>';
+    (side.cats||[]).forEach(cat => {
+      const cols = cat.cols||[];
+      const rows = (cat.rows||[]).slice(0,8);
+      const n = cols.length;
+      const restPct = n > 1 ? Math.floor(55/(n-1)) : 55;
+      html += '<div style="margin-bottom:12px">';
+      html += '<div style="font-size:.54rem;font-weight:700;text-transform:uppercase;letter-spacing:1.5px;border-bottom:1px solid #999;padding-bottom:2px;margin-bottom:3px">' + (cat.cat||'') + '</div>';
+      html += '<table style="width:100%;border-collapse:collapse;table-layout:fixed">';
+      // Header
+      html += '<thead><tr>';
+      cols.forEach((c,i) => {
+        const w = i===0 ? '45%' : restPct+'%';
+        const align = i===0 ? 'left' : 'right';
+        html += '<th style="font-weight:700;font-size:.5rem;text-transform:uppercase;border-top:2px solid #111;border-bottom:1px solid #111;padding:3px 4px;background:#e8e8e8;white-space:nowrap;width:'+w+';text-align:'+align+'">' + c + '</th>';
+      });
+      html += '</tr></thead>';
+      // Rows
+      html += '<tbody>';
+      rows.forEach(row => {
+        html += '<tr>';
+        (row||[]).forEach((cell,k) => {
+          const align = k===0 ? 'left' : 'right';
+          html += '<td style="padding:2px 4px;border-bottom:1px solid #eee;font-size:.6rem;font-family:Libre Baskerville,serif;white-space:nowrap;text-align:'+align+'">' + cell + '</td>';
+        });
+        html += '</tr>';
+      });
+      html += '</tbody></table></div>';
+    });
+    html += '</div>';
+    return html;
   }
-  return `<div style="display:grid;grid-template-columns:1fr 1fr;gap:0 20px">${col(left)}${col(right)}</div>`;
+  return '<div style="display:grid;grid-template-columns:1fr 1fr;gap:0 24px">' + buildCol(left) + buildCol(right) + '</div>';
 }
+
+
 
 // ── BRACKET ──────────────────────────────────────────────────────────────────
 function renderBracket(rounds) {
