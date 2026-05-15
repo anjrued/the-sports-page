@@ -163,6 +163,37 @@ def fmt_mlb_linescore(ls, away_name, home_name):
                  "e": t.get("home", {}).get("errors", 0)},
     }
 
+def fmt_mlb_pitching(box, side):
+    team_data = box.get("teams", {}).get(side, {})
+    team_name = team_data.get("team", {}).get("name", side)
+    pitchers = []
+    for pid, p in team_data.get("players", {}).items():
+        pos = p.get("position", {}).get("abbreviation", "")
+        if pos != "P":
+            continue
+        stats = p.get("stats", {}).get("pitching", {})
+        if not stats or not stats.get("inningsPitched"):
+            continue
+        last = p.get("person", {}).get("fullName", "").split()[-1]
+        note = p.get("gameStatus", {}).get("isCurrentPitcher", False)
+        dec = ""
+        if stats.get("wins"): dec = f"W, {stats['wins']}-{stats.get('losses',0)}"
+        elif stats.get("losses"): dec = f"L, {stats.get('wins',0)}-{stats['losses']}"
+        elif stats.get("saves"): dec = f"SV, {stats['saves']}"
+        elif stats.get("holds"): dec = "H"
+        pitchers.append({
+            "name": f"{last}{' ('+dec+')' if dec else ''}",
+            "ip":  stats.get("inningsPitched", "0.0"),
+            "h":   stats.get("hits", 0),
+            "r":   stats.get("runs", 0),
+            "er":  stats.get("earnedRuns", 0),
+            "bb":  stats.get("baseOnBalls", 0),
+            "so":  stats.get("strikeOuts", 0),
+            "np":  stats.get("numberOfPitches", 0),
+            "era": stats.get("era", "—"),
+        })
+    return {"team": team_name, "pitchers": pitchers}
+
 def fmt_mlb_batting(box, side):
     team_data = box.get("teams", {}).get(side, {})
     team_name = team_data.get("team", {}).get("name", side)
@@ -316,16 +347,19 @@ def build_mlb(client, today_str, yesterday_str, mlb_season):
         loser  = home_name if ar > hr else away_name
         title  = f"{winner} {max(ar,hr)}, {loser} {min(ar,hr)}"
 
-        batting, notes = [], ""
+        batting, pitching, notes = [], [], ""
         if i < 3:  # Full box score for top 3 games
             box_raw = mlb_boxscore(pk)
             if box_raw:
                 batting = [fmt_mlb_batting(box_raw,"away"),
                            fmt_mlb_batting(box_raw,"home")]
+                pitching = [fmt_mlb_pitching(box_raw,"away"),
+                            fmt_mlb_pitching(box_raw,"home")]
                 notes   = fmt_mlb_notes(box_raw)
 
         box_scores.append({"title": title, "linescore": ls,
-                            "batting": batting, "notes": notes})
+                            "batting": batting, "pitching": pitching if i < 3 else [],
+                            "notes": notes})
         time.sleep(0.2)
 
     # Standings
@@ -768,7 +802,8 @@ def build_nhl(client, today_str, yesterday_str, nhl_season_id):
             notes = ""
 
         box_scores.append({"title": title, "linescore": ls,
-                            "batting": batting, "notes": notes})
+                            "batting": batting, "pitching": pitching if i < 3 else [],
+                            "notes": notes})
 
     # Standings
     std_raw = api_get(f"{NHL}/standings/{today_str}")
