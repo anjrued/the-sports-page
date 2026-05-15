@@ -1,15 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<!-- Google tag (gtag.js) -->
-<script async src="https://www.googletagmanager.com/gtag/js?id=G-3LHZLQR5MF"></script>
-<script>
-  window.dataLayer = window.dataLayer || [];
-  function gtag(){dataLayer.push(arguments);}
-  gtag('js', new Date());
-
-  gtag('config', 'G-3LHZLQR5MF');
-</script>
 <meta charset="UTF-8"/>
 <meta name="viewport" content="width=device-width,initial-scale=1.0"/>
 <title>The Sports Page</title>
@@ -695,7 +686,7 @@ table.ldr-tbl {
 }
 .sp-nav-btn:last-child { border-right: none; }
 .sp-nav-btn:hover { background: #e8e8e8; color: #111; }
-.sp-nav-btn.active { background: #111; color: #fff; }
+.sp-nav-btn.active { background: #111 !important; color: #fff !important; }
 
 /* ── DATELINE ── */
 .sp-dateline {
@@ -835,6 +826,8 @@ table.ldr-tbl {
 /* ── RESPONSIVE ── */
 @media (max-width: 760px) {
   .sp-sport-main-grid, .sp-front-grid { grid-template-columns: 1fr; }
+  /* Hide extra standings columns on mobile — show only Team W L Pct GB */
+  .std-hide-mobile { display: none !important; }
   .sp-sport-left { border-right: none; padding-right: 0; border-bottom: 2px solid #111; padding-bottom: 14px; margin-bottom: 12px; }
   .sp-sport-right { padding-left: 0; }
   .sp-hl-body, .sp-op-body { column-count: 1; }
@@ -2230,7 +2223,7 @@ function renderStandings(divisions, hasSplit) {
           <thead><tr>
             <th style="${TH};text-align:left;min-width:120px">Team</th>
             <th style="${TH}">W</th><th style="${TH}">L</th><th style="${TH}">Pct</th><th style="${TH}">GB</th>
-            ${hasSplit?`<th style="${TH}">L10</th><th style="${TH}">Str</th><th style="${TH}">Home</th><th style="${TH}">Away</th>`:''}
+            ${hasSplit?`<th style="${TH}" class="std-hide-mobile">L10</th><th style="${TH}" class="std-hide-mobile">Str</th><th style="${TH}" class="std-hide-mobile">Home</th><th style="${TH}" class="std-hide-mobile">Away</th>`:''}
             ${hasNote?`<th style="${TH};text-align:left">Note</th>`:''}
           </tr></thead>
           <tbody>
@@ -2240,7 +2233,7 @@ function renderStandings(divisions, hasSplit) {
               <td style="${TD};font-weight:${i===0?'700':'400'}">${t.l||''}</td>
               <td style="${TD};font-weight:${i===0?'700':'400'}">${t.pct||''}</td>
               <td style="${TD};font-weight:${i===0?'700':'400'}">${t.gb||''}</td>
-              ${hasSplit?`<td style="${TD}">${t.l10||''}</td><td style="${TD}">${t.strk||''}</td><td style="${TD}">${t.home||''}</td><td style="${TD}">${t.away||''}</td>`:''}
+              ${hasSplit?`<td style="${TD}" class="std-hide-mobile">${t.l10||''}</td><td style="${TD}" class="std-hide-mobile">${t.strk||''}</td><td style="${TD}" class="std-hide-mobile">${t.home||''}</td><td style="${TD}" class="std-hide-mobile">${t.away||''}</td>`:''}
               ${t.note?`<td style="${TD};text-align:left;font-size:.52rem;color:#555;font-style:italic">${t.note}</td>`:''}
             </tr>`).join('')}
           </tbody>
@@ -2322,7 +2315,7 @@ function renderEditorsNote() {
       <p>Just scores, stories, standings, and the joy of sports.</p>
       <p>If you'd like to help keep the presses running:</p>
     </div>
-    <a class="editors-note-link" href="https://buymeacoffee.com/thesportspage" target="_blank" rel="noopener">Support the Sports Section</a>
+    <a class="editors-note-link" href="https://buymeacoffee.com/thesportspage" target="_blank" rel="noopener">Support The Sports Page</a>
   </div>`;
 }
 
@@ -2407,7 +2400,15 @@ function buildSport(id, overrides) {
           ${id==='mlb'&&game.pitching&&game.pitching.some(t=>t.pitchers&&t.pitchers.length)?renderPitching(game.pitching):''}
           ${hasNFL2?renderNFLStats(game.nflStats):''}
         </div>
-        ${game.notes?`<p class="bs-notes">${game.notes}</p>`:''}
+        ${game.notes?(()=>{
+  const noteParts = game.notes.split('  ').filter(Boolean);
+  const formatted = noteParts.map(part => {
+    const colon = part.indexOf(':');
+    if (colon === -1) return part;
+    return '<b>' + part.slice(0,colon) + ':</b>' + part.slice(colon+1);
+  }).join(' &nbsp;·&nbsp; ');
+  return '<p class="bs-notes">' + formatted + '</p>';
+})():''}
       </div>`;
     }).join('')}
     </div>
@@ -2436,11 +2437,9 @@ function buildNav() {
     
     btn.onclick = () => {
       document.querySelectorAll('.page').forEach(p=>p.classList.remove('active'));
-      document.querySelectorAll('.sp-nav-btn').forEach(b=>{b.classList.remove('active');b.style.background='none';b.style.color='#444';});
+      document.querySelectorAll('.sp-nav-btn').forEach(b=>{b.classList.remove('active');b.style.background='';b.style.color='';});
       document.getElementById(s.id).classList.add('active');
-      btn.classList.add('active');
-      
-    };
+      btn.classList.add('active'); };
     nav.appendChild(btn);
   });
 }
