@@ -167,12 +167,15 @@ def fmt_mlb_linescore(ls, away_name, home_name):
     }
 
 def fmt_mlb_pitching(box, side):
-    team_data = box.get("teams", {}).get(side, {})
-    team_name = team_data.get("team", {}).get("name", side)
+    team_data  = box.get("teams", {}).get(side, {})
+    team_name  = team_data.get("team", {}).get("name", side)
+    players    = team_data.get("players", {})
+    # Use the ordered pitchers list — IDs in appearance order
+    ordered_ids = team_data.get("pitchers", [])
     pitchers = []
-    for pid, p in team_data.get("players", {}).items():
-        pos = p.get("position", {}).get("abbreviation", "")
-        if pos != "P":
+    for pid in ordered_ids:
+        p = players.get(f"ID{pid}", players.get(str(pid), {}))
+        if not p:
             continue
         stats = p.get("stats", {}).get("pitching", {})
         if not stats or not stats.get("inningsPitched"):
@@ -361,13 +364,25 @@ def fmt_mlb_schedule(games):
             if not p: return ""
             parts = p.get("fullName","").split()
             last = parts[-1] if parts else ""
-            stats_list = p.get("stats",[])
-            era = ""; rec = ""
-            for s in stats_list:
+            pid  = p.get("id","")
+            era  = ""; rec = ""
+            # Try stats embedded in probable pitcher object
+            for s in p.get("stats",[]):
                 sp = s.get("stats",{})
-                if sp.get("era"): era = sp["era"]
+                if sp.get("era"): era = str(sp["era"])
                 w = sp.get("wins",""); l = sp.get("losses","")
                 if w != "" and l != "": rec = f"{w}-{l}"
+            # Fallback: fetch season stats directly if not embedded
+            if (not era or not rec) and pid:
+                sdata = api_get(f"{MLB}/people/{pid}/stats",
+                                {"stats":"season","season":mlb_season,"group":"pitching"})
+                if sdata:
+                    for sg in sdata.get("stats",[]):
+                        for split in sg.get("splits",[]):
+                            sp = split.get("stat",{})
+                            if sp.get("era") and not era: era = str(sp["era"])
+                            w = sp.get("wins",""); l = sp.get("losses","")
+                            if w != "" and l != "" and not rec: rec = f"{w}-{l}"
             if rec and era: return f"{last} ({rec}, {era})"
             elif rec: return f"{last} ({rec})"
             elif era: return f"{last} ({era})"
