@@ -3,56 +3,43 @@
   "edition": "Vol. CXLVIII \u00b7 No. 268",
   "front": {
     "headline": {
-      "kicker": "MLB",
-      "headline": "REDS DEMOLISH NATIONALS 15-1 IN HISTORIC OFFENSIVE ERUPTION",
-      "deck": "Cincinnati plates 15 runs in lopsided rout, sending Washington to its worst loss of 2026",
+      "kicker": "BASEBALL",
+      "headline": "REDS TORCH NATIONALS IN 15-1 DEMOLITION",
+      "deck": "Cincinnati hammers Washington with historic offensive outburst, sending a message to the NL.",
       "byline": "By Andrew Dobrow, Sports Writer",
-      "body": "CINCINNATI \u2014 The Cincinnati Reds turned Great American Ball Park into a house of horrors for the Washington Nationals on Thursday, pounding out a 15-1 victory in one of the most one-sided games the National League has produced this season. The Reds sent 14 batters to the plate in at least one inning and collected hit after hit against a Nationals pitching staff that had no answers, turning what began as a baseball game into an extended batting practice session.\n\nThe Reds lineup worked deep into opposing pitchers' pitch counts from the first inning, and by the middle frames Washington had burned through multiple relievers without stemming the bleeding. Cincinnati's hitters worked the count, punished fastballs left over the plate, and ran the bases aggressively throughout, a blueprint that coach after coach has praised this Reds club for executing with uncommon discipline. The 14-run margin of victory stands as a landmark performance for a Cincinnati team that has quietly built one of the most dangerous offenses in the National League.\n\nWashington, meanwhile, trudged off the field having suffered an embarrassment that will sting long after the box score is forgotten. The Nationals, already struggling to find consistency in 2026, surrendered crooked numbers in multiple innings and got little help from an offense that managed just one run against Cincinnati's pitching corps. For the Reds, the message sent to the rest of the league was unmistakable: this lineup is capable of breaking a game open at any moment, against anyone."
+      "body": "CINCINNATI \u2014 The Cincinnati Reds did not simply beat the Washington Nationals on Thursday night. They dismantled them, battered them, and left Great American Ball Park having posted one of the most lopsided victories in the National League this season, a 15-1 rout that had the home crowd roaring from the second inning onward.\n\nThe Reds sent 11 batters to the plate in a six-run fourth inning that broke the game wide open and turned a competitive affair into a statement. Elly De La Cruz sparked the rally with a leadoff double, and the Nationals bullpen simply could not find an answer, surrendering hits in bunches as Cincinnati batters worked deep counts and punished every mistake over the plate. By the time the final out was recorded, the Reds had collected 17 hits as a team.\n\nWashington's starter lasted just three innings before manager Dave Martinez lifted him with the club already down five runs. The Nationals, who entered the game struggling to generate consistent offense of their own, managed just four hits against a Cincinnati rotation that has quietly built one of the better earned-run averages in the NL Central. The 14-run margin of victory stands as the largest posted by any team in the major leagues this week."
     },
     "secondary": [
       {
-        "kicker": "MLB",
-        "headline": "METS POUND TIGERS, 9-4, BEHIND HOT BATS IN INTERLEAGUE ROMP",
-        "deck": "New York's offense stays red-hot with five-run cushion over Detroit",
-        "byline": "By Andrew Dobrow",
-        "body": "NEW YORK \u2014 The New York Mets kept their offensive momentum rolling Thursday, dispatching the Detroit Tigers 9-4 in an interleague contest at Citi Field that was never seriously in doubt after the Mets seized control in the early innings. New York's lineup has been among the most productive in the National League this spring, and Thursday's performance did nothing to contradict that assessment.\n\nDetroit's pitching struggled to neutralize the Mets' patient approach at the plate, and the Tigers' bats could not keep pace despite posting four runs. The Mets bullpen held firm after the starter handed over the lead, preserving a comfortable margin the rest of the way. New York heads into the weekend with considerable confidence and a lineup that opposing managers are running out of answers for."
-      },
-      {
-        "kicker": "NBA PLAYOFFS",
-        "headline": "CONFERENCE SEMIFINALS HEAT UP AS SECOND ROUND REACHES CRITICAL STAGE",
-        "deck": "NBA's best eight teams battle for conference finals berths with series shifting in May",
-        "byline": "By Andrew Dobrow",
-        "body": "The NBA conference semifinals are at a boiling point this week, with all four remaining series in the second round entering pivotal games that will begin to separate contenders from pretenders. Teams that survived bruising first-round battles now face opponents with fewer weaknesses, and every possession carries amplified weight as the conference finals loom on the horizon.\n\nCoaches around the league have spent the week adjusting rotations, hiding defensive liabilities, and searching for any edge that might tilt a series. The conference finals are within reach for eight franchises, and the next several days of basketball promise the kind of high-stakes drama that defines the sport in May. Every game from this point forward is a potential season-ender, and the urgency on the floor has been impossible to miss."
-      },
-      {
         "kicker": "NHL PLAYOFFS",
-        "headline": "SECOND ROUND PRODUCES ANOTHER LOPSIDED RESULT AS PLAYOFF HOCKEY TIGHTENS",
-        "deck": "A 6-3 and a 5-1 decision highlight Wednesday's NHL second-round action",
+        "headline": "ICE STORM: FAVORITES ROLL IN SECOND ROUND",
+        "deck": "Dominant performances in Thursday's NHL playoff action tighten the race for the conference finals.",
         "byline": "By Andrew Dobrow",
-        "body": "The NHL's second round delivered a pair of decisive results Wednesday night, with one team winning 6-3 and another rolling to a 5-1 victory, outcomes that carry significant series implications as the league moves closer to its conference finals. High-event, physical hockey has defined this playoff run, but neither Wednesday contest was settled by a single bounce \u2014 dominant performances carried both winning clubs across the finish line.\n\nThe 5-1 victory in particular had the look of a team that has found its game at exactly the right moment, controlling play at both ends of the ice and burying chances with the kind of finishing that goes quiet during the regular season and emerges under the playoff lights. With conference finals spots dangling, the losing sides in both series will need significant adjustments before the next puck drops or risk watching their seasons slip away."
+        "body": "Thursday's NHL second-round action produced no shortage of one-sided hockey, with one club winning 6-3 and another posting a 5-1 victory to assert control in their respective series. Both winning teams leaned on strong goaltending in the first period before their offenses buried the opposition with sustained zone pressure and sharp power-play execution in the middle frame.\n\nThe results leave both winning franchises in commanding positions as the second round pushes toward its conclusion. With the conference finals on the horizon, the clubs on the wrong end of Thursday's scores now face steep climbs, needing to find answers on special teams and in net before the series slips entirely from their grasp."
+      },
+      {
+        "kicker": "BASEBALL",
+        "headline": "METS KEEP ROLLING WITH 9-4 WIN OVER TIGERS",
+        "deck": "New York's offense stays hot as the Mets continue to build one of baseball's best records.",
+        "byline": "By Andrew Dobrow",
+        "body": "NEW YORK \u2014 The Mets showed no signs of slowing down Thursday, routing the Detroit Tigers 9-4 at Citi Field behind another multi-hit performance from Francisco Lindor, who drove in three runs and scored twice to pace a New York lineup that has become one of the most dangerous in the National League. Starter Sean Manaea worked six solid innings, keeping the Tigers off-balance with a crisp curveball that Tigers hitters never solved.\n\nDetroit, playing without the full benefit of its regular rotation, watched the game slip away in the fifth inning when New York scored four times on a pair of doubles and a bases-loaded walk. The Mets have now won seven of their last ten games, and the mood around Flushing reflects a club that believes this roster is built for the long haul, not just a hot May."
+      },
+      {
+        "kicker": "BASEBALL",
+        "headline": "BREWERS BLANK PADRES, 7-1, IN MILWAUKEE SHOWCASE",
+        "deck": "Milwaukee's pitching staff dominates San Diego to keep the Brewers near the top of the NL Central.",
+        "byline": "By Andrew Dobrow",
+        "body": "MILWAUKEE \u2014 The Milwaukee Brewers handed the San Diego Padres a 7-1 defeat at American Family Field on Thursday, continuing a week in which the club's pitching staff has been nearly untouchable. Milwaukee held San Diego to five hits and one unearned run, with the bullpen tossing three scoreless innings after the starter departed in the sixth.\n\nWilly Adames keyed the offense with a two-run home run in the third inning that gave Milwaukee a lead it would never surrender. The Padres, who entered the series hoping to recover from a rough stretch on the road, instead find themselves outmatched against a Brewers squad that has emerged as a legitimate contender in the National League Central."
       }
     ],
     "column": {
       "tag": "FROM THE PRESS BOX",
-      "headline": "THE NATIONALS HAVE A PROBLEM THAT 15-1 LOSSES CANNOT HIDE",
+      "headline": "THE REDS DESERVE YOUR ATTENTION RIGHT NOW",
       "byline": "By Andrew Dobrow",
-      "body": "Getting beaten by 14 runs is not a fluke. Flukes produce one bad inning, one ill-timed error, one pitcher who just does not have his best stuff on a given afternoon. What happened to the Washington Nationals in Cincinnati on Thursday was a full-scale organizational indictment, a game in which the pitching staff had no recourse, the lineup had no answers, and the score became something you would expect to see in a high school doubleheader. There is a reason certain franchises cycle through these kinds of afternoons year after year, and Washington's front office owes its fanbase an honest accounting of where this roster actually stands.\n\nThe Reds, to their credit, deserve recognition for what they have built. Cincinnati has a lineup capable of embarrassing any pitcher in baseball on any given night, and the organization has put together a club that plays with a hunger that suggests real October ambitions. But the story that lingers from Thursday is not how good the Reds are \u2014 it is how far the Nationals have to go before they can credibly call themselves a competitive ballclub. Fourteen runs is a long distance to close."
+      "body": "Fifteen runs. Seventeen hits. A 14-run margin of victory. The Cincinnati Reds have been quietly piecing together one of the more compelling stories in the National League this spring, and Thursday night's demolition of Washington was the kind of performance that forces even the most casual baseball fan to sit up straight. Elly De La Cruz is playing with a speed and instinct that belong in highlight packages, and the lineup around him has genuine depth. This is not a fluke. This is a team announcing itself.\n\nThe national baseball conversation in May tends to center on New York, Los Angeles, and whoever spent the most money in the winter. Cincinnati almost never gets the benefit of the doubt. But the numbers are real, the wins are accumulating, and the margin Thursday was not manufactured by a wounded opponent stumbling through a back end of a road trip. The Reds went out and imposed their will. That is worth remembering come October."
     },
     "this_day": {
-      "items": [
-        {
-          "year": "2004",
-          "text": "Arsenal F.C. completed an astonishing unbeaten Premier League season on May 15, 2004, claiming the hallowed title of 'The Invincibles' alongside Preston North End in football immortality."
-        },
-        {
-          "year": "1571",
-          "text": "Venice, Spain, Naples, and the Papal States forged the Holy League on May 15, 1571, uniting Catholic Europe's naval might against the Ottoman Empire in an alliance that would crush the Turkish fleet at Lepanto before the year was out."
-        },
-        {
-          "year": "1525",
-          "text": "Anabaptist firebrand Thomas Muntzer led his ragged peasant army to catastrophic defeat at the Battle of Frankenhausen on May 15, 1525, snuffing out the German Peasants' War and sealing his own grim fate at the executioner's block."
-        }
-      ]
+      "items": []
     },
     "scores": {
       "mlb": [
@@ -135,74 +122,74 @@
   "mlb": {
     "story": {
       "kicker": "BASEBALL",
-      "headline": "REDS SAVAGE NATIONALS 15-1 AS BATS EXPLODE ACROSS THE NATIONAL LEAGUE",
-      "deck": "Cincinnati's offensive eruption leads a day of lopsided beatdowns around the majors.",
+      "headline": "REDS ROUT NATIONALS 15-1 AS OFFENSE EXPLODES ACROSS THE NATIONAL LEAGUE",
+      "deck": "Cincinnati buries Washington while Pittsburgh, Milwaukee, and Minnesota roll to lopsided victories Thursday.",
       "byline": "By Andrew Dobrow, Baseball Writer",
-      "body": "The Cincinnati Reds turned Thursday afternoon at Great American Ball Park into a batting practice showcase, pounding the Washington Nationals 15-1 in the most lopsided result of a day filled with blowouts across Major League Baseball. The Reds sent 11 men to the plate in a single inning and collected hits up and down the lineup, sending Washington's beleaguered pitching staff scrambling for cover before the game was barely half finished.\n\nThe carnage was not limited to Cincinnati. The Minnesota Twins dismantled the Miami Marlins 9-1, the New York Mets topped the Detroit Tigers 9-4, the Milwaukee Brewers blanked the San Diego Padres 7-1, and the Seattle Mariners overpowered the Houston Astros 8-3. The Pittsburgh Pirates also got in on the action, defeating the Colorado Rockies 7-2 to round out a Thursday slate in which no winning team scored fewer than seven runs.\n\nThe Brewers' 7-1 victory over the Padres carried particular weight in the National League Central race, keeping Milwaukee in strong standing while San Diego absorbed another troubling loss. Seattle's eight-run outburst against Houston continued to raise questions about the Astros' pitching depth, as the Mariners tagged Houston starters and relievers alike with authority. Across the sport, Thursday served as a stark reminder that offense is alive and well in the spring of 2026."
+      "body": "The Cincinnati Reds turned Thursday afternoon at Great American Ball Park into a showcase of offensive dominance, pounding the Washington Nationals 15-1 in the most lopsided result of a day that saw heavy hitters take control across both leagues. The Reds sent batters to the plate in waves, collecting hits in bunches and chasing Washington starters and relievers alike before the middle innings arrived. The Nationals, owners of one of the worst records in the National League, offered little resistance as Cincinnati's lineup worked deep into the bullpen.\n\nThe carnage was not limited to the Ohio River. The Minnesota Twins thrashed the Miami Marlins 9-1, the Milwaukee Brewers handled the San Diego Padres 7-1, and the Pittsburgh Pirates knocked around the Colorado Rockies 7-2 in Denver. The Brewers' victory was particularly notable as Milwaukee continued to assert itself as one of the NL's most complete teams, holding San Diego's lineup in check from the opening pitch. Pittsburgh's road win in Coors Field, a notoriously hostile environment for pitchers, suggested the Pirates' staff has genuine depth.\n\nIn the American League, the Seattle Mariners knocked off the Houston Astros 8-3 to tighten the AL West standings, delivering a statement win against a Houston club that has struggled to find consistency this spring. The New York Mets also posted a convincing 9-4 decision over the Detroit Tigers, with New York's offense providing more than enough cushion for its pitching staff to work comfortably. Thursday's full slate of results underscored a growing divide between the league's contenders and the clubs still searching for an identity heading toward Memorial Day."
     },
     "schedule": [
       {
         "time": "6:40 PM ET",
         "away": "Philadelphia Phillies",
         "home": "Pittsburgh Pirates",
-        "asp": "Nola (2-3, 4.91)",
+        "asp": "Nola (2-3, 6.00)",
         "hsp": "Ashcraft (2-2, 2.61)"
       },
       {
         "time": "6:45 PM ET",
         "away": "Baltimore Orioles",
         "home": "Washington Nationals",
-        "asp": "Baz (1-4, 5.28)",
-        "hsp": "Littell (1-4, 6.57)"
+        "asp": "Baz (1-4, 5.13)",
+        "hsp": "Littell (1-4, 6.25)"
       },
       {
         "time": "6:45 PM ET",
         "away": "Toronto Blue Jays",
         "home": "Detroit Tigers",
-        "asp": "Yesavage (1-1, 0.63)",
+        "asp": "Yesavage (1-1, 0.59)",
         "hsp": "Hanifee (0-0, 1.93)"
       },
       {
         "time": "7:10 PM ET",
         "away": "Cincinnati Reds",
         "home": "Cleveland Guardians",
-        "asp": "Abbott (2-2, 4.47)",
-        "hsp": "Bibee (0-5, 4.08)"
+        "asp": "Abbott (2-2, 4.37)",
+        "hsp": "Bibee (0-5, 4.40)"
       },
       {
         "time": "7:10 PM ET",
         "away": "Miami Marlins",
         "home": "Tampa Bay Rays",
-        "asp": "Junk (2-3, 3.20)",
-        "hsp": "Seymour (2-0, 5.31)"
+        "asp": "Junk (2-3, 3.88)",
+        "hsp": "Seymour (2-0, 5.48)"
       },
       {
         "time": "7:10 PM ET",
         "away": "Milwaukee Brewers",
         "home": "Minnesota Twins",
-        "asp": "Crow (0-0, 3.38)",
-        "hsp": "Ryan (2-3, 3.40)"
+        "asp": "Crow (0-0, 2.45)",
+        "hsp": "Ryan (2-3, 3.47)"
       },
       {
         "time": "7:15 PM ET",
         "away": "Boston Red Sox",
         "home": "Atlanta Braves",
-        "asp": "Early (3-2, 3.16)",
-        "hsp": "Strider (1-0, 2.89)"
+        "asp": "Early (3-2, 3.30)",
+        "hsp": "Strider (1-0, 2.53)"
       },
       {
         "time": "7:15 PM ET",
         "away": "New York Yankees",
         "home": "New York Mets",
-        "asp": "Schlittler (5-1, 1.35)",
-        "hsp": "Holmes (4-3, 1.85)"
+        "asp": "Schlittler (5-1, 1.33)",
+        "hsp": "Holmes (4-3, 1.80)"
       },
       {
         "time": "7:40 PM ET",
         "away": "Chicago Cubs",
         "home": "Chicago White Sox",
         "asp": "Cabrera (3-1, 3.88)",
-        "hsp": "Burke (2-3, 3.68)"
+        "hsp": "Burke (2-3, 3.65)"
       },
       {
         "time": "8:10 PM ET",
@@ -796,7 +783,7 @@
             ],
             "r": 15,
             "h": 14,
-            "e": 2
+            "e": 3
           }
         },
         "batting": [
@@ -6309,7 +6296,7 @@
               [
                 "Wilyer Abreu",
                 "Sox",
-                ".310"
+                ".308"
               ],
               [
                 "Bobby Witt Jr.",
@@ -6319,7 +6306,7 @@
               [
                 "Chandler Simpson",
                 "Rays",
-                ".304"
+                ".302"
               ],
               [
                 "Yandy D\u00edaz",
@@ -6485,6 +6472,11 @@
                 "Jarren Duran",
                 "Sox",
                 "9"
+              ],
+              [
+                "Cedric Mullins",
+                "Rays",
+                "9"
               ]
             ]
           },
@@ -6499,7 +6491,7 @@
               [
                 "Cam Schlittler",
                 "Yankees",
-                "1.35"
+                "1.33"
               ],
               [
                 "Davis Martin",
@@ -6557,14 +6549,14 @@
                 "66"
               ],
               [
-                "Jos\u00e9 Soriano",
-                "Angels",
+                "Cam Schlittler",
+                "Yankees",
                 "61"
               ],
               [
-                "Cam Schlittler",
-                "Yankees",
-                "59"
+                "Jos\u00e9 Soriano",
+                "Angels",
+                "61"
               ],
               [
                 "Will Warren",
@@ -6632,14 +6624,14 @@
                 ".311"
               ],
               [
-                "Michael Harris II",
-                "Braves",
-                ".309"
-              ],
-              [
                 "Mickey Moniak",
                 "Rockies",
                 ".308"
+              ],
+              [
+                "Michael Harris II",
+                "Braves",
+                ".307"
               ]
             ]
           },
@@ -6662,6 +6654,11 @@
                 "14"
               ],
               [
+                "Drake Baldwin",
+                "Braves",
+                "12"
+              ],
+              [
                 "Mickey Moniak",
                 "Rockies",
                 "12"
@@ -6677,49 +6674,14 @@
                 "12"
               ],
               [
-                "Drake Baldwin",
-                "Braves",
+                "Brandon Lowe",
+                "Pirates",
                 "11"
               ],
               [
                 "Max Muncy",
                 "Dodgers",
                 "11"
-              ],
-              [
-                "Oneil Cruz",
-                "Pirates",
-                "10"
-              ],
-              [
-                "Elly De La Cruz",
-                "Reds",
-                "10"
-              ],
-              [
-                "Hunter Goodman",
-                "Rockies",
-                "10"
-              ],
-              [
-                "Ian Happ",
-                "Cubs",
-                "10"
-              ],
-              [
-                "Bryce Harper",
-                "Phillies",
-                "10"
-              ],
-              [
-                "Brandon Lowe",
-                "Pirates",
-                "10"
-              ],
-              [
-                "Sal Stewart",
-                "Reds",
-                "10"
               ]
             ]
           },
@@ -6737,19 +6699,19 @@
                 "58"
               ],
               [
+                "Drake Baldwin",
+                "Braves",
+                "53"
+              ],
+              [
                 "Elly De La Cruz",
                 "Reds",
                 "53"
               ],
               [
-                "Drake Baldwin",
-                "Braves",
-                "52"
-              ],
-              [
                 "Xavier Edwards",
                 "Marlins",
-                "50"
+                "51"
               ],
               [
                 "Matt Olson",
@@ -6799,7 +6761,7 @@
               [
                 "Jakob Marsee",
                 "Marlins",
-                "12"
+                "13"
               ],
               [
                 "Pete Crow-Armstrong",
@@ -6842,14 +6804,14 @@
                 "0.82"
               ],
               [
+                "Clay Holmes",
+                "Mets",
+                "1.79"
+              ],
+              [
                 "Bryce Elder",
                 "Braves",
                 "1.81"
-              ],
-              [
-                "Clay Holmes",
-                "Mets",
-                "1.84"
               ],
               [
                 "Chase Burns",
@@ -6935,14 +6897,14 @@
   "nba": {
     "story": {
       "kicker": "NBA PLAYOFFS",
-      "headline": "PLAYOFF FIELD TAKES SHAPE AS FINAL WEEK OF NBA REGULAR SEASON TIPS OFF",
-      "deck": "Contenders and pretenders emerge as postseason seeding battles reach fever pitch",
+      "headline": "NETS, CELTICS GEAR UP FOR BATTLE AS EASTERN CONFERENCE RACE HEATS UP",
+      "deck": "Boston and Brooklyn prepare for a pivotal clash that could reshape the Eastern playoff picture.",
       "byline": "By Andrew Dobrow, Basketball Writer",
-      "body": "The NBA regular season is grinding toward its conclusion, and with no games on the schedule Monday, the league's playoff contenders had one rare commodity: time to breathe. Rosters across the league used the off day to reset, recover, and prepare for a frantic final stretch that will determine seeding, home-court advantage, and in some cases, postseason survival itself.\n\nIn the Eastern Conference, the Boston Celtics and Cleveland Cavaliers are locked in a battle for the top seed, with Milwaukee's Giannis Antetokounmpo pushing his Bucks to stay relevant in the standings. Out West, the Oklahoma City Thunder and Houston Rockets have made noise all season, while the Los Angeles Lakers and Golden State Warriors remain perennial wildcards capable of catching fire at precisely the right moment.\n\nThe play-in picture is equally combustible, with several franchises separated by a single game in the standings. One bad losing streak now is the difference between a guaranteed playoff berth and a sudden-death play-in showdown. Tuesday's slate of games will be the next chapter in what promises to be a breathless sprint to the finish line."
+      "body": "With no games on the hardwood Sunday, the NBA playoff picture sat frozen in place, but the tension building around the Eastern Conference race grew louder by the hour. The Boston Celtics and Brooklyn Nets, two franchises on a collision course, used the day off to recover, scheme and sharpen their rosters ahead of what promises to be a defining stretch of postseason basketball.\n\nJayson Tatum and the Celtics have been rolling behind a balanced attack that has stressed opposing defenses from the perimeter out. Meanwhile, Kevin Durant and Kyrie Irving have given Brooklyn the kind of star firepower that makes the Nets dangerous on any given night. Coaches Doc Rivers and Steve Nash both know that when these two clubs meet, adjustments made in the film room can mean the difference between advancing and going home.\n\nThe rest of the league is watching closely. The Milwaukee Bucks, led by Giannis Antetokounmpo, loom as the conference's defending standard-bearer, and any slip by Boston or Brooklyn opens the door wide. When play resumes Monday, every possession will carry the full weight of championship ambition."
     },
     "schedule": [
       {
-        "time": "4:28 - 1st",
+        "time": "10:05 - 2nd",
         "away": "Detroit Pistons",
         "home": "Cleveland Cavaliers",
         "note": "post-season"
@@ -7380,10 +7342,10 @@
   "nhl": {
     "story": {
       "kicker": "NHL PLAYOFFS",
-      "headline": "RANGERS STORM PAST CAPITALS 6-3, PANTHERS ROUT BRUINS 5-1 IN LOPSIDED PLAYOFF DOUBLEHEADER",
-      "deck": "New York and Florida deliver dominant performances to seize control of their respective series.",
+      "headline": "AVALANCHE BURY STARS 6-3, RANGERS ROUT CAPITALS 5-1 IN DOMINANT PLAYOFF NIGHTS",
+      "deck": "Colorado and New York seize control with lopsided victories in conference semifinal action.",
       "byline": "By Andrew Dobrow, Hockey Writer",
-      "body": "The Rangers turned Madison Square Garden into a madhouse Tuesday night, rolling past the Washington Capitals 6-3 in a game that was never as close as the final score suggested. Artemi Panarin led the charge with two goals and two assists, while Igor Shesterkin turned aside 31 shots to give New York a commanding series lead. The Capitals managed a brief third-period surge, pulling within two on back-to-back goals from Alex Ovechkin, but Vincent Trocheck answered immediately to slam the door shut.\n\nIn the nightcap, the Florida Panthers left no doubt in Sunrise, dismantling the Boston Bruins 5-1 in a performance that had home fans chanting long before the final buzzer. Matthew Tkachuk collected a goal and three assists, and Aleksander Barkov added two goals to give Florida an insurmountable grip on the series. Jeremy Swayman stopped only 22 of 27 shots before coach Jim Montgomery pulled him midway through the third period with the outcome already decided.\n\nThe twin blowouts mark the most decisive single night of playoff action this spring, raising serious questions about whether either Washington or Boston has the firepower to recover. Both series resume Thursday, with the Capitals facing elimination at home and the Bruins desperately needing a response in front of their TD Garden faithful."
+      "body": "Nathan MacKinnon turned Ball Arena into a house of horrors for Dallas on Wednesday night, scoring twice and adding an assist as the Colorado Avalanche demolished the Stars 6-3 to take a commanding 3-1 series lead. Mikko Rantanen added a goal and two helpers, and Alexandar Georgiev stopped 28 of 31 shots as Colorado's relentless forecheck suffocated a Dallas power play that had carried the Stars through the first round. Jake Oettinger allowed five goals before being pulled midway through the second period, a stunning fall for the netminder who had been Dallas's backbone all season.\n\nIn Madison Square Garden, the crowd was still roaring long after the final horn, as Artemi Panarin recorded a hat trick to lead the New York Rangers to a 5-1 demolition of the Washington Capitals. Igor Shesterkin was virtually untouchable, turning aside 34 shots and giving Capitals shooters no second chances. Mitch Marner, acquired at the trade deadline, chipped in two assists, and Adam Fox controlled the blue line with the poise of a veteran champion, helping New York seize a 3-2 series edge heading into Game 6.\n\nBoth winning clubs now carry the unmistakable look of teams that have found their playoff identity at exactly the right moment. Colorado's depth scoring, long questioned after midseason roster shuffles, has answered loudly in the past two games, with four different players beyond MacKinnon finding the net against Dallas. The Rangers, meanwhile, appear to have solved the one riddle that haunted them all regular season: finishing in high-danger areas, where they outscored Washington 9-2 across the past three games combined."
     },
     "schedule": [
       {
@@ -8359,10 +8321,10 @@
   "nfl": {
     "story": {
       "kicker": "NFL OFFSEASON",
-      "headline": "QUARTERBACKS ON THE MOVE AS NFL TEAMS RESHAPE ROSTERS FOR 2026",
-      "deck": "A wave of signal-caller shuffling is remaking the league's competitive landscape this spring.",
+      "headline": "DRAFT GRADES ARE IN: ANALYSTS SPLIT ON BOLD MOVES BY COWBOYS, BEARS",
+      "deck": "Dallas and Chicago made splashy April picks that have scouts talking months later.",
       "byline": "By Andrew Dobrow, NFL Writer",
-      "body": "The NFL's offseason quarterback carousel has spun into overdrive this May, with several franchises betting big on new faces under center. The Cleveland Browns, desperate to end years of instability at the position, agreed to terms with veteran Sam Darnold on a two-year deal worth $58 million, reuniting him with offensive coordinator Ken Dorsey. Meanwhile, the Las Vegas Raiders completed a blockbuster trade with the Pittsburgh Steelers, sending two first-round picks to Pittsburgh in exchange for Russell Wilson, who turns 38 in November but flashed enough in 2025 to command serious interest across the league.\n\nThe New England Patriots, still rebuilding under head coach Jerod Mayo, generated the loudest buzz at last month's NFL Draft by selecting Tennessee quarterback Nico Iamaleava with the fourth overall pick. The selection signals a long-term commitment from New England ownership and ends months of speculation that the franchise might pivot to a veteran free agent instead. Iamaleava's combination of arm strength and mobility drew comparisons to a young Steve McNair during pre-draft evaluations, and Patriots brass wasted no time signing him to his rookie contract.\n\nAround the rest of the league, the Dallas Cowboys released Dak Prescott in a cost-cutting move that sent shockwaves through the NFC East, clearing nearly $55 million in cap space. Prescott, 32, is expected to draw interest from the Minnesota Vikings and Atlanta Falcons, both of whom held pre-draft visits with the quarterback last week. Training camps open in late July, and several roster battles at the position remain unsettled, ensuring the quarterback conversation will dominate NFL headlines well into the summer."
+      "body": "Two months removed from the 2026 NFL Draft, the grades have settled and the debates have hardened. The Dallas Cowboys, selecting ninth overall, traded up to grab Georgia pass rusher Mykel Williams Jr. in a move that cost them a third-round pick and a 2027 second-rounder. Draft analyst Daniel Jeremiah of NFL Network called the price steep but the talent undeniable, while ESPN's Mel Kiper Jr. docked Dallas a full letter grade for the capital spent. The Cowboys, coming off a second-round playoff exit in Super Bowl LX season, believed the edge position was too critical to gamble on.\n\nThe Chicago Bears drew sharper criticism for selecting Louisville offensive tackle Marcus Mbow at No. 14, bypassing two quarterbacks still on the board. General manager Ryan Poles insisted the franchise is committed to second-year starter Caleb Williams and that protecting him was the priority. Scouts from three NFC teams, speaking anonymously, told The Sports Page they were surprised the Bears passed on the quarterback depth given Williams missed two games last season with a shoulder strain.\n\nElsewhere in the offseason market, the New England Patriots finalized a three-year, $72 million contract with veteran wide receiver Davante Adams, who had been released by the Las Vegas Raiders in March. Head coach Mike Vrabel called Adams the missing piece in an offense that ranked 24th in passing yards during the 2025 regular season. Minicamp opens in Foxborough on June 3, and all eyes will be on whether Adams and quarterback Drake Maye can generate the chemistry New England desperately needs heading into a critical third year of the rebuild."
     },
     "schedule": [
       {
