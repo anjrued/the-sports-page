@@ -124,7 +124,7 @@ def mlb_standings(season):
         "hydrate": "team,record,streak",
     })
 
-def mlb_leaders_for(season, league_id, category, limit=10):
+def mlb_leaders_for(season, league_id, category, limit=8):
     data = api_get(f"{MLB}/stats/leaders", {
         "leaderCategories": category,
         "season": season,
@@ -132,6 +132,7 @@ def mlb_leaders_for(season, league_id, category, limit=10):
         "sportId": 1,
         "limit": limit,
         "playerPool": "Qualified",
+        "statGroup": "hitting" if category in ["battingAverage","homeRuns","rbi","hits","stolenBases","onBasePercentage","sluggingPercentage"] else "pitching",
     })
     if not data:
         return []
@@ -343,7 +344,7 @@ def fmt_mlb_leaders_side(season, league_id, label):
     ]
     cats = []
     for api_cat, display, cols in cat_map:
-        leaders = mlb_leaders_for(season, league_id, api_cat, limit=10)
+        leaders = mlb_leaders_for(season, league_id, api_cat, limit=8)
         rows = []
         for ldr in leaders:
             name = ldr.get("person",{}).get("fullName","")
@@ -693,7 +694,7 @@ def nba_leaders_side(client, season, conf_filter, label):
             )
             df = obj.league_leaders.get_data_frame()
             rows = []
-            for _, row in df.head(10).iterrows():
+            for _, row in df.head(8).iterrows():
                 rows.append([
                     row.get("PLAYER",""),
                     row.get("TEAM",""),
@@ -924,7 +925,7 @@ def fmt_nhl_leaders_side(conf_abbr, label, season_id):
         for game_type in ["3","2"]:
             data = api_get(
                 f"https://api-web.nhle.com/v1/skater-stats-leaders/{season_id}/{game_type}",
-                params={"categories": cat, "limit": 10}
+                params={"categories": cat, "limit": 8}
             )
             if data and data.get(cat):
                 rows = []
@@ -945,7 +946,7 @@ def fmt_nhl_leaders_side(conf_abbr, label, season_id):
     for game_type in ["3","2"]:
         data = api_get(
             f"https://api-web.nhle.com/v1/goalie-stats-leaders/{season_id}/{game_type}",
-            params={"categories": "savePctg", "limit": 10}
+            params={"categories": "savePctg", "limit": 8}
         )
         if data and data.get("savePctg"):
             rows = []
