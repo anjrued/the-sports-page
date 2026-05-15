@@ -1007,186 +1007,73 @@ def fmt_nhl_standings(raw):
 
 def fmt_nhl_leaders_side(conf_abbr, label, season_id):
     cats_config = [
-        ("goals",   "Goals (Season)",   ["Player","Team","G"]),
-        ("assists", "Assists (Season)", ["Player","Team","A"]),
-        ("points",  "Points (Season)",  ["Player","Team","G","A","Pts"]),
+        ("goals",  "Goals",  ["Player","Team","G"]),
+        ("assists","Assists",["Player","Team","A"]),
+        ("points", "Points", ["Player","Team","G","A","Pts"]),
     ]
     cats = []
+
+    def get_name(p):
+        fn = p.get("firstName",{}); ln = p.get("lastName",{})
+        fn = fn.get("default","") if isinstance(fn,dict) else str(fn)
+        ln = ln.get("default","") if isinstance(ln,dict) else str(ln)
+        return f"{fn} {ln}".strip() or p.get("skaterFullName","")
+
+    def get_team(p):
+        t = p.get("teamAbbrevAlt","") or p.get("teamAbbrev","")
+        return t.get("default","") if isinstance(t,dict) else str(t)
+
     for cat, display, cols in cats_config:
-        # Try playoff leaders first, fall back to regular season
         for game_type in ["3","2"]:
             data = api_get(
                 f"https://api-web.nhle.com/v1/skater-stats-leaders/{season_id}/{game_type}",
                 params={"categories": cat, "limit": 8}
             )
-            if data and data.get(cat):
-                rows = []
-                for p in data[cat]:
-                    name = p.get("lastName",{}).get("default","")
-                    team = p.get("teamAbbrevAlt","") or (p.get("teamAbbrev","") if isinstance(p.get("teamAbbrev",""), str) else p.get("teamAbbrev",{}).get("default",""))
-                    if cat == "points":
-                        rows.append([name, team,
-                                     str(p.get("goals",0)),
-                                     str(p.get("assists",0)),
-                                     str(p.get("points",0))])
-                    else:
-                        rows.append([name, team, str(p.get(cat,0))])
-                if rows:
-                    cats.append({"cat": display, "cols": cols, "rows": rows})
+            if not data: continue
+            players = data.get(cat,[])
+            if not players: continue
+            rows = []
+            for p in players[:8]:
+                nm = get_name(p); tm = get_team(p)
+                if cat == "points":
+                    rows.append([nm,tm,str(p.get("goals",0)),str(p.get("assists",0)),str(p.get("points",0))])
+                else:
+                    rows.append([nm, tm, str(p.get(cat,0))])
+            if rows:
+                cats.append({"cat":display,"cols":cols,"rows":rows})
                 break
-    # Goaltending
+
     for game_type in ["3","2"]:
         data = api_get(
             f"https://api-web.nhle.com/v1/goalie-stats-leaders/{season_id}/{game_type}",
-            params={"categories": "savePctg", "limit": 8}
+            params={"categories":"savePctg","limit":8}
         )
-        if data and data.get("savePctg"):
-            rows = []
-            for p in data["savePctg"]:
-                name = p.get("lastName",{}).get("default","")
-                team = (p.get("teamAbbrev","") if isinstance(p.get("teamAbbrev",""), str) else p.get("teamAbbrev",{}).get("default",""))
-                gaa  = p.get("goalsAgainstAvg","")
-                svp  = p.get("savePctg","")
-                gp   = p.get("gamesPlayed","")
-                rows.append([name, team, str(gp), f"{float(gaa):.2f}" if gaa else "—",
-                              f".{str(round(float(svp)*1000)).zfill(3)}" if svp else "—"])
-            if rows:
-                cats.append({"cat":"Goaltending (GAA)","cols":["Goalie","Team","GP","GAA","SV%"],"rows":rows})
+        if not data: continue
+        goalies = data.get("savePctg",[])
+        if not goalies: continue
+        rows = []
+        for p in goalies[:8]:
+            fn = p.get("firstName",{}); ln = p.get("lastName",{})
+            fn = fn.get("default","") if isinstance(fn,dict) else str(fn)
+            ln = ln.get("default","") if isinstance(ln,dict) else str(ln)
+            name = f"{fn} {ln}".strip()
+            team = p.get("teamAbbrevAlt","") or p.get("teamAbbrev","")
+            team = team.get("default","") if isinstance(team,dict) else str(team)
+            gaa=p.get("goalsAgainstAvg",""); svp=p.get("savePctg",""); gp=p.get("gamesPlayed","")
+            rows.append([name,str(team),str(gp),
+                         f"{float(gaa):.2f}" if gaa else "—",
+                         f".{str(round(float(svp)*1000)).zfill(3)}" if svp else "—"])
+        if rows:
+            cats.append({"cat":"Goaltending","cols":["Goalie","Team","GP","GAA","SV%"],"rows":rows})
             break
+
     return {"label": label, "cats": cats}
 
-# ══════════════════════════════════════════════════════════════════════════════
-# NFL  (ESPN free API for standings, Claude for story + offseason content)
-# ══════════════════════════════════════════════════════════════════════════════
-
-def build_nfl(client):
-    print("  NFL: fetching data from ESPN...")
-    ESPN_BASE = "https://site.api.espn.com/apis/site/v2/sports/football/nfl"
-
-    # ── Standings ──────────────────────────────────────────────────────────────
-    standings_raw = fetch_nfl_standings()
-    standings = fmt_espn_nfl_standings(standings_raw)
-    leaders   = fetch_nfl_leaders()
-
-    # ── Recent/Playoff scores from ESPN scoreboard ─────────────────────────────
-    # Fetch last 30 days of NFL events to find postseason games
-    box_scores = []
-    game_summaries = []
-
-    # Try to get recent completed games — playoffs are in Jan/Feb
-    for season_type in ["3", "2"]:  # 3=playoffs, 2=regular season
-        data = api_get(f"{ESPN_BASE}/scoreboard", {
-            "seasontype": season_type,
-            "limit": 10,
-        })
-        if not data: continue
-        events = data.get("events", [])
-        for event in events[:6]:
-            comps = event.get("competitions", [{}])[0]
-            status = comps.get("status", {}).get("type", {})
-            if not status.get("completed", False):
-                continue
-            competitors = comps.get("competitors", [])
-            if len(competitors) < 2: continue
-            home = next((t for t in competitors if t.get("homeAway")=="home"), competitors[0])
-            away = next((t for t in competitors if t.get("homeAway")=="away"), competitors[1])
-            away_name  = away.get("team",{}).get("displayName","")
-            home_name  = home.get("team",{}).get("displayName","")
-            away_score = int(away.get("score",0) or 0)
-            home_score = int(home.get("score",0) or 0)
-            winner     = away_name if away_score > home_score else home_name
-            loser      = home_name if away_score > home_score else away_name
-            title      = f"{winner} {max(away_score,home_score)}, {loser} {min(away_score,home_score)}"
-            event_name = event.get("name", title)
-            game_id    = event.get("id","")
-
-            # Linescore
-            line_comps = comps.get("linescores",[])
-            away_scores = [int(q.get("value",0) or 0) for q in
-                           away.get("linescores",[]) or line_comps[:4]]
-            home_scores = [int(q.get("value",0) or 0) for q in
-                           home.get("linescores",[]) or line_comps[:4]]
-
-            ls = {
-                "away": {"name": away_name, "scores": away_scores, "r": away_score},
-                "home": {"name": home_name, "scores": home_scores, "r": home_score},
-            }
-
-            # Fetch box score stats from ESPN summary endpoint
-            nfl_stats = []
-            summary = api_get(f"{ESPN_BASE}/summary", {"event": game_id})
-            if summary:
-                for cat in summary.get("boxscore",{}).get("players",[]):
-                    team_name = cat.get("team",{}).get("abbreviation","")
-                    for stat_group in cat.get("statistics",[]):
-                        label = stat_group.get("name","")
-                        if label not in ["passing","rushing","receiving"]: continue
-                        cols_raw = [k.get("name","") for k in stat_group.get("keys",[])]
-                        # Map ESPN key names to short display names
-                        COL_MAP = {
-                            "name":"Player","team":"Team",
-                            "completions/passingAttempts":"Cmp/Att",
-                            "passingYards":"Yds","passingTouchdowns":"TD",
-                            "interceptions":"Int","rushingAttempts":"Car",
-                            "rushingYards":"Yds","rushingTouchdowns":"TD",
-                            "receivingTargets":"Tgt","receptions":"Rec",
-                            "receivingYards":"Yds","receivingTouchdowns":"TD",
-                            "avg":"Avg","longRushing":"Lng","longReceiving":"Lng",
-                        }
-                        cols = [COL_MAP.get(c,c) for c in cols_raw]
-                        rows = []
-                        for athlete in stat_group.get("athletes",[])[:5]:
-                            stats_vals = athlete.get("stats",[])
-                            player_name = athlete.get("athlete",{}).get("shortName","")
-                            row = [player_name] + stats_vals[:len(cols)-1]
-                            rows.append(row)
-                        if rows:
-                            nfl_stats.append({"label": label.title(), "cols": cols, "rows": rows})
-
-                # Notes
-                notes_parts = []
-                for hdl in summary.get("header",{}).get("competitions",[{}])[0].get("notes",[]):
-                    txt = hdl.get("headline","") or hdl.get("text","")
-                    if txt: notes_parts.append(txt)
-                notes = "  ".join(notes_parts)
-            else:
-                nfl_stats = []
-                notes = ""
-
-            box_scores.append({
-                "title": event_name,
-                "linescore": ls,
-                "batting": [],
-                "nflStats": nfl_stats,
-                "notes": notes,
-            })
-            game_summaries.append(title)
-
-        if box_scores: break  # got playoff data, stop
-
-    # Offseason calendar
-    schedule = [
-        {"time":"May 22","away":"Deadline","home":"5th-Year Options","note":"Teams must exercise options for 2021 first-round picks"},
-        {"time":"June 1","away":"Cutdown","home":"Roster Moves","note":"Post-June 1 designations take effect; cap savings accelerate"},
-        {"time":"July 24","away":"Training","home":"Camps Open","note":"Veteran reporting date for all 32 teams"},
-    ]
-
-
-
-    # ── Story ──────────────────────────────────────────────────────────────────
-    scores_txt = "; ".join(game_summaries[:4]) if game_summaries else "NFL offseason"
-    story = claude_call(client, f"""Write an NFL story for today\'s Sports Page.
-Recent NFL results or offseason news: {scores_txt}
-Return JSON: {{"kicker":"NFL","headline":"HEADLINE ALL CAPS","deck":"Under 20 words","byline":"By Andrew Dobrow, NFL Writer","body":"Three paragraphs separated by \\n\\n."}}""")
-
-    return {"story": story, "schedule": schedule,
-            "boxScores": box_scores, "standings": standings, "leaders": leaders}
 
 
 def fetch_nfl_standings():
     """Fetch NFL standings from ESPN, explicitly requesting the most recent completed season."""
     today = date.today()
-    # NFL season: Sep-Feb. If we're in the offseason (Mar-Aug), use prior year.
     season_year = today.year if today.month >= 9 else today.year - 1
     data = api_get(
         "https://site.api.espn.com/apis/v2/sports/football/nfl/standings",
@@ -1194,47 +1081,171 @@ def fetch_nfl_standings():
     )
     if data and data.get("children"):
         return data
-    # Fallback: no season param
     return api_get("https://site.api.espn.com/apis/v2/sports/football/nfl/standings")
 
 def fetch_nfl_leaders():
     """Fetch NFL season stat leaders from ESPN."""
     today = date.today()
     season_year = today.year if today.month >= 9 else today.year - 1
-    cats = {
-        "passing":   ["Passing Yards",  ["Player","Team","Att","Cmp","Yds","TD","Int"]],
-        "rushing":   ["Rushing Yards",  ["Player","Team","Car","Yds","Avg","TD"]],
-        "receiving": ["Receiving Yards",["Player","Team","Rec","Yds","Avg","TD"]],
-        "sacks":     ["Sacks",          ["Player","Team","Sacks"]],
-    }
     result = {"left": {"label":"AFC","cats":[]}, "right": {"label":"NFC","cats":[]}}
-    for stat_cat, (display, cols) in cats.items():
-        data = api_get(
-            f"https://site.api.espn.com/apis/site/v2/sports/football/nfl/leaders",
-            {"season": season_year, "seasontype": 2}
-        )
-        if not data: continue
-        # ESPN leaders endpoint returns all categories together
-        for cat_group in data.get("categories",[]):
-            cat_name = cat_group.get("name","").lower()
-            if stat_cat not in cat_name: continue
-            afc_rows = []; nfc_rows = []
-            for leader in cat_group.get("leaders",[])[:8]:
-                athlete = leader.get("athlete",{})
-                team    = leader.get("team",{})
-                name    = athlete.get("shortName", athlete.get("displayName",""))
-                conf    = team.get("conferenceId","")
-                abbr    = team.get("abbreviation","")
-                val     = leader.get("displayValue","")
-                row     = [name, abbr, val]
-                if conf == "8":   afc_rows.append(row)   # ESPN AFC id=8
-                elif conf == "7": nfc_rows.append(row)   # ESPN NFC id=7
-            if afc_rows:
-                result["left"]["cats"].append({"cat":display,"cols":cols,"rows":afc_rows[:8]})
-            if nfc_rows:
-                result["right"]["cats"].append({"cat":display,"cols":cols,"rows":nfc_rows[:8]})
-        break  # leaders endpoint has all cats, no need to re-fetch
+    data = api_get(
+        "https://site.api.espn.com/apis/site/v2/sports/football/nfl/leaders",
+        {"season": season_year, "seasontype": 2}
+    )
+    if not data:
+        return result
+    cat_map = {
+        "passing":   ("Passing Yards",  ["Player","Team","Att","Cmp","Yds","TD","Int"]),
+        "rushing":   ("Rushing Yards",  ["Player","Team","Car","Yds","Avg","TD"]),
+        "receiving": ("Receiving Yards",["Player","Team","Rec","Yds","Avg","TD"]),
+        "sacks":     ("Sacks",          ["Player","Team","Sacks"]),
+    }
+    for cat_group in data.get("categories",[]):
+        cat_name = cat_group.get("name","").lower()
+        if cat_name not in cat_map:
+            continue
+        display, cols = cat_map[cat_name]
+        afc_rows = []; nfc_rows = []
+        for leader in cat_group.get("leaders",[])[:8]:
+            athlete = leader.get("athlete",{})
+            team    = leader.get("team",{})
+            name    = athlete.get("shortName", athlete.get("displayName",""))
+            conf    = team.get("conferenceId","")
+            abbr    = team.get("abbreviation","")
+            val     = leader.get("displayValue","")
+            row     = [name, abbr, val]
+            if conf == "8":   afc_rows.append(row)
+            elif conf == "7": nfc_rows.append(row)
+        if afc_rows:
+            result["left"]["cats"].append({"cat":display,"cols":cols,"rows":afc_rows[:8]})
+        if nfc_rows:
+            result["right"]["cats"].append({"cat":display,"cols":cols,"rows":nfc_rows[:8]})
     return result
+
+def fmt_nhl_standings(raw):
+    if not raw:
+        print("    NHL Standings: no raw data")
+        return []
+    east = {"label":"Eastern Conference","teams":[]}
+    west = {"label":"Western Conference","teams":[]}
+    standings = raw.get("standings", [])
+    print(f"    NHL Standings: {len(standings)} teams")
+    for t in standings:
+        conf = t.get("conferenceName","") or t.get("conferenceAbbrev","")
+        l10w  = int(t.get("l10Wins",0) or 0)
+        l10l  = int(t.get("l10Losses",0) or 0)
+        l10ot = int(t.get("l10OtLosses",0) or 0)
+        name = (t.get("teamName",{}) or {}).get("default","") or                (t.get("teamCommonName",{}) or {}).get("default","") or                t.get("teamName","") or t.get("name","")
+        pctg = t.get("pointPctg", t.get("winPctg", 0)) or 0
+        try:
+            pct_str = f".{str(round(float(pctg)*1000)).zfill(3)}"
+        except Exception:
+            pct_str = ".000"
+        streak_code  = t.get("streakCode","")  or ""
+        streak_count = t.get("streakCount","") or ""
+        entry = {
+            "rank": int(t.get("conferenceSequence",0) or 0),
+            "name": name,
+            "w":    int(t.get("wins",0) or 0),
+            "l":    int(t.get("losses",0) or 0),
+            "pct":  pct_str,
+            "gb":   "—",
+            "l10":  f"{l10w}-{l10l+l10ot}",
+            "strk": f"{streak_code}{streak_count}",
+            "home": f"{t.get('homeWins',0)}-{int(t.get('homeLosses',0) or 0)+int(t.get('homeOtLosses',0) or 0)}",
+            "away": f"{t.get('roadWins',0)}-{int(t.get('roadLosses',0) or 0)+int(t.get('roadOtLosses',0) or 0)}",
+        }
+        if "East" in conf or conf in ["E","Eastern"]:
+            east["teams"].append(entry)
+        else:
+            west["teams"].append(entry)
+    east["teams"].sort(key=lambda x: x["rank"])
+    west["teams"].sort(key=lambda x: x["rank"])
+    return [east, west]
+
+def build_nfl(client):
+    print("  NFL: fetching data from ESPN...")
+    ESPN_BASE = "https://site.api.espn.com/apis/site/v2/sports/football/nfl"
+
+    standings_raw = fetch_nfl_standings()
+    standings = fmt_espn_nfl_standings(standings_raw)
+    leaders   = fetch_nfl_leaders()
+
+    box_scores = []
+    game_summaries = []
+
+    for season_type in ["3","2"]:
+        data = api_get(f"{ESPN_BASE}/scoreboard", {"seasontype": season_type, "limit": 10})
+        if not data: continue
+        events = data.get("events",[])
+        for event in events[:6]:
+            comps = event.get("competitions",[{}])[0]
+            if not comps.get("status",{}).get("type",{}).get("completed",False):
+                continue
+            competitors = comps.get("competitors",[])
+            if len(competitors) < 2: continue
+            home = next((t for t in competitors if t.get("homeAway")=="home"), competitors[0])
+            away = next((t for t in competitors if t.get("homeAway")=="away"), competitors[1])
+            away_name  = away.get("team",{}).get("displayName","")
+            home_name  = home.get("team",{}).get("displayName","")
+            away_score = int(away.get("score",0) or 0)
+            home_score = int(home.get("score",0) or 0)
+            winner = away_name if away_score > home_score else home_name
+            loser  = home_name if away_score > home_score else away_name
+            title  = f"{winner} {max(away_score,home_score)}, {loser} {min(away_score,home_score)}"
+            event_name = event.get("name", title)
+            game_id = event.get("id","")
+
+            away_lines = [int(q.get("value",0) or 0) for q in away.get("linescores",[])]
+            home_lines = [int(q.get("value",0) or 0) for q in home.get("linescores",[])]
+            ls = {
+                "away": {"name": away_name, "scores": away_lines, "r": away_score},
+                "home": {"name": home_name, "scores": home_lines, "r": home_score},
+            }
+
+            nfl_stats = []; notes = ""
+            summary = api_get(f"{ESPN_BASE}/summary", {"event": game_id})
+            if summary:
+                for cat in summary.get("boxscore",{}).get("players",[]):
+                    for stat_group in cat.get("statistics",[]):
+                        label = stat_group.get("name","")
+                        if label not in ["passing","rushing","receiving"]: continue
+                        keys = [k.get("name","") for k in stat_group.get("keys",[])]
+                        COL_MAP = {
+                            "name":"Player","completions/passingAttempts":"Cmp/Att",
+                            "passingYards":"Yds","passingTouchdowns":"TD","interceptions":"Int",
+                            "rushingAttempts":"Car","rushingYards":"Yds","rushingTouchdowns":"TD",
+                            "receivingTargets":"Tgt","receptions":"Rec","receivingYards":"Yds",
+                            "receivingTouchdowns":"TD","avg":"Avg",
+                        }
+                        cols = [COL_MAP.get(k,k) for k in keys]
+                        rows = []
+                        for athlete in stat_group.get("athletes",[])[:5]:
+                            pname = athlete.get("athlete",{}).get("shortName","")
+                            rows.append([pname] + athlete.get("stats",[])[:len(cols)-1])
+                        if rows:
+                            nfl_stats.append({"label":label.title(),"cols":cols,"rows":rows})
+
+            box_scores.append({
+                "title": event_name, "linescore": ls,
+                "batting": [], "nflStats": nfl_stats, "notes": notes,
+            })
+            game_summaries.append(title)
+        if box_scores: break
+
+    schedule = [
+        {"time":"May 22","away":"Deadline","home":"5th-Year Options","note":"Teams must exercise options for 2021 first-round picks"},
+        {"time":"June 1","away":"Cutdown","home":"Roster Moves","note":"Post-June 1 designations take effect"},
+        {"time":"July 24","away":"Training","home":"Camps Open","note":"Veteran reporting date for all 32 teams"},
+    ]
+
+    scores_txt = "; ".join(game_summaries[:4]) if game_summaries else "NFL offseason"
+    story = claude_call(client, f"""Write an NFL story for today's Sports Page.
+Recent NFL results or offseason news: {scores_txt}
+Return JSON: {{"kicker":"NFL","headline":"HEADLINE ALL CAPS","deck":"Under 20 words","byline":"By Andrew Dobrow, NFL Writer","body":"Three paragraphs separated by \\n\\n."}}""")
+
+    return {"story": story, "schedule": schedule,
+            "boxScores": box_scores, "standings": standings, "leaders": leaders}
 
 def fmt_espn_nfl_standings(raw):
     if not raw:
@@ -1260,13 +1271,8 @@ def fmt_espn_nfl_standings(raw):
                 divs.append({"label": div_name, "teams": teams})
     return divs
 
-# ══════════════════════════════════════════════════════════════════════════════
-# FRONT PAGE  (Claude writes based on real data summary)
-# ══════════════════════════════════════════════════════════════════════════════
-
 def build_front(client, mlb_data, nba_data, nhl_data, nfl_data):
     print("  Writing front page...")
-
     mlb_scores = [b["title"] for b in mlb_data.get("boxScores",[])[:5]]
     nba_scores = [b["title"] for b in nba_data.get("boxScores",[])[:3]]
     nhl_scores = [b["title"] for b in nhl_data.get("boxScores",[])[:3]]
@@ -1278,7 +1284,7 @@ MLB: {'; '.join(mlb_scores) if mlb_scores else 'No games'}
 NBA: {'; '.join(nba_scores) if nba_scores else 'No games'}
 NHL: {'; '.join(nhl_scores) if nhl_scores else 'No games'}
 
-IMPORTANT: Choose the single most compelling story across ALL sports as the headline — do NOT default to baseball. If the NHL or NBA had a more exciting result, lead with that. The three secondary stories must cover three DIFFERENT sports or storylines. The opinion column should comment on the biggest story of the day.
+IMPORTANT: Choose the single most compelling story across ALL sports as the headline — do NOT default to baseball. If the NHL or NBA had a more exciting result, lead with that. The three secondary stories must cover three DIFFERENT sports or storylines.
 
 Return JSON:
 {{
@@ -1289,9 +1295,8 @@ Return JSON:
     {{"kicker":"SPORT","headline":"HEADLINE","deck":"Deck","byline":"By Andrew Dobrow","body":"Two paragraphs separated by \\n\\n."}}
   ],
   "column": {{"tag":"FROM THE PRESS BOX","headline":"OPINION HEADLINE","byline":"By Andrew Dobrow","body":"Two opinionated paragraphs separated by \\n\\n."}}
-}}""", max_tokens=3000)
+}}"""  , max_tokens=3000)
 
-    # Build scores sidebar from real data
     def fmt_scores(boxes):
         return [{"away": b["linescore"]["away"]["name"],
                  "away_score": b["linescore"]["away"]["r"],
@@ -1310,10 +1315,6 @@ Return JSON:
             "nhl": fmt_scores(nhl_data.get("boxScores",[])[:4]),
         }
     }
-
-# ══════════════════════════════════════════════════════════════════════════════
-# MAIN
-# ══════════════════════════════════════════════════════════════════════════════
 
 def main():
     print("=== The Sports Page Daily Pipeline ===")
@@ -1336,7 +1337,6 @@ def main():
     output = {
         "date":    now.strftime("%A, %B %-d, %Y"),
         "edition": f"Vol. CXLVIII · No. {now.timetuple().tm_yday + 133}",
-        "weather": "Check your local forecast",
         "front":   front,
         "mlb":     mlb,
         "nba":     nba,
