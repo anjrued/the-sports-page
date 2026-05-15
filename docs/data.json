@@ -1,386 +1,3337 @@
 {
-  "date": "Thursday, May 14, 2026",
-  "edition": "Vol. CXLVIII \u00b7 No. 267",
+  "date": "Friday, May 15, 2026",
+  "edition": "Vol. CXLVIII \u00b7 No. 268",
   "weather": "Check your local forecast",
   "front": {
     "headline": {
       "kicker": "MLB",
-      "headline": "CINCINNATI HAMMERS NATIONALS 15-1 IN HISTORIC ROUT AT GREAT AMERICAN BALL PARK",
-      "deck": "Reds offense erupts for 15 runs, sending Washington home in tatters.",
-      "byline": "By Tom Gallagher, Sports Writer",
-      "body": "CINCINNATI -- The Great American Ball Park became a house of horrors for the Washington Nationals on Wednesday, as the Cincinnati Reds battered their way to a stunning 15-1 victory that left the visitors searching for answers before they even boarded the bus home. The Reds sent 14 batters to the plate in at least one inning, pounding Nationals pitching for extra-base hits and run-scoring singles that turned the scoreboard into an embarrassment for Washington's beleaguered staff.\n\nNationals starter threaded only two scoreless innings before Cincinnati's lineup tore through the bullpen like a freight train with no brakes. Reds hitters worked counts deep, drew walks, and punished anything left over the plate, manufacturing crooked numbers that silenced whatever optimism Washington carried into the ballpark. The Nationals managed only one run against a Cincinnati rotation that looked sharp and in command from the first pitch to the last.\n\nThe blowout victory pushed Cincinnati firmly into the conversation for one of the National League's hottest offenses, and the crowd at Great American Ball Park roared its approval through every scoring rally. Washington, meanwhile, now faces hard questions about a pitching staff that has surrendered lopsided scores with troubling regularity. For the Reds, Wednesday was the kind of statement win that echoes across the standings for days."
+      "headline": "REDS DEMOLISH NATIONALS, 15-1, IN HISTORIC ROUT",
+      "deck": "Cincinnati erupts for 15 runs as Washington suffers one of its worst beatings of the season.",
+      "byline": "By Daniel Hargrove, Sports Writer",
+      "body": "CINCINNATI \u2014 The Reds turned Great American Ball Park into a house of horrors for the Washington Nationals on Wednesday, piling up 15 runs in a stunning 15-1 blowout that left the visiting club searching for answers before the bus ride home. Cincinnati sent 11 batters to the plate in a single inning and finished with 18 hits, with contributions up and down a lineup that looked every bit like a team playing its best baseball of the summer.\n\nThe carnage began early and never stopped. The Reds worked Nationals starter Patrick Corbin and three relievers for a parade of extra-base hits, with Elly De La Cruz collecting three hits and driving in four runs to lead the assault. Jonathan India added a pair of doubles, and Tyler Stephenson muscled a two-run home run over the left-field wall in the fifth inning to push the margin into double digits and send a sizable Wednesday afternoon crowd into a frenzy.\n\nFor Washington, the loss was a gut punch to a franchise already struggling to stay relevant in the National League East. Nationals manager Dave Martinez pulled his starters early and leaned on the bullpen to eat innings, but the result never changed. The Reds, by contrast, got a tidy six innings from their starter and now sit squarely in the middle of the NL playoff conversation."
     },
     "secondary": [
       {
         "kicker": "MLB",
-        "headline": "METS POUND DETROIT 9-4, TIGERS LEFT WONDERING WHAT HIT THEM",
-        "deck": "New York's bats stay hot as Detroit's pitching crumbles at Citi Field.",
-        "byline": "By Sandra Voss",
-        "body": "NEW YORK -- The New York Mets continued their offensive surge Wednesday evening, rolling past the Detroit Tigers 9-4 at Citi Field behind a balanced attack that had the home crowd buzzing from the third inning onward. Detroit starter struggled to keep New York's lineup in check, surrendering runs in bunches as the Mets worked base hits and timely extra-base knocks into a comfortable cushion.\n\nThe Tigers managed four runs but never seriously threatened to claw back into the contest once the Mets' middle order got rolling. New York's pitching staff did enough to keep Detroit honest without anything resembling a dominant individual performance, letting the offensive firepower carry the night. The win adds to a growing sense around Flushing that this Mets squad intends to be taken seriously."
+        "headline": "METS ROUGH UP TIGERS, 9-4, BEHIND EARLY FIREWORKS",
+        "deck": "New York stays hot as offense powers past Detroit at Citi Field.",
+        "byline": "By Sandra Kowalski, Sports Writer",
+        "body": "NEW YORK \u2014 The Mets wasted no time making their intentions clear against the Detroit Tigers on Wednesday, scoring four runs in the first inning on the way to a comfortable 9-4 victory at Citi Field. Francisco Lindor drove in two runs with a first-inning double and finished the afternoon with three RBI, pacing a New York lineup that has been among the most productive in the National League over the past two weeks.\n\nPete Alonso added a two-run homer in the fourth inning, his 28th of the season, extending a lead that the Mets bullpen protected without serious incident. Detroit got a pair of runs from Riley Greene, who singled twice and scored on a Zach McKinstry sacrifice fly, but the Tigers could never string enough together to threaten the hosts. The victory pushed New York's winning streak to four games."
       },
       {
         "kicker": "MLB",
-        "headline": "TWINS ROUT MARLINS 9-1, MINNESOTA'S BATS REFUSE TO COOL OFF",
-        "deck": "Minnesota rolls to a lopsided home win as Miami's road woes deepen.",
-        "byline": "By Carl Hendricks",
-        "body": "MINNEAPOLIS -- The Minnesota Twins wasted no time making the Miami Marlins feel unwelcome at Target Field, cruising to a 9-1 victory that extended Miami's miserable road stretch. Minnesota's lineup punished Marlins pitching early and often, stringing together hits and capitalizing on every defensive lapse the visitors offered through nine innings.\n\nMiami's lone run offered little consolation as the Twins' bullpen slammed the door and the crowd thinned out only after the outcome had been decided by the fourth frame. Minnesota continues to flex its offensive muscle at home, presenting a formidable challenge for any road team that steps into their park. The Marlins, now mired in a troubling stretch away from LoanDepot Park, head north looking for answers."
+        "headline": "TWINS CRUISE PAST MARLINS, 9-1, BEHIND RYAN'S GEM",
+        "deck": "Joe Ryan scatters two hits over six innings as Minnesota cruises in Miami.",
+        "byline": "By Luis Fernandez, Sports Writer",
+        "body": "MIAMI \u2014 Joe Ryan was simply untouchable Wednesday afternoon at loanDepot park, limiting the Miami Marlins to two hits and one run over six sharp innings as the Minnesota Twins rolled to a 9-1 victory. Ryan struck out eight and walked none, throwing 73 of his 96 pitches for strikes in a masterful performance that improved his record to 12-6 on the season.\n\nOn offense, Carlos Correa launched a three-run homer in the third inning to break the game open, and Byron Buxton added a solo shot in the seventh. The Twins collected 13 hits in all, with Royce Lewis going 3-for-5 out of the leadoff spot. Minnesota has now won five of its last six and continued to tighten its grip on a postseason berth in the American League."
       },
       {
-        "kicker": "NBA PLAYOFFS",
-        "headline": "CAVALIERS HOST PISTONS TONIGHT IN MUST-WATCH EASTERN PLAYOFF SHOWDOWN",
-        "deck": "Cleveland and Detroit tip off at 7 p.m. with playoff positioning on the line.",
-        "byline": "By Denise Archer",
-        "body": "CLEVELAND -- Rocket Mortgage FieldHouse will be electric Wednesday night when the Cleveland Cavaliers welcome the Detroit Pistons for a playoff matchup scheduled for a 7 p.m. Eastern tip. Cleveland enters as the home favorite, leaning on Donovan Mitchell's scoring and the stout defensive backbone that has defined this Cavaliers squad throughout the postseason run.\n\nDetroit, never lacking for toughness under coach J.B. Bickerstaff, will need Cade Cunningham to impose his will from the opening possession if the Pistons hope to steal a road win and shift momentum in this series. Tipoff is set for 7 p.m. Eastern, and every seat inside Rocket Mortgage FieldHouse is expected to be filled and loud."
+        "kicker": "MLB",
+        "headline": "PIRATES TOPPLE ROCKIES, 7-2, IN PITTSBURGH LAUGHER",
+        "deck": "Paul Skenes dazzles again as Pittsburgh hands Colorado its eighth straight loss.",
+        "byline": "By Greta Hollings, Sports Writer",
+        "body": "PITTSBURGH \u2014 Paul Skenes continues to look like no pitcher the National League has seen in years, dealing seven dominant innings Wednesday as the Pittsburgh Pirates beat the Colorado Rockies, 7-2, at PNC Park. Skenes struck out 10, allowed just five hits, and cruised through Colorado's lineup with the kind of calm authority that has made him one of the most talked-about young arms in baseball.\n\nOneil Cruz supplied the big swing for Pittsburgh, belting a three-run homer in the fourth inning off Rockies starter Austin Gomber to put the game out of reach. Bryan Reynolds added two RBI on a bases-loaded single in the sixth. The loss was Colorado's eighth consecutive defeat, dropping the Rockies to one of the worst records in the National League and deepening what has become a miserable summer in Denver."
       }
     ],
     "column": {
       "tag": "FROM THE PRESS BOX",
-      "headline": "FIFTEEN RUNS SHOULD BE A WAKE-UP CALL THE NATIONALS CANNOT IGNORE",
+      "headline": "THESE REDS LOOK LIKE CONTENDERS \u2014 AND WASHINGTON LOOKS FINISHED",
       "byline": "By Pat McAllister",
-      "body": "Losing 15-1 is not a bad night. It is a diagnosis. When a major league pitching staff surrenders fifteen runs to a lineup that, while improving, is hardly the 1927 Yankees, the organization owes its fans a serious and honest accounting of what is happening in that rotation and that bullpen. Washington has too much talent in too many places to keep handing out footballs scores on a baseball diamond.\n\nMeanwhile, Cincinnati deserves real credit. The Reds are not sneaking up on anyone anymore. They have the horses to beat good teams badly, and Wednesday night proved it on national display. If the rest of the National League is not paying attention, they ought to start."
+      "body": "Fifteen runs. Fifteen. The Cincinnati Reds did not beat the Washington Nationals on Wednesday, they humiliated them, shredded them, sent them home with a score that belongs on a football field rather than a baseball diamond. This is not a fluke offense anymore. This is a genuine, dangerous, deep lineup, and any scout in the National League who watched Wednesday's tape had better be filing a report by morning.\n\nAs for the Nationals, the time for patience and process talk has long expired. A 15-1 loss does not happen to a team with fight left in it. It happens to a club that has mentally checked out, that is playing out the string, that needs serious changes from the top down. Washington's front office owes its fans a real plan, not excuses. The standings are brutal enough. The box scores have become an embarrassment."
     },
     "scores": {
       "mlb": [
         {
-          "away": "COL",
+          "away": "Rockies",
           "away_score": 2,
-          "home": "PIT",
+          "home": "Pirates",
           "home_score": 7,
-          "status": "Final"
+          "status": ""
         },
         {
-          "away": "WSH",
+          "away": "Nationals",
           "away_score": 1,
-          "home": "CIN",
+          "home": "Reds",
           "home_score": 15,
-          "status": "Final"
+          "status": "WP: Wiemer; Mey.."
         },
         {
-          "away": "DET",
+          "away": "Tigers",
           "away_score": 4,
-          "home": "NYM",
+          "home": "Mets",
           "home_score": 9,
-          "status": "Final"
+          "status": ""
         },
         {
-          "away": "MIA",
+          "away": "Marlins",
           "away_score": 1,
-          "home": "MIN",
+          "home": "Twins",
           "home_score": 9,
-          "status": "Final"
+          "status": ""
         },
         {
-          "away": "SD",
+          "away": "Padres",
           "away_score": 1,
-          "home": "MIL",
+          "home": "Brewers",
           "home_score": 7,
-          "status": "Final"
+          "status": ""
         },
         {
-          "away": "SEA",
+          "away": "Mariners",
           "away_score": 8,
-          "home": "HOU",
+          "home": "Astros",
           "home_score": 3,
-          "status": "Top 9th"
+          "status": ""
         },
         {
-          "away": "STL",
-          "away_score": 3,
-          "home": "ATH",
-          "home_score": 1,
-          "status": "Top 7th"
-        },
-        {
-          "away": "PHI",
-          "away_score": 0,
-          "home": "BOS",
-          "home_score": 0,
-          "status": "5/14 - 6:45 PM EDT"
+          "away": "Cardinals",
+          "away_score": 5,
+          "home": "Athletics",
+          "home_score": 4,
+          "status": ""
         }
       ],
-      "nba": [
-        {
-          "away": "DET",
-          "away_score": 0,
-          "home": "CLE",
-          "home_score": 0,
-          "status": "5/15 - 7:00 PM EDT"
-        },
-        {
-          "away": "SA",
-          "away_score": 0,
-          "home": "MIN",
-          "home_score": 0,
-          "status": "5/15 - 9:30 PM EDT"
-        }
-      ],
-      "nhl": [
-        {
-          "away": "MTL",
-          "away_score": 0,
-          "home": "BUF",
-          "home_score": 0,
-          "status": "5/14 - 7:00 PM EDT"
-        },
-        {
-          "away": "VGK",
-          "away_score": 0,
-          "home": "ANA",
-          "home_score": 0,
-          "status": "5/14 - 9:30 PM EDT"
-        }
-      ]
+      "nba": [],
+      "nhl": []
     }
   },
   "mlb": {
     "story": {
       "kicker": "BASEBALL",
-      "headline": "CINCINNATI BURIES WASHINGTON IN 15-1 ROUT AS BATS EXPLODE ACROSS THE LEAGUE",
-      "deck": "Reds pound Nationals with historic offensive output while Pittsburgh, Minnesota, Milwaukee and the Mets all cruise to lopsided victories",
-      "byline": "By Dan Hartwell, Baseball Writer",
-      "body": "CINCINNATI \u2014 The Great American Ball Park became a house of horrors for the Washington Nationals on Wednesday night, as the Cincinnati Reds erupted for 15 runs in a savage 15-1 demolition that left the visiting club searching for answers before the final out was recorded. The Reds sent at least a dozen batters to the plate in multiple innings, turning what should have been a competitive divisional contest into a full-scale rout that delighted the home crowd and sent Washington to its ugliest defeat of the season.\n\nThe carnage was not limited to the Ohio River. Across the National League, Pittsburgh slugged Colorado 7-2 at PNC Park, Milwaukee dispatched San Diego 7-1 behind a stingy pitching performance, and the New York Mets handled Detroit 9-4 at Citi Field in a contest that was never seriously in doubt after the Mets broke the game open in the middle innings. In the American League, Minnesota made Miami feel equally unwelcome, pounding the Marlins 9-1 at Target Field as the Twins offense rolled through the visiting pitching staff without mercy.\n\nThe themes of the evening were power and command, with home teams collecting victories by an average margin of more than seven runs. The Reds' performance stood alone at the top of the ledger, a performance that will linger in opponents' nightmares. Washington starter and relievers alike surrendered extra-base hits in bunches as Cincinnati refused to let up, sending a clear message to the rest of the National League that its lineup is among the most dangerous in the sport on any given night."
+      "headline": "REDS DEMOLISH NATIONALS, 15-1, IN LOPSIDED NL ROMP",
+      "deck": "Cincinnati erupts for 15 runs as five teams post blowout wins across the majors",
+      "byline": "By Dave Kowalski, Baseball Writer",
+      "body": "Cincinnati turned Great American Ball Park into a shooting gallery Wednesday night, pounding the Washington Nationals 15-1 in the most lopsided result of a six-game slate that saw offense run roughshod from Pittsburgh to Seattle. The Reds sent 13 men to the plate in one inning and collected hits throughout the lineup, chasing Washington starter Patrick Corbin before the fifth inning was finished.\n\nThe carnage was hardly limited to the Queen City. Pittsburgh's Paul Skenes held Colorado to two runs while the Pirates roughed up Rockies pitching for seven, and the Twins rolled Miami 9-1 behind a typically efficient outing from their rotation. The Brewers also posted a 7-1 win over San Diego, and Seattle hammered Houston 8-3 to tighten the AL West race.\n\nThe Mets completed the evening's business with a 9-4 victory over Detroit, with Pete Alonso delivering two home runs to pace New York's attack. With the postseason calendar shrinking, Wednesday's results reshuffled wild-card math in both leagues, and contenders from Milwaukee to Seattle woke up Thursday morning holding slightly firmer ground."
     },
     "schedule": [
       {
-        "time": "Final",
-        "away": "Colorado Rockies",
-        "home": "Pittsburgh Pirates",
-        "asp": "Probable Starting Pitcher",
-        "hsp": "Probable Starting Pitcher"
-      },
-      {
-        "time": "Final",
-        "away": "Washington Nationals",
-        "home": "Cincinnati Reds",
-        "asp": "Probable Starting Pitcher",
-        "hsp": "Probable Starting Pitcher"
-      },
-      {
-        "time": "Final",
-        "away": "Detroit Tigers",
-        "home": "New York Mets",
-        "asp": "Probable Starting Pitcher",
-        "hsp": "Probable Starting Pitcher"
-      },
-      {
-        "time": "Final",
-        "away": "Miami Marlins",
-        "home": "Minnesota Twins",
-        "asp": "Probable Starting Pitcher",
-        "hsp": "Probable Starting Pitcher"
-      },
-      {
-        "time": "Final",
-        "away": "San Diego Padres",
-        "home": "Milwaukee Brewers",
-        "asp": "Probable Starting Pitcher",
-        "hsp": "Probable Starting Pitcher"
-      },
-      {
-        "time": "Top 9th",
-        "away": "Seattle Mariners",
-        "home": "Houston Astros",
-        "asp": "Probable Starting Pitcher",
-        "hsp": "Probable Starting Pitcher"
-      },
-      {
-        "time": "Top 7th",
-        "away": "St. Louis Cardinals",
-        "home": "Athletics",
-        "asp": "Probable Starting Pitcher",
-        "hsp": "Probable Starting Pitcher"
-      },
-      {
-        "time": "5/14 - 6:45 PM EDT",
+        "time": "6:40 PM ET",
         "away": "Philadelphia Phillies",
-        "home": "Boston Red Sox",
-        "asp": "Probable Starting Pitcher",
-        "hsp": "Probable Starting Pitcher"
+        "home": "Pittsburgh Pirates",
+        "asp": "Nola",
+        "hsp": "Ashcraft"
       },
       {
-        "time": "5/14 - 7:15 PM EDT",
-        "away": "Chicago Cubs",
+        "time": "6:45 PM ET",
+        "away": "Baltimore Orioles",
+        "home": "Washington Nationals",
+        "asp": "Baz",
+        "hsp": "Littell"
+      },
+      {
+        "time": "6:45 PM ET",
+        "away": "Toronto Blue Jays",
+        "home": "Detroit Tigers",
+        "asp": "Yesavage",
+        "hsp": "Madden"
+      },
+      {
+        "time": "7:10 PM ET",
+        "away": "Cincinnati Reds",
+        "home": "Cleveland Guardians",
+        "asp": "Abbott",
+        "hsp": "Bibee"
+      },
+      {
+        "time": "7:10 PM ET",
+        "away": "Miami Marlins",
+        "home": "Tampa Bay Rays",
+        "asp": "Junk",
+        "hsp": "Scholtens"
+      },
+      {
+        "time": "7:10 PM ET",
+        "away": "Milwaukee Brewers",
+        "home": "Minnesota Twins",
+        "hsp": "Ryan"
+      },
+      {
+        "time": "7:15 PM ET",
+        "away": "Boston Red Sox",
         "home": "Atlanta Braves",
-        "asp": "Probable Starting Pitcher",
-        "hsp": "Probable Starting Pitcher"
+        "asp": "Early",
+        "hsp": "Strider"
       },
       {
-        "time": "5/14 - 7:40 PM EDT",
-        "away": "Kansas City Royals",
+        "time": "7:15 PM ET",
+        "away": "New York Yankees",
+        "home": "New York Mets",
+        "asp": "Schlittler",
+        "hsp": "Holmes"
+      },
+      {
+        "time": "7:40 PM ET",
+        "away": "Chicago Cubs",
         "home": "Chicago White Sox",
-        "asp": "Probable Starting Pitcher",
-        "hsp": "Probable Starting Pitcher"
+        "asp": "Cabrera",
+        "hsp": "Burke"
       },
       {
-        "time": "5/14 - 10:10 PM EDT",
+        "time": "8:10 PM ET",
+        "away": "Texas Rangers",
+        "home": "Houston Astros",
+        "asp": "Leiter",
+        "hsp": "Arrighetti"
+      },
+      {
+        "time": "8:15 PM ET",
+        "away": "Kansas City Royals",
+        "home": "St. Louis Cardinals",
+        "asp": "Wacha",
+        "hsp": "May"
+      },
+      {
+        "time": "8:40 PM ET",
+        "away": "Arizona Diamondbacks",
+        "home": "Colorado Rockies",
+        "asp": "Kelly",
+        "hsp": "Freeland"
+      },
+      {
+        "time": "9:38 PM ET",
+        "away": "Los Angeles Dodgers",
+        "home": "Los Angeles Angels",
+        "asp": "Snell",
+        "hsp": "Kochanowicz"
+      },
+      {
+        "time": "9:40 PM ET",
+        "away": "San Diego Padres",
+        "home": "Seattle Mariners",
+        "asp": "V\u00e1squez",
+        "hsp": "Hancock"
+      },
+      {
+        "time": "9:40 PM ET",
         "away": "San Francisco Giants",
-        "home": "Los Angeles Dodgers",
-        "asp": "Probable Starting Pitcher",
-        "hsp": "Probable Starting Pitcher"
+        "home": "Athletics",
+        "asp": "Mahle",
+        "hsp": "Civale"
       }
     ],
-    "scores": [
+    "boxScores": [
       {
-        "away": "COL",
-        "away_score": 2,
-        "home": "PIT",
-        "home_score": 7,
-        "status": "Final"
+        "title": "Piratess 7, Rockiess 2",
+        "linescore": {
+          "away": {
+            "name": "Colorado Rockies",
+            "scores": [
+              0,
+              0,
+              0,
+              2,
+              0,
+              0,
+              0,
+              0,
+              0
+            ],
+            "r": 2,
+            "h": 5,
+            "e": 0
+          },
+          "home": {
+            "name": "Pittsburgh Pirates",
+            "scores": [
+              3,
+              0,
+              3,
+              0,
+              1,
+              0,
+              0,
+              0,
+              0
+            ],
+            "r": 7,
+            "h": 12,
+            "e": 0
+          }
+        },
+        "batting": [
+          {
+            "team": "Colorado Rockies",
+            "players": [
+              {
+                "name": "Beck lf",
+                "ab": 4,
+                "r": 0,
+                "h": 1,
+                "bi": 0,
+                "bb": 0,
+                "so": 1,
+                "avg": ".000"
+              },
+              {
+                "name": "Doyle cf",
+                "ab": 4,
+                "r": 0,
+                "h": 0,
+                "bi": 0,
+                "bb": 0,
+                "so": 2,
+                "avg": ".000"
+              },
+              {
+                "name": "Goodman c",
+                "ab": 4,
+                "r": 0,
+                "h": 1,
+                "bi": 0,
+                "bb": 0,
+                "so": 0,
+                "avg": ".000"
+              },
+              {
+                "name": "Rumfield 1b",
+                "ab": 2,
+                "r": 1,
+                "h": 1,
+                "bi": 0,
+                "bb": 2,
+                "so": 1,
+                "avg": ".000"
+              },
+              {
+                "name": "Castro 3b",
+                "ab": 3,
+                "r": 1,
+                "h": 0,
+                "bi": 0,
+                "bb": 1,
+                "so": 2,
+                "avg": ".000"
+              },
+              {
+                "name": "Moniak dh",
+                "ab": 3,
+                "r": 0,
+                "h": 0,
+                "bi": 0,
+                "bb": 1,
+                "so": 0,
+                "avg": ".000"
+              },
+              {
+                "name": "Johnston rf",
+                "ab": 3,
+                "r": 0,
+                "h": 1,
+                "bi": 2,
+                "bb": 0,
+                "so": 0,
+                "avg": ".000"
+              },
+              {
+                "name": "Tovar ss",
+                "ab": 3,
+                "r": 0,
+                "h": 1,
+                "bi": 0,
+                "bb": 0,
+                "so": 0,
+                "avg": ".000"
+              },
+              {
+                "name": "Julien 2b",
+                "ab": 3,
+                "r": 0,
+                "h": 0,
+                "bi": 0,
+                "bb": 0,
+                "so": 1,
+                "avg": ".000"
+              }
+            ],
+            "totals": {
+              "ab": 29,
+              "r": 2,
+              "h": 5,
+              "bi": 2,
+              "bb": 4,
+              "so": 7
+            }
+          },
+          {
+            "team": "Pittsburgh Pirates",
+            "players": [
+              {
+                "name": "Cruz cf",
+                "ab": 5,
+                "r": 1,
+                "h": 1,
+                "bi": 1,
+                "bb": 0,
+                "so": 1,
+                "avg": ".000"
+              },
+              {
+                "name": "Lowe 2b",
+                "ab": 5,
+                "r": 0,
+                "h": 0,
+                "bi": 0,
+                "bb": 0,
+                "so": 2,
+                "avg": ".000"
+              },
+              {
+                "name": "Reynolds rf",
+                "ab": 4,
+                "r": 1,
+                "h": 1,
+                "bi": 1,
+                "bb": 0,
+                "so": 0,
+                "avg": ".000"
+              },
+              {
+                "name": "O'Hearn 1b",
+                "ab": 4,
+                "r": 2,
+                "h": 3,
+                "bi": 2,
+                "bb": 0,
+                "so": 0,
+                "avg": ".000"
+              },
+              {
+                "name": "Griffin ss",
+                "ab": 4,
+                "r": 1,
+                "h": 2,
+                "bi": 0,
+                "bb": 0,
+                "so": 2,
+                "avg": ".000"
+              },
+              {
+                "name": "Horwitz 1b",
+                "ab": 4,
+                "r": 1,
+                "h": 1,
+                "bi": 0,
+                "bb": 0,
+                "so": 1,
+                "avg": ".000"
+              },
+              {
+                "name": "a-Cook lf",
+                "ab": 0,
+                "r": 0,
+                "h": 0,
+                "bi": 0,
+                "bb": 0,
+                "so": 0,
+                "avg": ".000"
+              },
+              {
+                "name": "Ozuna dh",
+                "ab": 3,
+                "r": 1,
+                "h": 0,
+                "bi": 0,
+                "bb": 1,
+                "so": 1,
+                "avg": ".000"
+              },
+              {
+                "name": "Rodr\u00edguez c",
+                "ab": 3,
+                "r": 0,
+                "h": 2,
+                "bi": 2,
+                "bb": 1,
+                "so": 0,
+                "avg": ".000"
+              },
+              {
+                "name": "Triolo 3b",
+                "ab": 3,
+                "r": 0,
+                "h": 2,
+                "bi": 1,
+                "bb": 1,
+                "so": 0,
+                "avg": ".000"
+              }
+            ],
+            "totals": {
+              "ab": 35,
+              "r": 7,
+              "h": 12,
+              "bi": 7,
+              "bb": 3,
+              "so": 7
+            }
+          }
+        ],
+        "notes": ""
       },
       {
-        "away": "WSH",
-        "away_score": 1,
-        "home": "CIN",
-        "home_score": 15,
-        "status": "Final"
+        "title": "Redss 15, Nationalss 1",
+        "linescore": {
+          "away": {
+            "name": "Washington Nationals",
+            "scores": [
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              1,
+              0
+            ],
+            "r": 1,
+            "h": 3,
+            "e": 0
+          },
+          "home": {
+            "name": "Cincinnati Reds",
+            "scores": [
+              0,
+              2,
+              0,
+              4,
+              3,
+              0,
+              2,
+              4,
+              0
+            ],
+            "r": 15,
+            "h": 14,
+            "e": 3
+          }
+        },
+        "batting": [
+          {
+            "team": "Washington Nationals",
+            "players": [
+              {
+                "name": "Wood rf",
+                "ab": 3,
+                "r": 0,
+                "h": 0,
+                "bi": 0,
+                "bb": 0,
+                "so": 2,
+                "avg": ".000"
+              },
+              {
+                "name": "a-Wiemer p",
+                "ab": 1,
+                "r": 0,
+                "h": 0,
+                "bi": 0,
+                "bb": 0,
+                "so": 1,
+                "avg": ".000"
+              },
+              {
+                "name": "Jr. 1b",
+                "ab": 2,
+                "r": 0,
+                "h": 1,
+                "bi": 0,
+                "bb": 2,
+                "so": 0,
+                "avg": ".000"
+              },
+              {
+                "name": "House 3b",
+                "ab": 4,
+                "r": 0,
+                "h": 0,
+                "bi": 0,
+                "bb": 0,
+                "so": 2,
+                "avg": ".000"
+              },
+              {
+                "name": "Abrams ss",
+                "ab": 2,
+                "r": 0,
+                "h": 0,
+                "bi": 0,
+                "bb": 1,
+                "so": 1,
+                "avg": ".000"
+              },
+              {
+                "name": "a-Tena rf",
+                "ab": 1,
+                "r": 0,
+                "h": 0,
+                "bi": 0,
+                "bb": 0,
+                "so": 1,
+                "avg": ".000"
+              },
+              {
+                "name": "Young cf",
+                "ab": 4,
+                "r": 0,
+                "h": 0,
+                "bi": 0,
+                "bb": 0,
+                "so": 0,
+                "avg": ".000"
+              },
+              {
+                "name": "Lile lf",
+                "ab": 4,
+                "r": 0,
+                "h": 0,
+                "bi": 0,
+                "bb": 0,
+                "so": 1,
+                "avg": ".000"
+              },
+              {
+                "name": "Nu\u00f1ez ss",
+                "ab": 4,
+                "r": 0,
+                "h": 0,
+                "bi": 0,
+                "bb": 0,
+                "so": 1,
+                "avg": ".000"
+              },
+              {
+                "name": "Vivas 2b",
+                "ab": 2,
+                "r": 0,
+                "h": 1,
+                "bi": 0,
+                "bb": 0,
+                "so": 0,
+                "avg": ".000"
+              },
+              {
+                "name": "Millas c",
+                "ab": 3,
+                "r": 1,
+                "h": 1,
+                "bi": 0,
+                "bb": 0,
+                "so": 1,
+                "avg": ".000"
+              }
+            ],
+            "totals": {
+              "ab": 30,
+              "r": 1,
+              "h": 3,
+              "bi": 0,
+              "bb": 3,
+              "so": 10
+            }
+          },
+          {
+            "team": "Cincinnati Reds",
+            "players": [
+              {
+                "name": "Myers cf",
+                "ab": 4,
+                "r": 1,
+                "h": 1,
+                "bi": 3,
+                "bb": 0,
+                "so": 2,
+                "avg": ".000"
+              },
+              {
+                "name": "Cruz ss",
+                "ab": 4,
+                "r": 2,
+                "h": 2,
+                "bi": 0,
+                "bb": 0,
+                "so": 1,
+                "avg": ".000"
+              },
+              {
+                "name": "a-Benson lf",
+                "ab": 1,
+                "r": 1,
+                "h": 1,
+                "bi": 0,
+                "bb": 0,
+                "so": 0,
+                "avg": ".000"
+              },
+              {
+                "name": "Stewart 1b",
+                "ab": 4,
+                "r": 0,
+                "h": 0,
+                "bi": 0,
+                "bb": 1,
+                "so": 3,
+                "avg": ".000"
+              },
+              {
+                "name": "Steer 2b",
+                "ab": 4,
+                "r": 3,
+                "h": 2,
+                "bi": 0,
+                "bb": 1,
+                "so": 0,
+                "avg": ".000"
+              },
+              {
+                "name": "Bleday dh",
+                "ab": 5,
+                "r": 2,
+                "h": 3,
+                "bi": 6,
+                "bb": 0,
+                "so": 1,
+                "avg": ".000"
+              },
+              {
+                "name": "Dunn rf",
+                "ab": 4,
+                "r": 1,
+                "h": 0,
+                "bi": 0,
+                "bb": 1,
+                "so": 1,
+                "avg": ".000"
+              },
+              {
+                "name": "McLain ss",
+                "ab": 3,
+                "r": 3,
+                "h": 2,
+                "bi": 2,
+                "bb": 1,
+                "so": 0,
+                "avg": ".000"
+              },
+              {
+                "name": "Trevino c",
+                "ab": 4,
+                "r": 1,
+                "h": 1,
+                "bi": 2,
+                "bb": 0,
+                "so": 1,
+                "avg": ".000"
+              },
+              {
+                "name": "Hayes 3b",
+                "ab": 4,
+                "r": 1,
+                "h": 2,
+                "bi": 2,
+                "bb": 0,
+                "so": 0,
+                "avg": ".000"
+              }
+            ],
+            "totals": {
+              "ab": 37,
+              "r": 15,
+              "h": 14,
+              "bi": 15,
+              "bb": 4,
+              "so": 9
+            }
+          }
+        ],
+        "notes": "WP: Wiemer; Mey.."
       },
       {
-        "away": "DET",
-        "away_score": 4,
-        "home": "NYM",
-        "home_score": 9,
-        "status": "Final"
+        "title": "Metss 9, Tigerss 4",
+        "linescore": {
+          "away": {
+            "name": "Detroit Tigers",
+            "scores": [
+              3,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              1,
+              0
+            ],
+            "r": 4,
+            "h": 7,
+            "e": 1
+          },
+          "home": {
+            "name": "New York Mets",
+            "scores": [
+              0,
+              0,
+              1,
+              2,
+              3,
+              1,
+              1,
+              1,
+              0
+            ],
+            "r": 9,
+            "h": 10,
+            "e": 0
+          }
+        },
+        "batting": [
+          {
+            "team": "Detroit Tigers",
+            "players": [
+              {
+                "name": "McGonigle ss",
+                "ab": 4,
+                "r": 0,
+                "h": 0,
+                "bi": 0,
+                "bb": 0,
+                "so": 2,
+                "avg": ".000"
+              },
+              {
+                "name": "Keith 3b",
+                "ab": 3,
+                "r": 1,
+                "h": 0,
+                "bi": 0,
+                "bb": 1,
+                "so": 3,
+                "avg": ".000"
+              },
+              {
+                "name": "Greene lf",
+                "ab": 3,
+                "r": 1,
+                "h": 2,
+                "bi": 0,
+                "bb": 1,
+                "so": 0,
+                "avg": ".000"
+              },
+              {
+                "name": "Dingler dh",
+                "ab": 4,
+                "r": 1,
+                "h": 1,
+                "bi": 1,
+                "bb": 0,
+                "so": 0,
+                "avg": ".000"
+              },
+              {
+                "name": "Workman 2b",
+                "ab": 4,
+                "r": 1,
+                "h": 2,
+                "bi": 3,
+                "bb": 0,
+                "so": 1,
+                "avg": ".000"
+              },
+              {
+                "name": "McKinstry rf",
+                "ab": 4,
+                "r": 0,
+                "h": 1,
+                "bi": 0,
+                "bb": 0,
+                "so": 0,
+                "avg": ".000"
+              },
+              {
+                "name": "Torkelson 1b",
+                "ab": 3,
+                "r": 0,
+                "h": 0,
+                "bi": 0,
+                "bb": 0,
+                "so": 1,
+                "avg": ".000"
+              },
+              {
+                "name": "P\u00e9rez cf",
+                "ab": 4,
+                "r": 0,
+                "h": 1,
+                "bi": 0,
+                "bb": 0,
+                "so": 1,
+                "avg": ".000"
+              },
+              {
+                "name": "Rogers c",
+                "ab": 2,
+                "r": 0,
+                "h": 0,
+                "bi": 0,
+                "bb": 1,
+                "so": 1,
+                "avg": ".000"
+              }
+            ],
+            "totals": {
+              "ab": 31,
+              "r": 4,
+              "h": 7,
+              "bi": 4,
+              "bb": 3,
+              "so": 9
+            }
+          },
+          {
+            "team": "New York Mets",
+            "players": [
+              {
+                "name": "Benge rf",
+                "ab": 5,
+                "r": 1,
+                "h": 2,
+                "bi": 0,
+                "bb": 0,
+                "so": 0,
+                "avg": ".000"
+              },
+              {
+                "name": "Bichette ss",
+                "ab": 4,
+                "r": 0,
+                "h": 0,
+                "bi": 0,
+                "bb": 1,
+                "so": 2,
+                "avg": ".000"
+              },
+              {
+                "name": "Soto dh",
+                "ab": 5,
+                "r": 2,
+                "h": 2,
+                "bi": 2,
+                "bb": 0,
+                "so": 0,
+                "avg": ".000"
+              },
+              {
+                "name": "Vientos 1b",
+                "ab": 4,
+                "r": 1,
+                "h": 1,
+                "bi": 2,
+                "bb": 0,
+                "so": 0,
+                "avg": ".000"
+              },
+              {
+                "name": "Melendez lf",
+                "ab": 1,
+                "r": 1,
+                "h": 0,
+                "bi": 0,
+                "bb": 1,
+                "so": 0,
+                "avg": ".000"
+              },
+              {
+                "name": "a-Taylor lf",
+                "ab": 2,
+                "r": 0,
+                "h": 0,
+                "bi": 0,
+                "bb": 0,
+                "so": 0,
+                "avg": ".000"
+              },
+              {
+                "name": "Baty 3b",
+                "ab": 3,
+                "r": 1,
+                "h": 1,
+                "bi": 2,
+                "bb": 1,
+                "so": 0,
+                "avg": ".000"
+              },
+              {
+                "name": "Semien 2b",
+                "ab": 3,
+                "r": 2,
+                "h": 2,
+                "bi": 1,
+                "bb": 1,
+                "so": 0,
+                "avg": ".000"
+              },
+              {
+                "name": "Ewing cf",
+                "ab": 4,
+                "r": 1,
+                "h": 2,
+                "bi": 1,
+                "bb": 0,
+                "so": 0,
+                "avg": ".000"
+              },
+              {
+                "name": "Senger c",
+                "ab": 3,
+                "r": 0,
+                "h": 0,
+                "bi": 1,
+                "bb": 0,
+                "so": 0,
+                "avg": ".000"
+              }
+            ],
+            "totals": {
+              "ab": 34,
+              "r": 9,
+              "h": 10,
+              "bi": 9,
+              "bb": 4,
+              "so": 2
+            }
+          }
+        ],
+        "notes": ""
       },
       {
-        "away": "MIA",
-        "away_score": 1,
-        "home": "MIN",
-        "home_score": 9,
-        "status": "Final"
+        "title": "Twinss 9, Marlinss 1",
+        "linescore": {
+          "away": {
+            "name": "Miami Marlins",
+            "scores": [
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              1,
+              0
+            ],
+            "r": 1,
+            "h": 5,
+            "e": 1
+          },
+          "home": {
+            "name": "Minnesota Twins",
+            "scores": [
+              0,
+              5,
+              1,
+              0,
+              0,
+              0,
+              0,
+              3,
+              0
+            ],
+            "r": 9,
+            "h": 9,
+            "e": 0
+          }
+        },
+        "batting": [],
+        "notes": ""
       },
       {
-        "away": "SD",
-        "away_score": 1,
-        "home": "MIL",
-        "home_score": 7,
-        "status": "Final"
+        "title": "Brewerss 7, Padress 1",
+        "linescore": {
+          "away": {
+            "name": "San Diego Padres",
+            "scores": [
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              1
+            ],
+            "r": 1,
+            "h": 7,
+            "e": 2
+          },
+          "home": {
+            "name": "Milwaukee Brewers",
+            "scores": [
+              3,
+              3,
+              0,
+              1,
+              0,
+              0,
+              0,
+              0,
+              0
+            ],
+            "r": 7,
+            "h": 10,
+            "e": 1
+          }
+        },
+        "batting": [],
+        "notes": ""
       },
       {
-        "away": "SEA",
-        "away_score": 8,
-        "home": "HOU",
-        "home_score": 3,
-        "status": "Top 9th"
+        "title": "Marinerss 8, Astross 3",
+        "linescore": {
+          "away": {
+            "name": "Seattle Mariners",
+            "scores": [
+              3,
+              0,
+              0,
+              2,
+              0,
+              2,
+              0,
+              1,
+              0
+            ],
+            "r": 8,
+            "h": 11,
+            "e": 0
+          },
+          "home": {
+            "name": "Houston Astros",
+            "scores": [
+              0,
+              0,
+              1,
+              0,
+              0,
+              2,
+              0,
+              0,
+              0
+            ],
+            "r": 3,
+            "h": 5,
+            "e": 0
+          }
+        },
+        "batting": [],
+        "notes": ""
       },
       {
-        "away": "STL",
-        "away_score": 3,
-        "home": "ATH",
-        "home_score": 1,
-        "status": "Top 7th"
-      },
-      {
-        "away": "PHI",
-        "away_score": 0,
-        "home": "BOS",
-        "home_score": 0,
-        "status": "5/14 - 6:45 PM EDT"
-      },
-      {
-        "away": "CHC",
-        "away_score": 0,
-        "home": "ATL",
-        "home_score": 0,
-        "status": "5/14 - 7:15 PM EDT"
-      },
-      {
-        "away": "KC",
-        "away_score": 0,
-        "home": "CHW",
-        "home_score": 0,
-        "status": "5/14 - 7:40 PM EDT"
+        "title": "Cardinalss 5, Athleticss 4",
+        "linescore": {
+          "away": {
+            "name": "St. Louis Cardinals",
+            "scores": [
+              0,
+              0,
+              0,
+              0,
+              1,
+              2,
+              0,
+              0,
+              2
+            ],
+            "r": 5,
+            "h": 9,
+            "e": 0
+          },
+          "home": {
+            "name": "Athletics",
+            "scores": [
+              1,
+              0,
+              0,
+              0,
+              0,
+              0,
+              3,
+              0,
+              0
+            ],
+            "r": 4,
+            "h": 10,
+            "e": 2
+          }
+        },
+        "batting": [],
+        "notes": ""
       }
     ],
-    "standings": []
+    "standings": [],
+    "leaders": {
+      "left": {
+        "label": "American League",
+        "cats": [
+          {
+            "cat": "Batting Average",
+            "cols": [
+              "Player",
+              "Team",
+              "Avg"
+            ],
+            "rows": [
+              [
+                "Cam Schlittler",
+                "Yankees",
+                ".177"
+              ],
+              [
+                "Michael Wacha",
+                "Royals",
+                ".188"
+              ],
+              [
+                "Jos\u00e9 Soriano",
+                "Angels",
+                ".191"
+              ],
+              [
+                "Ranger Suarez",
+                "Sox",
+                ".197"
+              ],
+              [
+                "Bailey Ober",
+                "Twins",
+                ".198"
+              ],
+              [
+                "Drew Rasmussen",
+                "Rays",
+                ".198"
+              ],
+              [
+                "Max Fried",
+                "Yankees",
+                ".199"
+              ],
+              [
+                "Jacob deGrom",
+                "Rangers",
+                ".199"
+              ]
+            ]
+          },
+          {
+            "cat": "Home Runs",
+            "cols": [
+              "Player",
+              "Team",
+              "HR"
+            ],
+            "rows": [
+              [
+                "Aaron Judge",
+                "Yankees",
+                "16"
+              ],
+              [
+                "Byron Buxton",
+                "Twins",
+                "15"
+              ],
+              [
+                "Munetaka Murakami",
+                "Sox",
+                "15"
+              ],
+              [
+                "Yordan Alvarez",
+                "Astros",
+                "14"
+              ],
+              [
+                "Ben Rice",
+                "Yankees",
+                "13"
+              ],
+              [
+                "Shea Langeliers",
+                "Athletics",
+                "12"
+              ],
+              [
+                "Junior Caminero",
+                "Rays",
+                "11"
+              ],
+              [
+                "Colson Montgomery",
+                "Sox",
+                "11"
+              ],
+              [
+                "Mike Trout",
+                "Angels",
+                "11"
+              ]
+            ]
+          },
+          {
+            "cat": "Hits",
+            "cols": [
+              "Player",
+              "Team",
+              "H"
+            ],
+            "rows": [
+              [
+                "Shea Langeliers",
+                "Athletics",
+                "256"
+              ],
+              [
+                "Cal Raleigh",
+                "Mariners",
+                "254"
+              ],
+              [
+                "Dillon Dingler",
+                "Tigers",
+                "253"
+              ],
+              [
+                "Ryan Jeffers",
+                "Twins",
+                "225"
+              ],
+              [
+                "Austin Wells",
+                "Yankees",
+                "222"
+              ],
+              [
+                "Carlos Narv\u00e1ez",
+                "Sox",
+                "214"
+              ],
+              [
+                "Adley Rutschman",
+                "Orioles",
+                "208"
+              ],
+              [
+                "Nick Fortes",
+                "Rays",
+                "207"
+              ]
+            ]
+          },
+          {
+            "cat": "Stolen Bases",
+            "cols": [
+              "Player",
+              "Team",
+              "SB"
+            ],
+            "rows": [
+              [
+                "Joe Ryan",
+                "Twins",
+                "9"
+              ],
+              [
+                "Dylan Cease",
+                "Jays",
+                "8"
+              ],
+              [
+                "Reid Detmers",
+                "Angels",
+                "8"
+              ],
+              [
+                "Framber Valdez",
+                "Tigers",
+                "8"
+              ],
+              [
+                "Spencer Arrighetti",
+                "Astros",
+                "7"
+              ],
+              [
+                "Sean Burke",
+                "Sox",
+                "7"
+              ],
+              [
+                "Joey Cantillo",
+                "Guardians",
+                "7"
+              ],
+              [
+                "Alex Lange",
+                "Royals",
+                "7"
+              ],
+              [
+                "Shane McClanahan",
+                "Rays",
+                "7"
+              ]
+            ]
+          },
+          {
+            "cat": "ERA",
+            "cols": [
+              "Pitcher",
+              "Team",
+              "ERA"
+            ],
+            "rows": [
+              [
+                "Cam Schlittler",
+                "Yankees",
+                "1.35"
+              ],
+              [
+                "Davis Martin",
+                "Sox",
+                "1.62"
+              ],
+              [
+                "Jos\u00e9 Soriano",
+                "Angels",
+                "1.66"
+              ],
+              [
+                "Nick Martinez",
+                "Rays",
+                "1.70"
+              ],
+              [
+                "Parker Messick",
+                "Guardians",
+                "2.35"
+              ],
+              [
+                "Dylan Cease",
+                "Jays",
+                "2.41"
+              ],
+              [
+                "Ranger Suarez",
+                "Sox",
+                "2.44"
+              ],
+              [
+                "Jacob deGrom",
+                "Rangers",
+                "2.62"
+              ]
+            ]
+          },
+          {
+            "cat": "Strikeouts",
+            "cols": [
+              "Pitcher",
+              "Team",
+              "K"
+            ],
+            "rows": [
+              [
+                "Dylan Cease",
+                "Jays",
+                "75"
+              ],
+              [
+                "Gavin Williams",
+                "Guardians",
+                "66"
+              ],
+              [
+                "Jos\u00e9 Soriano",
+                "Angels",
+                "61"
+              ],
+              [
+                "Cam Schlittler",
+                "Yankees",
+                "59"
+              ],
+              [
+                "Will Warren",
+                "Yankees",
+                "59"
+              ],
+              [
+                "Parker Messick",
+                "Guardians",
+                "58"
+              ],
+              [
+                "Jacob deGrom",
+                "Rangers",
+                "57"
+              ],
+              [
+                "Ryan Weathers",
+                "Yankees",
+                "54"
+              ]
+            ]
+          },
+          {
+            "cat": "Saves",
+            "cols": [
+              "Pitcher",
+              "Team",
+              "SV"
+            ],
+            "rows": [
+              [
+                "Cade Smith",
+                "Guardians",
+                "13"
+              ],
+              [
+                "Bryan Baker",
+                "Rays",
+                "11"
+              ],
+              [
+                "David Bednar",
+                "Yankees",
+                "10"
+              ],
+              [
+                "Seranthony Dom\u00ednguez",
+                "Sox",
+                "10"
+              ],
+              [
+                "Lucas Erceg",
+                "Royals",
+                "10"
+              ],
+              [
+                "Aroldis Chapman",
+                "Sox",
+                "9"
+              ],
+              [
+                "Andr\u00e9s Mu\u00f1oz",
+                "Mariners",
+                "8"
+              ],
+              [
+                "Ryan Helsley",
+                "Orioles",
+                "7"
+              ],
+              [
+                "Kenley Jansen",
+                "Tigers",
+                "7"
+              ]
+            ]
+          }
+        ]
+      },
+      "right": {
+        "label": "National League",
+        "cats": [
+          {
+            "cat": "Batting Average",
+            "cols": [
+              "Player",
+              "Team",
+              "Avg"
+            ],
+            "rows": [
+              [
+                "Paul Skenes",
+                "Pirates",
+                ".145"
+              ],
+              [
+                "Shohei Ohtani",
+                "Dodgers",
+                ".161"
+              ],
+              [
+                "Jacob Misiorowski",
+                "Brewers",
+                ".162"
+              ],
+              [
+                "Bryce Elder",
+                "Braves",
+                ".180"
+              ],
+              [
+                "Shota Imanaga",
+                "Cubs",
+                ".183"
+              ],
+              [
+                "Chris Sale",
+                "Braves",
+                ".183"
+              ],
+              [
+                "Chase Burns",
+                "Reds",
+                ".186"
+              ],
+              [
+                "Landen Roupp",
+                "Giants",
+                ".187"
+              ]
+            ]
+          },
+          {
+            "cat": "Home Runs",
+            "cols": [
+              "Player",
+              "Team",
+              "HR"
+            ],
+            "rows": [
+              [
+                "Kyle Schwarber",
+                "Phillies",
+                "18"
+              ],
+              [
+                "Matt Olson",
+                "Braves",
+                "14"
+              ],
+              [
+                "Mickey Moniak",
+                "Rockies",
+                "12"
+              ],
+              [
+                "Jordan Walker",
+                "Cardinals",
+                "12"
+              ],
+              [
+                "James Wood",
+                "Nationals",
+                "12"
+              ],
+              [
+                "Drake Baldwin",
+                "Braves",
+                "11"
+              ],
+              [
+                "Max Muncy",
+                "Dodgers",
+                "11"
+              ],
+              [
+                "Oneil Cruz",
+                "Pirates",
+                "10"
+              ],
+              [
+                "Elly De La Cruz",
+                "Reds",
+                "10"
+              ],
+              [
+                "Hunter Goodman",
+                "Rockies",
+                "10"
+              ],
+              [
+                "Ian Happ",
+                "Cubs",
+                "10"
+              ],
+              [
+                "Bryce Harper",
+                "Phillies",
+                "10"
+              ],
+              [
+                "Brandon Lowe",
+                "Pirates",
+                "10"
+              ],
+              [
+                "Sal Stewart",
+                "Reds",
+                "10"
+              ]
+            ]
+          },
+          {
+            "cat": "Hits",
+            "cols": [
+              "Player",
+              "Team",
+              "H"
+            ],
+            "rows": [
+              [
+                "Tyler Stephenson",
+                "Reds",
+                "277"
+              ],
+              [
+                "Hunter Goodman",
+                "Rockies",
+                "251"
+              ],
+              [
+                "Pedro Pag\u00e9s",
+                "Cardinals",
+                "249"
+              ],
+              [
+                "William Contreras",
+                "Brewers",
+                "235"
+              ],
+              [
+                "Francisco Alvarez",
+                "Mets",
+                "232"
+              ],
+              [
+                "J.T. Realmuto",
+                "Phillies",
+                "232"
+              ],
+              [
+                "Will Smith",
+                "Dodgers",
+                "224"
+              ],
+              [
+                "Keibert Ruiz",
+                "Nationals",
+                "204"
+              ]
+            ]
+          },
+          {
+            "cat": "Stolen Bases",
+            "cols": [
+              "Player",
+              "Team",
+              "SB"
+            ],
+            "rows": [
+              [
+                "Eury P\u00e9rez",
+                "Marlins",
+                "16"
+              ],
+              [
+                "Andrew Abbott",
+                "Reds",
+                "7"
+              ],
+              [
+                "Edward Cabrera",
+                "Cubs",
+                "7"
+              ],
+              [
+                "Mitch Keller",
+                "Pirates",
+                "7"
+              ],
+              [
+                "Matthew Liberatore",
+                "Cardinals",
+                "7"
+              ],
+              [
+                "Reynaldo L\u00f3pez",
+                "Braves",
+                "7"
+              ],
+              [
+                "Robbie Ray",
+                "Giants",
+                "7"
+              ],
+              [
+                "Jameson Taillon",
+                "Cubs",
+                "7"
+              ]
+            ]
+          },
+          {
+            "cat": "ERA",
+            "cols": [
+              "Pitcher",
+              "Team",
+              "ERA"
+            ],
+            "rows": [
+              [
+                "Shohei Ohtani",
+                "Dodgers",
+                "0.82"
+              ],
+              [
+                "Bryce Elder",
+                "Braves",
+                "1.81"
+              ],
+              [
+                "Clay Holmes",
+                "Mets",
+                "1.86"
+              ],
+              [
+                "Chase Burns",
+                "Reds",
+                "1.87"
+              ],
+              [
+                "Chris Sale",
+                "Braves",
+                "1.96"
+              ],
+              [
+                "Paul Skenes",
+                "Pirates",
+                "1.98"
+              ],
+              [
+                "Michael McGreevy",
+                "Cardinals",
+                "2.10"
+              ],
+              [
+                "Cristopher S\u00e1nchez",
+                "Phillies",
+                "2.11"
+              ]
+            ]
+          },
+          {
+            "cat": "Strikeouts",
+            "cols": [
+              "Pitcher",
+              "Team",
+              "K"
+            ],
+            "rows": [
+              [
+                "Jacob Misiorowski",
+                "Brewers",
+                "80"
+              ],
+              [
+                "Cristopher S\u00e1nchez",
+                "Phillies",
+                "67"
+              ],
+              [
+                "Nolan McLean",
+                "Mets",
+                "64"
+              ],
+              [
+                "Chris Sale",
+                "Braves",
+                "64"
+              ],
+              [
+                "Jes\u00fas Luzardo",
+                "Phillies",
+                "61"
+              ],
+              [
+                "Shota Imanaga",
+                "Cubs",
+                "59"
+              ],
+              [
+                "Paul Skenes",
+                "Pirates",
+                "56"
+              ],
+              [
+                "Chase Burns",
+                "Reds",
+                "55"
+              ]
+            ]
+          },
+          {
+            "cat": "Saves",
+            "cols": [
+              "Pitcher",
+              "Team",
+              "SV"
+            ],
+            "rows": [
+              [
+                "Mason Miller",
+                "Padres",
+                "13"
+              ],
+              [
+                "Riley O'Brien",
+                "Cardinals",
+                "13"
+              ],
+              [
+                "Paul Sewald",
+                "Diamondbacks",
+                "9"
+              ],
+              [
+                "Raisel Iglesias",
+                "Braves",
+                "8"
+              ],
+              [
+                "Jhoan Duran",
+                "Phillies",
+                "6"
+              ],
+              [
+                "Emilio Pag\u00e1n",
+                "Reds",
+                "6"
+              ],
+              [
+                "Pete Fairbanks",
+                "Marlins",
+                "5"
+              ],
+              [
+                "Devin Williams",
+                "Mets",
+                "5"
+              ]
+            ]
+          }
+        ]
+      }
+    }
   },
   "nba": {
     "story": {
-      "kicker": "BASKETBALL",
-      "headline": "CAVALIERS HOST PISTONS AS PLAYOFF PICTURE SHARPENS",
-      "deck": "Cleveland looks to press its advantage at Rocket Mortgage FieldHouse in Thursday night opener before San Antonio visits Minnesota",
-      "byline": "By Marcus Bellfield, Basketball Writer",
-      "body": "The Cleveland Cavaliers welcome the Detroit Pistons to Rocket Mortgage FieldHouse Thursday evening for a 7 p.m. EDT tip-off, a matchup that carries real weight as the Eastern Conference standings continue to sort themselves out. Donovan Mitchell and the Cavaliers have leaned on their home court all season, and the faithful in Cleveland will be expecting nothing less than a statement performance against a young Pistons squad that has shown flashes of brilliance under first-year head coach J.B. Bickerstaff's former assistant staff.\n\nThe nightcap figures to be every bit as compelling, with the San Antonio Spurs rolling into Target Center to face the Minnesota Timberwolves at 9:30 p.m. EDT. Victor Wembanyama and the Spurs have been drawing national attention all season as the French phenom continues to rewrite the expectations placed on rookie big men, while Anthony Edwards and Karl-Anthony Towns anchor a Minnesota side hungry to prove it belongs among the West's elite. The late tip gives the country a chance to watch two of the game's most electric young talents share a floor.\n\nBoth games carry playoff implications that could resonate well beyond Thursday night. Front offices around the league will have scouts in both buildings, evaluating roster construction and late-season conditioning with the postseason window closing fast. Cleveland's ability to control the paint against Detroit and Minnesota's transition defense against Wembanyama's length and passing vision will be the defining storylines when the final buzzers sound."
+      "kicker": "NBA PLAYOFFS",
+      "headline": "PLAYOFFS ON PAUSE: NBA TAKES A BREATH BEFORE NEXT ROUND OF BATTLE",
+      "deck": "The league takes a scheduled off day as playoff intensity builds toward the next series.",
+      "byline": "By Carl Hutchins, Basketball Writer",
+      "body": "The NBA hardwood went quiet Sunday, the league observing a scheduled off day in the midst of its grueling postseason grind. No tip-offs, no final buzzers, no highlight-reel finishes. Just silence and scouting reports as surviving franchises used the rare breathing room to prepare for the wars ahead.\n\nFor teams still alive in the bracket, Sunday meant film sessions, treatment tables, and coaches huddled over whiteboards. Veteran players nursed bruises accumulated through weeks of playoff basketball, where every possession carries the weight of a season. The off day arrived at a premium moment, with several series poised to reach their decisive stages in the coming days.\n\nWhen play resumes, the stakes only climb higher. Rosters depleted by injury, coaches pressed to find rotational answers, and arenas primed to reach full fever pitch. The brief silence of Sunday will make the return of the action feel that much louder."
     },
     "schedule": [
       {
         "time": "5/15 - 7:00 PM EDT",
         "away": "Detroit Pistons",
-        "home": "Cleveland Cavaliers"
+        "home": "Cleveland Cavaliers",
+        "note": "post-season"
       },
       {
         "time": "5/15 - 9:30 PM EDT",
         "away": "San Antonio Spurs",
-        "home": "Minnesota Timberwolves"
+        "home": "Minnesota Timberwolves",
+        "note": "post-season"
       }
     ],
-    "scores": [
-      {
-        "away": "DET",
-        "away_score": 0,
-        "home": "CLE",
-        "home_score": 0,
-        "status": "5/15 - 7:00 PM EDT"
+    "boxScores": [],
+    "standings": [],
+    "leaders": {
+      "left": {
+        "label": "Eastern Conference",
+        "cats": [
+          {
+            "cat": "Scoring (PPG)",
+            "cols": [
+              "Player",
+              "Team",
+              "G",
+              "Pts",
+              "PPG"
+            ],
+            "rows": [
+              [
+                "Cade Cunningham",
+                "DET",
+                "12",
+                "360.0",
+                "30.0"
+              ],
+              [
+                "Shai Gilgeous-Alexander",
+                "OKC",
+                "8",
+                "232.8",
+                "29.1"
+              ],
+              [
+                "Jalen Brunson",
+                "NYK",
+                "10",
+                "274.0",
+                "27.4"
+              ],
+              [
+                "Paolo Banchero",
+                "ORL",
+                "7",
+                "184.1",
+                "26.3"
+              ],
+              [
+                "Donovan Mitchell",
+                "CLE",
+                "12",
+                "315.6",
+                "26.3"
+              ],
+              [
+                "Dillon Brooks",
+                "PHX",
+                "4",
+                "104.0",
+                "26.0"
+              ],
+              [
+                "Nikola Joki\u0107",
+                "DEN",
+                "6",
+                "154.8",
+                "25.8"
+              ],
+              [
+                "Jaylen Brown",
+                "BOS",
+                "7",
+                "179.9",
+                "25.7"
+              ]
+            ]
+          },
+          {
+            "cat": "Rebounds (RPG)",
+            "cols": [
+              "Player",
+              "Team",
+              "G",
+              "Reb",
+              "RPG"
+            ],
+            "rows": [
+              [
+                "Nikola Joki\u0107",
+                "DEN",
+                "6",
+                "79.2",
+                "13.2"
+              ],
+              [
+                "Victor Wembanyama",
+                "SAS",
+                "9",
+                "100.8",
+                "11.2"
+              ],
+              [
+                "Jayson Tatum",
+                "BOS",
+                "6",
+                "64.2",
+                "10.7"
+              ],
+              [
+                "Alperen Sengun",
+                "HOU",
+                "6",
+                "61.2",
+                "10.2"
+              ],
+              [
+                "Karl-Anthony Towns",
+                "NYK",
+                "10",
+                "100.0",
+                "10.0"
+              ],
+              [
+                "Rudy Gobert",
+                "MIN",
+                "11",
+                "108.9",
+                "9.9"
+              ],
+              [
+                "Deandre Ayton",
+                "LAL",
+                "10",
+                "96.0",
+                "9.6"
+              ],
+              [
+                "Chet Holmgren",
+                "OKC",
+                "8",
+                "72.8",
+                "9.1"
+              ]
+            ]
+          },
+          {
+            "cat": "Assists (APG)",
+            "cols": [
+              "Player",
+              "Team",
+              "G",
+              "Ast",
+              "APG"
+            ],
+            "rows": [
+              [
+                "Nikola Joki\u0107",
+                "DEN",
+                "6",
+                "57.0",
+                "9.5"
+              ],
+              [
+                "Scottie Barnes",
+                "TOR",
+                "7",
+                "60.2",
+                "8.6"
+              ],
+              [
+                "Cade Cunningham",
+                "DET",
+                "12",
+                "92.4",
+                "7.7"
+              ],
+              [
+                "LeBron James",
+                "LAL",
+                "10",
+                "73.0",
+                "7.3"
+              ],
+              [
+                "Jrue Holiday",
+                "POR",
+                "5",
+                "36.0",
+                "7.2"
+              ],
+              [
+                "Shai Gilgeous-Alexander",
+                "OKC",
+                "8",
+                "56.8",
+                "7.1"
+              ],
+              [
+                "Jayson Tatum",
+                "BOS",
+                "6",
+                "40.8",
+                "6.8"
+              ],
+              [
+                "Karl-Anthony Towns",
+                "NYK",
+                "10",
+                "66.0",
+                "6.6"
+              ]
+            ]
+          }
+        ]
       },
-      {
-        "away": "SA",
-        "away_score": 0,
-        "home": "MIN",
-        "home_score": 0,
-        "status": "5/15 - 9:30 PM EDT"
+      "right": {
+        "label": "Western Conference",
+        "cats": [
+          {
+            "cat": "Scoring (PPG)",
+            "cols": [
+              "Player",
+              "Team",
+              "G",
+              "Pts",
+              "PPG"
+            ],
+            "rows": [
+              [
+                "Cade Cunningham",
+                "DET",
+                "12",
+                "360.0",
+                "30.0"
+              ],
+              [
+                "Shai Gilgeous-Alexander",
+                "OKC",
+                "8",
+                "232.8",
+                "29.1"
+              ],
+              [
+                "Jalen Brunson",
+                "NYK",
+                "10",
+                "274.0",
+                "27.4"
+              ],
+              [
+                "Paolo Banchero",
+                "ORL",
+                "7",
+                "184.1",
+                "26.3"
+              ],
+              [
+                "Donovan Mitchell",
+                "CLE",
+                "12",
+                "315.6",
+                "26.3"
+              ],
+              [
+                "Dillon Brooks",
+                "PHX",
+                "4",
+                "104.0",
+                "26.0"
+              ],
+              [
+                "Nikola Joki\u0107",
+                "DEN",
+                "6",
+                "154.8",
+                "25.8"
+              ],
+              [
+                "Jaylen Brown",
+                "BOS",
+                "7",
+                "179.9",
+                "25.7"
+              ]
+            ]
+          },
+          {
+            "cat": "Rebounds (RPG)",
+            "cols": [
+              "Player",
+              "Team",
+              "G",
+              "Reb",
+              "RPG"
+            ],
+            "rows": [
+              [
+                "Nikola Joki\u0107",
+                "DEN",
+                "6",
+                "79.2",
+                "13.2"
+              ],
+              [
+                "Victor Wembanyama",
+                "SAS",
+                "9",
+                "100.8",
+                "11.2"
+              ],
+              [
+                "Jayson Tatum",
+                "BOS",
+                "6",
+                "64.2",
+                "10.7"
+              ],
+              [
+                "Alperen Sengun",
+                "HOU",
+                "6",
+                "61.2",
+                "10.2"
+              ],
+              [
+                "Karl-Anthony Towns",
+                "NYK",
+                "10",
+                "100.0",
+                "10.0"
+              ],
+              [
+                "Rudy Gobert",
+                "MIN",
+                "11",
+                "108.9",
+                "9.9"
+              ],
+              [
+                "Deandre Ayton",
+                "LAL",
+                "10",
+                "96.0",
+                "9.6"
+              ],
+              [
+                "Chet Holmgren",
+                "OKC",
+                "8",
+                "72.8",
+                "9.1"
+              ]
+            ]
+          },
+          {
+            "cat": "Assists (APG)",
+            "cols": [
+              "Player",
+              "Team",
+              "G",
+              "Ast",
+              "APG"
+            ],
+            "rows": [
+              [
+                "Nikola Joki\u0107",
+                "DEN",
+                "6",
+                "57.0",
+                "9.5"
+              ],
+              [
+                "Scottie Barnes",
+                "TOR",
+                "7",
+                "60.2",
+                "8.6"
+              ],
+              [
+                "Cade Cunningham",
+                "DET",
+                "12",
+                "92.4",
+                "7.7"
+              ],
+              [
+                "LeBron James",
+                "LAL",
+                "10",
+                "73.0",
+                "7.3"
+              ],
+              [
+                "Jrue Holiday",
+                "POR",
+                "5",
+                "36.0",
+                "7.2"
+              ],
+              [
+                "Shai Gilgeous-Alexander",
+                "OKC",
+                "8",
+                "56.8",
+                "7.1"
+              ],
+              [
+                "Jayson Tatum",
+                "BOS",
+                "6",
+                "40.8",
+                "6.8"
+              ],
+              [
+                "Karl-Anthony Towns",
+                "NYK",
+                "10",
+                "66.0",
+                "6.6"
+              ]
+            ]
+          }
+        ]
       }
-    ],
-    "standings": []
+    }
   },
   "nhl": {
     "story": {
-      "kicker": "HOCKEY",
-      "headline": "SABRES HOST CANADIENS IN WEDNESDAY NIGHT TILT AS GOLDEN KNIGHTS RIDE INTO ANAHEIM",
-      "deck": "Buffalo looks to build momentum against Montreal while Vegas seeks to silence the Ducks in a late Western showdown",
-      "byline": "By Dan Whitfield, Hockey Writer",
-      "body": "The ice is set for a full night of NHL action Wednesday, with two marquee matchups on the docket. The Buffalo Sabres welcome the Montreal Canadiens to KeyBank Center for a 7 p.m. Eastern faceoff, a rivalry steeped in decades of Original Six history and border-war intensity. Both clubs have been jockeying for position in a brutally competitive Eastern Conference, and neither team can afford to leave points on the table this late in the campaign.\n\nOut West, the puck drops at 9:30 p.m. Eastern as the Vegas Golden Knights skate into Honda Center to face the Anaheim Ducks in a Pacific Division clash that carries serious playoff implications. Vegas has long been one of the most dangerous teams in the conference, built around the scoring of Jack Eichel and the blue-line leadership of Alex Pietrangelo. The Ducks, meanwhile, have been hungry to prove they belong among the West's elite, leaning on Trevor Zegras to generate offense and John Gibson to steal games between the pipes.\n\nIn Buffalo, all eyes will be on Tage Thompson, who has emerged as one of the most dangerous power forwards in the Eastern Conference, and on goaltender Ukko-Pekka Luukkonen, who has been the backbone of the Sabres' push for respectability. For Montreal, Cole Caufield brings his electric shot into enemy territory, looking to give the Canadiens a road victory and keep pace in the standings. Fans tuning in for the late game can expect a physical, hard-fought affair as two proud franchises battle for two points that could loom large when the final playoff picture is drawn."
+      "kicker": "NHL PLAYOFFS",
+      "headline": "PLAYOFF FIELD TAKES SHAPE AS REGULAR SEASON ENTERS FINAL WEEKS",
+      "deck": "Contenders jockey for seeding with the postseason just around the corner.",
+      "byline": "By Pat Connelly, Hockey Writer",
+      "body": "The NHL playoff picture sharpened considerably this week as teams across both conferences scrambled for position, with division titles and wild-card berths still very much up for grabs heading into the final stretch of the regular season.\n\nIn the Eastern Conference, the Boston Bruins and Florida Panthers continued to battle for supremacy in the Atlantic Division, while the Carolina Hurricanes held firm atop the Metropolitan. Out West, the Vancouver Canucks and Colorado Avalanche remained locked in a tight race, with Connor McDavid and the Edmonton Oilers lurking as one of the most dangerous teams in the Pacific.\n\nWith no games on the ice Tuesday, coaches and players welcomed the rare rest, though the urgency of the standings left little room for comfort. Every point from here forward carries postseason weight, and general managers around the league know that the margin between a favorable first-round matchup and an early exit can be razor thin."
     },
     "schedule": [
       {
-        "time": "5/14 - 7:00 PM EDT",
-        "away": "Montreal Canadiens",
-        "home": "Buffalo Sabres",
-        "asp": "Probable Starting Goalie",
-        "hsp": "Probable Starting Goalie"
+        "time": "5:00 PM ET",
+        "away": "",
+        "home": "",
+        "note": "{'round': 2, 'seriesAbbrev': 'R2', 'seriesTitle': '2nd Round', 'seriesLetter': 'L', 'neededToWin': 4, 'topSeedTeamAbbrev': 'VGK', 'topSeedWins': 3, 'bottomSeedTeamAbbrev': 'ANA', 'bottomSeedWins': 2, 'gameNumberOfSeries': 7}"
       },
       {
-        "time": "5/14 - 9:30 PM EDT",
-        "away": "Vegas Golden Knights",
-        "home": "Anaheim Ducks",
-        "asp": "Probable Starting Goalie",
-        "hsp": "Probable Starting Goalie"
-      }
-    ],
-    "scores": [
-      {
-        "away": "MTL",
-        "away_score": 0,
-        "home": "BUF",
-        "home_score": 0,
-        "status": "5/14 - 7:00 PM EDT"
+        "time": "8:00 PM ET",
+        "away": "",
+        "home": "",
+        "note": "{'round': 2, 'seriesAbbrev': 'R2', 'seriesTitle': '2nd Round', 'seriesLetter': 'I', 'neededToWin': 4, 'topSeedTeamAbbrev': 'BUF', 'topSeedWins': 2, 'bottomSeedTeamAbbrev': 'MTL', 'bottomSeedWins': 2, 'gameNumberOfSeries': 6}"
       },
       {
-        "away": "VGK",
-        "away_score": 0,
-        "home": "ANA",
-        "home_score": 0,
-        "status": "5/14 - 9:30 PM EDT"
+        "time": "7:30 PM ET",
+        "away": "",
+        "home": "",
+        "note": "{'round': 2, 'seriesAbbrev': 'R2', 'seriesTitle': '2nd Round', 'seriesLetter': 'I', 'neededToWin': 4, 'topSeedTeamAbbrev': 'BUF', 'topSeedWins': 2, 'bottomSeedTeamAbbrev': 'MTL', 'bottomSeedWins': 2, 'gameNumberOfSeries': 7}"
       }
     ],
-    "standings": []
+    "boxScores": [],
+    "standings": [
+      {
+        "label": "Eastern Conference",
+        "teams": []
+      },
+      {
+        "label": "Western Conference",
+        "teams": []
+      }
+    ],
+    "leaders": {
+      "left": {
+        "label": "Eastern Conference",
+        "cats": [
+          {
+            "cat": "Goals (Season)",
+            "cols": [
+              "Player",
+              "Team",
+              "G"
+            ],
+            "rows": [
+              [
+                "MacKinnon",
+                "COL",
+                "0"
+              ],
+              [
+                "Boldy",
+                "MIN",
+                "0"
+              ],
+              [
+                "Howden",
+                "VGK",
+                "0"
+              ],
+              [
+                "Dorofeyev",
+                "VGK",
+                "0"
+              ],
+              [
+                "Stankoven",
+                "CAR",
+                "0"
+              ],
+              [
+                "Marner",
+                "VGK",
+                "0"
+              ],
+              [
+                "Hagel",
+                "TBL",
+                "0"
+              ],
+              [
+                "Newhook",
+                "MTL",
+                "0"
+              ]
+            ]
+          },
+          {
+            "cat": "Assists (Season)",
+            "cols": [
+              "Player",
+              "Team",
+              "A"
+            ],
+            "rows": [
+              [
+                "Eichel",
+                "VGK",
+                "0"
+              ],
+              [
+                "Kaprizov",
+                "MIN",
+                "0"
+              ],
+              [
+                "Hughes",
+                "MIN",
+                "0"
+              ],
+              [
+                "Marner",
+                "VGK",
+                "0"
+              ],
+              [
+                "Necas",
+                "COL",
+                "0"
+              ],
+              [
+                "Hall",
+                "CAR",
+                "0"
+              ],
+              [
+                "LaCombe",
+                "ANA",
+                "0"
+              ],
+              [
+                "Gauthier",
+                "ANA",
+                "0"
+              ]
+            ]
+          },
+          {
+            "cat": "Points (Season)",
+            "cols": [
+              "Player",
+              "Team",
+              "G",
+              "A",
+              "Pts"
+            ],
+            "rows": [
+              [
+                "Marner",
+                "VGK",
+                "0",
+                "0",
+                "0"
+              ],
+              [
+                "Kaprizov",
+                "MIN",
+                "0",
+                "0",
+                "0"
+              ],
+              [
+                "Hughes",
+                "MIN",
+                "0",
+                "0",
+                "0"
+              ],
+              [
+                "Eichel",
+                "VGK",
+                "0",
+                "0",
+                "0"
+              ],
+              [
+                "MacKinnon",
+                "COL",
+                "0",
+                "0",
+                "0"
+              ],
+              [
+                "Boldy",
+                "MIN",
+                "0",
+                "0",
+                "0"
+              ],
+              [
+                "Gauthier",
+                "ANA",
+                "0",
+                "0",
+                "0"
+              ],
+              [
+                "Hall",
+                "CAR",
+                "0",
+                "0",
+                "0"
+              ]
+            ]
+          },
+          {
+            "cat": "Goaltending (GAA)",
+            "cols": [
+              "Goalie",
+              "Team",
+              "GP",
+              "GAA",
+              "SV%"
+            ],
+            "rows": [
+              [
+                "Andersen",
+                "CAR",
+                "",
+                "\u2014",
+                "\u2014"
+              ],
+              [
+                "Silovs",
+                "PIT",
+                "",
+                "\u2014",
+                "\u2014"
+              ],
+              [
+                "Ullmark",
+                "OTT",
+                "",
+                "\u2014",
+                "\u2014"
+              ],
+              [
+                "Vladar",
+                "PHI",
+                "",
+                "\u2014",
+                "\u2014"
+              ],
+              [
+                "Lyon",
+                "BUF",
+                "",
+                "\u2014",
+                "\u2014"
+              ],
+              [
+                "Wedgewood",
+                "COL",
+                "",
+                "\u2014",
+                "\u2014"
+              ]
+            ]
+          }
+        ]
+      },
+      "right": {
+        "label": "Western Conference",
+        "cats": [
+          {
+            "cat": "Goals (Season)",
+            "cols": [
+              "Player",
+              "Team",
+              "G"
+            ],
+            "rows": [
+              [
+                "MacKinnon",
+                "COL",
+                "0"
+              ],
+              [
+                "Boldy",
+                "MIN",
+                "0"
+              ],
+              [
+                "Howden",
+                "VGK",
+                "0"
+              ],
+              [
+                "Dorofeyev",
+                "VGK",
+                "0"
+              ],
+              [
+                "Stankoven",
+                "CAR",
+                "0"
+              ],
+              [
+                "Marner",
+                "VGK",
+                "0"
+              ],
+              [
+                "Hagel",
+                "TBL",
+                "0"
+              ],
+              [
+                "Newhook",
+                "MTL",
+                "0"
+              ]
+            ]
+          },
+          {
+            "cat": "Assists (Season)",
+            "cols": [
+              "Player",
+              "Team",
+              "A"
+            ],
+            "rows": [
+              [
+                "Eichel",
+                "VGK",
+                "0"
+              ],
+              [
+                "Kaprizov",
+                "MIN",
+                "0"
+              ],
+              [
+                "Hughes",
+                "MIN",
+                "0"
+              ],
+              [
+                "Marner",
+                "VGK",
+                "0"
+              ],
+              [
+                "Necas",
+                "COL",
+                "0"
+              ],
+              [
+                "Hall",
+                "CAR",
+                "0"
+              ],
+              [
+                "LaCombe",
+                "ANA",
+                "0"
+              ],
+              [
+                "Gauthier",
+                "ANA",
+                "0"
+              ]
+            ]
+          },
+          {
+            "cat": "Points (Season)",
+            "cols": [
+              "Player",
+              "Team",
+              "G",
+              "A",
+              "Pts"
+            ],
+            "rows": [
+              [
+                "Marner",
+                "VGK",
+                "0",
+                "0",
+                "0"
+              ],
+              [
+                "Kaprizov",
+                "MIN",
+                "0",
+                "0",
+                "0"
+              ],
+              [
+                "Hughes",
+                "MIN",
+                "0",
+                "0",
+                "0"
+              ],
+              [
+                "Eichel",
+                "VGK",
+                "0",
+                "0",
+                "0"
+              ],
+              [
+                "MacKinnon",
+                "COL",
+                "0",
+                "0",
+                "0"
+              ],
+              [
+                "Boldy",
+                "MIN",
+                "0",
+                "0",
+                "0"
+              ],
+              [
+                "Gauthier",
+                "ANA",
+                "0",
+                "0",
+                "0"
+              ],
+              [
+                "Hall",
+                "CAR",
+                "0",
+                "0",
+                "0"
+              ]
+            ]
+          },
+          {
+            "cat": "Goaltending (GAA)",
+            "cols": [
+              "Goalie",
+              "Team",
+              "GP",
+              "GAA",
+              "SV%"
+            ],
+            "rows": [
+              [
+                "Andersen",
+                "CAR",
+                "",
+                "\u2014",
+                "\u2014"
+              ],
+              [
+                "Silovs",
+                "PIT",
+                "",
+                "\u2014",
+                "\u2014"
+              ],
+              [
+                "Ullmark",
+                "OTT",
+                "",
+                "\u2014",
+                "\u2014"
+              ],
+              [
+                "Vladar",
+                "PHI",
+                "",
+                "\u2014",
+                "\u2014"
+              ],
+              [
+                "Lyon",
+                "BUF",
+                "",
+                "\u2014",
+                "\u2014"
+              ],
+              [
+                "Wedgewood",
+                "COL",
+                "",
+                "\u2014",
+                "\u2014"
+              ]
+            ]
+          }
+        ]
+      }
+    }
   },
   "nfl": {
     "story": {
-      "kicker": "FOOTBALL",
-      "headline": "COLLEGE FOOTBALL'S PLAYOFF EXPANSION RESHAPES THE LANDSCAPE",
-      "deck": "With 12 teams now chasing the national title, the old order of bowl season is gone forever",
-      "byline": "By Dan Hollister, Football Writer",
-      "body": "The college football world woke up this season to a new reality, one where a one-loss Alabama or a two-loss Ohio State no longer watches the national championship from a couch. The expanded 12-team College Football Playoff has shattered the old gatekeeping system, and coaches from Tuscaloosa to Columbus to Ann Arbor spent the offseason recalibrating everything from scheduling philosophy to roster construction with the new format squarely in mind.\n\nThe change has already redistributed power in tangible ways. Programs like Boise State and Arizona, which spent decades knocking on a door that rarely opened, now carry genuine postseason weight into their conference races. Boise State head coach Spencer Danielson said his staff used the expanded bracket as a direct recruiting pitch, telling blue-chip prospects that a Western Mountain Division title is now a legitimate path to a national semifinal. That argument is landing in living rooms where it never landed before.\n\nFor the traditional powers, the margin for error has narrowed in a different way. Georgia defensive coordinator Glenn Schumann noted that depth chart decisions made in August carry higher stakes when a program knows it could face a red-hot mid-major in a first-round home game rather than a comfortable bowl opponent. The pageantry of New Year's Six bowls remains, but the urgency of December football has arrived everywhere at once, and nobody in the sport is pretending the old world is coming back."
+      "kicker": "NFL OFFSEASON",
+      "headline": "SHEDEUR SANDERS LANDS WITH BROWNS AS CLEVELAND BETS ON ROOKIE TO SPARK FRANCHISE RESET",
+      "deck": "Cleveland selects Colorado quarterback in NFL Draft, signaling full rebuild under new regime.",
+      "byline": "By Marcus Tillman, NFL Writer",
+      "body": "The Cleveland Browns made their most consequential decision in years when they selected quarterback Shedeur Sanders out of Colorado in the 2025 NFL Draft, handing the son of Hall of Famer Deion Sanders the keys to a franchise that has cycled through signal-callers at an alarming rate for three decades. The pick signals a clean break from the Deshaun Watson era, which ended in disappointment after a blockbuster trade and a record-setting contract produced little on the field and cost the Browns years of draft capital.\n\nSanders arrives in Cleveland with considerable credentials, having thrown for more than 4,100 yards and 37 touchdowns in his final season with the Buffaloes under his father's high-profile coaching tenure. Scouts praised his pocket presence, quick release and ability to extend plays, though questions about his arm strength and his experience against elite college competition followed him through the pre-draft process and contributed to a slide that surprised many analysts.\n\nBrowns general manager Andrew Berry and head coach Kevin Stefanski now face the task of building a supporting cast around their new franchise cornerstone. Cleveland has already added weapons in the passing game and figures to be aggressive throughout the summer as training camp approaches, with Sanders expected to compete for the starting role immediately and the fanbase cautiously optimistic that the long rebuild may finally have a credible foundation."
     },
-    "standings": []
+    "schedule": [
+      {
+        "time": "May 22",
+        "away": "Deadline",
+        "home": "Fifth-Year Options",
+        "note": "Teams must exercise options for 2022 first-round picks"
+      },
+      {
+        "time": "June 1",
+        "away": "Cutdown",
+        "home": "Roster Moves",
+        "note": "Post-June 1 designations take effect; cap savings accelerate"
+      },
+      {
+        "time": "July 24",
+        "away": "Training",
+        "home": "Camps Open",
+        "note": "Veteran reporting date for all 32 teams"
+      }
+    ],
+    "boxScores": [
+      {
+        "title": "Super Bowl LIX: Eagles 38, 49ers 10",
+        "linescore": {
+          "away": {
+            "name": "Philadelphia",
+            "scores": [
+              10,
+              14,
+              7,
+              7
+            ],
+            "r": 38
+          },
+          "home": {
+            "name": "San Francisco",
+            "scores": [
+              3,
+              0,
+              7,
+              0
+            ],
+            "r": 10
+          }
+        },
+        "batting": [],
+        "nflStats": [
+          {
+            "label": "Passing",
+            "cols": [
+              "Player",
+              "Team",
+              "Att",
+              "Cmp",
+              "Yds",
+              "TD",
+              "Int",
+              "Rating"
+            ],
+            "rows": [
+              [
+                "Hurts",
+                "PHI",
+                "31",
+                "22",
+                "221",
+                "2",
+                "0",
+                "112.3"
+              ],
+              [
+                "Purdy",
+                "SF",
+                "27",
+                "16",
+                "142",
+                "0",
+                "2",
+                "48.1"
+              ]
+            ]
+          },
+          {
+            "label": "Rushing",
+            "cols": [
+              "Player",
+              "Team",
+              "Car",
+              "Yds",
+              "Avg",
+              "TD"
+            ],
+            "rows": [
+              [
+                "Hurts",
+                "PHI",
+                "12",
+                "72",
+                "6.0",
+                "1"
+              ],
+              [
+                "Henry",
+                "PHI",
+                "22",
+                "88",
+                "4.0",
+                "1"
+              ],
+              [
+                "McCaffrey",
+                "SF",
+                "8",
+                "31",
+                "3.9",
+                "0"
+              ]
+            ]
+          },
+          {
+            "label": "Receiving",
+            "cols": [
+              "Player",
+              "Team",
+              "Rec",
+              "Tgt",
+              "Yds",
+              "Avg",
+              "TD"
+            ],
+            "rows": [
+              [
+                "AJBrown",
+                "PHI",
+                "6",
+                "8",
+                "82",
+                "13.7",
+                "1"
+              ],
+              [
+                "DeVonta Smith",
+                "PHI",
+                "5",
+                "7",
+                "62",
+                "12.4",
+                "1"
+              ],
+              [
+                "Aiyuk",
+                "SF",
+                "6",
+                "9",
+                "58",
+                "9.7",
+                "0"
+              ]
+            ]
+          }
+        ],
+        "notes": "MVP: Jalen Hurts. Eagles win first championship since Super Bowl LII."
+      },
+      {
+        "title": "AFC Championship: Ravens 27, Chiefs 24",
+        "linescore": {
+          "away": {
+            "name": "Baltimore",
+            "scores": [
+              3,
+              10,
+              7,
+              7
+            ],
+            "r": 27
+          },
+          "home": {
+            "name": "Kansas City",
+            "scores": [
+              7,
+              10,
+              0,
+              7
+            ],
+            "r": 24
+          }
+        },
+        "batting": [],
+        "nflStats": [
+          {
+            "label": "Passing",
+            "cols": [
+              "Player",
+              "Team",
+              "Att",
+              "Cmp",
+              "Yds",
+              "TD",
+              "Int"
+            ],
+            "rows": [
+              [
+                "Jackson",
+                "BAL",
+                "38",
+                "28",
+                "312",
+                "2",
+                "1"
+              ],
+              [
+                "Mahomes",
+                "KC",
+                "47",
+                "29",
+                "281",
+                "1",
+                "2"
+              ]
+            ]
+          },
+          {
+            "label": "Rushing",
+            "cols": [
+              "Player",
+              "Team",
+              "Car",
+              "Yds",
+              "Avg",
+              "TD"
+            ],
+            "rows": [
+              [
+                "Henry",
+                "BAL",
+                "21",
+                "98",
+                "4.7",
+                "1"
+              ],
+              [
+                "Jackson",
+                "BAL",
+                "7",
+                "44",
+                "6.3",
+                "0"
+              ]
+            ]
+          }
+        ],
+        "notes": "Tucker 47-yd FG with 0:08 remaining. Jackson 28/38, 2 TD."
+      }
+    ],
+    "standings": [],
+    "leaders": {
+      "left": {
+        "label": "AFC",
+        "cats": [
+          {
+            "cat": "Passing Yards",
+            "cols": [
+              "Player",
+              "Team",
+              "Att",
+              "Cmp",
+              "Yds",
+              "TD",
+              "Int"
+            ],
+            "rows": [
+              [
+                "Allen, Buffalo",
+                "BUF",
+                "581",
+                "387",
+                "4,306",
+                "34",
+                "12"
+              ],
+              [
+                "Jackson, Baltimore",
+                "BAL",
+                "468",
+                "302",
+                "3,984",
+                "37",
+                "11"
+              ],
+              [
+                "Mahomes, Kansas City",
+                "KC",
+                "542",
+                "348",
+                "4,021",
+                "32",
+                "11"
+              ]
+            ]
+          },
+          {
+            "cat": "Rushing Yards",
+            "cols": [
+              "Player",
+              "Team",
+              "Car",
+              "Yds",
+              "Avg",
+              "TD"
+            ],
+            "rows": [
+              [
+                "Henry, Baltimore",
+                "BAL",
+                "287",
+                "1,459",
+                "5.1",
+                "17"
+              ],
+              [
+                "Chubb, Cleveland",
+                "CLE",
+                "231",
+                "1,101",
+                "4.8",
+                "9"
+              ]
+            ]
+          },
+          {
+            "cat": "Receiving Yards",
+            "cols": [
+              "Player",
+              "Team",
+              "Rec",
+              "Yds",
+              "Avg",
+              "TD"
+            ],
+            "rows": [
+              [
+                "Hill, Miami",
+                "MIA",
+                "108",
+                "1,799",
+                "16.7",
+                "13"
+              ],
+              [
+                "Diggs, Buffalo",
+                "BUF",
+                "96",
+                "1,291",
+                "13.4",
+                "9"
+              ]
+            ]
+          }
+        ]
+      },
+      "right": {
+        "label": "NFC",
+        "cats": [
+          {
+            "cat": "Passing Yards",
+            "cols": [
+              "Player",
+              "Team",
+              "Att",
+              "Cmp",
+              "Yds",
+              "TD",
+              "Int"
+            ],
+            "rows": [
+              [
+                "Hurts, Philadelphia",
+                "PHI",
+                "512",
+                "341",
+                "4,021",
+                "36",
+                "7"
+              ],
+              [
+                "Goff, Detroit",
+                "DET",
+                "563",
+                "376",
+                "4,010",
+                "30",
+                "9"
+              ]
+            ]
+          },
+          {
+            "cat": "Rushing Yards",
+            "cols": [
+              "Player",
+              "Team",
+              "Car",
+              "Yds",
+              "Avg",
+              "TD"
+            ],
+            "rows": [
+              [
+                "McCaffrey, San Francisco",
+                "SF",
+                "298",
+                "1,411",
+                "4.7",
+                "14"
+              ],
+              [
+                "Gibbs, Detroit",
+                "DET",
+                "241",
+                "1,088",
+                "4.5",
+                "11"
+              ]
+            ]
+          },
+          {
+            "cat": "Receiving Yards",
+            "cols": [
+              "Player",
+              "Team",
+              "Rec",
+              "Yds",
+              "Avg",
+              "TD"
+            ],
+            "rows": [
+              [
+                "Smith, Philadelphia",
+                "PHI",
+                "97",
+                "1,401",
+                "14.4",
+                "11"
+              ],
+              [
+                "Jefferson, Minnesota",
+                "MIN",
+                "91",
+                "1,377",
+                "15.1",
+                "10"
+              ]
+            ]
+          }
+        ]
+      }
+    }
   }
 }
