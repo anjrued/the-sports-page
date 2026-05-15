@@ -841,14 +841,21 @@ Return JSON: {{"kicker":"NBA PLAYOFFS","headline":"HEADLINE ALL CAPS","deck":"Un
             "boxScores": box_scores, "standings": standings, "leaders": leaders}
 
 def nba_leaders_side(client, season, conf_filter, label):
-    """Get NBA leaders for one conference via nba_api."""
+    """Get NBA leaders for one conference via nba_api, filtered by conference."""
     try:
         from nba_api.stats.endpoints import leagueleaders
         cats_config = [
-            ("PTS", "Scoring (PPG)",    ["Player","Team","G","Pts","PPG"]),
-            ("REB", "Rebounds (RPG)",   ["Player","Team","G","Reb","RPG"]),
-            ("AST", "Assists (APG)",    ["Player","Team","G","Ast","APG"]),
+            ("PTS", "Scoring (PPG)",  ["Player","Team","G","Pts","PPG"]),
+            ("REB", "Rebounds (RPG)", ["Player","Team","G","Reb","RPG"]),
+            ("AST", "Assists (APG)",  ["Player","Team","G","Ast","APG"]),
         ]
+        # ESPN conference IDs for filtering team abbreviations
+        # East teams vs West teams — use conference param if available
+        east_teams = {"ATL","BOS","BKN","CHA","CHI","CLE","DET","IND",
+                      "MIA","MIL","NYK","ORL","PHI","TOR","WAS"}
+        west_teams = {"DAL","DEN","GSW","HOU","LAC","LAL","MEM","MIN",
+                      "NOP","OKC","PHX","POR","SAC","SAS","UTA"}
+
         cats = []
         for stat, display, cols in cats_config:
             time.sleep(0.6)
@@ -859,20 +866,23 @@ def nba_leaders_side(client, season, conf_filter, label):
                 season_type_all_star="Playoffs",
             )
             df = obj.league_leaders.get_data_frame()
+            # Filter by conference
+            conf_teams = east_teams if conf_filter == "East" else west_teams
+            filtered = df[df["TEAM"].isin(conf_teams)] if "TEAM" in df.columns else df
             rows = []
-            for _, row in df.head(8).iterrows():
+            for _, row in filtered.head(8).iterrows():
                 rows.append([
                     row.get("PLAYER",""),
                     row.get("TEAM",""),
                     str(int(row.get("GP",0) or 0)),
-                    str(round(float(row.get(stat,0) or 0)*row.get("GP",1),1)),
+                    str(round(float(row.get(stat,0) or 0)*float(row.get("GP",1) or 1),1)),
                     str(round(float(row.get(stat,0) or 0),1)),
                 ])
             if rows:
                 cats.append({"cat": display, "cols": cols, "rows": rows})
         return {"label": label, "cats": cats}
     except Exception as e:
-        print(f"    NBA leaders error: {e}")
+        print(f"    NBA leaders error ({label}): {e}")
         return {"label": label, "cats": []}
 
 def nba_fallback(client):
