@@ -2340,6 +2340,25 @@ function renderBracket(rounds) {
 // ═══════════════════════════════════════════
 
 
+function renderThisDayHorizontal(thisDay) {
+  if (!thisDay || !thisDay.items || !thisDay.items.length) return '';
+  const entries = thisDay.items.slice(0,3);
+  const items = entries.map((item, i) =>
+    `<div style="flex:1;min-width:180px;padding:0 14px${i < entries.length-1 ? ';border-right:1px solid #ccc' : ''}">
+      <span style="font-family:'Playfair Display',serif;font-weight:700;font-size:.72rem;color:#111">${item.year}</span>
+      <span style="font-size:.65rem;font-family:'Libre Baskerville',serif;color:#333;line-height:1.6;display:block;margin-top:3px">${item.text}</span>
+    </div>`
+  ).join('');
+  return `<div style="border-top:2px solid #111;padding:8px 0 10px;margin:10px 0">
+    <div style="font-size:.52rem;font-weight:700;text-transform:uppercase;letter-spacing:2.5px;color:#8B0000;margin-bottom:7px;padding-bottom:4px;border-bottom:1px solid #ddd">
+      ◆ This Day in Sports
+    </div>
+    <div style="display:grid;grid-template-columns:repeat(${entries.length},1fr)">
+      ${items}
+    </div>
+  </div>`;
+}
+
 function renderThisDay(thisDay) {
   if (!thisDay || !thisDay.items || !thisDay.items.length) return '';
   const items = thisDay.items.slice(0,3).map(item =>
@@ -2383,10 +2402,10 @@ function buildFront(overrides) {
       </div>
       <div class="sp-score-sidebar">
         ${renderSidebar(sc)}
-        ${renderThisDay((overrides && overrides.this_day) || front.this_day)}
       </div>
     </div>
     ${renderEditorsNote()}
+    ${renderThisDayHorizontal((overrides && overrides.this_day) || front.this_day)}
     <hr class="sp-rule-thin"/>
     <div class="sp-sec-grid">
       ${sec.map(s=>`<div class="sp-sec-story">
