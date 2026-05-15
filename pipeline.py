@@ -352,11 +352,58 @@ Return JSON: {{"kicker":"BASEBALL","headline":"HEADLINE ALL CAPS","deck":"Under 
 # NBA  (stats.nba.com via nba_api — official, free, no key)
 # ══════════════════════════════════════════════════════════════════════════════
 
+
+def espn_nba_scores(game_date):
+    """ESPN fallback for NBA scores when nba_api times out."""
+    data = api_get("https://site.api.espn.com/apis/site/v2/sports/basketball/nba/scoreboard",
+                   {"dates": game_date.replace("-","")})
+    games = []
+    if not data: return games
+    for event in data.get("events",[]):
+        comps = event.get("competitions",[{}])[0]
+        teams = comps.get("competitors",[])
+        if len(teams) < 2: continue
+        home = next((t for t in teams if t.get("homeAway")=="home"), teams[0])
+        away = next((t for t in teams if t.get("homeAway")=="away"), teams[1])
+        status = comps.get("status",{}).get("type",{}).get("shortDetail","Final")
+        games.append({
+            "game_id": event.get("id",""),
+            "away": away.get("team",{}).get("displayName",""),
+            "home": home.get("team",{}).get("displayName",""),
+            "away_score": int(away.get("score",0) or 0),
+            "home_score": int(home.get("score",0) or 0),
+            "status": status,
+        })
+    return games
+
+def espn_nba_schedule(game_date):
+    """ESPN fallback for today's NBA schedule."""
+    data = api_get("https://site.api.espn.com/apis/site/v2/sports/basketball/nba/scoreboard",
+                   {"dates": game_date.replace("-","")})
+    games = []
+    if not data: return games
+    for event in data.get("events",[]):
+        comps = event.get("competitions",[{}])[0]
+        teams = comps.get("competitors",[])
+        if len(teams) < 2: continue
+        home = next((t for t in teams if t.get("homeAway")=="home"), teams[0])
+        away = next((t for t in teams if t.get("homeAway")=="away"), teams[1])
+        status = comps.get("status",{}).get("type",{}).get("shortDetail","TBD")
+        note = event.get("season",{}).get("slug","")
+        entry = {
+            "time": status,
+            "away": away.get("team",{}).get("displayName",""),
+            "home": home.get("team",{}).get("displayName",""),
+        }
+        if note: entry["note"] = note
+        games.append(entry)
+    return games
+
 def build_nba(client, today_str, yesterday_str, nba_season):
     print("  NBA: fetching data...")
     try:
         from nba_api.stats.endpoints import (
-            scoreboardv2, boxscoretraditionalv2,
+            scoreboardv3, boxscoretraditionalv2,
             leaguestandingsv3, leagueleaders
         )
     except ImportError:
@@ -376,8 +423,8 @@ def build_nba(client, today_str, yesterday_str, nba_season):
     def nba_get(endpoint_cls, **kwargs):
         for attempt in range(3):
             try:
-                time.sleep(0.6)
-                obj = endpoint_cls(**kwargs)
+                time.sleep(1.5)
+                obj = endpoint_cls(timeout=60, **kwargs)
                 obj._endpoint_headers = NBA_HEADERS
                 return obj
             except Exception as e:
@@ -388,52 +435,49 @@ def build_nba(client, today_str, yesterday_str, nba_season):
         return None
 
     # Yesterday's scores
-    board = nba_get(scoreboardv2.ScoreboardV2, game_date=yesterday_str, league_id="00")
+    board = nba_get(scoreboardv3.ScoreboardV3, game_date=yesterday_str, league_id="00")
     yesterday_games = []
+    if not board:
+        print('    nba_api failed, using ESPN fallback for NBA scores')
+        yesterday_games = espn_nba_scores(yesterday_str)
     if board:
         try:
-            games_df = board.game_header.get_data_frame()
-            line_df  = board.line_score.get_data_frame()
-            for _, g in games_df.iterrows():
-                gid = g.get("GAME_ID","")
-                lines = line_df[line_df["GAME_ID"]==gid]
-                if len(lines) >= 2:
-                    away_row = lines.iloc[0]
-                    home_row = lines.iloc[1]
-                    yesterday_games.append({
-                        "game_id": gid,
-                        "away": away_row.get("TEAM_CITY_NAME","") + " " + away_row.get("TEAM_NAME",""),
-                        "home": home_row.get("TEAM_CITY_NAME","") + " " + home_row.get("TEAM_NAME",""),
-                        "away_score": int(away_row.get("PTS",0) or 0),
-                        "home_score": int(home_row.get("PTS",0) or 0),
-                        "status": g.get("GAME_STATUS_TEXT","Final"),
-                    })
+            sb = board.score_board.get_data_frame()
+            for _, g in sb.iterrows():
+                yesterday_games.append({
+                    "game_id": str(g.get("gameId","")),
+                    "away": g.get("awayTeamCity","") + " " + g.get("awayTeamName",""),
+                    "home": g.get("homeTeamCity","") + " " + g.get("homeTeamName",""),
+                    "away_score": int(g.get("awayTeamScore",0) or 0),
+                    "home_score": int(g.get("homeTeamScore",0) or 0),
+                    "status": g.get("gameStatusText","Final"),
+                })
         except Exception as e:
             print(f"    NBA scoreboard parse error: {e}")
+            # Fallback: try ESPN for NBA scores
+            yesterday_games = espn_nba_scores(yesterday_str)
 
     # Today's schedule
-    today_board = nba_get(scoreboardv2.ScoreboardV2, game_date=today_str, league_id="00")
+    today_board = nba_get(scoreboardv3.ScoreboardV3, game_date=today_str, league_id="00")
     schedule = []
+    if not today_board:
+        schedule = espn_nba_schedule(today_str)
     if today_board:
         try:
-            games_df  = today_board.game_header.get_data_frame()
-            series_df = today_board.series_standings.get_data_frame()
-            for _, g in games_df.iterrows():
-                gid = g.get("GAME_ID","")
-                away = (g.get("VISITOR_TEAM_CITY","") + " " + g.get("VISITOR_TEAM_NICKNAME","")).strip()
-                home = (g.get("HOME_TEAM_CITY","") + " " + g.get("HOME_TEAM_NICKNAME","")).strip()
-                time_et = g.get("GAME_STATUS_TEXT","TBD")
-                note = ""
-                if not series_df.empty:
-                    sr = series_df[series_df["GAME_ID"]==gid]
-                    if not sr.empty:
-                        note = sr.iloc[0].get("SERIES_LEADER","")
-                entry = {"time": time_et, "away": away, "home": home}
-                if note:
-                    entry["note"] = note
+            sb = today_board.score_board.get_data_frame()
+            for _, g in sb.iterrows():
+                away = g.get("awayTeamCity","") + " " + g.get("awayTeamName","")
+                home = g.get("homeTeamCity","") + " " + g.get("homeTeamName","")
+                time_et = g.get("gameStatusText","TBD")
+                entry = {"time": time_et, "away": away.strip(), "home": home.strip()}
+                series = g.get("seriesText","") or g.get("seriesStatusText","")
+                if series:
+                    entry["note"] = str(series)
                 schedule.append(entry)
         except Exception as e:
             print(f"    NBA today schedule parse error: {e}")
+            # Fallback to ESPN
+            schedule = espn_nba_schedule(today_str)
 
     # Box scores
     box_scores = []
@@ -792,7 +836,7 @@ def fmt_nhl_leaders_side(conf_abbr, label, season_id):
                 rows = []
                 for p in data[cat]:
                     name = p.get("lastName",{}).get("default","")
-                    team = p.get("teamAbbrevAlt","") or p.get("teamAbbrev",{}).get("default","")
+                    team = p.get("teamAbbrevAlt","") or (p.get("teamAbbrev","") if isinstance(p.get("teamAbbrev",""), str) else p.get("teamAbbrev",{}).get("default",""))
                     if cat == "points":
                         rows.append([name, team,
                                      str(p.get("goals",0)),
@@ -813,7 +857,7 @@ def fmt_nhl_leaders_side(conf_abbr, label, season_id):
             rows = []
             for p in data["savePctg"]:
                 name = p.get("lastName",{}).get("default","")
-                team = p.get("teamAbbrev",{}).get("default","")
+                team = (p.get("teamAbbrev","") if isinstance(p.get("teamAbbrev",""), str) else p.get("teamAbbrev",{}).get("default",""))
                 gaa  = p.get("goalsAgainstAvg","")
                 svp  = p.get("savePctg","")
                 gp   = p.get("gamesPlayed","")
