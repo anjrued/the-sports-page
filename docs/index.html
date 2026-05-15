@@ -1770,10 +1770,10 @@ function story(s, hLevel, bodyClass) {
 
 // ── SCORES ───────────────────────────────────────────────────────────────────
 function scoreGame(g) {
-  return `<div class="sp-game">
-    <div class="sp-game-row"><span class="sp-team">${g.away||g.away_team||''}</span><span class="sp-sv">${g.away_score||g.as||0}</span></div>
-    <div class="sp-game-row"><span class="sp-team">${g.home||g.home_team||''}</span><span class="sp-sv">${g.home_score||g.hs||0}</span></div>
-    <div class="sp-game-note">${g.status||g.note||'Final'}</div>
+  return `<div style="padding:2px 0;border-bottom:1px solid #ddd;font-size:.65rem;font-family:'Libre Baskerville',serif">
+    <div style="display:flex;justify-content:space-between;line-height:1.55"><span style="flex:1">${g.away||g.away_team||''}</span><span style="font-weight:700;min-width:18px;text-align:right">${g.away_score||g.as||0}</span></div>
+    <div style="display:flex;justify-content:space-between;line-height:1.55"><span style="flex:1">${g.home||g.home_team||''}</span><span style="font-weight:700;min-width:18px;text-align:right">${g.home_score||g.hs||0}</span></div>
+    <div style="font-size:.48rem;color:#666;font-style:italic;text-align:right">${g.status||g.note||'Final'}</div>
   </div>`;
 }
 
@@ -1784,7 +1784,7 @@ function renderSidebar(scores) {
     const games = scores[key];
     if (!games || !games.length) return;
     const lbl = {nba:'NBA',mlb:'Baseball',nhl:'Hockey'}[key];
-    html += `<div class="sp-league-lbl">${lbl}</div>`;
+    html += `<div style="font-size:.48rem;font-weight:700;text-transform:uppercase;letter-spacing:1.8px;color:#8B0000;margin:7px 0 2px;border-bottom:1px solid #bbb;padding-bottom:1px">${lbl}</div>`;
     games.forEach(g => { html += scoreGame(g); });
   });
   return html;
@@ -1811,7 +1811,7 @@ function renderLinescore(ls, sport) {
   const scores = ls.away.scores;
   const cols = isBB ? scores.map((_,i)=>i+1) : isHK ? ['1','2','3','OT','SO'].slice(0,scores.length) : ['Q1','Q2','Q3','Q4','OT'].slice(0,scores.length);
   return `<div style="overflow-x:auto"><table class="linescore">
-    <thead><tr><th>Team</th>${cols.map(c=>`<th>${c}</th>`).join('')}<th>${isBB?'R':'T'}</th>${isBB?'<th>H</th><th>E</th>':''}'}</tr></thead>
+    <thead><tr><th>Team</th>${cols.map(c=>`<th>${c}</th>`).join('')}<th>${isBB?'R':'T'}</th>${isBB?'<th>H</th><th>E</th>':''}</tr></thead>
     <tbody>
       ${[ls.away,ls.home].map(side => `<tr>
         <td>${side.name}</td>
@@ -1890,45 +1890,55 @@ function renderNFLStats(nflStats) {
 
 // ── STANDINGS ────────────────────────────────────────────────────────────────
 function renderStandings(divisions, hasSplit) {
-  if (!divisions||!divisions.length) return '';
-  return divisions.map(div => `
-    <div class="sp-div-label">${div.label||''}</div>
-    <div class="sp-std-wrap"><table class="sp-std-tbl">
+  if (!divisions||!divisions.length) return '<p style="font-style:italic;color:#999;font-size:.75rem;padding:8px 0">Standings not available.</p>';
+  const TS = 'text-align:right;font-size:.61rem;font-family:"Libre Baskerville",serif';
+  const TH = 'text-align:right;font-weight:700;font-size:.52rem;text-transform:uppercase;border-top:1px solid #111;border-bottom:2px solid #111;padding:2px 4px;background:#e0e0e0;white-space:nowrap';
+  const TD = 'padding:2px 4px;border-bottom:1px solid #e0e0e0;text-align:right;white-space:nowrap;font-size:.61rem;font-family:"Libre Baskerville",serif';
+  return divisions.map(div => {
+    if (!div || !div.teams || !div.teams.length) return '';
+    const hasNote = div.teams[0] && div.teams[0].note;
+    return `
+    <div style="font-size:.54rem;font-weight:700;text-transform:uppercase;letter-spacing:2px;margin:12px 0 3px;padding-bottom:2px;border-bottom:1px solid #aaa;color:#8B0000">${div.label||''}</div>
+    <div style="overflow-x:auto;-webkit-overflow-scrolling:touch"><table style="min-width:${hasSplit?'500px':'280px'};width:100%;border-collapse:collapse">
       <thead><tr>
-        <th style="text-align:left;min-width:130px">Team</th>
-        <th>W</th><th>L</th><th>Pct</th><th>GB</th>
-        ${hasSplit?'<th>L10</th><th>Str</th><th>Home</th><th>Away</th>':''}
-        ${div.teams[0]&&div.teams[0].note?'<th style="text-align:left;min-width:110px">Status</th>':''}
+        <th style="${TH};text-align:left;min-width:130px">Team</th>
+        <th style="${TH}">W</th><th style="${TH}">L</th><th style="${TH}">Pct</th><th style="${TH}">GB</th>
+        ${hasSplit?`<th style="${TH}">L10</th><th style="${TH}">Str</th><th style="${TH}">Home</th><th style="${TH}">Away</th>`:''}
+        ${hasNote?`<th style="${TH};text-align:left;min-width:110px">Status</th>`:''}
       </tr></thead><tbody>
-      ${div.teams.map(t=>`<tr>
-        <td style="text-align:left">${t.name}</td>
-        <td>${t.w}</td><td>${t.l}</td><td>${t.pct}</td><td>${t.gb}</td>
-        ${hasSplit?`<td>${t.l10||''}</td><td>${t.strk||''}</td><td>${t.home||''}</td><td>${t.away||''}</td>`:''}
-        ${t.note?`<td style="text-align:left;font-size:.52rem;color:#555;font-style:italic">${t.note}</td>`:''}
+      ${div.teams.map((t,i)=>`<tr style="${i===0?'font-weight:700':''}">
+        <td style="${TD};text-align:left">${t.name||''}</td>
+        <td style="${TD}">${t.w||''}</td><td style="${TD}">${t.l||''}</td><td style="${TD}">${t.pct||''}</td><td style="${TD}">${t.gb||''}</td>
+        ${hasSplit?`<td style="${TD}">${t.l10||''}</td><td style="${TD}">${t.strk||''}</td><td style="${TD}">${t.home||''}</td><td style="${TD}">${t.away||''}</td>`:''}
+        ${t.note?`<td style="${TD};text-align:left;font-size:.52rem;color:#555;font-style:italic">${t.note}</td>`:''}
       </tr>`).join('')}
       </tbody>
-    </table></div>
-  `).join('');
+    </table></div>`;
+  }).join('');
 }
 
 // ── LEAGUE LEADERS ───────────────────────────────────────────────────────────
 function renderLeaders(leaders) {
   if (!leaders) return '';
   const { left, right } = leaders;
+  if (!left || !right) return '';
+  const TH = 'text-align:left;font-weight:700;font-size:.5rem;text-transform:uppercase;border-bottom:1px solid #ccc;padding:1px 3px';
+  const TD = 'padding:2px 3px;border-bottom:1px solid #eee;font-size:.6rem;font-family:"Libre Baskerville",serif';
   function col(side) {
+    if (!side || !side.cats) return '';
     return `<div>
-      <div class="leaders-col-head">${side.label}</div>
-      ${side.cats.map(cat => `
-        <div class="leader-block">
-          <div class="leader-cat">${cat.cat}</div>
-          <table class="ldr-tbl">
-            <thead><tr>${cat.cols.map(c=>`<th>${c}</th>`).join('')}</tr></thead>
-            <tbody>${cat.rows.map(row=>`<tr>${row.map(cell=>`<td>${cell}</td>`).join('')}</tr>`).join('')}</tbody>
+      <div style="font-family:'Playfair Display',serif;font-size:.78rem;font-weight:900;text-transform:uppercase;text-align:center;border-top:2px solid #111;border-bottom:2px solid #111;padding:3px 0;margin-bottom:8px;letter-spacing:1px">${side.label||''}</div>
+      ${(side.cats||[]).map(cat => `
+        <div style="margin-bottom:10px">
+          <div style="font-size:.54rem;font-weight:700;text-transform:uppercase;letter-spacing:1.5px;border-bottom:1px solid #999;padding-bottom:2px;margin-bottom:2px">${cat.cat||''}</div>
+          <table style="width:100%;border-collapse:collapse">
+            <thead><tr>${(cat.cols||[]).map(c=>`<th style="${TH}${c!==cat.cols[0]?';text-align:right':''}">${c}</th>`).join('')}</tr></thead>
+            <tbody>${(cat.rows||[]).map(row=>`<tr>${(row||[]).map((cell,k)=>`<td style="${TD}${k>0?';text-align:right':''}">${cell}</td>`).join('')}</tr>`).join('')}</tbody>
           </table>
         </div>`).join('')}
     </div>`;
   }
-  return `<div class="leaders-split">${col(left)}${col(right)}</div>`;
+  return `<div style="display:grid;grid-template-columns:1fr 1fr;gap:0 20px">${col(left)}${col(right)}</div>`;
 }
 
 // ── BRACKET ──────────────────────────────────────────────────────────────────
@@ -2020,12 +2030,12 @@ function buildSport(id, overrides) {
       const hasNFL2 = id==='nfl'&&game.nflStats;
       const canExpand = hasBatting||hasNFL2;
       return `<div class="bs-game">
-        <div class="bs-game-title" ${canExpand?`onclick="toggleBS('${bid}')" style="cursor:pointer"`:''}>
+        <div class="bs-game-title" >
           <span>${game.title}</span>
-          ${canExpand?`<span id="${bid}-toggle" class="bs-toggle">▼ Full Box Score</span>`:''}
+          
         </div>
         ${renderLinescore(game.linescore,id)}
-        <div id="${bid}" style="display:none">
+        <div id="${bid}" style="display:block">
           ${hasBatting?renderBatting(game.batting,id):''}
           ${hasNFL2?renderNFLStats(game.nflStats):''}
         </div>
@@ -2053,11 +2063,15 @@ function buildNav() {
     const btn = document.createElement('button');
     btn.className = 'sp-nav-btn' + (s.id==='front'?' active':'');
     btn.textContent = s.label;
+    btn.style.cssText = 'flex:1;min-width:80px;padding:8px 10px;font-family:"Libre Baskerville",serif;font-size:.6rem;font-weight:700;text-transform:uppercase;letter-spacing:1.5px;background:none;border:none;border-right:1px solid #bbb;cursor:pointer;color:#444;white-space:nowrap;transition:all .12s';
+    if(s.id==='front'){btn.style.background='#111';btn.style.color='#fff';}
     btn.onclick = () => {
       document.querySelectorAll('.page').forEach(p=>p.classList.remove('active'));
-      document.querySelectorAll('.sp-nav-btn').forEach(b=>b.classList.remove('active'));
+      document.querySelectorAll('.sp-nav-btn').forEach(b=>{b.classList.remove('active');b.style.background='none';b.style.color='#444';});
       document.getElementById(s.id).classList.add('active');
       btn.classList.add('active');
+      btn.style.background='#111';
+      btn.style.color='#fff';
     };
     nav.appendChild(btn);
   });
