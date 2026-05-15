@@ -514,9 +514,25 @@ table.ldr-tbl {
   .leaders-split { grid-template-columns: 1fr; }
   .footer { padding: 7px 14px; flex-direction: column; gap: 2px; text-align: center; }
 }
+@media (max-width: 760px) {
+  .sp-nav-btn {
+    flex: none;
+    font-size: .55rem;
+    letter-spacing: .8px;
+    padding: 8px 10px;
+    white-space: nowrap;
+  }
+  .sp-nav { overflow-x: auto; }
+}
 @media (max-width: 480px) {
   .masthead-name { font-size: 1.6rem; }
-  .nav-btn { font-size: .54rem; padding: 7px 8px; }
+  .sp-name { font-size: 2.2rem; }
+  .nav-btn { font-size: .5rem; padding: 7px 6px; }
+  .sp-nav-btn {
+    font-size: .52rem;
+    letter-spacing: .5px;
+    padding: 8px 8px;
+  }
 }
 
 /* Extra styles for HTML version */
@@ -659,7 +675,7 @@ table.ldr-tbl {
 .sp-nav::-webkit-scrollbar { display: none; }
 .sp-nav-btn {
   flex: 1;
-  min-width: 80px;
+  min-width: 0;
   padding: 8px 10px;
   font-family: 'Libre Baskerville', serif;
   font-size: .6rem;
@@ -672,6 +688,8 @@ table.ldr-tbl {
   cursor: pointer;
   color: #444;
   white-space: nowrap;
+  overflow: hidden;
+  text-overflow: clip;
   transition: all .12s;
 }
 .sp-nav-btn:last-child { border-right: none; }
