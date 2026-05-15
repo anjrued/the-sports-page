@@ -907,7 +907,6 @@ def build_nhl(client, today_str, yesterday_str, nhl_season_id):
 
         box_scores.append({"title": title, "linescore": ls,
                             "batting": batting,
-                            "pitching": pitching,
                             "notes": notes})
 
     # Standings
