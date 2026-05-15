@@ -1778,7 +1778,7 @@ function scoreGame(g) {
 }
 
 function renderSidebar(scores) {
-  let html = '<div class="sp-score-col-head">Yesterday's Scores</div>';
+  let html = `<div class="sp-score-col-head">Yesterday's Scores</div>`;
   const sports = ['nba','mlb','nhl'];
   sports.forEach(key => {
     const games = scores[key];
