@@ -272,46 +272,54 @@ def fmt_mlb_schedule(games):
     return sched
 
 def fmt_mlb_standings(raw):
-    div_order = ["AL East","AL Central","AL West","NL East","NL Central","NL West"]
+    # Map all known API division name variants to short display names
+    NAME_MAP = {
+        "American League East":    "AL East",
+        "American League Central": "AL Central",
+        "American League West":    "AL West",
+        "National League East":    "NL East",
+        "National League Central": "NL Central",
+        "National League West":    "NL West",
+        "AL East": "AL East", "AL Central": "AL Central", "AL West": "AL West",
+        "NL East": "NL East", "NL Central": "NL Central", "NL West": "NL West",
+    }
+    DIV_ORDER = ["AL East","AL Central","AL West","NL East","NL Central","NL West"]
     divs = {}
     if not raw:
         print("    Standings: no raw data")
         return []
     records = raw.get("records", [])
-    print(f"    Standings: {len(records)} division records found")
+    print(f"    Standings: {len(records)} records received")
     for rec in records:
-        # Division name can be nested differently depending on API version
         div_obj = rec.get("division", {})
-        div = div_obj.get("name", div_obj.get("nameShort", ""))
+        raw_name = (div_obj.get("name","") or
+                    div_obj.get("nameShort","") or
+                    rec.get("divisionName",""))
+        div = NAME_MAP.get(raw_name, raw_name)
         if not div:
-            # Try alternate path
-            div = rec.get("divisionName", "")
+            print(f"      Skipping record — no division name. Keys: {list(rec.keys())}")
+            continue
         teams = []
         for i, tr in enumerate(rec.get("teamRecords", [])):
-            # splitRecords
             split_list = tr.get("records", {}).get("splitRecords", [])
             splits = {s.get("type", s.get("splitType","")): s for s in split_list}
             ho = splits.get("home", {}); aw = splits.get("away", {})
             lt = splits.get("lastTen", splits.get("last10", {}))
             gb_raw = tr.get("gamesBack", tr.get("gamesBehind", "—"))
-            gb = "-" if str(gb_raw) in ["0.0","0","0.00"] else str(gb_raw)
-            # streak
+            gb = "-" if str(gb_raw) in ["0.0","0","0.00","-.--","—"] else str(gb_raw)
             streak_obj = tr.get("streak", {})
-            strk = streak_obj.get("streakCode", "") or (
+            strk = streak_obj.get("streakCode","") or (
                 ("W" if streak_obj.get("streakType","")=="wins" else "L") +
                 str(streak_obj.get("streakNumber",""))
                 if streak_obj else ""
             )
-            # pct
             pct_raw = tr.get("winningPercentage", tr.get("pct", ".000"))
             if pct_raw and not str(pct_raw).startswith("."):
-                try:
-                    pct_raw = f"{float(pct_raw):.3f}"
-                except Exception:
-                    pass
+                try: pct_raw = f"{float(pct_raw):.3f}"
+                except: pass
             teams.append({
                 "rank": i+1,
-                "name": tr.get("team", {}).get("name", ""),
+                "name": tr.get("team",{}).get("name",""),
                 "w":    tr.get("wins", 0),
                 "l":    tr.get("losses", 0),
                 "pct":  str(pct_raw),
@@ -321,14 +329,16 @@ def fmt_mlb_standings(raw):
                 "home": f"{ho.get('wins',0)}-{ho.get('losses',0)}",
                 "away": f"{aw.get('wins',0)}-{aw.get('losses',0)}",
             })
-        if div and teams:
+        if teams:
             divs[div] = {"label": div, "teams": teams}
             print(f"      {div}: {len(teams)} teams")
-    result = [divs[d] for d in div_order if d in divs]
-    # If none matched the expected names, return whatever we have
+        else:
+            print(f"      {div}: no teams found")
+    result = [divs[d] for d in DIV_ORDER if d in divs]
     if not result and divs:
-        print(f"    Warning: div names didn't match expected. Got: {list(divs.keys())}")
+        print(f"    Warning: using unordered divs: {list(divs.keys())}")
         result = list(divs.values())
+    print(f"    Standings result: {len(result)} divisions")
     return result
 
 def fmt_mlb_leaders_side(season, league_id, label):
