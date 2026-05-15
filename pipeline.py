@@ -100,7 +100,7 @@ def mlb_today(today_date):
     data = api_get(f"{MLB}/schedule", {
         "sportId": 1,
         "date": today_date,
-        "hydrate": "probablePitcher,team",
+        "hydrate": "probablePitcher(note,stats),team",
     })
     if not data:
         return []
@@ -178,22 +178,25 @@ def fmt_mlb_pitching(box, side):
         if not stats or not stats.get("inningsPitched"):
             continue
         last = p.get("person", {}).get("fullName", "").split()[-1]
-        note = p.get("gameStatus", {}).get("isCurrentPitcher", False)
-        dec = ""
-        if stats.get("wins"): dec = f"W, {stats['wins']}-{stats.get('losses',0)}"
-        elif stats.get("losses"): dec = f"L, {stats.get('wins',0)}-{stats['losses']}"
-        elif stats.get("saves"): dec = f"SV, {stats['saves']}"
-        elif stats.get("holds"): dec = "H"
+        ss   = p.get("seasonStats", {}).get("pitching", {})
+        dec  = ""
+        sw   = ss.get("wins",  stats.get("wins",  0))
+        sl   = ss.get("losses",stats.get("losses",0))
+        if stats.get("wins"):     dec = f"W, {sw}-{sl}"
+        elif stats.get("losses"): dec = f"L, {sw}-{sl}"
+        elif stats.get("saves"):  dec = f"SV, {ss.get('saves',stats.get('saves',0))}"
+        elif stats.get("holds"):  dec = "H"
+        era = ss.get("era", stats.get("era","—"))
         pitchers.append({
             "name": f"{last}{' ('+dec+')' if dec else ''}",
-            "ip":  stats.get("inningsPitched", "0.0"),
-            "h":   stats.get("hits", 0),
-            "r":   stats.get("runs", 0),
-            "er":  stats.get("earnedRuns", 0),
-            "bb":  stats.get("baseOnBalls", 0),
-            "so":  stats.get("strikeOuts", 0),
-            "np":  stats.get("numberOfPitches", 0),
-            "era": stats.get("era", "—"),
+            "ip":  stats.get("inningsPitched","0.0"),
+            "h":   stats.get("hits",0),
+            "r":   stats.get("runs",0),
+            "er":  stats.get("earnedRuns",0),
+            "bb":  stats.get("baseOnBalls",0),
+            "so":  stats.get("strikeOuts",0),
+            "np":  stats.get("numberOfPitches",0),
+            "era": era,
         })
     return {"team": team_name, "pitchers": pitchers}
 
@@ -205,22 +208,24 @@ def fmt_mlb_batting(box, side):
         order = p.get("battingOrder")
         if not order:
             continue
-        stats = p.get("stats", {}).get("batting", {})
-        if not stats:
+        game_s   = p.get("stats", {}).get("batting", {})
+        season_s = p.get("seasonStats", {}).get("batting", {})
+        if not game_s:
             continue
         pos = p.get("position", {}).get("abbreviation", "").lower()
         last = p.get("person", {}).get("fullName", "").split()[-1]
         prefix = "" if int(order) % 100 == 0 else "a-"
+        avg = season_s.get("avg", game_s.get("avg", ".000"))
         batters.append({
             "_o": int(order),
             "name": f"{prefix}{last} {pos}",
-            "ab": stats.get("atBats", 0),
-            "r":  stats.get("runs", 0),
-            "h":  stats.get("hits", 0),
-            "bi": stats.get("rbi", 0),
-            "bb": stats.get("baseOnBalls", 0),
-            "so": stats.get("strikeOuts", 0),
-            "avg": stats.get("avg", ".000"),
+            "ab": game_s.get("atBats", 0),
+            "r":  game_s.get("runs", 0),
+            "h":  game_s.get("hits", 0),
+            "bi": game_s.get("rbi", 0),
+            "bb": game_s.get("baseOnBalls", 0),
+            "so": game_s.get("strikeOuts", 0),
+            "avg": avg,
         })
     batters.sort(key=lambda x: x["_o"])
     for b in batters:
@@ -233,12 +238,13 @@ def fmt_mlb_batting(box, side):
 
 def fmt_mlb_notes(box):
     notes = []
+    want = {"HR","2B","3B","SB","CS","WP","LP","SV","LOB","E","HBP","GIDP","DP","T","Att"}
     for item in box.get("info", []):
-        lbl = item.get("label","")
-        val = item.get("value","")
-        if lbl in ["HR","2B","3B","SB","WP","LP","SV","LOB","E"]:
+        lbl = item.get("label","").strip()
+        val = item.get("value","").strip()
+        if lbl in want and val:
             notes.append(f"{lbl}: {val}")
-    return ". ".join(notes) + "." if notes else ""
+    return "  ".join(notes) if notes else ""
 
 def fmt_mlb_schedule(games):
     sched = []
@@ -257,9 +263,18 @@ def fmt_mlb_schedule(games):
         hp = home.get("probablePitcher",{})
         def pp(p):
             if not p: return ""
-            n = p.get("fullName","").split()
-            last = n[-1] if n else ""
-            # Try to get record/ERA from a quick stats call
+            parts = p.get("fullName","").split()
+            last = parts[-1] if parts else ""
+            stats_list = p.get("stats",[])
+            era = ""; rec = ""
+            for s in stats_list:
+                sp = s.get("stats",{})
+                if sp.get("era"): era = sp["era"]
+                w = sp.get("wins",""); l = sp.get("losses","")
+                if w != "" and l != "": rec = f"{w}-{l}"
+            if rec and era: return f"{last} ({rec}, {era})"
+            elif rec: return f"{last} ({rec})"
+            elif era: return f"{last} ({era})"
             return last
         entry = {
             "time": time_str,
@@ -431,6 +446,7 @@ def build_mlb(client, today_str, yesterday_str, mlb_season):
 
         box_scores.append({"title": title, "linescore": ls,
                             "batting": batting,
+                            "pitching": pitching,
                             "notes": notes})
         time.sleep(0.2)
 
@@ -890,6 +906,7 @@ def build_nhl(client, today_str, yesterday_str, nhl_season_id):
 
         box_scores.append({"title": title, "linescore": ls,
                             "batting": batting,
+                            "pitching": pitching,
                             "notes": notes})
 
     # Standings
@@ -1009,80 +1026,181 @@ def fmt_nhl_leaders_side(conf_abbr, label, season_id):
 # ══════════════════════════════════════════════════════════════════════════════
 
 def build_nfl(client):
-    print("  NFL: fetching standings + writing story...")
-    # ESPN free API for standings
-    ESPN = "https://site.api.espn.com/apis/v2/sports/football/nfl/standings"
-    raw = api_get(ESPN)
-    standings = fmt_espn_nfl_standings(raw)
+    print("  NFL: fetching data from ESPN...")
+    ESPN_BASE = "https://site.api.espn.com/apis/site/v2/sports/football/nfl"
 
-    # NFL offseason schedule items
+    # ── Standings ──────────────────────────────────────────────────────────────
+    standings_raw = fetch_nfl_standings()
+    standings = fmt_espn_nfl_standings(standings_raw)
+    leaders   = fetch_nfl_leaders()
+
+    # ── Recent/Playoff scores from ESPN scoreboard ─────────────────────────────
+    # Fetch last 30 days of NFL events to find postseason games
+    box_scores = []
+    game_summaries = []
+
+    # Try to get recent completed games — playoffs are in Jan/Feb
+    for season_type in ["3", "2"]:  # 3=playoffs, 2=regular season
+        data = api_get(f"{ESPN_BASE}/scoreboard", {
+            "seasontype": season_type,
+            "limit": 10,
+        })
+        if not data: continue
+        events = data.get("events", [])
+        for event in events[:6]:
+            comps = event.get("competitions", [{}])[0]
+            status = comps.get("status", {}).get("type", {})
+            if not status.get("completed", False):
+                continue
+            competitors = comps.get("competitors", [])
+            if len(competitors) < 2: continue
+            home = next((t for t in competitors if t.get("homeAway")=="home"), competitors[0])
+            away = next((t for t in competitors if t.get("homeAway")=="away"), competitors[1])
+            away_name  = away.get("team",{}).get("displayName","")
+            home_name  = home.get("team",{}).get("displayName","")
+            away_score = int(away.get("score",0) or 0)
+            home_score = int(home.get("score",0) or 0)
+            winner     = away_name if away_score > home_score else home_name
+            loser      = home_name if away_score > home_score else away_name
+            title      = f"{winner} {max(away_score,home_score)}, {loser} {min(away_score,home_score)}"
+            event_name = event.get("name", title)
+            game_id    = event.get("id","")
+
+            # Linescore
+            line_comps = comps.get("linescores",[])
+            away_scores = [int(q.get("value",0) or 0) for q in
+                           away.get("linescores",[]) or line_comps[:4]]
+            home_scores = [int(q.get("value",0) or 0) for q in
+                           home.get("linescores",[]) or line_comps[:4]]
+
+            ls = {
+                "away": {"name": away_name, "scores": away_scores, "r": away_score},
+                "home": {"name": home_name, "scores": home_scores, "r": home_score},
+            }
+
+            # Fetch box score stats from ESPN summary endpoint
+            nfl_stats = []
+            summary = api_get(f"{ESPN_BASE}/summary", {"event": game_id})
+            if summary:
+                for cat in summary.get("boxscore",{}).get("players",[]):
+                    team_name = cat.get("team",{}).get("abbreviation","")
+                    for stat_group in cat.get("statistics",[]):
+                        label = stat_group.get("name","")
+                        if label not in ["passing","rushing","receiving"]: continue
+                        cols_raw = [k.get("name","") for k in stat_group.get("keys",[])]
+                        # Map ESPN key names to short display names
+                        COL_MAP = {
+                            "name":"Player","team":"Team",
+                            "completions/passingAttempts":"Cmp/Att",
+                            "passingYards":"Yds","passingTouchdowns":"TD",
+                            "interceptions":"Int","rushingAttempts":"Car",
+                            "rushingYards":"Yds","rushingTouchdowns":"TD",
+                            "receivingTargets":"Tgt","receptions":"Rec",
+                            "receivingYards":"Yds","receivingTouchdowns":"TD",
+                            "avg":"Avg","longRushing":"Lng","longReceiving":"Lng",
+                        }
+                        cols = [COL_MAP.get(c,c) for c in cols_raw]
+                        rows = []
+                        for athlete in stat_group.get("athletes",[])[:5]:
+                            stats_vals = athlete.get("stats",[])
+                            player_name = athlete.get("athlete",{}).get("shortName","")
+                            row = [player_name] + stats_vals[:len(cols)-1]
+                            rows.append(row)
+                        if rows:
+                            nfl_stats.append({"label": label.title(), "cols": cols, "rows": rows})
+
+                # Notes
+                notes_parts = []
+                for hdl in summary.get("header",{}).get("competitions",[{}])[0].get("notes",[]):
+                    txt = hdl.get("headline","") or hdl.get("text","")
+                    if txt: notes_parts.append(txt)
+                notes = "  ".join(notes_parts)
+            else:
+                nfl_stats = []
+                notes = ""
+
+            box_scores.append({
+                "title": event_name,
+                "linescore": ls,
+                "batting": [],
+                "nflStats": nfl_stats,
+                "notes": notes,
+            })
+            game_summaries.append(title)
+
+        if box_scores: break  # got playoff data, stop
+
+    # Offseason calendar
     schedule = [
-        {"time":"May 22","away":"Deadline","home":"Fifth-Year Options","note":"Teams must exercise options for 2022 first-round picks"},
+        {"time":"May 22","away":"Deadline","home":"5th-Year Options","note":"Teams must exercise options for 2021 first-round picks"},
         {"time":"June 1","away":"Cutdown","home":"Roster Moves","note":"Post-June 1 designations take effect; cap savings accelerate"},
         {"time":"July 24","away":"Training","home":"Camps Open","note":"Veteran reporting date for all 32 teams"},
     ]
 
-    # Static postseason box scores (no free API for NFL player stats)
-    box_scores = [
-        {"title":"Super Bowl LIX: Eagles 38, 49ers 10",
-         "linescore":{"away":{"name":"Philadelphia","scores":[10,14,7,7],"r":38},
-                      "home":{"name":"San Francisco","scores":[3,0,7,0],"r":10}},
-         "batting":[],
-         "nflStats":[
-             {"label":"Passing","cols":["Player","Team","Att","Cmp","Yds","TD","Int","Rating"],
-              "rows":[["Hurts","PHI","31","22","221","2","0","112.3"],["Purdy","SF","27","16","142","0","2","48.1"]]},
-             {"label":"Rushing","cols":["Player","Team","Car","Yds","Avg","TD"],
-              "rows":[["Hurts","PHI","12","72","6.0","1"],["Henry","PHI","22","88","4.0","1"],["McCaffrey","SF","8","31","3.9","0"]]},
-             {"label":"Receiving","cols":["Player","Team","Rec","Tgt","Yds","Avg","TD"],
-              "rows":[["AJBrown","PHI","6","8","82","13.7","1"],["DeVonta Smith","PHI","5","7","62","12.4","1"],["Aiyuk","SF","6","9","58","9.7","0"]]},
-         ],
-         "notes":"MVP: Jalen Hurts. Eagles win first championship since Super Bowl LII."},
-        {"title":"AFC Championship: Ravens 27, Chiefs 24",
-         "linescore":{"away":{"name":"Baltimore","scores":[3,10,7,7],"r":27},
-                      "home":{"name":"Kansas City","scores":[7,10,0,7],"r":24}},
-         "batting":[],
-         "nflStats":[
-             {"label":"Passing","cols":["Player","Team","Att","Cmp","Yds","TD","Int"],
-              "rows":[["Jackson","BAL","38","28","312","2","1"],["Mahomes","KC","47","29","281","1","2"]]},
-             {"label":"Rushing","cols":["Player","Team","Car","Yds","Avg","TD"],
-              "rows":[["Henry","BAL","21","98","4.7","1"],["Jackson","BAL","7","44","6.3","0"]]},
-         ],
-         "notes":"Tucker 47-yd FG with 0:08 remaining. Jackson 28/38, 2 TD."},
-    ]
 
-    # Leaders (static — no free NFL API with player stats)
-    leaders = {
-        "left": {"label":"AFC","cats":[
-            {"cat":"Passing Yards","cols":["Player","Team","Att","Cmp","Yds","TD","Int"],
-             "rows":[["Allen, Buffalo","BUF","581","387","4,306","34","12"],
-                     ["Jackson, Baltimore","BAL","468","302","3,984","37","11"],
-                     ["Mahomes, Kansas City","KC","542","348","4,021","32","11"]]},
-            {"cat":"Rushing Yards","cols":["Player","Team","Car","Yds","Avg","TD"],
-             "rows":[["Henry, Baltimore","BAL","287","1,459","5.1","17"],
-                     ["Chubb, Cleveland","CLE","231","1,101","4.8","9"]]},
-            {"cat":"Receiving Yards","cols":["Player","Team","Rec","Yds","Avg","TD"],
-             "rows":[["Hill, Miami","MIA","108","1,799","16.7","13"],
-                     ["Diggs, Buffalo","BUF","96","1,291","13.4","9"]]},
-        ]},
-        "right": {"label":"NFC","cats":[
-            {"cat":"Passing Yards","cols":["Player","Team","Att","Cmp","Yds","TD","Int"],
-             "rows":[["Hurts, Philadelphia","PHI","512","341","4,021","36","7"],
-                     ["Goff, Detroit","DET","563","376","4,010","30","9"]]},
-            {"cat":"Rushing Yards","cols":["Player","Team","Car","Yds","Avg","TD"],
-             "rows":[["McCaffrey, San Francisco","SF","298","1,411","4.7","14"],
-                     ["Gibbs, Detroit","DET","241","1,088","4.5","11"]]},
-            {"cat":"Receiving Yards","cols":["Player","Team","Rec","Yds","Avg","TD"],
-             "rows":[["Smith, Philadelphia","PHI","97","1,401","14.4","11"],
-                     ["Jefferson, Minnesota","MIN","91","1,377","15.1","10"]]},
-        ]},
-    }
 
-    story = claude_call(client, """Write a brief NFL offseason news story for today's Sports Page.
-Focus on real current news: trades, signings, training camp storylines.
-Return JSON: {"kicker":"NFL OFFSEASON","headline":"HEADLINE ALL CAPS","deck":"Under 20 words","byline":"By Andrew Dobrow, NFL Writer","body":"Three paragraphs separated by \\n\\n."}""")
+    # ── Story ──────────────────────────────────────────────────────────────────
+    scores_txt = "; ".join(game_summaries[:4]) if game_summaries else "NFL offseason"
+    story = claude_call(client, f"""Write an NFL story for today\'s Sports Page.
+Recent NFL results or offseason news: {scores_txt}
+Return JSON: {{"kicker":"NFL","headline":"HEADLINE ALL CAPS","deck":"Under 20 words","byline":"By Andrew Dobrow, NFL Writer","body":"Three paragraphs separated by \\n\\n."}}""")
 
     return {"story": story, "schedule": schedule,
             "boxScores": box_scores, "standings": standings, "leaders": leaders}
+
+
+def fetch_nfl_standings():
+    """Fetch NFL standings from ESPN, explicitly requesting the most recent completed season."""
+    today = date.today()
+    # NFL season: Sep-Feb. If we're in the offseason (Mar-Aug), use prior year.
+    season_year = today.year if today.month >= 9 else today.year - 1
+    data = api_get(
+        "https://site.api.espn.com/apis/v2/sports/football/nfl/standings",
+        {"season": season_year, "seasontype": 2}
+    )
+    if data and data.get("children"):
+        return data
+    # Fallback: no season param
+    return api_get("https://site.api.espn.com/apis/v2/sports/football/nfl/standings")
+
+def fetch_nfl_leaders():
+    """Fetch NFL season stat leaders from ESPN."""
+    today = date.today()
+    season_year = today.year if today.month >= 9 else today.year - 1
+    cats = {
+        "passing":   ["Passing Yards",  ["Player","Team","Att","Cmp","Yds","TD","Int"]],
+        "rushing":   ["Rushing Yards",  ["Player","Team","Car","Yds","Avg","TD"]],
+        "receiving": ["Receiving Yards",["Player","Team","Rec","Yds","Avg","TD"]],
+        "sacks":     ["Sacks",          ["Player","Team","Sacks"]],
+    }
+    result = {"left": {"label":"AFC","cats":[]}, "right": {"label":"NFC","cats":[]}}
+    for stat_cat, (display, cols) in cats.items():
+        data = api_get(
+            f"https://site.api.espn.com/apis/site/v2/sports/football/nfl/leaders",
+            {"season": season_year, "seasontype": 2}
+        )
+        if not data: continue
+        # ESPN leaders endpoint returns all categories together
+        for cat_group in data.get("categories",[]):
+            cat_name = cat_group.get("name","").lower()
+            if stat_cat not in cat_name: continue
+            afc_rows = []; nfc_rows = []
+            for leader in cat_group.get("leaders",[])[:8]:
+                athlete = leader.get("athlete",{})
+                team    = leader.get("team",{})
+                name    = athlete.get("shortName", athlete.get("displayName",""))
+                conf    = team.get("conferenceId","")
+                abbr    = team.get("abbreviation","")
+                val     = leader.get("displayValue","")
+                row     = [name, abbr, val]
+                if conf == "8":   afc_rows.append(row)   # ESPN AFC id=8
+                elif conf == "7": nfc_rows.append(row)   # ESPN NFC id=7
+            if afc_rows:
+                result["left"]["cats"].append({"cat":display,"cols":cols,"rows":afc_rows[:8]})
+            if nfc_rows:
+                result["right"]["cats"].append({"cat":display,"cols":cols,"rows":nfc_rows[:8]})
+        break  # leaders endpoint has all cats, no need to re-fetch
+    return result
 
 def fmt_espn_nfl_standings(raw):
     if not raw:
@@ -1093,7 +1211,7 @@ def fmt_espn_nfl_standings(raw):
             div_name = div.get("name","")
             teams = []
             for i, entry in enumerate(div.get("standings",{}).get("entries",[])):
-                tm = entry.get("team",{})
+                tm    = entry.get("team",{})
                 stats = {s["name"]:s["displayValue"] for s in entry.get("stats",[])}
                 teams.append({
                     "rank": i+1,
@@ -1102,7 +1220,7 @@ def fmt_espn_nfl_standings(raw):
                     "l":    stats.get("losses","—"),
                     "pct":  stats.get("winPercent",".000"),
                     "gb":   stats.get("gamesBehind","—"),
-                    "note": stats.get("clincher",""),
+                    "note": stats.get("clincher","") or stats.get("playoffSeed",""),
                 })
             if teams:
                 divs.append({"label": div_name, "teams": teams})
