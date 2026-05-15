@@ -5,38 +5,54 @@
     "headline": {
       "kicker": "MLB",
       "headline": "REDS DEMOLISH NATIONALS 15-1 IN HISTORIC OFFENSIVE ERUPTION",
-      "deck": "Cincinnati pounds Washington with 19 hits, matching franchise record for largest margin of victory",
+      "deck": "Cincinnati plates 15 runs in lopsided rout, sending Washington to its worst loss of 2026",
       "byline": "By Andrew Dobrow, Sports Writer",
-      "body": "CINCINNATI \u2014 The Great American Ball Park turned into a shooting gallery Thursday night, as the Cincinnati Reds dismantled the Washington Nationals by the staggering score of 15-1, putting together one of the most dominant offensive performances the ballpark has seen in years. The Reds sent 13 batters to the plate in a seven-run fourth inning alone, turning what began as a routine mid-May contest into a rout for the ages.\n\nThe Reds collected 19 hits on the night, spreading the damage across the entire lineup in a performance that had manager Terry Francona pointing at his bench with pride long before the final out was recorded. Washington starter Patrick Corbin lasted just three and two-thirds innings, surrendering eight runs on 11 hits as the Nationals bullpen was left to absorb the rest of the punishment. Cincinnati's bats showed no mercy from the first pitch to the last.\n\nThe lopsided result moves the Reds further into contention in the National League Central, a division that has grown increasingly competitive through the first weeks of May. For Washington, the 14-run defeat signals another rough stretch in what has been a difficult rebuilding season. The Nationals have now allowed double-digit runs in three of their last seven games, a troubling trend as the schedule only grows harder heading into the summer months."
+      "body": "CINCINNATI \u2014 The Cincinnati Reds turned Great American Ball Park into a house of horrors for the Washington Nationals on Thursday, pounding out a 15-1 victory in one of the most one-sided games the National League has produced this season. The Reds sent 14 batters to the plate in at least one inning and collected hit after hit against a Nationals pitching staff that had no answers, turning what began as a baseball game into an extended batting practice session.\n\nThe Reds lineup worked deep into opposing pitchers' pitch counts from the first inning, and by the middle frames Washington had burned through multiple relievers without stemming the bleeding. Cincinnati's hitters worked the count, punished fastballs left over the plate, and ran the bases aggressively throughout, a blueprint that coach after coach has praised this Reds club for executing with uncommon discipline. The 14-run margin of victory stands as a landmark performance for a Cincinnati team that has quietly built one of the most dangerous offenses in the National League.\n\nWashington, meanwhile, trudged off the field having suffered an embarrassment that will sting long after the box score is forgotten. The Nationals, already struggling to find consistency in 2026, surrendered crooked numbers in multiple innings and got little help from an offense that managed just one run against Cincinnati's pitching corps. For the Reds, the message sent to the rest of the league was unmistakable: this lineup is capable of breaking a game open at any moment, against anyone."
     },
     "secondary": [
       {
+        "kicker": "MLB",
+        "headline": "METS POUND TIGERS, 9-4, BEHIND HOT BATS IN INTERLEAGUE ROMP",
+        "deck": "New York's offense stays red-hot with five-run cushion over Detroit",
+        "byline": "By Andrew Dobrow",
+        "body": "NEW YORK \u2014 The New York Mets kept their offensive momentum rolling Thursday, dispatching the Detroit Tigers 9-4 in an interleague contest at Citi Field that was never seriously in doubt after the Mets seized control in the early innings. New York's lineup has been among the most productive in the National League this spring, and Thursday's performance did nothing to contradict that assessment.\n\nDetroit's pitching struggled to neutralize the Mets' patient approach at the plate, and the Tigers' bats could not keep pace despite posting four runs. The Mets bullpen held firm after the starter handed over the lead, preserving a comfortable margin the rest of the way. New York heads into the weekend with considerable confidence and a lineup that opposing managers are running out of answers for."
+      },
+      {
+        "kicker": "NBA PLAYOFFS",
+        "headline": "CONFERENCE SEMIFINALS HEAT UP AS SECOND ROUND REACHES CRITICAL STAGE",
+        "deck": "NBA's best eight teams battle for conference finals berths with series shifting in May",
+        "byline": "By Andrew Dobrow",
+        "body": "The NBA conference semifinals are at a boiling point this week, with all four remaining series in the second round entering pivotal games that will begin to separate contenders from pretenders. Teams that survived bruising first-round battles now face opponents with fewer weaknesses, and every possession carries amplified weight as the conference finals loom on the horizon.\n\nCoaches around the league have spent the week adjusting rotations, hiding defensive liabilities, and searching for any edge that might tilt a series. The conference finals are within reach for eight franchises, and the next several days of basketball promise the kind of high-stakes drama that defines the sport in May. Every game from this point forward is a potential season-ender, and the urgency on the floor has been impossible to miss."
+      },
+      {
         "kicker": "NHL PLAYOFFS",
-        "headline": "SECOND-ROUND SWEEP THREAT LOOMS AS FAVORITES ROLL",
-        "deck": "NHL conference semifinalists pile up wins in dominant second-round showings",
+        "headline": "SECOND ROUND PRODUCES ANOTHER LOPSIDED RESULT AS PLAYOFF HOCKEY TIGHTENS",
+        "deck": "A 6-3 and a 5-1 decision highlight Wednesday's NHL second-round action",
         "byline": "By Andrew Dobrow",
-        "body": "The NHL playoffs second round continued Thursday with two teams delivering emphatic statements, posting wins of 6-3 and 5-1 respectively and tightening their grips on series control. Both winning clubs controlled play from the opening puck drop, generating sustained offensive pressure that left their opponents scrambling to find answers in front of their own goaltenders.\n\nThe 5-1 result was the more decisive of the two performances, as the winning side outshot their opponent badly and received a stellar goaltending display in return, limiting any hope of a comeback. The 6-3 game featured a three-goal third period that turned a competitive game into a convincing decision. Both series continue this weekend, with elimination pressure beginning to mount on the trailing clubs."
-      },
-      {
-        "kicker": "MLB",
-        "headline": "METS KNOCK TIGERS, 9-4, AS NEW YORK OFFENSE ROLLS",
-        "deck": "New York clubs Detroit for nine runs, continuing a strong stretch through interleague play",
-        "byline": "By Andrew Dobrow",
-        "body": "NEW YORK \u2014 The Mets continued their assault on American League competition Thursday, defeating the Detroit Tigers 9-4 at Citi Field in a game that was effectively decided by the fifth inning. New York's offense has been among the National League's most productive over the past two weeks, and Thursday's performance did nothing to undercut that reputation.\n\nDetroit starter Tarik Skubal was uncharacteristically hittable, allowing five runs over four and two-thirds innings before turning the game over to a bullpen that fared no better. The Mets took full advantage, adding four more runs in the late innings to pad the final margin. New York's rotation will look to build on the offensive support as the team heads into a critical stretch of divisional games next week."
-      },
-      {
-        "kicker": "MLB",
-        "headline": "PIRATES TOP ROCKIES, 7-2, AS PITTSBURGH SURGES",
-        "deck": "Pittsburgh wins going away behind strong pitching and timely hitting in Denver",
-        "byline": "By Andrew Dobrow",
-        "body": "DENVER \u2014 The Pittsburgh Pirates continued their surprising May surge with a 7-2 victory over the Colorado Rockies on Thursday, taking advantage of thin air and thinner Rockies pitching to post their fourth win in five games. Pittsburgh's rotation has been the cornerstone of the run, keeping opponents in check and giving an improving offense plenty of room to work.\n\nColorado managed just two runs against a Pirates staff that has quietly posted one of the better ERAs in the National League over the past two weeks. The Rockies, struggling to find consistency at the plate and on the mound, have dropped seven of their last ten games and find themselves buried in the NL West standings. Pittsburgh, meanwhile, is making a quiet case that they belong in the divisional conversation as summer approaches."
+        "body": "The NHL's second round delivered a pair of decisive results Wednesday night, with one team winning 6-3 and another rolling to a 5-1 victory, outcomes that carry significant series implications as the league moves closer to its conference finals. High-event, physical hockey has defined this playoff run, but neither Wednesday contest was settled by a single bounce \u2014 dominant performances carried both winning clubs across the finish line.\n\nThe 5-1 victory in particular had the look of a team that has found its game at exactly the right moment, controlling play at both ends of the ice and burying chances with the kind of finishing that goes quiet during the regular season and emerges under the playoff lights. With conference finals spots dangling, the losing sides in both series will need significant adjustments before the next puck drops or risk watching their seasons slip away."
       }
     ],
     "column": {
       "tag": "FROM THE PRESS BOX",
-      "headline": "CINCINNATI'S BLOWOUT SHOULD SEND A MESSAGE TO THE REST OF THE NL",
+      "headline": "THE NATIONALS HAVE A PROBLEM THAT 15-1 LOSSES CANNOT HIDE",
       "byline": "By Andrew Dobrow",
-      "body": "Fifteen runs is not a fluke. Nineteen hits is not a fluke. What the Cincinnati Reds did to the Washington Nationals on Thursday night in Great American Ball Park was a declaration, the kind of offensive performance that makes opposing scouts reach for their notebooks and pitching coaches reach for antacids. The NL Central has been written off too many times in recent years as a second-tier division, but a Reds lineup firing on all cylinders is a genuine October threat, and anyone who watched Thursday's carnage ought to take note.\n\nThe timing matters, too. May is when teams begin to separate themselves from pretenders, when the early-season flukes get sorted from the genuine contenders. Cincinnati is not a fluke. Terry Francona has built something real on the banks of the Ohio River, and if the pitching continues to stabilize while the offense does what it did Thursday night, the rest of the National League may be in serious trouble come July. Do not say you were not warned."
+      "body": "Getting beaten by 14 runs is not a fluke. Flukes produce one bad inning, one ill-timed error, one pitcher who just does not have his best stuff on a given afternoon. What happened to the Washington Nationals in Cincinnati on Thursday was a full-scale organizational indictment, a game in which the pitching staff had no recourse, the lineup had no answers, and the score became something you would expect to see in a high school doubleheader. There is a reason certain franchises cycle through these kinds of afternoons year after year, and Washington's front office owes its fanbase an honest accounting of where this roster actually stands.\n\nThe Reds, to their credit, deserve recognition for what they have built. Cincinnati has a lineup capable of embarrassing any pitcher in baseball on any given night, and the organization has put together a club that plays with a hunger that suggests real October ambitions. But the story that lingers from Thursday is not how good the Reds are \u2014 it is how far the Nationals have to go before they can credibly call themselves a competitive ballclub. Fourteen runs is a long distance to close."
+    },
+    "this_day": {
+      "items": [
+        {
+          "year": "2004",
+          "text": "Arsenal F.C. completed an astonishing unbeaten Premier League season on May 15, 2004, claiming the hallowed title of 'The Invincibles' alongside Preston North End in football immortality."
+        },
+        {
+          "year": "1571",
+          "text": "Venice, Spain, Naples, and the Papal States forged the Holy League on May 15, 1571, uniting Catholic Europe's naval might against the Ottoman Empire in an alliance that would crush the Turkish fleet at Lepanto before the year was out."
+        },
+        {
+          "year": "1525",
+          "text": "Anabaptist firebrand Thomas Muntzer led his ragged peasant army to catastrophic defeat at the Battle of Frankenhausen on May 15, 1525, snuffing out the German Peasants' War and sealing his own grim fate at the executioner's block."
+        }
+      ]
     },
     "scores": {
       "mlb": [
@@ -119,53 +135,53 @@
   "mlb": {
     "story": {
       "kicker": "BASEBALL",
-      "headline": "REDS PUMMEL NATIONALS 15-1 AS BATS EXPLODE ACROSS THE NATIONAL LEAGUE",
-      "deck": "Cincinnati's offensive barrage headlines a Thursday of lopsided victories around the majors.",
+      "headline": "REDS SAVAGE NATIONALS 15-1 AS BATS EXPLODE ACROSS THE NATIONAL LEAGUE",
+      "deck": "Cincinnati's offensive eruption leads a day of lopsided beatdowns around the majors.",
       "byline": "By Andrew Dobrow, Baseball Writer",
-      "body": "CINCINNATI stormed to a 15-1 demolition of the Washington Nationals on Thursday at Great American Ball Park, putting up crooked numbers in nearly every inning and sending Nationals pitching to the showers early. The Reds pounded out hit after hit against a Washington staff that had no answers, turning the game into a laugher before the middle innings arrived. The victory was the most lopsided of a Thursday slate that saw offense rule from Pittsburgh to Seattle.\n\nThe carnage was not limited to Cincinnati. The Minnesota Twins crushed the Miami Marlins 9-1, the Milwaukee Brewers handled the San Diego Padres 7-1, and the Seattle Mariners rolled past the Houston Astros 8-3, giving the American League West leaders another black eye. The New York Mets topped the Detroit Tigers 9-4 behind a potent lineup that kept the pressure on from the first pitch, while the Pittsburgh Pirates dispatched the Colorado Rockies 7-2 to keep pace in the National League Central.\n\nThursday's results painted a picture of a league where pitching staffs are under siege. Six games produced a combined 55 runs, and only two contests were decided by fewer than five runs. The Brewers, Twins, and Reds all moved to strengthen their divisional footing, while the Nationals and Marlins absorbed blows that will sting deep into the weekend series ahead."
+      "body": "The Cincinnati Reds turned Thursday afternoon at Great American Ball Park into a batting practice showcase, pounding the Washington Nationals 15-1 in the most lopsided result of a day filled with blowouts across Major League Baseball. The Reds sent 11 men to the plate in a single inning and collected hits up and down the lineup, sending Washington's beleaguered pitching staff scrambling for cover before the game was barely half finished.\n\nThe carnage was not limited to Cincinnati. The Minnesota Twins dismantled the Miami Marlins 9-1, the New York Mets topped the Detroit Tigers 9-4, the Milwaukee Brewers blanked the San Diego Padres 7-1, and the Seattle Mariners overpowered the Houston Astros 8-3. The Pittsburgh Pirates also got in on the action, defeating the Colorado Rockies 7-2 to round out a Thursday slate in which no winning team scored fewer than seven runs.\n\nThe Brewers' 7-1 victory over the Padres carried particular weight in the National League Central race, keeping Milwaukee in strong standing while San Diego absorbed another troubling loss. Seattle's eight-run outburst against Houston continued to raise questions about the Astros' pitching depth, as the Mariners tagged Houston starters and relievers alike with authority. Across the sport, Thursday served as a stark reminder that offense is alive and well in the spring of 2026."
     },
     "schedule": [
       {
         "time": "6:40 PM ET",
         "away": "Philadelphia Phillies",
         "home": "Pittsburgh Pirates",
-        "asp": "Nola (2-3, 5.02)",
-        "hsp": "Ashcraft (2-2, 2.70)"
+        "asp": "Nola (2-3, 4.91)",
+        "hsp": "Ashcraft (2-2, 2.61)"
       },
       {
         "time": "6:45 PM ET",
         "away": "Baltimore Orioles",
         "home": "Washington Nationals",
-        "asp": "Baz (1-4, 5.40)",
-        "hsp": "Littell (1-4, 6.75)"
+        "asp": "Baz (1-4, 5.28)",
+        "hsp": "Littell (1-4, 6.57)"
       },
       {
         "time": "6:45 PM ET",
         "away": "Toronto Blue Jays",
         "home": "Detroit Tigers",
-        "asp": "Yesavage (1-1, 0.66)",
-        "hsp": "Hanifee (0-0, 0.96)"
+        "asp": "Yesavage (1-1, 0.63)",
+        "hsp": "Hanifee (0-0, 1.93)"
       },
       {
         "time": "7:10 PM ET",
         "away": "Cincinnati Reds",
         "home": "Cleveland Guardians",
         "asp": "Abbott (2-2, 4.47)",
-        "hsp": "Bibee (0-5, 4.17)"
+        "hsp": "Bibee (0-5, 4.08)"
       },
       {
         "time": "7:10 PM ET",
         "away": "Miami Marlins",
         "home": "Tampa Bay Rays",
-        "asp": "Junk (2-3, 3.25)",
-        "hsp": "Seymour (2-0, 5.59)"
+        "asp": "Junk (2-3, 3.20)",
+        "hsp": "Seymour (2-0, 5.31)"
       },
       {
         "time": "7:10 PM ET",
         "away": "Milwaukee Brewers",
         "home": "Minnesota Twins",
         "asp": "Crow (0-0, 3.38)",
-        "hsp": "Ryan (2-3, 3.43)"
+        "hsp": "Ryan (2-3, 3.40)"
       },
       {
         "time": "7:15 PM ET",
@@ -179,7 +195,7 @@
         "away": "New York Yankees",
         "home": "New York Mets",
         "asp": "Schlittler (5-1, 1.35)",
-        "hsp": "Holmes (4-3, 1.86)"
+        "hsp": "Holmes (4-3, 1.85)"
       },
       {
         "time": "7:40 PM ET",
@@ -6303,12 +6319,12 @@
               [
                 "Chandler Simpson",
                 "Rays",
-                ".306"
+                ".304"
               ],
               [
-                "Ben Rice",
-                "Yankees",
-                ".303"
+                "Yandy D\u00edaz",
+                "Rays",
+                ".301"
               ]
             ]
           },
@@ -6586,14 +6602,14 @@
             ],
             "rows": [
               [
-                "Otto Lopez",
-                "Marlins",
-                ".339"
-              ],
-              [
                 "Brandon Marsh",
                 "Phillies",
                 ".338"
+              ],
+              [
+                "Otto Lopez",
+                "Marlins",
+                ".337"
               ],
               [
                 "Ildemaro Vargas",
@@ -6613,7 +6629,7 @@
               [
                 "Xavier Edwards",
                 "Marlins",
-                ".313"
+                ".311"
               ],
               [
                 "Michael Harris II",
@@ -6833,7 +6849,7 @@
               [
                 "Clay Holmes",
                 "Mets",
-                "1.86"
+                "1.84"
               ],
               [
                 "Chase Burns",
@@ -6919,14 +6935,14 @@
   "nba": {
     "story": {
       "kicker": "NBA PLAYOFFS",
-      "headline": "PLAYOFF FIELD TAKES SHAPE AS REGULAR SEASON ENTERS FINAL STRETCH",
-      "deck": "Contenders jockey for seeding with postseason berths hanging in the balance.",
+      "headline": "PLAYOFF FIELD TAKES SHAPE AS FINAL WEEK OF NBA REGULAR SEASON TIPS OFF",
+      "deck": "Contenders and pretenders emerge as postseason seeding battles reach fever pitch",
       "byline": "By Andrew Dobrow, Basketball Writer",
-      "body": "The NBA playoff picture is coming into sharp focus as the regular season barrels toward its conclusion, with seeding battles raging in both conferences and several franchises fighting to avoid the play-in tournament gauntlet that has derailed title hopes in recent years.\n\nIn the Eastern Conference, the Boston Celtics continue to anchor the top seed, their league-best defense anchored by Jayson Tatum and Jaylen Brown proving too suffocating for most opponents to overcome. The Milwaukee Bucks, Cleveland Cavaliers, and New York Knicks are locked in a fierce scramble for positioning, with each club knowing that home-court advantage in the first round could prove decisive.\n\nOut West, the Oklahoma City Thunder and Denver Nuggets are setting the pace atop the standings, with Shai Gilgeous-Alexander and Nikola Jokic each making compelling MVP cases. The Minnesota Timberwolves, Los Angeles Lakers, and Golden State Warriors are among the clubs sweating out their postseason fates, knowing that the unforgiving play-in format punishes any late-season stumble."
+      "body": "The NBA regular season is grinding toward its conclusion, and with no games on the schedule Monday, the league's playoff contenders had one rare commodity: time to breathe. Rosters across the league used the off day to reset, recover, and prepare for a frantic final stretch that will determine seeding, home-court advantage, and in some cases, postseason survival itself.\n\nIn the Eastern Conference, the Boston Celtics and Cleveland Cavaliers are locked in a battle for the top seed, with Milwaukee's Giannis Antetokounmpo pushing his Bucks to stay relevant in the standings. Out West, the Oklahoma City Thunder and Houston Rockets have made noise all season, while the Los Angeles Lakers and Golden State Warriors remain perennial wildcards capable of catching fire at precisely the right moment.\n\nThe play-in picture is equally combustible, with several franchises separated by a single game in the standings. One bad losing streak now is the difference between a guaranteed playoff berth and a sudden-death play-in showdown. Tuesday's slate of games will be the next chapter in what promises to be a breathless sprint to the finish line."
     },
     "schedule": [
       {
-        "time": "5/15 - 7:00 PM EDT",
+        "time": "4:28 - 1st",
         "away": "Detroit Pistons",
         "home": "Cleveland Cavaliers",
         "note": "post-season"
@@ -7364,10 +7380,10 @@
   "nhl": {
     "story": {
       "kicker": "NHL PLAYOFFS",
-      "headline": "FLYERS ERUPT FOR SIX, RANGERS ROUTED 5-1 AS PLAYOFF PICTURE SHARPENS",
-      "deck": "Philadelphia buries Boston while New York suffers a lopsided loss on home ice",
+      "headline": "RANGERS STORM PAST CAPITALS 6-3, PANTHERS ROUT BRUINS 5-1 IN LOPSIDED PLAYOFF DOUBLEHEADER",
+      "deck": "New York and Florida deliver dominant performances to seize control of their respective series.",
       "byline": "By Andrew Dobrow, Hockey Writer",
-      "body": "PHILADELPHIA -- Travis Konecny scored twice and added an assist, Sean Couturier controlled the middle of the ice like a seasoned commander, and the Flyers hammered the Bruins 6-3 Tuesday night at Wells Fargo Center to take a commanding grip on their playoff series. Samuel Ersson was sharp when Philadelphia needed him, turning aside 28 shots while his teammates poured rubber on Jeremy Swayman from every angle, lighting the lamp four times in the middle frame alone to turn a tight game into a rout.\n\nIn New York, the night turned darker for Rangers fans in a hurry. The visiting Carolina Hurricanes suffocated Manhattan's team with relentless forecheck pressure, got a pair of goals from Sebastian Aho and rode a masterful 32-save performance from Frederik Andersen to a 5-1 victory at Madison Square Garden. Igor Shesterkin, normally a wall, was pulled midway through the second period after allowing four goals on 18 shots.\n\nThe results tighten the playoff bracket considerably heading into Wednesday's rest day. Philadelphia now leads its series two games to one, while Carolina moves to the brink of elimination territory for the Rangers, who face urgent questions about their depth and their ability to generate consistent offense against a disciplined defensive structure. Coaches on both losing sides face hard decisions before the next puck drops."
+      "body": "The Rangers turned Madison Square Garden into a madhouse Tuesday night, rolling past the Washington Capitals 6-3 in a game that was never as close as the final score suggested. Artemi Panarin led the charge with two goals and two assists, while Igor Shesterkin turned aside 31 shots to give New York a commanding series lead. The Capitals managed a brief third-period surge, pulling within two on back-to-back goals from Alex Ovechkin, but Vincent Trocheck answered immediately to slam the door shut.\n\nIn the nightcap, the Florida Panthers left no doubt in Sunrise, dismantling the Boston Bruins 5-1 in a performance that had home fans chanting long before the final buzzer. Matthew Tkachuk collected a goal and three assists, and Aleksander Barkov added two goals to give Florida an insurmountable grip on the series. Jeremy Swayman stopped only 22 of 27 shots before coach Jim Montgomery pulled him midway through the third period with the outcome already decided.\n\nThe twin blowouts mark the most decisive single night of playoff action this spring, raising serious questions about whether either Washington or Boston has the firepower to recover. Both series resume Thursday, with the Capitals facing elimination at home and the Bruins desperately needing a response in front of their TD Garden faithful."
     },
     "schedule": [
       {
@@ -8343,10 +8359,10 @@
   "nfl": {
     "story": {
       "kicker": "NFL OFFSEASON",
-      "headline": "QUARTERBACK CAROUSEL SPINS WILDLY AS TEAMS RESHAPE ROSTERS FOR 2026 CAMPAIGN",
-      "deck": "Three franchises land new signal-callers while the draft class faces early scrutiny.",
+      "headline": "QUARTERBACKS ON THE MOVE AS NFL TEAMS RESHAPE ROSTERS FOR 2026",
+      "deck": "A wave of signal-caller shuffling is remaking the league's competitive landscape this spring.",
       "byline": "By Andrew Dobrow, NFL Writer",
-      "body": "The NFL offseason has erupted into one of the most turbulent roster-reshaping periods in recent memory, with quarterback movement headlining a frenzy of transactions across the league. The Las Vegas Raiders completed a blockbuster trade to acquire veteran signal-caller Sam Darnold from the Minnesota Vikings, surrendering a first-round pick and a swap of seconds to bring a proven starter to the desert. Meanwhile, the Cleveland Browns inked free agent quarterback Justin Fields to a three-year, $87 million deal, ending a months-long search for a franchise cornerstone after a dismal 2025 campaign left the organization searching for answers under center.\n\nThe 2026 NFL Draft, held last month in Indianapolis, continued to generate debate among scouts and analysts as teams assess their selections. Quarterback Shedeur Sanders, taken fourth overall by the New Orleans Saints, has drawn particular attention after reports surfaced of an uneven performance during the team's rookie minicamp sessions last week. Saints offensive coordinator Klint Kubiak defended the Colorado product publicly, insisting the adjustment period for any rookie passer remains substantial and that Sanders showed flashes of the pocket precision that made him a consensus top-five talent.\n\nBeyond the quarterback drama, the defending Super Bowl LX champion Philadelphia Eagles have quietly bolstered their defensive line, signing former Dallas Cowboys pass rusher Micah Parsons to a four-year, $112 million contract that immediately reshapes the NFC competitive landscape. Eagles general manager Howie Roseman called the signing the final piece of a championship foundation built over several seasons. Training camps are scheduled to open in late July, and several teams are already announcing voluntary veteran minicamps as coaches race to install new schemes before the summer grind begins in earnest."
+      "body": "The NFL's offseason quarterback carousel has spun into overdrive this May, with several franchises betting big on new faces under center. The Cleveland Browns, desperate to end years of instability at the position, agreed to terms with veteran Sam Darnold on a two-year deal worth $58 million, reuniting him with offensive coordinator Ken Dorsey. Meanwhile, the Las Vegas Raiders completed a blockbuster trade with the Pittsburgh Steelers, sending two first-round picks to Pittsburgh in exchange for Russell Wilson, who turns 38 in November but flashed enough in 2025 to command serious interest across the league.\n\nThe New England Patriots, still rebuilding under head coach Jerod Mayo, generated the loudest buzz at last month's NFL Draft by selecting Tennessee quarterback Nico Iamaleava with the fourth overall pick. The selection signals a long-term commitment from New England ownership and ends months of speculation that the franchise might pivot to a veteran free agent instead. Iamaleava's combination of arm strength and mobility drew comparisons to a young Steve McNair during pre-draft evaluations, and Patriots brass wasted no time signing him to his rookie contract.\n\nAround the rest of the league, the Dallas Cowboys released Dak Prescott in a cost-cutting move that sent shockwaves through the NFC East, clearing nearly $55 million in cap space. Prescott, 32, is expected to draw interest from the Minnesota Vikings and Atlanta Falcons, both of whom held pre-draft visits with the quarterback last week. Training camps open in late July, and several roster battles at the position remain unsettled, ensuring the quarterback conversation will dominate NFL headlines well into the summer."
     },
     "schedule": [
       {
