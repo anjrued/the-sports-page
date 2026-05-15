@@ -384,14 +384,13 @@ def build_mlb(client, today_str, yesterday_str, mlb_season):
         title  = f"{winner} {max(ar,hr)}, {loser} {min(ar,hr)}"
 
         batting, pitching, notes = [], [], ""
-        if i < 3:  # Full box score for top 3 games
-            box_raw = mlb_boxscore(pk)
-            if box_raw:
-                batting = [fmt_mlb_batting(box_raw,"away"),
-                           fmt_mlb_batting(box_raw,"home")]
-                pitching = [fmt_mlb_pitching(box_raw,"away"),
-                            fmt_mlb_pitching(box_raw,"home")]
-                notes   = fmt_mlb_notes(box_raw)
+        box_raw = mlb_boxscore(pk)
+        if box_raw:
+            batting = [fmt_mlb_batting(box_raw,"away"),
+                       fmt_mlb_batting(box_raw,"home")]
+            pitching = [fmt_mlb_pitching(box_raw,"away"),
+                        fmt_mlb_pitching(box_raw,"home")]
+            notes   = fmt_mlb_notes(box_raw)
 
         box_scores.append({"title": title, "linescore": ls,
                             "batting": batting,
@@ -567,8 +566,8 @@ def build_nba(client, today_str, yesterday_str, nba_season):
         }
 
         batting = []
-        if i < 3:  # Full box for top 3 games
-            box = nba_get(boxscoretraditionalv2.BoxScoreTraditionalV2, game_id=gid)
+        box = nba_get(boxscoretraditionalv2.BoxScoreTraditionalV2, game_id=gid)
+        if True:  # Full box for all games
             if box:
                 try:
                     pl = box.player_stats.get_data_frame()
@@ -760,10 +759,15 @@ def build_nhl(client, today_str, yesterday_str, nhl_season_id):
                     note = f"{title}: {top} leads {tw}-{bw}" if tw > bw else                            f"{title}: {bot} leads {bw}-{tw}" if bw > tw else                            f"{title}: Tied {tw}-{bw}"
                 else:
                     note = str(series) if series else ""
+                away_name = away.get("placeName",{}).get("default","") or                              away.get("name",{}).get("default","") or                              away.get("fullName","") or                              away.get("teamName",{}).get("default","")
+                home_name = home.get("placeName",{}).get("default","") or                              home.get("name",{}).get("default","") or                              home.get("fullName","") or                              home.get("teamName",{}).get("default","")
+                # Skip games with no team names resolved
+                if not away_name or not home_name:
+                    continue
                 entry = {
                     "time": time_str,
-                    "away": away.get("name",{}).get("default","") or away.get("fullName",""),
-                    "home": home.get("name",{}).get("default","") or home.get("fullName",""),
+                    "away": away_name,
+                    "home": home_name,
                 }
                 if note:
                     entry["note"] = note
