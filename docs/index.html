@@ -826,6 +826,10 @@ table.ldr-tbl {
 /* ── RESPONSIVE ── */
 @media (min-width: 761px) {
   .std-hide-mobile { display: table-cell !important; }
+  .standings-two-col { display: grid; grid-template-columns: 1fr 1fr; gap: 0 20px; align-items: start; }
+}
+@media (max-width: 760px) {
+  .standings-two-col { display: block; }
 }
 @media (max-width: 760px) {
   .sp-sport-main-grid, .sp-front-grid { grid-template-columns: 1fr; }
@@ -2374,7 +2378,7 @@ function buildSport(id, overrides) {
   const hasBracket = id==='nba'||id==='nhl';
   const isNFL      = id==='nfl';
   const stdsCount  = (stdsData||[]).length;
-  const twoCol     = stdsCount > 3 ? 'style="display:grid;grid-template-columns:1fr 1fr;gap:0 20px"' : '';
+  const twoCol     = stdsCount > 3 ? 'class="standings-two-col"' : '';
 
   document.getElementById(id).innerHTML = `
     <div style="padding-bottom:14px;border-bottom:2px solid #111;margin-bottom:14px">
