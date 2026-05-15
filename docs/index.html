@@ -830,6 +830,7 @@ table.ldr-tbl {
 }
 @media (max-width: 760px) {
   .standings-two-col { display: block; }
+  .leaders-split { grid-template-columns: 1fr; }
 }
 @media (max-width: 760px) {
   .sp-sport-main-grid, .sp-front-grid { grid-template-columns: 1fr; }
@@ -2290,7 +2291,7 @@ function renderLeaders(leaders) {
     html += '</div>';
     return html;
   }
-  return '<div style="display:grid;grid-template-columns:1fr 1fr;gap:0 24px">' + buildCol(left) + buildCol(right) + '</div>';
+  return '<div class="leaders-split">' + buildCol(left) + buildCol(right) + '</div>';
 }
 
 
