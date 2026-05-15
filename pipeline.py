@@ -1375,7 +1375,7 @@ def fmt_espn_nfl_standings(raw):
                 divs.append({"label": div_name, "teams": teams})
     return divs
 
-def build_front(client, mlb_data, nba_data, nhl_data, nfl_data, today_str='today'):
+def build_front(client, mlb_data, nba_data, nhl_data, nfl_data, today_str='today', now_str='today'):
     print("  Writing front page...")
     mlb_scores = [b["title"] for b in mlb_data.get("boxScores",[])[:5]]
     nba_scores = [b["title"] for b in nba_data.get("boxScores",[])[:3]]
@@ -1420,10 +1420,52 @@ Return JSON:
                  "status": "Final"}
                 for b in boxes if b.get("linescore")]
 
+    # This Day in Sports — Wikipedia verified events + Claude rewrite
+    this_day = {"items": []}
+    try:
+        from datetime import date as _date
+        today_dt = _date.today()
+        wiki_url = f"https://en.wikipedia.org/api/rest_v1/feed/onthisday/events/{today_dt.month}/{today_dt.day}"
+        wiki_raw = api_get(wiki_url)
+        if wiki_raw and wiki_raw.get("events"):
+            # Filter for sports-related events
+            sports_keywords = [
+                "baseball","football","basketball","hockey","soccer","tennis",
+                "golf","boxing","olympic","championship","world series","super bowl",
+                "nba","nfl","mlb","nhl","fifa","wimbledon","nascar","formula",
+                "stadium","league","tournament","title","medal","record","defeated",
+                "won","scored","pitcher","quarterback","innings","touchdown","goal",
+                "home run","strikeout","slam","championship","playoffs","series",
+            ]
+            sports_events = []
+            for event in wiki_raw["events"]:
+                text_lower = event.get("text","").lower()
+                if any(kw in text_lower for kw in sports_keywords):
+                    sports_events.append({
+                        "year": str(event.get("year","")),
+                        "text": event.get("text",""),
+                    })
+            if sports_events:
+                # Pass verified events to Claude to rewrite in newspaper voice
+                events_json = json.dumps(sports_events[:8])
+                this_day = claude_call(client, f"""Rewrite these verified sports history events in classic newspaper style.
+Each entry should be one punchy, vivid sentence. Keep the year accurate.
+Events (from Wikipedia, all occurred on {today_dt.strftime('%B %-d')}):
+{events_json}
+Pick the 3 most interesting and return JSON:
+{{"items": [{{"year": "1941", "text": "One sentence newspaper style."}}]}}
+Return ONLY the JSON.""", max_tokens=400)
+        if not this_day or not this_day.get("items"):
+            this_day = {"items": []}
+    except Exception as e:
+        print(f"    This Day in Sports error: {e}")
+        this_day = {"items": []}
+
     return {
         "headline":  content.get("headline",{}),
         "secondary": content.get("secondary",[]),
         "column":    content.get("column",{}),
+        "this_day":  this_day if isinstance(this_day, dict) else {},
         "scores": {
             "mlb": fmt_scores(mlb_data.get("boxScores",[])[:8]),
             "nba": fmt_scores(nba_data.get("boxScores",[])[:4]),
@@ -1447,7 +1489,7 @@ def main():
     nba = build_nba(client, today, yesterday, nba_s)
     nhl = build_nhl(client, today, yesterday, nhl_s)
     nfl = build_nfl(client)
-    front = build_front(client, mlb, nba, nhl, nfl, today_str=now.strftime('%A, %B %-d, %Y'))
+    front = build_front(client, mlb, nba, nhl, nfl, today_str=now.strftime('%A, %B %-d, %Y'), now_str=now.strftime('%B %-d'))
 
     output = {
         "date":    now.strftime("%A, %B %-d, %Y"),
