@@ -625,6 +625,209 @@ table.ldr-tbl {
   .leaders-split{grid-template-columns:1fr}
 }
 
+
+/* ── MASTHEAD ── */
+.sp-name {
+  font-family: 'UnifrakturMaguntia', cursive;
+  font-size: clamp(2.6rem, 9vw, 6.5rem);
+  line-height: 1;
+  letter-spacing: 2px;
+  color: #111;
+}
+.sp-tagline {
+  font-size: .56rem;
+  letter-spacing: 4px;
+  text-transform: uppercase;
+  color: #444;
+  margin-top: 4px;
+  padding-bottom: 8px;
+}
+.masthead {
+  text-align: center;
+  border-top: 6px double #111;
+  padding: 12px 24px 0;
+}
+
+/* ── SECTION NAV ── */
+.sp-nav {
+  display: flex;
+  border-top: 3px solid #111;
+  border-bottom: 3px solid #111;
+  overflow-x: auto;
+  scrollbar-width: none;
+}
+.sp-nav::-webkit-scrollbar { display: none; }
+.sp-nav-btn {
+  flex: 1;
+  min-width: 80px;
+  padding: 8px 10px;
+  font-family: 'Libre Baskerville', serif;
+  font-size: .6rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 1.5px;
+  background: none;
+  border: none;
+  border-right: 1px solid #bbb;
+  cursor: pointer;
+  color: #444;
+  white-space: nowrap;
+  transition: all .12s;
+}
+.sp-nav-btn:last-child { border-right: none; }
+.sp-nav-btn:hover { background: #e8e8e8; color: #111; }
+.sp-nav-btn.active { background: #111; color: #fff; }
+
+/* ── DATELINE ── */
+.sp-dateline {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 3px 24px;
+  border-bottom: 2px solid #111;
+  font-size: .55rem;
+  text-transform: uppercase;
+  letter-spacing: .5px;
+  color: #444;
+}
+
+/* ── KICKER / FLAG ── */
+.sp-kicker {
+  display: inline-block;
+  font-family: 'Libre Baskerville', serif;
+  font-size: .5rem;
+  font-weight: 700;
+  letter-spacing: 3px;
+  text-transform: uppercase;
+  color: #fff;
+  background: #111;
+  padding: 2px 7px;
+  margin-bottom: 4px;
+}
+
+/* ── SECTION HEAD ── */
+.sp-sec-head {
+  font-size: .58rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 2.5px;
+  border-top: 3px solid #111;
+  border-bottom: 1px solid #111;
+  padding: 3px 0;
+  margin: 18px 0 10px;
+}
+.sp-sec-head-red { color: #8B0000; }
+
+/* ── HEADLINES ── */
+.sp-hl-head {
+  font-family: 'Playfair Display', serif;
+  font-size: clamp(1.8rem, 4vw, 3.2rem);
+  font-weight: 900;
+  line-height: 1.02;
+  letter-spacing: -.5px;
+  margin-bottom: 5px;
+}
+.sp-hl-deck {
+  font-family: 'Playfair Display', serif;
+  font-size: .88rem;
+  font-style: italic;
+  color: #333;
+  line-height: 1.4;
+  margin-bottom: 4px;
+  border-bottom: 1px solid #ccc;
+  padding-bottom: 4px;
+}
+.sp-byline {
+  font-size: .54rem;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  color: #555;
+  margin-bottom: 8px;
+}
+.sp-hl-body {
+  column-count: 2;
+  column-gap: 16px;
+  column-rule: 1px solid #ccc;
+}
+.sp-body { font-size: .8rem; line-height: 1.75; text-align: justify; hyphens: auto; }
+.sp-body p+p { text-indent: 1.3em; }
+
+/* ── SPORT PAGE GRID ── */
+.sp-sport-main-grid {
+  display: grid;
+  grid-template-columns: 1fr 220px;
+  gap: 0;
+  padding-bottom: 14px;
+  border-bottom: 2px solid #111;
+  margin-bottom: 14px;
+}
+.sp-sport-left { border-right: 1.5px solid #111; padding-right: 18px; }
+.sp-sport-right { padding-left: 8px; }
+
+/* ── FRONT GRID ── */
+.sp-front-grid {
+  display: grid;
+  grid-template-columns: 1fr 190px;
+  gap: 0;
+  padding-bottom: 16px;
+  border-bottom: 2px solid #111;
+  margin-bottom: 14px;
+}
+
+/* ── SECONDARY STORIES ── */
+.sp-sec-grid { display: grid; grid-template-columns: repeat(3,1fr); gap: 0 14px; margin-top: 10px; }
+.sp-sec-story { border-right: 1px solid #ccc; padding-right: 14px; }
+.sp-sec-story:last-child { border-right: none; padding-right: 0; }
+.sp-sec-s-head { font-family: 'Playfair Display', serif; font-size: clamp(.85rem,1.5vw,1.1rem); font-weight: 700; line-height: 1.1; margin-bottom: 3px; }
+.sp-sec-s-deck { font-family: 'Playfair Display', serif; font-size: .72rem; font-style: italic; color: #444; margin-bottom: 3px; border-bottom: 1px solid #ddd; padding-bottom: 3px; }
+.sp-sec-s-byline { font-size: .52rem; text-transform: uppercase; letter-spacing: 1px; color: #666; margin-bottom: 5px; }
+.sp-sec-s-body { font-size: .73rem; line-height: 1.68; text-align: justify; hyphens: auto; }
+
+/* ── OPINION ── */
+.sp-opinion { display: grid; grid-template-columns: 80px 1fr; gap: 0 14px; border-top: 3px double #111; padding-top: 12px; margin-top: 16px; }
+.sp-opinion-label { border-right: 1.5px solid #111; padding-right: 14px; display: flex; flex-direction: column; gap: 4px; }
+.sp-op-tag { font-size: .5rem; font-weight: 700; letter-spacing: 2px; text-transform: uppercase; }
+.sp-op-title { font-family: 'Playfair Display', serif; font-size: 1.3rem; font-style: italic; line-height: 1.1; }
+.sp-op-head { font-family: 'Playfair Display', serif; font-size: clamp(.95rem,1.8vw,1.2rem); font-weight: 700; line-height: 1.1; margin-bottom: 4px; }
+.sp-op-byline { font-size: .56rem; text-transform: uppercase; letter-spacing: 1px; color: #555; margin-bottom: 8px; border-bottom: 1px solid #ccc; padding-bottom: 3px; }
+.sp-op-body { column-count: 2; column-gap: 16px; column-rule: 1px solid #ccc; font-size: .78rem; line-height: 1.74; text-align: justify; hyphens: auto; }
+.sp-op-body p+p { text-indent: 1.3em; }
+
+/* ── SCORE SIDEBAR ── */
+.sp-score-sidebar { padding-left: 10px; }
+.sp-col-head { font-family: 'Playfair Display', serif; font-size: .68rem; font-weight: 700; text-transform: uppercase; letter-spacing: 1px; border-top: 2px solid #111; border-bottom: 2px solid #111; padding: 2px 0; margin-bottom: 6px; }
+
+/* ── BOX SCORE ── */
+.bs-game { margin-bottom: 16px; break-inside: avoid; }
+.bs-game-title { font-family: 'Playfair Display', serif; font-size: .9rem; font-weight: 900; margin-bottom: 4px; border-bottom: 1px solid #111; padding-bottom: 2px; }
+.bs-notes { font-size: .58rem; font-style: italic; color: #444; line-height: 1.5; border-top: 1px solid #e0e0e0; padding-top: 3px; margin-top: 3px; }
+
+/* ── FOOTER ── */
+.sp-footer { border-top: 3px double #111; padding: 7px 24px; display: flex; justify-content: space-between; font-size: .54rem; color: #555; text-transform: uppercase; letter-spacing: .5px; background: #f0f0f0; }
+
+/* ── SCHEDULE ── */
+.schedule-head { font-family: 'Playfair Display', serif; font-size: .7rem; font-weight: 700; text-transform: uppercase; letter-spacing: 1px; border-top: 2px solid #111; border-bottom: 2px solid #111; padding: 2px 0; margin-bottom: 6px; }
+.sched-item { padding: 5px 0; border-bottom: 1px dotted #bbb; }
+.sched-time { font-size: .52rem; text-transform: uppercase; letter-spacing: .8px; color: #666; margin-bottom: 1px; }
+.sched-matchup { font-family: 'Playfair Display', serif; font-size: .85rem; font-weight: 700; margin-bottom: 1px; }
+.sched-pitchers { font-size: .64rem; font-style: italic; color: #444; }
+.sched-note { font-size: .52rem; font-weight: 700; text-transform: uppercase; margin-top: 1px; }
+
+/* ── RESPONSIVE ── */
+@media (max-width: 760px) {
+  .sp-sport-main-grid, .sp-front-grid { grid-template-columns: 1fr; }
+  .sp-sport-left { border-right: none; padding-right: 0; border-bottom: 2px solid #111; padding-bottom: 14px; margin-bottom: 12px; }
+  .sp-sport-right { padding-left: 0; }
+  .sp-hl-body, .sp-op-body { column-count: 1; }
+  .sp-sec-grid { grid-template-columns: 1fr; }
+  .sp-sec-story { border-right: none; padding-right: 0; border-bottom: 1px solid #ccc; padding-bottom: 12px; margin-bottom: 12px; }
+  .sp-opinion { grid-template-columns: 1fr; }
+  .sp-opinion-label { border-right: none; flex-direction: row; align-items: center; gap: 8px; border-bottom: 1px solid #111; padding-bottom: 5px; margin-bottom: 8px; }
+  .sp-dateline { flex-direction: column; gap: 2px; text-align: center; padding: 3px 14px; }
+  .sp-footer { flex-direction: column; gap: 2px; text-align: center; }
+}
+@media (max-width: 480px) { .sp-name { font-size: 2.4rem; } }
+
 </style>
 </head>
 <body>
@@ -1808,19 +2011,40 @@ function renderSchedule(games, label) {
 // ── BOX SCORES ───────────────────────────────────────────────────────────────
 function renderLinescore(ls, sport) {
   const isBB = sport==='mlb', isHK = sport==='nhl';
-  const scores = ls.away.scores;
-  const cols = isBB ? scores.map((_,i)=>i+1) : isHK ? ['1','2','3','OT','SO'].slice(0,scores.length) : ['Q1','Q2','Q3','Q4','OT'].slice(0,scores.length);
-  return `<div style="overflow-x:auto"><table class="linescore">
-    <thead><tr><th>Team</th>${cols.map(c=>`<th>${c}</th>`).join('')}<th>${isBB?'R':'T'}</th>${isBB?'<th>H</th><th>E</th>':''}</tr></thead>
-    <tbody>
-      ${[ls.away,ls.home].map(side => `<tr>
-        <td>${side.name}</td>
-        ${side.scores.map(s=>`<td>${s}</td>`).join('')}
-        <td class="tot">${side.r}</td>
-        ${isBB ? `<td class="tot">${side.h}</td><td class="tot">${side.e}</td>` : ''}
-      </tr>`).join('')}
-    </tbody>
-  </table></div>`;
+  const RS = 'font-family:"Libre Baskerville",serif;font-size:.62rem';
+  const TN = 'font-weight:700;min-width:90px;padding-right:6px;white-space:nowrap';
+  const SC = 'text-align:center;min-width:14px;padding:0 2px;white-space:nowrap';
+  const TOT = 'font-weight:700;text-align:center;min-width:14px;padding:0 3px;white-space:nowrap';
+  function fmtScores(scores) {
+    if (isBB) {
+      // Group MLB innings in sets of 3: "010 023 00x"
+      const groups = [];
+      for (let i=0; i<scores.length; i+=3) {
+        groups.push(scores.slice(i,i+3).map(s=>String(s).padStart(1,'0')).join(''));
+      }
+      return groups.join(' ');
+    }
+    return scores.join(' ');
+  }
+  const rows = [ls.away, ls.home].map(side => {
+    const sc = fmtScores(side.scores||[]);
+    const totals = isBB
+      ? `${side.r}&nbsp;&nbsp;${side.h}&nbsp;&nbsp;${side.e}`
+      : `${side.r}`;
+    return `<tr style="${RS}">
+      <td style="${TN}">${side.name}</td>
+      <td style="${SC};letter-spacing:1px;font-family:monospace">${sc}</td>
+      <td style="padding:0 6px;color:#999">—</td>
+      <td style="${TOT}">${totals}</td>
+    </tr>`;
+  });
+  // Header row
+  const hdr = isBB
+    ? `<tr style="font-size:.52rem;font-weight:700;text-transform:uppercase;color:#555"><td></td><td style="${SC}">1&nbsp;2&nbsp;3&nbsp;&nbsp;4&nbsp;5&nbsp;6&nbsp;&nbsp;7&nbsp;8&nbsp;9</td><td></td><td style="${TOT}">R&nbsp;&nbsp;H&nbsp;&nbsp;E</td></tr>`
+    : `<tr style="font-size:.52rem;font-weight:700;text-transform:uppercase;color:#555"><td></td><td style="${SC}">${isHK?'1&nbsp;&nbsp;2&nbsp;&nbsp;3':'Q1&nbsp;Q2&nbsp;Q3&nbsp;Q4'}</td><td></td><td style="${TOT}">T</td></tr>`;
+  return `<table style="border-collapse:collapse;width:100%;border-bottom:1px solid #ddd;padding-bottom:2px;margin-bottom:4px">
+    <tbody>${hdr}${rows.join('')}</tbody>
+  </table>`;
 }
 
 function renderBatting(batting, sport) {
@@ -1857,7 +2081,7 @@ function renderBoxScores(boxScores, sport, label) {
     const hasNFL = sport==='nfl' && game.nflStats;
     const canExpand = hasBatting || hasNFL;
     html += `<div class="bs-game">
-      <div class="bs-game-title" ${canExpand?`onclick="toggleBS('${id}')" style="cursor:pointer"`:''}>
+      <div class="bs-game-title" style="font-size:.85rem" ${canExpand?`onclick="toggleBS('${id}')" style="cursor:pointer"`:''}>
         ${game.title}
         ${canExpand?`<span id="${id}-toggle" style="font-size:.64rem;color:#8B0000;font-weight:400;float:right">▼ Full Box Score</span>`:''}
       </div>
@@ -1869,6 +2093,32 @@ function renderBoxScores(boxScores, sport, label) {
       ${game.notes ? `<p class="bs-notes">${game.notes}</p>` : ''}
     </div>`;
   });
+  return html;
+}
+
+function renderPitching(pitching) {
+  if (!pitching || !pitching.some(t=>t.pitchers&&t.pitchers.length)) return '';
+  const TH = 'text-align:right;font-weight:700;border-bottom:1px solid #111;border-top:1px solid #111;padding:1px 3px;font-size:.49rem;text-transform:uppercase;background:#e0e0e0';
+  const TD = 'padding:0 3px;border-bottom:1px solid #ebebeb;text-align:right;font-size:.58rem;font-family:"Libre Baskerville",serif';
+  let html = '<table style="border-collapse:collapse;width:100%;margin-top:4px">';
+  pitching.forEach(tm => {
+    if (!tm.pitchers||!tm.pitchers.length) return;
+    html += `<thead>
+      <tr><td colspan="9" style="font-weight:700;font-size:.58rem;text-transform:uppercase;letter-spacing:1px;background:#ddd;padding:2px 3px;text-align:left">${tm.team}</td></tr>
+      <tr><th style="${TH};text-align:left">Pitcher</th><th style="${TH}">IP</th><th style="${TH}">H</th><th style="${TH}">R</th><th style="${TH}">ER</th><th style="${TH}">BB</th><th style="${TH}">SO</th><th style="${TH}">NP</th><th style="${TH}">ERA</th></tr>
+    </thead><tbody>`;
+    tm.pitchers.forEach(p => {
+      html += `<tr>
+        <td style="${TD};text-align:left">${p.name||''}</td>
+        <td style="${TD}">${p.ip||''}</td><td style="${TD}">${p.h||0}</td>
+        <td style="${TD}">${p.r||0}</td><td style="${TD}">${p.er||0}</td>
+        <td style="${TD}">${p.bb||0}</td><td style="${TD}">${p.so||0}</td>
+        <td style="${TD}">${p.np||0}</td><td style="${TD}">${p.era||'—'}</td>
+      </tr>`;
+    });
+    html += '</tbody>';
+  });
+  html += '</table>';
   return html;
 }
 
@@ -1890,7 +2140,7 @@ function renderNFLStats(nflStats) {
 
 // ── STANDINGS ────────────────────────────────────────────────────────────────
 function renderStandings(divisions, hasSplit) {
-  if (!divisions||!divisions.length) return '<p style="font-style:italic;color:#999;font-size:.75rem;padding:8px 0">Standings not available.</p>';
+  if (!divisions||!divisions.length||!Array.isArray(divisions)) return '<p style="font-style:italic;color:#999;font-size:.75rem;padding:8px 0">Standings loading...</p>';
   const TS = 'text-align:right;font-size:.61rem;font-family:"Libre Baskerville",serif';
   const TH = 'text-align:right;font-weight:700;font-size:.52rem;text-transform:uppercase;border-top:1px solid #111;border-bottom:2px solid #111;padding:2px 4px;background:#e0e0e0;white-space:nowrap';
   const TD = 'padding:2px 4px;border-bottom:1px solid #e0e0e0;text-align:right;white-space:nowrap;font-size:.61rem;font-family:"Libre Baskerville",serif';
@@ -1966,7 +2216,7 @@ function buildFront(overrides) {
   const sc  = (overrides && overrides.scores)    || front.scores;
 
   document.getElementById('front').innerHTML = `
-    <div class="sp-front-grid">
+    <div class="sp-front-grid" style="align-items:start">
       <div style="border-right:1.5px solid #111;padding-right:18px">
         ${story(hl, 1, 'sp-hl-body')}
       </div>
@@ -2012,7 +2262,7 @@ function buildSport(id, overrides) {
   const twoCol     = stdsCount > 3 ? 'style="display:grid;grid-template-columns:1fr 1fr;gap:0 20px"' : '';
 
   document.getElementById(id).innerHTML = `
-    <div class="sp-sport-main-grid">
+    <div class="sp-sport-main-grid" style="align-items:start">
       <div class="sp-sport-left">
         ${story(storyData, 1, 'sp-hl-body')}
       </div>
@@ -2023,25 +2273,27 @@ function buildSport(id, overrides) {
     </div>
     ${hasBracket ? secHead('Playoff Bracket')+renderBracket(d.bracket) : ''}
     ${secHead(isNFL?'Postseason Results':'Yesterday\'s Box Scores')}
-    <p style="font-size:.62rem;font-style:italic;color:#666;margin-bottom:8px">Click any game title to expand the full box score.</p>
+    <div style="display:grid;grid-template-columns:repeat(auto-fill,minmax(320px,1fr));gap:0 20px;align-items:start">
     ${boxData.map((game,idx)=>{
       const bid = `bs-${id}-${idx}`;
       const hasBatting = game.batting&&game.batting.some(t=>t.players&&t.players.length);
       const hasNFL2 = id==='nfl'&&game.nflStats;
       const canExpand = hasBatting||hasNFL2;
       return `<div class="bs-game">
-        <div class="bs-game-title" >
+        <div class="bs-game-title" style="font-size:.85rem" >
           <span>${game.title}</span>
           
         </div>
         ${renderLinescore(game.linescore,id)}
         <div id="${bid}" style="display:block">
           ${hasBatting?renderBatting(game.batting,id):''}
+          ${id==='mlb'&&game.pitching&&game.pitching.some(t=>t.pitchers&&t.pitchers.length)?renderPitching(game.pitching):''}
           ${hasNFL2?renderNFLStats(game.nflStats):''}
         </div>
         ${game.notes?`<p class="bs-notes">${game.notes}</p>`:''}
       </div>`;
     }).join('')}
+    </div>
     ${secHead(isNFL?'Final Standings':id==='nba'?'Playoff Standings':'Standings')}
     <div ${twoCol}>${renderStandings(stdsData||[],hasSplit)}</div>
     ${leadersData ? secHead('League Leaders')+renderLeaders(leadersData) : ''}`;
@@ -2063,15 +2315,14 @@ function buildNav() {
     const btn = document.createElement('button');
     btn.className = 'sp-nav-btn' + (s.id==='front'?' active':'');
     btn.textContent = s.label;
-    btn.style.cssText = 'flex:1;min-width:80px;padding:8px 10px;font-family:"Libre Baskerville",serif;font-size:.6rem;font-weight:700;text-transform:uppercase;letter-spacing:1.5px;background:none;border:none;border-right:1px solid #bbb;cursor:pointer;color:#444;white-space:nowrap;transition:all .12s';
-    if(s.id==='front'){btn.style.background='#111';btn.style.color='#fff';}
+    
+    
     btn.onclick = () => {
       document.querySelectorAll('.page').forEach(p=>p.classList.remove('active'));
       document.querySelectorAll('.sp-nav-btn').forEach(b=>{b.classList.remove('active');b.style.background='none';b.style.color='#444';});
       document.getElementById(s.id).classList.add('active');
       btn.classList.add('active');
-      btn.style.background='#111';
-      btn.style.color='#fff';
+      
     };
     nav.appendChild(btn);
   });
