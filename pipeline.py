@@ -345,7 +345,7 @@ def fmt_mlb_notes(box):
 
     return "  ".join(notes) if notes else ""
 
-def fmt_mlb_schedule(games):
+def fmt_mlb_schedule(games, mlb_season='2026'):
     sched = []
     for g in games:
         away = g.get("teams",{}).get("away",{})
@@ -529,7 +529,7 @@ def build_mlb(client, today_str, yesterday_str, mlb_season):
     print(f"    {len(yesterday_games)} games yesterday, {len(today_games_raw)} today")
 
     # Schedule
-    schedule = fmt_mlb_schedule(today_games_raw)
+    schedule = fmt_mlb_schedule(today_games_raw, mlb_season)
 
     # All box scores — full batting for first 3, linescore-only for rest
     box_scores = []
