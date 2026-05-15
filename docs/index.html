@@ -2208,29 +2208,36 @@ function renderNFLStats(nflStats) {
 // ── STANDINGS ────────────────────────────────────────────────────────────────
 function renderStandings(divisions, hasSplit) {
   if (!divisions||!divisions.length||!Array.isArray(divisions)) return '';
-  const TS = 'text-align:right;font-size:.61rem;font-family:"Libre Baskerville",serif';
   const TH = 'text-align:right;font-weight:700;font-size:.52rem;text-transform:uppercase;border-top:1px solid #111;border-bottom:2px solid #111;padding:2px 4px;background:#e0e0e0;white-space:nowrap';
   const TD = 'padding:2px 4px;border-bottom:1px solid #e0e0e0;text-align:right;white-space:nowrap;font-size:.61rem;font-family:"Libre Baskerville",serif';
   return divisions.map(div => {
     if (!div || !div.teams || !div.teams.length) return '';
     const hasNote = div.teams[0] && div.teams[0].note;
-    return `
-    <div style="font-size:.54rem;font-weight:700;text-transform:uppercase;letter-spacing:2px;margin:12px 0 3px;padding-bottom:2px;border-bottom:1px solid #aaa;color:#8B0000">${div.label||''}</div>
-    <div style="overflow-x:auto;-webkit-overflow-scrolling:touch"><table style="min-width:${hasSplit?'500px':'280px'};width:100%;border-collapse:collapse">
-      <thead><tr>
-        <th style="${TH};text-align:left;min-width:130px">Team</th>
-        <th style="${TH}">W</th><th style="${TH}">L</th><th style="${TH}">Pct</th><th style="${TH}">GB</th>
-        ${hasSplit?`<th style="${TH}">L10</th><th style="${TH}">Str</th><th style="${TH}">Home</th><th style="${TH}">Away</th>`:''}
-        ${hasNote?`<th style="${TH};text-align:left;min-width:110px">Status</th>`:''}
-      </tr></thead><tbody>
-      ${div.teams.map((t,i)=>`<tr style="${i===0?'font-weight:700':''}">
-        <td style="${TD};text-align:left">${t.name||''}</td>
-        <td style="${TD}">${t.w||''}</td><td style="${TD}">${t.l||''}</td><td style="${TD}">${t.pct||''}</td><td style="${TD}">${t.gb||''}</td>
-        ${hasSplit?`<td style="${TD}">${t.l10||''}</td><td style="${TD}">${t.strk||''}</td><td style="${TD}">${t.home||''}</td><td style="${TD}">${t.away||''}</td>`:''}
-        ${t.note?`<td style="${TD};text-align:left;font-size:.52rem;color:#555;font-style:italic">${t.note}</td>`:''}
-      </tr>`).join('')}
-      </tbody>
-    </table></div>`;
+    // Wrap label + table in ONE div so grid treats them as a single item
+    return `<div style="margin-bottom:14px;break-inside:avoid">
+      <div style="font-size:.54rem;font-weight:700;text-transform:uppercase;letter-spacing:2px;margin-bottom:4px;padding-bottom:2px;border-bottom:1px solid #aaa;color:#8B0000">${div.label||''}</div>
+      <div style="overflow-x:auto;-webkit-overflow-scrolling:touch">
+        <table style="min-width:${hasSplit?'420px':'240px'};width:100%;border-collapse:collapse;table-layout:auto">
+          <thead><tr>
+            <th style="${TH};text-align:left;min-width:120px">Team</th>
+            <th style="${TH}">W</th><th style="${TH}">L</th><th style="${TH}">Pct</th><th style="${TH}">GB</th>
+            ${hasSplit?`<th style="${TH}">L10</th><th style="${TH}">Str</th><th style="${TH}">Home</th><th style="${TH}">Away</th>`:''}
+            ${hasNote?`<th style="${TH};text-align:left">Note</th>`:''}
+          </tr></thead>
+          <tbody>
+            ${div.teams.map((t,i)=>`<tr>
+              <td style="${TD};text-align:left;font-weight:${i===0?'700':'400'}">${t.name||''}</td>
+              <td style="${TD};font-weight:${i===0?'700':'400'}">${t.w||''}</td>
+              <td style="${TD};font-weight:${i===0?'700':'400'}">${t.l||''}</td>
+              <td style="${TD};font-weight:${i===0?'700':'400'}">${t.pct||''}</td>
+              <td style="${TD};font-weight:${i===0?'700':'400'}">${t.gb||''}</td>
+              ${hasSplit?`<td style="${TD}">${t.l10||''}</td><td style="${TD}">${t.strk||''}</td><td style="${TD}">${t.home||''}</td><td style="${TD}">${t.away||''}</td>`:''}
+              ${t.note?`<td style="${TD};text-align:left;font-size:.52rem;color:#555;font-style:italic">${t.note}</td>`:''}
+            </tr>`).join('')}
+          </tbody>
+        </table>
+      </div>
+    </div>`;
   }).join('');
 }
 
