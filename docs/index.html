@@ -1,15 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <!-- Google tag (gtag.js) -->
-<script async src="https://www.googletagmanager.com/gtag/js?id=G-3LHZLQR5MF"></script>
-<script>
-  window.dataLayer = window.dataLayer || [];
-  function gtag(){dataLayer.push(arguments);}
-  gtag('js', new Date());
-
-  gtag('config', 'G-3LHZLQR5MF');
-</script>
 <meta charset="UTF-8"/>
 <meta name="viewport" content="width=device-width,initial-scale=1.0"/>
 <title>The Sports Page</title>
@@ -24,7 +15,7 @@
 
 body {
   background: #fff;
-  font-family: 'Libre Baskerville', Georgia, serif;
+  font-family: 'Playfair Display', serif;
   color: #111;
   -webkit-font-smoothing: antialiased;
 }
@@ -75,7 +66,7 @@ body {
   flex: 1;
   min-width: 80px;
   padding: 7px 12px;
-  font-family: 'Libre Baskerville', serif;
+  font-family: 'Playfair Display', serif;
   font-size: .6rem;
   font-weight: 700;
   text-transform: uppercase;
@@ -111,7 +102,7 @@ body {
 
 /* ── SECTION FLAGS ── */
 .flag {
-  font-family: 'Libre Baskerville', serif;
+  font-family: 'Playfair Display', serif;
   font-size: .55rem;
   font-weight: 700;
   letter-spacing: 3px;
@@ -133,7 +124,7 @@ body {
   margin: 14px 0 10px;
 }
 .section-label {
-  font-family: 'Libre Baskerville', serif;
+  font-family: 'Playfair Display', serif;
   font-size: .58rem;
   font-weight: 700;
   letter-spacing: 2.5px;
@@ -246,7 +237,7 @@ h3.headline {
 .score-game { padding: 2px 0; border-bottom: 1px solid #ddd; }
 .score-row { display: flex; justify-content: space-between; font-size: .65rem; line-height: 1.55; }
 .score-team { flex: 1; }
-.score-val { font-weight: 700; min-width: 18px; text-align: right; font-family: 'Libre Baskerville', monospace; }
+.score-val { font-weight: 700; min-width: 18px; text-align: right; font-family: 'Playfair Display', serif; }
 .score-status { font-size: .48rem; color: #666; font-style: italic; text-align: right; }
 
 /* ── SECONDARY STORIES (3-col) ── */
@@ -349,7 +340,7 @@ table.linescore {
   width: 100%;
   border-collapse: collapse;
   font-size: .62rem;
-  font-family: 'Libre Baskerville', serif;
+  font-family: 'Playfair Display', serif;
 }
 .linescore th {
   padding: 2px 5px;
@@ -372,7 +363,7 @@ table.btbl {
   width: 100%;
   border-collapse: collapse;
   font-size: .62rem;
-  font-family: 'Libre Baskerville', serif;
+  font-family: 'Playfair Display', serif;
   margin-bottom: 4px;
 }
 .btbl th {
@@ -418,7 +409,7 @@ table.std-tbl {
   width: 100%;
   border-collapse: collapse;
   font-size: .62rem;
-  font-family: 'Libre Baskerville', serif;
+  font-family: 'Playfair Display', serif;
   margin-bottom: 4px;
 }
 .std-tbl th {
@@ -476,7 +467,7 @@ table.ldr-tbl {
   width: 100%;
   border-collapse: collapse;
   font-size: .61rem;
-  font-family: 'Libre Baskerville', serif;
+  font-family: 'Playfair Display', serif;
 }
 .ldr-tbl th { text-align: left; font-weight: 700; font-size: .5rem; text-transform: uppercase; border-bottom: 1px solid #ccc; padding: 1px 3px; }
 .ldr-tbl th:not(:first-child) { text-align: right; }
@@ -680,7 +671,7 @@ table.ldr-tbl {
 .sp-nav-btn {
   flex: 1;
   padding: 8px 14px;
-  font-family: 'Libre Baskerville', serif;
+  font-family: 'Playfair Display', serif;
   font-size: .6rem;
   font-weight: 700;
   text-transform: uppercase;
@@ -713,7 +704,7 @@ table.ldr-tbl {
 /* ── KICKER / FLAG ── */
 .sp-kicker {
   display: inline-block;
-  font-family: 'Libre Baskerville', serif;
+  font-family: 'Playfair Display', serif;
   font-size: .5rem;
   font-weight: 700;
   letter-spacing: 3px;
@@ -866,7 +857,6 @@ table.ldr-tbl {
   <div class="sp-dateline">
     <span id="dl-edition"></span>
     <span id="dl-date" style="font-weight:700;color:#111"></span>
-    <span id="dl-weather"></span>
   </div>
   <div id="front" class="page active"></div>
   <div id="mlb"   class="page"></div>
@@ -888,7 +878,7 @@ const mlb = {
     kicker:"Baseball",
     headline:"OHTANI'S HISTORIC PACE PUTS HIM ON TRACK FOR 53 HOME RUNS",
     deck:"No player since Bonds in 2001 has reached 15 home runs this early in a season",
-    byline:"By Sandra Reyes, Baseball Writer",
+    byline:"By Andrew Dobrow, Baseball Writer",
     body:"Shohei Ohtani arrived in Los Angeles with absurd expectations and has somehow exceeded them. Through 46 games he has 15 home runs, 42 RBI, and a .321 batting average — a pace that would produce 53 home runs and 148 RBI over a full season.\n\nWhat makes his production historically unusual is the consistency. He has not gone more than four consecutive games without a home run. He has hit them to all fields, off fastballs and off sliders, and pitchers who have tried to work around him have watched him draw walks and steal bases.\n\n\"He is operating at a level that makes you rethink what is possible,\" Dodgers manager Dave Roberts said. \"I have managed for a long time. I have not seen anything like what he does every day.\""
   },
   schedule: [
@@ -1339,7 +1329,7 @@ const mlb = {
 
 // ── NBA ────────────────────────────────────────────────────────────────────────
 const nba = {
-  story:{kicker:"NBA Playoffs",headline:"BRUNSON HAS BECOME THE MOST UNGUARDABLE PLAYER IN THESE PLAYOFFS",deck:"No defense has found an answer for New York's point guard through two rounds",byline:"By James R. Morrison, Sports Writer",body:"There is a moment in every great playoff run when a player stops being good and starts being inevitable. For Jalen Brunson, that moment arrived in the second quarter of Game 4 against Indiana, and nothing the Pacers threw at him Wednesday changed the equation.\n\nBrunson is averaging 36.4 points through six games against Indiana, shooting 48 percent from the floor and 42 percent from three. He has scored at least 30 in four consecutive games, a feat no Knick has accomplished since Walt Frazier in 1970.\n\n\"You just try to make him work,\" Indiana coach Rick Carlisle said. \"But he makes everything work. That's the problem.\""},
+  story:{kicker:"NBA Playoffs",headline:"BRUNSON HAS BECOME THE MOST UNGUARDABLE PLAYER IN THESE PLAYOFFS",deck:"No defense has found an answer for New York's point guard through two rounds",byline:"By Andrew Dobrow, Sports Writer",body:"There is a moment in every great playoff run when a player stops being good and starts being inevitable. For Jalen Brunson, that moment arrived in the second quarter of Game 4 against Indiana, and nothing the Pacers threw at him Wednesday changed the equation.\n\nBrunson is averaging 36.4 points through six games against Indiana, shooting 48 percent from the floor and 42 percent from three. He has scored at least 30 in four consecutive games, a feat no Knick has accomplished since Walt Frazier in 1970.\n\n\"You just try to make him work,\" Indiana coach Rick Carlisle said. \"But he makes everything work. That's the problem.\""},
   schedule:[
     {time:"8:00 PM ET",away:"Indiana Pacers",home:"New York Knicks",note:"Game 7 — Series tied 3-3"},
     {time:"10:30 PM ET",away:"Minnesota Timberwolves",home:"Golden State Warriors",note:"Game 6 — MIN leads 3-2"},
@@ -1531,7 +1521,7 @@ const nba = {
 
 // ── NHL ────────────────────────────────────────────────────────────────────────
 const nhl = {
-  story:{kicker:"NHL Playoffs",headline:"REINHART ENDS MARATHON: PANTHERS SURVIVE BRUINS IN DOUBLE OT",deck:"Florida takes 3-2 series lead; Bobrovsky stops 44 shots in a landmark performance",byline:"By Mike Callahan, Hockey Writer",body:"Sam Reinhart ended one of the most gripping games of this postseason at 6:42 of the second overtime, burying a rebound off a Dmitry Kulikov point shot to give the Florida Panthers a 4-3 victory over the Boston Bruins at Amerant Bank Arena.\n\nSergei Bobrovsky was the story through 80 minutes, stopping 44 of 47 shots including a penalty shot by David Pastrnak midway through the second period. The Panthers killed four penalties in regulation before Reinhart delivered the winner.\n\n\"Bob made some incredible saves. That's playoff hockey,\" said Boston's Brad Marchand, who had two goals and an assist in a losing effort."},
+  story:{kicker:"NHL Playoffs",headline:"REINHART ENDS MARATHON: PANTHERS SURVIVE BRUINS IN DOUBLE OT",deck:"Florida takes 3-2 series lead; Bobrovsky stops 44 shots in a landmark performance",byline:"By Andrew Dobrow, Hockey Writer",body:"Sam Reinhart ended one of the most gripping games of this postseason at 6:42 of the second overtime, burying a rebound off a Dmitry Kulikov point shot to give the Florida Panthers a 4-3 victory over the Boston Bruins at Amerant Bank Arena.\n\nSergei Bobrovsky was the story through 80 minutes, stopping 44 of 47 shots including a penalty shot by David Pastrnak midway through the second period. The Panthers killed four penalties in regulation before Reinhart delivered the winner.\n\n\"Bob made some incredible saves. That's playoff hockey,\" said Boston's Brad Marchand, who had two goals and an assist in a losing effort."},
   schedule:[
     {time:"7:30 PM ET",away:"Boston Bruins",home:"Florida Panthers",note:"Game 6 — FLA leads series 3-2"},
     {time:"9:30 PM ET",away:"Vancouver Canucks",home:"Edmonton Oilers",note:"Game 6 — EDM leads series 4-1"},
@@ -1738,7 +1728,7 @@ const nhl = {
 
 // ── NFL ────────────────────────────────────────────────────────────────────────
 const nfl = {
-  story:{kicker:"NFL Offseason",headline:"RAVENS LOCK UP JACKSON THROUGH 2030 IN RECORD-SETTING DEAL",deck:"Reigning MVP secured with $275 million guaranteed, the most in NFL history",byline:"By Derek Paulson, NFL Writer",body:"The Baltimore Ravens agreed Wednesday on a contract extension with quarterback Lamar Jackson that makes him the highest-paid player in NFL history. The deal runs through the 2030 season and includes $275 million in fully guaranteed money.\n\nJackson, 28, is coming off his second MVP season, having thrown for 3,984 yards and 37 touchdowns while rushing for 846 yards in 2024. He led Baltimore to a 13-4 regular season record before falling to Kansas City in the AFC Championship.\n\n\"Lamar is the heartbeat of this franchise,\" Ravens GM Eric DeCosta said. \"This extension reflects our belief that he is not only the best player in football, but the right leader for everything we want to build.\""},
+  story:{kicker:"NFL Offseason",headline:"RAVENS LOCK UP JACKSON THROUGH 2030 IN RECORD-SETTING DEAL",deck:"Reigning MVP secured with $275 million guaranteed, the most in NFL history",byline:"By Andrew Dobrow, NFL Writer",body:"The Baltimore Ravens agreed Wednesday on a contract extension with quarterback Lamar Jackson that makes him the highest-paid player in NFL history. The deal runs through the 2030 season and includes $275 million in fully guaranteed money.\n\nJackson, 28, is coming off his second MVP season, having thrown for 3,984 yards and 37 touchdowns while rushing for 846 yards in 2024. He led Baltimore to a 13-4 regular season record before falling to Kansas City in the AFC Championship.\n\n\"Lamar is the heartbeat of this franchise,\" Ravens GM Eric DeCosta said. \"This extension reflects our belief that he is not only the best player in football, but the right leader for everything we want to build.\""},
   schedule:[
     {time:"May 22",away:"Deadline",home:"Fifth-Year Options",note:"Teams must exercise options for 2022 first-round picks"},
     {time:"June 1",away:"Cutdown",home:"Roster Moves",note:"Post-June 1 designations take effect; cap savings accelerate"},
@@ -1925,13 +1915,13 @@ const nfl = {
 
 // ── FRONT PAGE DATA ────────────────────────────────────────────────────────────
 const front = {
-  headline:{kicker:"NBA Playoffs",headline:"KNICKS STUN PACERS IN OVERTIME CLASSIC TO EVEN SERIES",deck:"Brunson pours in 44 points as New York forces Game 7 with a gritty Garden performance",byline:"By James R. Morrison, Sports Writer",body:"Jalen Brunson delivered one of the most commanding playoff performances in Madison Square Garden history Wednesday night, scoring 44 points, including six in overtime, as the New York Knicks defeated the Indiana Pacers 118-112 to even their second-round series at three games apiece.\n\nKarl-Anthony Towns added 22 points and 11 rebounds in a rugged interior battle, and OG Anunoby locked down Tyrese Haliburton, held to just 14 points on 5-of-17 shooting, for stretches of the second half.\n\nGame 7 is Saturday in Indianapolis, where the Pacers have won nine straight playoff games. \"We know what we have to do,\" Brunson said. \"This group doesn't flinch.\""},
+  headline:{kicker:"NBA Playoffs",headline:"KNICKS STUN PACERS IN OVERTIME CLASSIC TO EVEN SERIES",deck:"Brunson pours in 44 points as New York forces Game 7 with a gritty Garden performance",byline:"By Andrew Dobrow, Sports Writer",body:"Jalen Brunson delivered one of the most commanding playoff performances in Madison Square Garden history Wednesday night, scoring 44 points, including six in overtime, as the New York Knicks defeated the Indiana Pacers 118-112 to even their second-round series at three games apiece.\n\nKarl-Anthony Towns added 22 points and 11 rebounds in a rugged interior battle, and OG Anunoby locked down Tyrese Haliburton, held to just 14 points on 5-of-17 shooting, for stretches of the second half.\n\nGame 7 is Saturday in Indianapolis, where the Pacers have won nine straight playoff games. \"We know what we have to do,\" Brunson said. \"This group doesn't flinch.\""},
   secondary:[
-    {kicker:"Baseball",headline:"OHTANI GOES DEEP TWICE AS DODGERS ROUT GIANTS, 9-2",deck:"Los Angeles slugger moves within two of the NL lead with 15 home runs",byline:"By Sandra Reyes",body:"Shohei Ohtani launched a pair of home runs at Dodger Stadium, connecting for a two-run shot in the third and a solo blast in the sixth as Los Angeles beat San Francisco 9-2.\n\nOhtani, batting .321, is now tied with Philadelphia's Bryce Harper for second in the National League home run race with 15."},
-    {kicker:"NHL Playoffs",headline:"PANTHERS EDGE BRUINS IN DOUBLE OVERTIME THRILLER",deck:"Reinhart's winner at 6:42 of the second extra period sends Florida to Game 6",byline:"By Mike Callahan",body:"Sam Reinhart ended one of the most gripping games of this postseason, burying a rebound at 6:42 of the second overtime to give Florida a 4-3 win over Boston at Amerant Bank Arena.\n\nSergei Bobrovsky stopped 44 of 47 shots for the Panthers, including a penalty shot from David Pastrnak."},
-    {kicker:"NFL Offseason",headline:"RAVENS LOCK UP JACKSON FOR RECORD $275 MILLION",deck:"Reigning two-time MVP signed through 2030 in the richest deal in league history",byline:"By Derek Paulson",body:"The Baltimore Ravens agreed Wednesday on an extension with quarterback Lamar Jackson making him the highest-paid player in NFL history, with $275 million fully guaranteed through the 2030 season.\n\nJackson is coming off his second consecutive MVP campaign, leading Baltimore to a 13-4 record."},
+    {kicker:"Baseball",headline:"OHTANI GOES DEEP TWICE AS DODGERS ROUT GIANTS, 9-2",deck:"Los Angeles slugger moves within two of the NL lead with 15 home runs",byline:"By Andrew Dobrow",body:"Shohei Ohtani launched a pair of home runs at Dodger Stadium, connecting for a two-run shot in the third and a solo blast in the sixth as Los Angeles beat San Francisco 9-2.\n\nOhtani, batting .321, is now tied with Philadelphia's Bryce Harper for second in the National League home run race with 15."},
+    {kicker:"NHL Playoffs",headline:"PANTHERS EDGE BRUINS IN DOUBLE OVERTIME THRILLER",deck:"Reinhart's winner at 6:42 of the second extra period sends Florida to Game 6",byline:"By Andrew Dobrow",body:"Sam Reinhart ended one of the most gripping games of this postseason, burying a rebound at 6:42 of the second overtime to give Florida a 4-3 win over Boston at Amerant Bank Arena.\n\nSergei Bobrovsky stopped 44 of 47 shots for the Panthers, including a penalty shot from David Pastrnak."},
+    {kicker:"NFL Offseason",headline:"RAVENS LOCK UP JACKSON FOR RECORD $275 MILLION",deck:"Reigning two-time MVP signed through 2030 in the richest deal in league history",byline:"By Andrew Dobrow",body:"The Baltimore Ravens agreed Wednesday on an extension with quarterback Lamar Jackson making him the highest-paid player in NFL history, with $275 million fully guaranteed through the 2030 season.\n\nJackson is coming off his second consecutive MVP campaign, leading Baltimore to a 13-4 record."},
   ],
-  column:{tag:"From the Press Box",headline:"STOP BLAMING THE REFS: YOUR TEAM JUST ISN'T GOOD ENOUGH",byline:"By Pat McAllister",body:"Every spring, as the playoffs narrow the field and the losses sting sharper, a familiar ritual begins: the officiating becomes the story. Social media floods with freeze-frames. Coaches bite their lips at the podium. Fans who watched their team get outrebounded by twelve somehow locate a missed call in the third quarter as the true cause of defeat.\n\nHere is what the tape actually shows: the teams still standing in May are there because they execute better, defend harder, and adjust faster. Bad calls happen in every series, to every team. The difference between champions and complainers is what you do on the next possession."},
+  column:{tag:"From the Press Box",headline:"STOP BLAMING THE REFS: YOUR TEAM JUST ISN'T GOOD ENOUGH",byline:"By Andrew Dobrow",body:"Every spring, as the playoffs narrow the field and the losses sting sharper, a familiar ritual begins: the officiating becomes the story. Social media floods with freeze-frames. Coaches bite their lips at the podium. Fans who watched their team get outrebounded by twelve somehow locate a missed call in the third quarter as the true cause of defeat.\n\nHere is what the tape actually shows: the teams still standing in May are there because they execute better, defend harder, and adjust faster. Bad calls happen in every series, to every team. The difference between champions and complainers is what you do on the next possession."},
   scores:{
     nba:[
       {away:"Indiana",as:112,home:"New York",hs:118,note:"OT — NYK leads 3-3"},
@@ -1992,7 +1982,7 @@ function story(s, hLevel, bodyClass) {
 
 // ── SCORES ───────────────────────────────────────────────────────────────────
 function scoreGame(g) {
-  return `<div style="padding:2px 0;border-bottom:1px solid #ddd;font-size:.65rem;font-family:'Libre Baskerville',serif">
+  return `<div style="padding:2px 0;border-bottom:1px solid #ddd;font-size:.65rem;font-family:'Libre Baskerville', serif">
     <div style="display:flex;justify-content:space-between;line-height:1.55"><span style="flex:1">${g.away||g.away_team||''}</span><span style="font-weight:700;min-width:18px;text-align:right">${g.away_score||g.as||0}</span></div>
     <div style="display:flex;justify-content:space-between;line-height:1.55"><span style="flex:1">${g.home||g.home_team||''}</span><span style="font-weight:700;min-width:18px;text-align:right">${g.home_score||g.hs||0}</span></div>
     <div style="font-size:.48rem;color:#666;font-style:italic;text-align:right">${g.status||g.note||'Final'}</div>
@@ -2031,41 +2021,41 @@ function renderSchedule(games, label) {
 
 function renderLinescore(ls, sport) {
   const isBB = sport==='mlb', isHK = sport==='nhl';
-  const RS = 'font-family:"Libre Baskerville",serif;font-size:.62rem';
-  const TN = 'font-weight:700;min-width:90px;padding-right:6px;white-space:nowrap';
-  const SC = 'text-align:center;min-width:14px;padding:0 2px;white-space:nowrap';
-  const TOT = 'font-weight:700;text-align:center;min-width:14px;padding:0 3px;white-space:nowrap';
-  function fmtScores(scores) {
-    if (isBB) {
-      // Group MLB innings in sets of 3: "010 023 00x"
-      const groups = [];
-      for (let i=0; i<scores.length; i+=3) {
-        groups.push(scores.slice(i,i+3).map(s=>String(s).padStart(1,'0')).join(''));
-      }
-      return groups.join(' ');
-    }
-    return scores.join(' ');
-  }
+  const scores = ls.away.scores;
+  const cols = isBB ? scores.map((_,i)=>i+1)
+    : isHK ? ['1','2','3','OT','SO'].slice(0,scores.length)
+    : ['Q1','Q2','Q3','Q4','OT'].slice(0,scores.length);
+
+  const TH = 'background:#111;color:#fff;font-size:.5rem;font-weight:700;text-transform:uppercase;text-align:center;padding:2px 4px;white-space:nowrap;min-width:18px';
+  const THL = 'background:#111;color:#fff;font-size:.5rem;font-weight:700;text-transform:uppercase;text-align:left;padding:2px 6px;min-width:120px';
+  const TD = 'text-align:center;font-size:.62rem;padding:2px 4px;border-bottom:1px solid #e0e0e0;font-family:"Libre Baskerville",serif;white-space:nowrap';
+  const TDL = 'text-align:left;font-size:.62rem;font-weight:700;padding:2px 6px;border-bottom:1px solid #e0e0e0;font-family:"Libre Baskerville",serif;white-space:nowrap';
+  const TDTOT = 'text-align:center;font-size:.62rem;font-weight:700;padding:2px 4px;border-bottom:1px solid #e0e0e0;background:#e0e0e0;font-family:"Libre Baskerville",serif;white-space:nowrap';
+  const SEP = 'text-align:center;font-size:.6rem;color:#999;padding:0 3px;border-bottom:1px solid #e0e0e0';
+
   const rows = [ls.away, ls.home].map(side => {
-    const sc = fmtScores(side.scores||[]);
+    const scoreCells = (side.scores||[]).map(s=>`<td style="${TD}">${s}</td>`).join('');
     const totals = isBB
-      ? `${side.r}&nbsp;&nbsp;${side.h}&nbsp;&nbsp;${side.e}`
-      : `${side.r}`;
-    return `<tr style="${RS}">
-      <td style="${TN}">${side.name}</td>
-      <td style="${SC};letter-spacing:1px;font-family:monospace">${sc}</td>
-      <td style="padding:0 6px;color:#999">—</td>
-      <td style="${TOT}">${totals}</td>
-    </tr>`;
+      ? `<td style="${SEP}">—</td><td style="${TDTOT}">${side.r}</td><td style="${TDTOT}">${side.h}</td><td style="${TDTOT}">${side.e}</td>`
+      : `<td style="${SEP}">—</td><td style="${TDTOT}">${side.r}</td>`;
+    return `<tr><td style="${TDL}">${side.name}</td>${scoreCells}${totals}</tr>`;
   });
-  // Header row
-  const hdr = isBB
-    ? `<tr style="font-size:.52rem;font-weight:700;text-transform:uppercase;color:#555"><td></td><td style="${SC}">1&nbsp;2&nbsp;3&nbsp;&nbsp;4&nbsp;5&nbsp;6&nbsp;&nbsp;7&nbsp;8&nbsp;9</td><td></td><td style="${TOT}">R&nbsp;&nbsp;H&nbsp;&nbsp;E</td></tr>`
-    : `<tr style="font-size:.52rem;font-weight:700;text-transform:uppercase;color:#555"><td></td><td style="${SC}">${isHK?'1&nbsp;&nbsp;2&nbsp;&nbsp;3':'Q1&nbsp;Q2&nbsp;Q3&nbsp;Q4'}</td><td></td><td style="${TOT}">T</td></tr>`;
-  return `<table style="border-collapse:collapse;width:100%;border-bottom:1px solid #ddd;padding-bottom:2px;margin-bottom:4px">
-    <tbody>${hdr}${rows.join('')}</tbody>
-  </table>`;
+
+  const rhe = isBB
+    ? `<th style="${TH}">R</th><th style="${TH}">H</th><th style="${TH}">E</th>`
+    : `<th style="${TH}">T</th>`;
+
+  return `<div style="overflow-x:auto;margin-bottom:6px"><table style="border-collapse:collapse;width:100%">
+    <thead><tr>
+      <th style="${THL}">Team</th>
+      ${cols.map(c=>`<th style="${TH}">${c}</th>`).join('')}
+      <th style="padding:0 3px;background:#111"></th>
+      ${rhe}
+    </tr></thead>
+    <tbody>${rows.join('')}</tbody>
+  </table></div>`;
 }
+
 
 function renderBatting(batting, sport) {
   if (!batting || !batting.some(t=>t.players&&t.players.length)) return '';
@@ -2237,7 +2227,7 @@ function buildFront(overrides) {
 
   document.getElementById('front').innerHTML = `
     <div class="sp-front-grid" style="align-items:start">
-      <div style="border-right:1.5px solid #111;padding-right:18px">
+      <div style="padding-right:18px">
         ${story(hl, 1, 'sp-hl-body')}
       </div>
       <div class="sp-score-sidebar">
@@ -2353,7 +2343,7 @@ async function init() {
   buildNav();
   document.getElementById('dl-edition').textContent = META.edition;
   document.getElementById('dl-date').textContent    = META.date;
-  document.getElementById('dl-weather').textContent = META.weather + ' · Five Cents';
+  
   buildFront(null);
   SECTIONS.filter(s=>s.id!=='front').forEach(s => buildSport(s.id, null));
 
