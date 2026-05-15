@@ -2193,7 +2193,7 @@ function renderLeaders(leaders) {
           <div style="font-size:.54rem;font-weight:700;text-transform:uppercase;letter-spacing:1.5px;border-bottom:1px solid #999;padding-bottom:2px;margin-bottom:2px">${cat.cat||''}</div>
           <table style="width:100%;border-collapse:collapse">
             <thead><tr>${(cat.cols||[]).map(c=>`<th style="${TH}${c!==cat.cols[0]?';text-align:right':''}">${c}</th>`).join('')}</tr></thead>
-            <tbody>${(cat.rows||[]).map(row=>`<tr>${(row||[]).map((cell,k)=>`<td style="${TD}${k>0?';text-align:right':''}">${cell}</td>`).join('')}</tr>`).join('')}</tbody>
+            <tbody>${(cat.rows||[]).slice(0,8).map(row=>`<tr>${(row||[]).map((cell,k)=>`<td style="${TD}${k>0?';text-align:right':''}">${cell}</td>`).join('')}</tr>`).join('')}</tbody>
           </table>
         </div>`).join('')}
     </div>`;
