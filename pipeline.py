@@ -278,6 +278,15 @@ def fmt_mlb_notes(box):
             notes.append(val)
             seen.add(val)
 
+    # Debug: if no notes found, log available keys
+    if not notes:
+        info_labels = [i.get("label","") for i in box.get("info",[])]
+        print(f"      Notes debug: info labels={info_labels[:8]}")
+        for side in ["away","home"]:
+            tn = box.get("teams",{}).get(side,{}).get("note","")
+            if tn:
+                print(f"      Notes debug: {side}.note type={type(tn).__name__} val={str(tn)[:100]}")
+
     return "  ".join(notes) if notes else ""
 
 def fmt_mlb_schedule(games):
@@ -1240,9 +1249,13 @@ def build_nfl(client):
     ]
 
     scores_txt = "; ".join(game_summaries[:4]) if game_summaries else "NFL offseason"
-    story = claude_call(client, f"""Write an NFL story for today's Sports Page.
-Recent NFL results or offseason news: {scores_txt}
-Return JSON: {{"kicker":"NFL","headline":"HEADLINE ALL CAPS","deck":"Under 20 words","byline":"By Andrew Dobrow, NFL Writer","body":"Three paragraphs separated by \\n\\n."}}""")
+    story = claude_call(client, f"""Write an NFL offseason story for today's Sports Page.
+CONTEXT: The 2025 NFL season concluded in February 2026 with Super Bowl LX.
+It is now May 2026 — the NFL offseason. No games are being played.
+Write about current offseason news: trades, signings, draft analysis, training camp storylines.
+Do NOT write about upcoming Super Bowls or suggest the season is still ongoing.
+Recent news or results: {scores_txt}
+Return JSON: {{"kicker":"NFL OFFSEASON","headline":"HEADLINE ALL CAPS","deck":"Under 20 words","byline":"By Andrew Dobrow, NFL Writer","body":"Three paragraphs separated by \\n\\n."}}""")
 
     return {"story": story, "schedule": schedule,
             "boxScores": box_scores, "standings": standings, "leaders": leaders}
@@ -1302,7 +1315,7 @@ Return JSON:
                  "away_score": b["linescore"]["away"]["r"],
                  "home": b["linescore"]["home"]["name"],
                  "home_score": b["linescore"]["home"]["r"],
-                 "status": b.get("notes","Final")[:30]}
+                 "status": "Final"}
                 for b in boxes if b.get("linescore")]
 
     return {
