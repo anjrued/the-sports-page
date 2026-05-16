@@ -1519,29 +1519,80 @@ Return JSON:
                  "status": "Final"}
                 for b in boxes if b.get("linescore")]
 
-    # This Day in Sports — on-this-day.com (verified daily sports facts)
+    # This Day in Sports — radio station syndicated content (sports-only, daily)
     this_day = {"items": []}
     try:
         import re as _re
-        # Fetch HTML directly — api_get expects JSON
         import requests as _req
-        resp = _req.get("https://on-this-day.com/cgi-bin/otd/sportsotd.pl",
-                       headers={"User-Agent": "Mozilla/5.0 (compatible; TheSportsPage/1.0)"}, timeout=15)
-        if resp.status_code == 200:
-            matches = _re.findall(r'\*\*(\d{4})\*\*\s*[-–]\s*([^*]+?)(?=\s*\*\*|\s*Sports Quote|$)', resp.text, _re.DOTALL)
-            events = [{"year": m[0], "text": m[1].strip().replace("  "," ")} for m in matches if len(m[1].strip()) > 20]
-            print(f"    This Day: {len(events)} events found on on-this-day.com")
+        from datetime import date as _date
+        today_dt = _date.today()
+        month_name = today_dt.strftime("%B").lower()
+        day_num    = today_dt.day
+        year_num   = today_dt.year
+
+        # Multiple syndicated radio station sites with the same content
+        candidate_urls = [
+            f"https://backstagecountry.com/{year_num}/{today_dt.strftime('%m')}/{today_dt.strftime('%d')}/this-day-in-sports-history-{month_name}-{day_num}/",
+            f"https://country1037fm.com/{year_num}/{today_dt.strftime('%m')}/{today_dt.strftime('%d')}/this-day-in-sports-history-{month_name}-{day_num}-2/",
+            f"https://975thefanatic.com/{year_num}/{today_dt.strftime('%m')}/{today_dt.strftime('%d')}/this-day-in-sports-history-{month_name}-{day_num}-2/",
+            f"https://wrif.com/{year_num}/{today_dt.strftime('%m')}/{today_dt.strftime('%d')}/this-day-in-sports-history-{month_name}-{day_num}/",
+        ]
+
+        html = None
+        for url in candidate_urls:
+            try:
+                r = _req.get(url, headers={"User-Agent": "Mozilla/5.0 (compatible; TheSportsPage/1.0)"}, timeout=15)
+                if r.status_code == 200 and len(r.text) > 500:
+                    html = r.text
+                    print(f"    This Day: fetched from {url.split('/')[2]}")
+                    break
+            except Exception:
+                continue
+
+        if html:
+            # Parse "year: event" format from the article body
+            matches = _re.findall('(\\d{4}):\\s*([^<\\n]{30,300})', html)
+            events = [{"year": m[0], "text": _re.sub(r'\s+', ' ', m[1]).strip()} for m in matches]
+            # Remove duplicates by year
+            seen = set()
+            events = [e for e in events if not (e["year"] in seen or seen.add(e["year"]))]
+            print(f"    This Day: {len(events)} events parsed")
             if events:
-                events_json = json.dumps(events)
-                result = claude_call(client, f"""Pick the 3 most interesting and impactful sports history facts from this list and rewrite each in one punchy newspaper sentence. Keep the year exactly as given.
+                events_json = json.dumps(events[:15])
+                result = claude_call(client, f"""Pick the 3 most dramatic and memorable sports history facts from this verified list. Rewrite each in one punchy newspaper sentence. Keep the year exactly as given.
 Events: {events_json}
-Favor dramatic moments over administrative events.
-Return JSON: {{"items": [{{"year": "1941", "text": "Vivid sentence."}}]}}""", max_tokens=400)
+Favor iconic moments, records, championships, and upsets over administrative events.
+Return JSON: {{"items": [{{"year": "1980", "text": "Vivid sentence."}}]}}""", max_tokens=400)
                 items = result.get("items", []) if isinstance(result, dict) else []
                 valid_years = {e["year"] for e in events}
                 items = [i for i in items if i.get("year","") in valid_years]
                 this_day = {"items": items[:3]}
                 print(f"    This Day: {len(this_day['items'])} entries selected")
+        else:
+            # Fallback: Wikipedia with broad filter
+            print("    This Day: radio sites unavailable, trying Wikipedia...")
+            resp = _req.get(
+                f"https://en.wikipedia.org/api/rest_v1/feed/onthisday/events/{today_dt.month}/{today_dt.day}",
+                headers={"User-Agent": "TheSportsPage/1.0"}, timeout=15)
+            if resp.status_code == 200:
+                sports_kw = ["baseball","basketball","football","hockey","soccer","tennis",
+                             "golf","boxing","olympic","nba","nfl","mlb","nhl","championship",
+                             "world series","super bowl","stadium","athlete","coach","league",
+                             "playoff","finals","title","medal","record","hall of fame","mvp"]
+                events = [{"year": str(e.get("year","")), "text": e.get("text","")}
+                          for e in resp.json().get("events",[])
+                          if any(kw in e.get("text","").lower() for kw in sports_kw)]
+                print(f"    This Day: {len(events)} Wikipedia sports events")
+                if events:
+                    events_json = json.dumps(events[:10])
+                    result = claude_call(client, f"""Pick the 3 most interesting sports history facts from this list and rewrite each in one punchy newspaper sentence. Keep each year exactly as given.
+Events: {events_json}
+Return JSON: {{"items": [{{"year": "1941", "text": "Vivid sentence."}}]}}""", max_tokens=400)
+                    items = result.get("items", []) if isinstance(result, dict) else []
+                    valid_years = {e["year"] for e in events}
+                    items = [i for i in items if i.get("year","") in valid_years]
+                    this_day = {"items": items[:3]}
+
     except Exception as e:
         print(f"    This Day in Sports error: {e}")
         this_day = {"items": []}
