@@ -1420,16 +1420,18 @@ Return JSON:
                  "status": "Final"}
                 for b in boxes if b.get("linescore")]
 
-    # This Day in Sports — Wikipedia verified events + Claude rewrite
+    # This Day in Sports — Wikipedia verified + Claude fills gaps
     this_day = {"items": []}
     try:
         from datetime import date as _date
         today_dt = _date.today()
+        month_day_str = today_dt.strftime('%B %-d')
+        wiki_items = []
+
+        # Step 1: Try Wikipedia
         wiki_url = f"https://en.wikipedia.org/api/rest_v1/feed/onthisday/events/{today_dt.month}/{today_dt.day}"
         wiki_raw = api_get(wiki_url)
         if wiki_raw and wiki_raw.get("events"):
-            # Filter for sports-related events
-            # Strict sports keywords — must be unambiguously about a sport/game/athlete
             must_have = [
                 "world series","super bowl","nba finals","stanley cup","olympic gold",
                 "olympic medal","grand slam","wimbledon","us open","masters",
@@ -1438,54 +1440,40 @@ Return JSON:
                 "baseball","basketball","football","hockey","soccer","tennis","golf",
                 "boxing","wrestling","track and field","marathon","swimming",
                 "world cup","champions league","tour de france","indy 500","daytona",
-                "hitting streak","batting average","era","pitcher","shutout",
-                "slam dunk","three-pointer","hat trick","penalty kick",
-                "heavyweight champion","knock out","knocked out",
+                "hitting streak","pitcher","shutout","slam dunk","three-pointer",
+                "hat trick","penalty kick","heavyweight champion","knocked out",
             ]
-            sports_events = []
-            for event in wiki_raw["events"]:
-                text_lower = event.get("text","").lower()
-                # Require at least one unambiguous sports term
-                if any(kw in text_lower for kw in must_have):
-                    sports_events.append({
-                        "year": str(event.get("year","")),
-                        "text": event.get("text",""),
-                    })
-            wiki_count = min(len(sports_events), 3)
-            needed = 3 - wiki_count
-
+            sports_events = [
+                {"year": str(e.get("year","")), "text": e.get("text","")}
+                for e in wiki_raw["events"]
+                if any(kw in e.get("text","").lower() for kw in must_have)
+            ]
+            print(f"    This Day: {len(sports_events)} Wikipedia sports events found")
             if sports_events:
                 events_json = json.dumps(sports_events[:3])
-                rewritten = claude_call(client, f"""Rewrite these Wikipedia-verified sports history events in classic newspaper style.
-Each entry: one punchy vivid sentence. Keep the year exactly as given. Only include clearly sports-related events.
-Events (from Wikipedia, verified on {today_dt.strftime('%B %-d')}):
-{events_json}
-Return JSON: {{"items": [{{"year": "1941", "text": "One vivid newspaper sentence."}}]}}
-Return ONLY the JSON.""", max_tokens=400)
+                rewritten = claude_call(client, f"""Rewrite these Wikipedia-verified sports history events in punchy newspaper style.
+Keep each year exactly as given. One vivid sentence per event.
+Events: {events_json}
+Return JSON: {{"items": [{{"year": "1941", "text": "Sentence."}}]}}""", max_tokens=400)
                 wiki_items = rewritten.get("items", []) if isinstance(rewritten, dict) else []
-            else:
-                wiki_items = []
-                needed = 3
 
-            # Claude fills remaining slots (or all 3 if wiki had nothing)
-            if needed > 0:
-                filled = claude_call(client, f"""You are writing a \'This Day in Sports\' column for {today_dt.strftime('%B %-d')}.
-Provide exactly {needed} sports history event(s) that occurred on {today_dt.strftime('%B %-d')} in any year.
-STRICT RULES:
-- Only include events you are CERTAIN occurred on this exact calendar date
-- If you are not sure of the exact date, do not include it — it is better to return fewer items
-- Real verified events only — no guessing
-- One punchy newspaper-style sentence per event
-Already covered (do not repeat): {[i['year'] for i in wiki_items]}
-Return JSON: {{"items": [{{"year": "1941", "text": "Vivid one-sentence description."}}]}}
-Return ONLY the JSON. Fewer entries is better than a wrong date.""", max_tokens=400)
-                extra_items = filled.get("items", []) if isinstance(filled, dict) else []
-            else:
-                extra_items = []
+        # Step 2: Claude fills remaining spots (runs whether wiki worked or not)
+        needed = 3 - len(wiki_items)
+        if needed > 0:
+            covered_years = [i.get("year","") for i in wiki_items]
+            filled = claude_call(client, f"""Write {needed} sports history fact(s) for {month_day_str} for a newspaper column.
+RULES: Only include events you are CERTAIN happened on {month_day_str}. If unsure of the exact date, omit it.
+Fewer correct entries beats more wrong ones. One punchy newspaper sentence each.
+Do not repeat these years already covered: {covered_years}
+Return JSON: {{"items": [{{"year": "1941", "text": "Vivid sentence."}}]}}
+Return ONLY the JSON.""", max_tokens=400)
+            extra_items = filled.get("items", []) if isinstance(filled, dict) else []
+            print(f"    This Day: Claude added {len(extra_items)} entry/entries")
+        else:
+            extra_items = []
 
-            this_day = {"items": (wiki_items + extra_items)[:3]}
-        if not this_day or not this_day.get("items"):
-            this_day = {"items": []}
+        this_day = {"items": (wiki_items + extra_items)[:3]}
+        print(f"    This Day in Sports: {len(this_day['items'])} total entries")
     except Exception as e:
         print(f"    This Day in Sports error: {e}")
         this_day = {"items": []}
