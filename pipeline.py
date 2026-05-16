@@ -108,11 +108,18 @@ def mlb_games_on(game_date):
         "hydrate": "linescore,team",
     })
     games = []
-    if data:
-        for d in data.get("dates", []):
-            for g in d.get("games", []):
-                if g.get("status", {}).get("abstractGameState") == "Final":
-                    games.append(g)
+    if not data:
+        print(f"      mlb_games_on: API returned None for {game_date}")
+        return games
+    dates = data.get("dates", [])
+    print(f"      mlb_games_on: {len(dates)} date(s) returned for {game_date}")
+    for d in dates:
+        raw_games = d.get("games", [])
+        states = [g.get("status", {}).get("abstractGameState","?") for g in raw_games]
+        print(f"      mlb_games_on: {len(raw_games)} games, states={states}")
+        for g in raw_games:
+            if g.get("status", {}).get("abstractGameState") == "Final":
+                games.append(g)
     return games
 
 def mlb_today(today_date):
@@ -394,6 +401,7 @@ def fmt_mlb_schedule(games, mlb_season='2026'):
                 if w != "" and l != "": rec = f"{w}-{l}"
             # Fallback: fetch season stats directly if not embedded
             if (not era or not rec) and pid:
+                time.sleep(0.2)  # prevent rate limiting on rapid pitcher lookups
                 sdata = api_get(f"{MLB}/people/{pid}/stats",
                                 {"stats":"season","season":mlb_season,"group":"pitching"})
                 if sdata:
@@ -549,7 +557,6 @@ def build_mlb(client, today_str, yesterday_str, mlb_season):
     print(f"    {len(yesterday_games)} games yesterday, {len(today_games_raw)} today")
 
     # Schedule
-    schedule = fmt_mlb_schedule(today_games_raw, mlb_season)
 
     # All box scores — full batting for first 3, linescore-only for rest
     box_scores = []
@@ -588,6 +595,9 @@ def build_mlb(client, today_str, yesterday_str, mlb_season):
                             "notes": notes})
         time.sleep(0.2)
 
+
+    # Schedule (built after box scores to avoid rate limiting box score API calls)
+    schedule = fmt_mlb_schedule(today_games_raw, mlb_season)
 
     # Standings
     standings = fmt_mlb_standings(standings_raw)
