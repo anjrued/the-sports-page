@@ -1491,45 +1491,34 @@ Return JSON:
                  "status": "Final"}
                 for b in boxes if b.get("linescore")]
 
-    # This Day in Sports — Wikipedia ONLY, no Claude fallback (prevents hallucination)
+    # This Day in Sports — on-this-day.com (verified daily sports facts)
     this_day = {"items": []}
     try:
-        from datetime import date as _date
-        today_dt = _date.today()
-        wiki_url = f"https://en.wikipedia.org/api/rest_v1/feed/onthisday/events/{today_dt.month}/{today_dt.day}"
-        wiki_raw = api_get(wiki_url)
-        if wiki_raw and wiki_raw.get("events"):
-            must_have = [
-                "world series","super bowl","nba finals","stanley cup","olympic gold",
-                "olympic medal","grand slam","wimbledon","us open","masters",
-                "home run","strikeout","no-hitter","perfect game","triple crown",
-                "touchdown","field goal","quarterback","nfl","nba","mlb","nhl","fifa",
-                "baseball","basketball","football","hockey","soccer","tennis","golf",
-                "boxing","wrestling","track and field","marathon","swimming",
-                "world cup","champions league","tour de france","indy 500","daytona",
-                "hitting streak","pitcher","shutout","slam dunk","three-pointer",
-                "hat trick","penalty kick","heavyweight champion","knocked out",
-            ]
-            sports_events = [
-                {"year": str(e.get("year","")), "text": e.get("text","")}
-                for e in wiki_raw["events"]
-                if any(kw in e.get("text","").lower() for kw in must_have)
-            ]
-            print(f"    This Day: {len(sports_events)} Wikipedia sports events found for {today_dt.strftime('%B %-d')}")
-            if sports_events:
-                # Rewrite in newspaper voice — Claude only rewrites verified Wikipedia text
-                events_json = json.dumps(sports_events[:3])
-                rewritten = claude_call(client, f"""Rewrite these Wikipedia-verified sports history events in punchy newspaper style.
-Keep each year EXACTLY as given. One vivid sentence per event. Do not change any facts.
+        import re as _re
+        otd_raw = api_get("https://on-this-day.com/cgi-bin/otd/sportsotd.pl")
+        if otd_raw:
+            print("    This Day: on-this-day.com returned unexpected format")
+        else:
+            # api_get won't parse HTML — use requests directly
+            import requests as _req
+            resp = _req.get("https://on-this-day.com/cgi-bin/otd/sportsotd.pl",
+                           headers={"User-Agent": "TheSportsPage/1.0"}, timeout=15)
+            if resp.status_code == 200:
+                # Parse bold year entries: **1941** - text
+                matches = _re.findall(r'\*\*(\d{4})\*\*\s*[-\u2013]\s*([^*]+?)(?=\s*\*\*|\s*Sports Quote|$)', resp.text, _re.DOTALL)
+                events = [{"year": m[0], "text": m[1].strip().replace("  "," ")} for m in matches if len(m[1].strip()) > 20]
+                print(f"    This Day: {len(events)} events found on on-this-day.com")
+                if events:
+                    events_json = json.dumps(events)
+                    result = claude_call(client, f"""Pick the 3 most interesting and impactful sports history facts from this list and rewrite each in one punchy newspaper sentence. Keep the year exactly as given.
 Events: {events_json}
-Return JSON: {{"items": [{{"year": "1941", "text": "Sentence."}}]}}""", max_tokens=400)
-                items = rewritten.get("items", []) if isinstance(rewritten, dict) else []
-                # Safety check: only keep items whose years match Wikipedia source years
-                valid_years = {{e["year"] for e in sports_events[:3]}}
-                items = [item for item in items if item.get("year","") in valid_years]
-                this_day = {"items": items[:3]}
-                print(f"    This Day: {len(this_day['items'])} verified entries")
-        # If Wikipedia returns nothing, section stays empty — no Claude guessing
+Favor dramatic, memorable moments over administrative or minor events.
+Return JSON: {{"items": [{{"year": "1941", "text": "Vivid sentence."}}]}}""", max_tokens=400)
+                    items = result.get("items", []) if isinstance(result, dict) else []
+                    valid_years = {{e["year"] for e in events}}
+                    items = [i for i in items if i.get("year","") in valid_years]
+                    this_day = {"items": items[:3]}
+                    print(f"    This Day: {len(this_day['items'])} entries selected")
     except Exception as e:
         print(f"    This Day in Sports error: {e}")
         this_day = {"items": []}
