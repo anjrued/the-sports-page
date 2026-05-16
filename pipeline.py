@@ -49,6 +49,41 @@ WRITERS = {
     "desk":  "The Sports Page Desk", # Generic desk byline
 }
 
+THIS_DAY_FACTS = {
+    "05-16": [{"year":"1920","text":"Jack Dempsey defeats Billy Miske to retain the heavyweight title"}, {"year":"1979","text":"Magic Johnson is selected first overall by the Los Angeles Lakers"}, {"year":"1980","text":"Magic Johnson delivers one of the greatest Finals performances ever, leading the Lakers to the NBA title"}],
+    "05-17": [{"year":"1939","text":"The first televised baseball game airs, a college contest between Princeton and Columbia"}, {"year":"1970","text":"Hank Aaron collects his 3,000th career hit, joining baseball's most exclusive club"}, {"year":"1998","text":"Mark McGwire reaches 20 home runs, charging toward what would become a historic season"}],
+    "05-18": [{"year":"1953","text":"Jacques Plante makes a Stanley Cup Finals appearance for the Montreal Canadiens"}, {"year":"2004","text":"Randy Johnson retires 27 straight Braves, throwing a perfect game at age 40"}, {"year":"2013","text":"Oxbow stuns the Preakness field at Pimlico, winning by nearly 20 lengths"}],
+    "05-19": [{"year":"1951","text":"Willie Mays makes his Major League debut with the New York Giants"}, {"year":"1973","text":"Secretariat blazes to victory at the Preakness, extending his Triple Crown bid"}, {"year":"2012","text":"I'll Have Another wins the Preakness Stakes, one step away from the Triple Crown"}],
+    "05-20": [{"year":"1978","text":"Affirmed wins the Preakness Stakes, moving one step closer to the Triple Crown"}, {"year":"2000","text":"Chelsea defeats Aston Villa in the FA Cup Final to claim the trophy"}],
+    "05-21": [{"year":"1979","text":"The White Sox and Tigers play 15 innings in an epic marathon of a ballgame"}, {"year":"1991","text":"Magic Johnson wins the NBA MVP award, cementing his legacy as one of the game's greatest"}, {"year":"2016","text":"The Cleveland Cavaliers clinch a trip to the NBA Finals, setting up a historic rematch with Golden State"}],
+    "05-22": [{"year":"1994","text":"Reggie Miller erupts for 25 points in the fourth quarter, stunning the Knicks at Madison Square Garden"}, {"year":"2010","text":"Roy Halladay throws a perfect game against the Marlins, the 20th in major league history"}, {"year":"2011","text":"Dan Wheldon wins the Indianapolis 500 in a thrilling finish"}],
+    "05-23": [{"year":"1951","text":"Willie Mays records his first career MLB hit, the beginning of a Hall of Fame journey"}, {"year":"1998","text":"Michael Jordan carries the Bulls past the Indiana Pacers in the playoffs"}, {"year":"2015","text":"American Pharoah wins the Preakness Stakes, keeping the Triple Crown dream alive"}],
+    "05-24": [{"year":"1935","text":"The first night game in Major League Baseball history is played in Cincinnati"}, {"year":"1981","text":"Bobby Unser wins the Indianapolis 500"}, {"year":"2015","text":"The Golden State Warriors reach the NBA Finals for the first time in 40 years"}],
+    "05-25": [{"year":"1935","text":"Jesse Owens sets three world records and ties a fourth in a single afternoon at the Big Ten Championships"}],
+    "05-26": [{"year":"1975","text":"Bobby Orr and the Boston Bruins celebrate a Stanley Cup championship"}, {"year":"1999","text":"The San Antonio Spurs reach their first NBA Finals"}, {"year":"2013","text":"Tony Kanaan wins the Indianapolis 500 in a dramatic finish"}],
+    "05-27": [{"year":"1995","text":"Jeff Gordon wins the Coca-Cola 600, announcing himself as NASCAR's next superstar"}, {"year":"2018","text":"The Vegas Golden Knights reach the Stanley Cup Final in their inaugural NHL season"}],
+    "05-28": [{"year":"1957","text":"National League owners vote to allow the Giants and Dodgers to move to California"}, {"year":"1986","text":"Barry Bonds makes his Major League Baseball debut"}, {"year":"2011","text":"The Dallas Mavericks win the Western Conference Finals, advancing to the NBA championship"}],
+    "05-29": [{"year":"1999","text":"Manchester United wins the UEFA Champions League in stunning fashion"}, {"year":"2010","text":"The Chicago Blackhawks advance to the Stanley Cup Final"}],
+    "05-30": [{"year":"1967","text":"Wilt Chamberlain wins the NBA MVP award"}, {"year":"1971","text":"Al Unser wins the Indianapolis 500"}, {"year":"2015","text":"American Pharoah wins his Belmont prep race, one step from history"}],
+    "05-31": [{"year":"1987","text":"Larry Bird steals the inbound pass and feeds Dennis Johnson for the game-winner against the Pistons"}, {"year":"2002","text":"France suffers a shocking World Cup upset loss to Senegal, defending champions eliminated in the group stage"}],
+    "06-01": [{"year":"1925","text":"Lou Gehrig begins his streak of 2,130 consecutive games played, a record that would stand for 56 years"}, {"year":"1994","text":"The New York Rangers defeat the Vancouver Canucks in Game 7 of the Stanley Cup Finals"}],
+    "06-02": [{"year":"1935","text":"Babe Ruth plays his final MLB game and retires, closing the book on the greatest career in baseball history"}, {"year":"2013","text":"Rafael Nadal defeats Novak Djokovic at the French Open in an epic battle"}, {"year":"2018","text":"Justify wins the Belmont Stakes to claim the Triple Crown"}],
+    "06-03": [{"year":"1926","text":"Gertrude Ederle prepares for her attempt to become the first woman to swim the English Channel"}, {"year":"1992","text":"Drazen Petrovic plays one of his final NBA playoff games before his tragic death the following year"}, {"year":"2001","text":"Allen Iverson and the Philadelphia 76ers reach the NBA Finals"}],
+    "06-04": [{"year":"1984","text":"Larry Bird and the Celtics win the NBA championship over the Lakers"}, {"year":"2008","text":"The Detroit Red Wings win the Stanley Cup"}],
+    "06-05": [{"year":"1977","text":"Bjorn Borg wins the French Open title"}, {"year":"1989","text":"Magic Johnson wins the NBA Finals MVP award"}, {"year":"2016","text":"The Golden State Warriors defeat the Cleveland Cavaliers in Game 2 of the NBA Finals"}],
+    "06-06": [{"year":"1993","text":"The Chicago Bulls defeat the Phoenix Suns in Game 1 of the NBA Finals"}, {"year":"2004","text":"Roger Federer wins the French Open, beginning his dominance of the clay court Grand Slam"}],
+    "06-07": [{"year":"1981","text":"Bjorn Borg wins the French Open for the sixth time"}, {"year":"2015","text":"American Pharoah wins the Triple Crown, ending a 37-year drought"}],
+    "06-08": [{"year":"1949","text":"Billy Martin plays his first game as a New York Yankee"}, {"year":"1986","text":"The Boston Celtics win Game 1 of the NBA Finals"}, {"year":"2001","text":"Shaquille O'Neal dominates in the NBA Finals opener"}],
+    "06-09": [{"year":"1973","text":"Secretariat wins the Belmont Stakes by 31 lengths, claiming the Triple Crown in the most dominant performance in horse racing history"}, {"year":"1998","text":"Michael Jordan hits his iconic jumper over Byron Russell to clinch the Bulls' sixth championship"}, {"year":"2010","text":"The Chicago Blackhawks win the Stanley Cup"}],
+    "06-10": [{"year":"1984","text":"The Boston Celtics defeat the Los Angeles Lakers in Game 7 of the NBA Finals"}, {"year":"2010","text":"The Chicago Blackhawks end a 49-year Stanley Cup drought"}],
+    "06-11": [{"year":"1993","text":"The Chicago Bulls defeat the Phoenix Suns in Game 3 of the NBA Finals"}, {"year":"1997","text":"Michael Jordan plays through flu-like symptoms to deliver 38 points in the Flu Game, one of the most iconic performances in Finals history"}],
+    "06-12": [{"year":"1939","text":"The Baseball Hall of Fame is formally dedicated in Cooperstown, New York"}, {"year":"1970","text":"Dock Ellis throws a no-hitter for the Pittsburgh Pirates"}, {"year":"2011","text":"The Dallas Mavericks win the NBA championship, defeating the Miami Heat"}],
+    "06-13": [{"year":"1997","text":"The Chicago Bulls win their fifth NBA title of the decade"}, {"year":"1999","text":"The San Antonio Spurs win their first NBA championship"}, {"year":"2019","text":"The St. Louis Blues win the first Stanley Cup in franchise history"}],
+    "06-14": [{"year":"1994","text":"The New York Rangers win the Stanley Cup, ending a 54-year drought"}, {"year":"1998","text":"The Chicago Bulls win their sixth NBA title, completing the second three-peat of the Jordan era"}, {"year":"2015","text":"The Golden State Warriors win Game 5 of the NBA Finals"}],
+    "06-15": [{"year":"1975","text":"Arthur Ashe competes in a Wimbledon tune-up event ahead of his historic title run"}, {"year":"1994","text":"The FIFA World Cup opens on American soil for the first time"}, {"year":"2011","text":"The Boston Bruins win the Stanley Cup over the Vancouver Canucks"}],
+    "06-16": [{"year":"1938","text":"Joe Louis defeats Max Schmeling in one of the most celebrated rematches in boxing history"}, {"year":"2003","text":"The San Antonio Spurs defeat the New Jersey Nets to win the NBA championship"}, {"year":"2015","text":"The Golden State Warriors win the NBA title, led by Stephen Curry's first championship"}],
+}
+
 # ── SHARED HELPERS ────────────────────────────────────────────────────────────
 
 def api_get(url, params=None, headers=None, timeout=20):
@@ -1529,45 +1564,18 @@ Return JSON:
                  "status": "Final"}
                 for b in boxes if b.get("linescore")]
 
-    # This Day in Sports — Wikipedia + Claude two-pass filter
+    # This Day in Sports — curated verified facts
     this_day = {"items": []}
     try:
-        import requests as _req
         from datetime import date as _date
         today_dt = _date.today()
-        resp = _req.get(
-            f"https://en.wikipedia.org/api/rest_v1/feed/onthisday/events/{today_dt.month}/{today_dt.day}",
-            headers={"User-Agent": "TheSportsPage/1.0"}, timeout=15
-        )
-        if resp.status_code == 200:
-            all_events = [
-                {"year": str(e.get("year","")), "text": e.get("text","")}
-                for e in resp.json().get("events", [])
-                if e.get("text","")
-            ]
-            print(f"    This Day: {len(all_events)} total Wikipedia events for {today_dt.strftime('%B %-d')}")
-            if all_events:
-                events_json = json.dumps(all_events)
-                result = claude_call(client, f"""You are an editor for a sports newspaper.
-From this list of historical events that occurred on {today_dt.strftime('%B %-d')}, do two things:
-1. Identify only the events that are about sports, athletes, teams, or sporting competitions
-2. Pick the 3 most dramatic and memorable sports events from those
-3. Rewrite each as one vivid punchy newspaper sentence
-
-Keep each year EXACTLY as given — do not change any years.
-If fewer than 3 are sports events, return only the sports ones.
-
-Events: {events_json}
-
-Return JSON: {{"items": [{{"year": "1980", "text": "One vivid sentence."}}]}}
-Return ONLY the JSON.""", max_tokens=500)
-                items = result.get("items", []) if isinstance(result, dict) else []
-                valid_years = {e["year"] for e in all_events}
-                items = [i for i in items if i.get("year","") in valid_years]
-                this_day = {"items": items[:3]}
-                print(f"    This Day: {len(this_day['items'])} sports entries selected")
+        key = today_dt.strftime("%m-%d")
+        entries = THIS_DAY_FACTS.get(key, [])
+        print(f"    This Day: {len(entries)} curated entries for {key}")
+        if entries:
+            this_day = {"items": entries[:3]}
     except Exception as e:
-        print(f"    This Day in Sports error: {{e}}")
+        print(f"    This Day in Sports error: {e}")
         this_day = {"items": []}
 
 
