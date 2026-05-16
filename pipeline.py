@@ -114,7 +114,7 @@ def mlb_linescore(game_pk):
     return api_get(f"{MLB}/game/{game_pk}/linescore")
 
 def mlb_boxscore(game_pk):
-    return api_get(f"{MLB}/game/{game_pk}/boxscore", {"hydrate": "person,stats,seasonStats"})
+    return api_get(f"{MLB}/game/{game_pk}/boxscore")
 
 def mlb_standings(season):
     return api_get(f"{MLB}/standings", {
@@ -537,6 +537,7 @@ def build_mlb(client, today_str, yesterday_str, mlb_season):
         pk        = game.get("gamePk")
         away_name = game.get("teams",{}).get("away",{}).get("team",{}).get("name","")
         home_name = game.get("teams",{}).get("home",{}).get("team",{}).get("name","")
+        time.sleep(0.3)
         ls_raw    = mlb_linescore(pk)
         ls        = fmt_mlb_linescore(ls_raw, away_name, home_name)
         if not ls:
@@ -645,7 +646,7 @@ def build_nba(client, today_str, yesterday_str, nba_season):
     print("  NBA: fetching data...")
     try:
         from nba_api.stats.endpoints import (
-            scoreboardv3, boxscoretraditionalv2,
+            scoreboardv3, boxscoretraditionalv3,
             leaguestandingsv3, leagueleaders
         )
     except ImportError:
@@ -738,7 +739,7 @@ def build_nba(client, today_str, yesterday_str, nba_season):
         }
 
         batting = []
-        box = nba_get(boxscoretraditionalv2.BoxScoreTraditionalV2, game_id=gid)
+        box = nba_get(boxscoretraditionalv3.BoxScoreTraditionalV3, game_id=gid)
         if True:  # Full box for all games
             if box:
                 try:
