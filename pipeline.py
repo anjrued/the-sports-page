@@ -561,29 +561,33 @@ def build_mlb(client, today_str, yesterday_str, mlb_season):
         ls_raw    = mlb_linescore(pk)
         ls        = fmt_mlb_linescore(ls_raw, away_name, home_name)
         if not ls:
+            print(f"      SKIP game {pk} ({away_name} @ {home_name}): linescore None={ls_raw is None}")
             continue
         ar, hr = ls["away"]["r"], ls["home"]["r"]
         winner = away_name if ar > hr else home_name
         loser  = home_name if ar > hr else away_name
         title  = f"{winner} {max(ar,hr)}, {loser} {min(ar,hr)}"
+        print(f"      Game {i+1}: {title}")
 
         batting, pitching, notes = [], [], ""
-        time.sleep(0.5)  # avoid rate limiting
+        time.sleep(0.5)
         box_raw = mlb_boxscore(pk)
         if box_raw:
-            batting = [fmt_mlb_batting(box_raw,"away"),
-                       fmt_mlb_batting(box_raw,"home")]
-            pitching = [fmt_mlb_pitching(box_raw,"away"),
-                        fmt_mlb_pitching(box_raw,"home")]
-            notes   = fmt_mlb_notes(box_raw)
-            # Compute HR/2B/3B/SB/LOB from batting data we already have
-            notes = compute_batting_notes(batting, notes)
+            batting  = [fmt_mlb_batting(box_raw,"away"), fmt_mlb_batting(box_raw,"home")]
+            pitching = [fmt_mlb_pitching(box_raw,"away"), fmt_mlb_pitching(box_raw,"home")]
+            notes    = fmt_mlb_notes(box_raw)
+            notes    = compute_batting_notes(batting, notes)
+            n_batters = sum(len(t.get("players",[])) for t in batting)
+            print(f"        Batters: {n_batters} | Notes: {bool(notes)}")
+        else:
+            print(f"        Box score: FAILED for {pk}")
 
         box_scores.append({"title": title, "linescore": ls,
                             "batting": batting,
                             "pitching": pitching,
                             "notes": notes})
         time.sleep(0.2)
+
 
     # Standings
     standings = fmt_mlb_standings(standings_raw)
@@ -1475,15 +1479,11 @@ Return JSON:
                  "status": "Final"}
                 for b in boxes if b.get("linescore")]
 
-    # This Day in Sports — Wikipedia verified + Claude fills gaps
+    # This Day in Sports — Wikipedia ONLY, no Claude fallback (prevents hallucination)
     this_day = {"items": []}
     try:
         from datetime import date as _date
         today_dt = _date.today()
-        month_day_str = today_dt.strftime('%B %-d')
-        wiki_items = []
-
-        # Step 1: Try Wikipedia
         wiki_url = f"https://en.wikipedia.org/api/rest_v1/feed/onthisday/events/{today_dt.month}/{today_dt.day}"
         wiki_raw = api_get(wiki_url)
         if wiki_raw and wiki_raw.get("events"):
@@ -1503,35 +1503,25 @@ Return JSON:
                 for e in wiki_raw["events"]
                 if any(kw in e.get("text","").lower() for kw in must_have)
             ]
-            print(f"    This Day: {len(sports_events)} Wikipedia sports events found")
+            print(f"    This Day: {len(sports_events)} Wikipedia sports events found for {today_dt.strftime('%B %-d')}")
             if sports_events:
+                # Rewrite in newspaper voice — Claude only rewrites verified Wikipedia text
                 events_json = json.dumps(sports_events[:3])
                 rewritten = claude_call(client, f"""Rewrite these Wikipedia-verified sports history events in punchy newspaper style.
-Keep each year exactly as given. One vivid sentence per event.
+Keep each year EXACTLY as given. One vivid sentence per event. Do not change any facts.
 Events: {events_json}
 Return JSON: {{"items": [{{"year": "1941", "text": "Sentence."}}]}}""", max_tokens=400)
-                wiki_items = rewritten.get("items", []) if isinstance(rewritten, dict) else []
-
-        # Step 2: Claude fills remaining spots (runs whether wiki worked or not)
-        needed = 3 - len(wiki_items)
-        if needed > 0:
-            covered_years = [i.get("year","") for i in wiki_items]
-            filled = claude_call(client, f"""Write {needed} sports history fact(s) for {month_day_str} for a newspaper column.
-RULES: Only include events you are CERTAIN happened on {month_day_str}. If unsure of the exact date, omit it.
-Fewer correct entries beats more wrong ones. One punchy newspaper sentence each.
-Do not repeat these years already covered: {covered_years}
-Return JSON: {{"items": [{{"year": "1941", "text": "Vivid sentence."}}]}}
-Return ONLY the JSON.""", max_tokens=400)
-            extra_items = filled.get("items", []) if isinstance(filled, dict) else []
-            print(f"    This Day: Claude added {len(extra_items)} entry/entries")
-        else:
-            extra_items = []
-
-        this_day = {"items": (wiki_items + extra_items)[:3]}
-        print(f"    This Day in Sports: {len(this_day['items'])} total entries")
+                items = rewritten.get("items", []) if isinstance(rewritten, dict) else []
+                # Safety check: only keep items whose years match Wikipedia source years
+                valid_years = {{e["year"] for e in sports_events[:3]}}
+                items = [item for item in items if item.get("year","") in valid_years]
+                this_day = {"items": items[:3]}
+                print(f"    This Day: {len(this_day['items'])} verified entries")
+        # If Wikipedia returns nothing, section stays empty — no Claude guessing
     except Exception as e:
         print(f"    This Day in Sports error: {e}")
         this_day = {"items": []}
+
 
     return {
         "headline":  content.get("headline",{}),
