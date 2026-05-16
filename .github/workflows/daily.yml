@@ -33,7 +33,7 @@ jobs:
         run: |
           git config user.name  "Sports Page Bot"
           git config user.email "bot@thesportspage.example"
-          git add docs/data.json
+          git add docs/data.json docs/archive.html docs/editions/
           git diff --staged --quiet || git commit -m "chore: publish $(date -u '+%Y-%m-%d') edition"
           git pull --rebase origin main
           git push
