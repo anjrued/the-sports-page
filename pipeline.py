@@ -39,6 +39,16 @@ def fetch_sport_news(sport_path, limit=5):
     return chr(10).join(headlines)
 
 
+# ── STAFF BYLINES ──────────────────────────────────────────────────────────────
+WRITERS = {
+    "mlb":   "Jack Mercer",        # Baseball writer
+    "nba":   "Marcus Webb",        # Basketball writer
+    "nhl":   "Dan Callahan",       # Hockey writer
+    "nfl":   "Ray Torino",         # Football writer
+    "front": "Frank Dolan",        # Managing editor / front page
+    "desk":  "The Sports Page Desk", # Generic desk byline
+}
+
 # ── SHARED HELPERS ────────────────────────────────────────────────────────────
 
 def api_get(url, params=None, headers=None, timeout=20):
@@ -620,12 +630,12 @@ def build_mlb(client, today_str, yesterday_str, mlb_season):
         mlb_story_prompt = f"""Write the lead baseball story for The Sports Page dated {today_str}.
 Yesterday\'s MLB results ({yesterday_str}): {scores_txt}{mlb_news_ctx}
 Only lead with breaking news if it is genuinely major — a star player death, season-ending injury to a franchise player, blockbuster trade, or league suspension. Routine injuries, minor trades, and lineup moves should be ignored. Otherwise always lead with the best game story.
-Return JSON: {{"kicker":"BASEBALL","headline":"HEADLINE ALL CAPS","deck":"Under 20 words","byline":"By Andrew Dobrow, Baseball Writer","body":"Three vivid paragraphs separated by \\n\\n."}}"""
+Return JSON: {{"kicker":"BASEBALL","headline":"HEADLINE ALL CAPS","deck":"Under 20 words","byline":"By Jack Mercer","body":"Three vivid paragraphs separated by \\n\\n."}}"""
     else:
         mlb_story_prompt = f"""Write a baseball story for The Sports Page dated {today_str}.
 No games yesterday.{mlb_news_ctx}
 If there is breaking news lead with that, otherwise write a standings or preview piece.
-Return JSON: {{"kicker":"BASEBALL","headline":"HEADLINE ALL CAPS","deck":"Under 20 words","byline":"By Andrew Dobrow, Baseball Writer","body":"Three vivid paragraphs separated by \\n\\n."}}"""
+Return JSON: {{"kicker":"BASEBALL","headline":"HEADLINE ALL CAPS","deck":"Under 20 words","byline":"By Jack Mercer","body":"Three vivid paragraphs separated by \\n\\n."}}"""
     story = claude_call(client, mlb_story_prompt)
 
     return {"story": story, "schedule": schedule,
@@ -910,9 +920,9 @@ def build_nba(client, today_str, yesterday_str, nba_season):
     nba_news = fetch_sport_news("basketball/nba")
     nba_news_ctx = f"\nBreaking NBA news today:\n{nba_news}" if nba_news else ""
     if scores_txt:
-        nba_prompt = f"Write the lead basketball story for The Sports Page dated {today_str}. Yesterday\'s NBA results: {scores_txt}.{nba_news_ctx} Only reference breaking news if it is genuinely major (death, season-ending injury to a star, blockbuster trade). Routine news should be ignored — always prefer a compelling game story. Return JSON: {{\"kicker\":\"NBA PLAYOFFS\",\"headline\":\"HEADLINE ALL CAPS\",\"deck\":\"Under 20 words\",\"byline\":\"By Andrew Dobrow, Basketball Writer\",\"body\":\"Three vivid paragraphs separated by \\\\n\\\\n.\"}}"
+        nba_prompt = f"Write the lead basketball story for The Sports Page dated {today_str}. Yesterday\'s NBA results: {scores_txt}.{nba_news_ctx} Only reference breaking news if it is genuinely major (death, season-ending injury to a star, blockbuster trade). Routine news should be ignored — always prefer a compelling game story. Return JSON: {{\"kicker\":\"NBA PLAYOFFS\",\"headline\":\"HEADLINE ALL CAPS\",\"deck\":\"Under 20 words\",\"byline\":\"By Marcus Webb\",\"body\":\"Three vivid paragraphs separated by \\\\n\\\\n.\"}}"
     else:
-        nba_prompt = f"Write an NBA story for The Sports Page dated {today_str}. No games yesterday.{nba_news_ctx} Lead with breaking news if available, otherwise write a playoff preview. Return JSON: {{\"kicker\":\"NBA PLAYOFFS\",\"headline\":\"HEADLINE ALL CAPS\",\"deck\":\"Under 20 words\",\"byline\":\"By Andrew Dobrow, Basketball Writer\",\"body\":\"Three vivid paragraphs separated by \\\\n\\\\n.\"}}"
+        nba_prompt = f"Write an NBA story for The Sports Page dated {today_str}. No games yesterday.{nba_news_ctx} Lead with breaking news if available, otherwise write a playoff preview. Return JSON: {{\"kicker\":\"NBA PLAYOFFS\",\"headline\":\"HEADLINE ALL CAPS\",\"deck\":\"Under 20 words\",\"byline\":\"By Marcus Webb\",\"body\":\"Three vivid paragraphs separated by \\\\n\\\\n.\"}}"
     story = claude_call(client, nba_prompt)
 
     return {"story": story, "schedule": schedule,
@@ -966,7 +976,7 @@ def nba_leaders_side(client, season, conf_filter, label):
 def nba_fallback(client):
     """Fallback NBA section if nba_api unavailable."""
     story = claude_call(client, """Write a brief NBA playoffs story for today's Sports Page.
-Return JSON: {"kicker":"NBA PLAYOFFS","headline":"HEADLINE","deck":"Deck","byline":"By Andrew Dobrow","body":"Two paragraphs separated by \\n\\n."}""")
+Return JSON: {"kicker":"NBA PLAYOFFS","headline":"HEADLINE","deck":"Deck","byline":"By Frank Dolan","body":"Two paragraphs separated by \\n\\n."}""")
     return {"story": story, "schedule": [], "boxScores": [],
             "standings": [], "leaders": {"left": {"label":"Eastern Conference","cats":[]}, "right": {"label":"Western Conference","cats":[]}}}
 
@@ -1133,9 +1143,9 @@ def build_nhl(client, today_str, yesterday_str, nhl_season_id):
     nhl_news = fetch_sport_news("hockey/nhl")
     nhl_news_ctx = f"\nBreaking NHL news today:\n{nhl_news}" if nhl_news else ""
     if scores_txt:
-        nhl_prompt = f"Write the lead hockey story for The Sports Page dated {today_str}. Yesterday\'s NHL results: {scores_txt}.{nhl_news_ctx} Only reference breaking news if it is genuinely major (death, season-ending injury to a star, blockbuster trade). Routine news should be ignored — always prefer a compelling game story. Return JSON: {{\"kicker\":\"NHL PLAYOFFS\",\"headline\":\"HEADLINE ALL CAPS\",\"deck\":\"Under 20 words\",\"byline\":\"By Andrew Dobrow, Hockey Writer\",\"body\":\"Three vivid paragraphs separated by \\\\n\\\\n.\"}}"
+        nhl_prompt = f"Write the lead hockey story for The Sports Page dated {today_str}. Yesterday\'s NHL results: {scores_txt}.{nhl_news_ctx} Only reference breaking news if it is genuinely major (death, season-ending injury to a star, blockbuster trade). Routine news should be ignored — always prefer a compelling game story. Return JSON: {{\"kicker\":\"NHL PLAYOFFS\",\"headline\":\"HEADLINE ALL CAPS\",\"deck\":\"Under 20 words\",\"byline\":\"By Dan Callahan\",\"body\":\"Three vivid paragraphs separated by \\\\n\\\\n.\"}}"
     else:
-        nhl_prompt = f"Write an NHL story for The Sports Page dated {today_str}. No games yesterday.{nhl_news_ctx} Lead with breaking news if available, otherwise write a playoff preview. Return JSON: {{\"kicker\":\"NHL PLAYOFFS\",\"headline\":\"HEADLINE ALL CAPS\",\"deck\":\"Under 20 words\",\"byline\":\"By Andrew Dobrow, Hockey Writer\",\"body\":\"Three vivid paragraphs separated by \\\\n\\\\n.\"}}"
+        nhl_prompt = f"Write an NHL story for The Sports Page dated {today_str}. No games yesterday.{nhl_news_ctx} Lead with breaking news if available, otherwise write a playoff preview. Return JSON: {{\"kicker\":\"NHL PLAYOFFS\",\"headline\":\"HEADLINE ALL CAPS\",\"deck\":\"Under 20 words\",\"byline\":\"By Dan Callahan\",\"body\":\"Three vivid paragraphs separated by \\\\n\\\\n.\"}}"
     story = claude_call(client, nhl_prompt)
 
     return {"story": story, "schedule": schedule,
@@ -1428,7 +1438,7 @@ It is now May 2026 — the NFL offseason. No games are being played.
 Write about current offseason news: trades, signings, draft analysis, training camp storylines.
 Do NOT write about upcoming Super Bowls or suggest the season is still ongoing.
 Recent news or results: {scores_txt}
-Return JSON: {{"kicker":"NFL OFFSEASON","headline":"HEADLINE ALL CAPS","deck":"Under 20 words","byline":"By Andrew Dobrow, NFL Writer","body":"Three paragraphs separated by \\n\\n."}}""")
+Return JSON: {{"kicker":"NFL OFFSEASON","headline":"HEADLINE ALL CAPS","deck":"Under 20 words","byline":"By Ray Torino","body":"Three paragraphs separated by \\n\\n."}}""")
 
     return {"story": story, "schedule": schedule,
             "boxScores": box_scores, "standings": standings, "leaders": leaders}
@@ -1502,13 +1512,13 @@ EDITORIAL RULES:
 
 Return JSON:
 {{
-  "headline": {{"kicker":"SPORT NAME","headline":"BIGGEST STORY IN ALL CAPS","deck":"Deck under 20 words","byline":"By Andrew Dobrow, Sports Writer","body":"Three paragraphs separated by \\n\\n."}},
+  "headline": {{"kicker":"SPORT NAME","headline":"BIGGEST STORY IN ALL CAPS","deck":"Deck under 20 words","byline":"By Frank Dolan","body":"Three paragraphs separated by \\n\\n."}},
   "secondary": [
-    {{"kicker":"SPORT","headline":"HEADLINE","deck":"Deck","byline":"By Andrew Dobrow","body":"Two paragraphs separated by \\n\\n."}},
-    {{"kicker":"SPORT","headline":"HEADLINE","deck":"Deck","byline":"By Andrew Dobrow","body":"Two paragraphs separated by \\n\\n."}},
-    {{"kicker":"SPORT","headline":"HEADLINE","deck":"Deck","byline":"By Andrew Dobrow","body":"Two paragraphs separated by \\n\\n."}}
+    {{"kicker":"SPORT","headline":"HEADLINE","deck":"Deck","byline":"By Frank Dolan","body":"Two paragraphs separated by \\n\\n."}},
+    {{"kicker":"SPORT","headline":"HEADLINE","deck":"Deck","byline":"By Frank Dolan","body":"Two paragraphs separated by \\n\\n."}},
+    {{"kicker":"SPORT","headline":"HEADLINE","deck":"Deck","byline":"By Frank Dolan","body":"Two paragraphs separated by \\n\\n."}}
   ],
-  "column": {{"tag":"FROM THE PRESS BOX","headline":"OPINION HEADLINE","byline":"By Andrew Dobrow","body":"Two opinionated paragraphs separated by \\n\\n."}}
+  "column": {{"tag":"FROM THE PRESS BOX","headline":"OPINION HEADLINE","byline":"By Frank Dolan","body":"Two opinionated paragraphs separated by \\n\\n."}}
 }}""", max_tokens=3000)
 
     def fmt_scores(boxes):
@@ -1519,83 +1529,46 @@ Return JSON:
                  "status": "Final"}
                 for b in boxes if b.get("linescore")]
 
-    # This Day in Sports — radio station syndicated content (sports-only, daily)
+    # This Day in Sports — Wikipedia + Claude two-pass filter
     this_day = {"items": []}
     try:
-        import re as _re
         import requests as _req
         from datetime import date as _date
         today_dt = _date.today()
-        month_name = today_dt.strftime("%B").lower()
-        day_num    = today_dt.day
-        year_num   = today_dt.year
+        resp = _req.get(
+            f"https://en.wikipedia.org/api/rest_v1/feed/onthisday/events/{today_dt.month}/{today_dt.day}",
+            headers={"User-Agent": "TheSportsPage/1.0"}, timeout=15
+        )
+        if resp.status_code == 200:
+            all_events = [
+                {"year": str(e.get("year","")), "text": e.get("text","")}
+                for e in resp.json().get("events", [])
+                if e.get("text","")
+            ]
+            print(f"    This Day: {len(all_events)} total Wikipedia events for {today_dt.strftime('%B %-d')}")
+            if all_events:
+                events_json = json.dumps(all_events)
+                result = claude_call(client, f"""You are an editor for a sports newspaper.
+From this list of historical events that occurred on {today_dt.strftime('%B %-d')}, do two things:
+1. Identify only the events that are about sports, athletes, teams, or sporting competitions
+2. Pick the 3 most dramatic and memorable sports events from those
+3. Rewrite each as one vivid punchy newspaper sentence
 
-        # Multiple syndicated radio station sites with the same content
-        candidate_urls = [
-            f"https://backstagecountry.com/{year_num}/{today_dt.strftime('%m')}/{today_dt.strftime('%d')}/this-day-in-sports-history-{month_name}-{day_num}/",
-            f"https://country1037fm.com/{year_num}/{today_dt.strftime('%m')}/{today_dt.strftime('%d')}/this-day-in-sports-history-{month_name}-{day_num}-2/",
-            f"https://975thefanatic.com/{year_num}/{today_dt.strftime('%m')}/{today_dt.strftime('%d')}/this-day-in-sports-history-{month_name}-{day_num}-2/",
-            f"https://wrif.com/{year_num}/{today_dt.strftime('%m')}/{today_dt.strftime('%d')}/this-day-in-sports-history-{month_name}-{day_num}/",
-        ]
+Keep each year EXACTLY as given — do not change any years.
+If fewer than 3 are sports events, return only the sports ones.
 
-        html = None
-        for url in candidate_urls:
-            try:
-                r = _req.get(url, headers={"User-Agent": "Mozilla/5.0 (compatible; TheSportsPage/1.0)"}, timeout=15)
-                if r.status_code == 200 and len(r.text) > 500:
-                    html = r.text
-                    print(f"    This Day: fetched from {url.split('/')[2]}")
-                    break
-            except Exception:
-                continue
-
-        if html:
-            # Parse "year: event" format from the article body
-            matches = _re.findall('(\\d{4}):\\s*([^<\\n]{30,300})', html)
-            events = [{"year": m[0], "text": _re.sub(r'\s+', ' ', m[1]).strip()} for m in matches]
-            # Remove duplicates by year
-            seen = set()
-            events = [e for e in events if not (e["year"] in seen or seen.add(e["year"]))]
-            print(f"    This Day: {len(events)} events parsed")
-            if events:
-                events_json = json.dumps(events[:15])
-                result = claude_call(client, f"""Pick the 3 most dramatic and memorable sports history facts from this verified list. Rewrite each in one punchy newspaper sentence. Keep the year exactly as given.
 Events: {events_json}
-Favor iconic moments, records, championships, and upsets over administrative events.
-Return JSON: {{"items": [{{"year": "1980", "text": "Vivid sentence."}}]}}""", max_tokens=400)
+
+Return JSON: {{"items": [{{"year": "1980", "text": "One vivid sentence."}}]}}
+Return ONLY the JSON.""", max_tokens=500)
                 items = result.get("items", []) if isinstance(result, dict) else []
-                valid_years = {e["year"] for e in events}
+                valid_years = {{e["year"] for e in all_events}}
                 items = [i for i in items if i.get("year","") in valid_years]
-                this_day = {"items": items[:3]}
-                print(f"    This Day: {len(this_day['items'])} entries selected")
-        else:
-            # Fallback: Wikipedia with broad filter
-            print("    This Day: radio sites unavailable, trying Wikipedia...")
-            resp = _req.get(
-                f"https://en.wikipedia.org/api/rest_v1/feed/onthisday/events/{today_dt.month}/{today_dt.day}",
-                headers={"User-Agent": "TheSportsPage/1.0"}, timeout=15)
-            if resp.status_code == 200:
-                sports_kw = ["baseball","basketball","football","hockey","soccer","tennis",
-                             "golf","boxing","olympic","nba","nfl","mlb","nhl","championship",
-                             "world series","super bowl","stadium","athlete","coach","league",
-                             "playoff","finals","title","medal","record","hall of fame","mvp"]
-                events = [{"year": str(e.get("year","")), "text": e.get("text","")}
-                          for e in resp.json().get("events",[])
-                          if any(kw in e.get("text","").lower() for kw in sports_kw)]
-                print(f"    This Day: {len(events)} Wikipedia sports events")
-                if events:
-                    events_json = json.dumps(events[:10])
-                    result = claude_call(client, f"""Pick the 3 most interesting sports history facts from this list and rewrite each in one punchy newspaper sentence. Keep each year exactly as given.
-Events: {events_json}
-Return JSON: {{"items": [{{"year": "1941", "text": "Vivid sentence."}}]}}""", max_tokens=400)
-                    items = result.get("items", []) if isinstance(result, dict) else []
-                    valid_years = {e["year"] for e in events}
-                    items = [i for i in items if i.get("year","") in valid_years]
-                    this_day = {"items": items[:3]}
-
+                this_day = {{"items": items[:3]}}
+                print(f"    This Day: {len(this_day['items'])} sports entries selected")
     except Exception as e:
-        print(f"    This Day in Sports error: {e}")
-        this_day = {"items": []}
+        print(f"    This Day in Sports error: {{e}}")
+        this_day = {{"items": []}}
 
 
     return {
