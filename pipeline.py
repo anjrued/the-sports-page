@@ -826,10 +826,11 @@ def build_nba(client, today_str, yesterday_str, nba_season):
                     tm = box.team_stats.get_data_frame()
 
                     # Quarter scores from team stats
+                    # Determine away/home by matching team abbrev from scores already built
+                    away_abbr = g.get("away","").split()[-1] if g.get("away","").split() else ""
                     for _, row in tm.iterrows():
-                        side_key = "away" if row.get("TEAM_ID") == \
-                            games_df[games_df["GAME_ID"]==gid].iloc[0].get("VISITOR_TEAM_ID") \
-                            else "home"
+                        team_abbr = str(row.get("TEAM_ABBREVIATION",""))
+                        side_key = "away" if team_abbr and away_abbr and team_abbr in g.get("away","") else "home"
                         ls[side_key]["scores"] = [
                             int(row.get("PTS_QTR1",0) or 0),
                             int(row.get("PTS_QTR2",0) or 0),
