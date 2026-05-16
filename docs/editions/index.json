@@ -1,0 +1,2559 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <!-- Google tag (gtag.js) -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-3LHZLQR5MF"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'G-3LHZLQR5MF');
+    </script>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width,initial-scale=1.0"/>
+<title>The Sports Page</title>
+<link rel="preconnect" href="https://fonts.googleapis.com"/>
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin/>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;0,900;1,400;1,700&family=Libre+Baskerville:ital,wght@0,400;0,700;1,400&family=UnifrakturMaguntia&display=swap" rel="stylesheet"/>
+<style>
+
+@import url('https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;0,900;1,400;1,700&family=Libre+Baskerville:ital,wght@0,400;0,700;1,400&family=UnifrakturMaguntia&display=swap');
+
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+body {
+  margin: 0;
+  padding: 20px 16px 40px;
+  background: #e8e8e8;
+  font-family: 'Playfair Display', serif;
+  color: #111;
+  -webkit-font-smoothing: antialiased;
+}
+
+/* ── PAPER ── */
+.paper {
+  max-width: 1200px;
+  margin: 0 auto;
+  background: #ffffff;
+  background-image:
+    radial-gradient(ellipse at top left, #ebebeb 0%, transparent 60%),
+    radial-gradient(ellipse at bottom right, #e8e8e8 0%, transparent 60%),
+    repeating-linear-gradient(0deg, transparent, transparent 22px, rgba(0,0,0,.025) 22px, rgba(0,0,0,.025) 23px);
+}
+
+/* ── MASTHEAD ── */
+.masthead {
+  text-align: center;
+  padding: 14px 24px 10px;
+  border-top: 6px double #111;
+}
+.masthead-name {
+  font-family: 'UnifrakturMaguntia', cursive;
+  font-size: clamp(2.8rem, 9vw, 6.5rem);
+  line-height: 1;
+  letter-spacing: 2px;
+  color: #111;
+}
+.masthead-tagline {
+  font-size: .56rem;
+  letter-spacing: 4px;
+  text-transform: uppercase;
+  color: #444;
+  margin-top: 2px;
+}
+.masthead-rule { border: none; border-top: 1px solid #111; margin: 6px 0 0; }
+
+/* ── SECTION NAV ── */
+.section-nav {
+  display: flex;
+  border-top: 3px solid #111;
+  border-bottom: 3px solid #111;
+  overflow-x: auto;
+  scrollbar-width: none;
+}
+.section-nav::-webkit-scrollbar { display: none; }
+.nav-btn {
+  flex: 1;
+  min-width: 80px;
+  padding: 7px 12px;
+  font-family: 'Playfair Display', serif;
+  font-size: .6rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 1.5px;
+  background: none;
+  border: none;
+  border-right: 1px solid #bbb;
+  cursor: pointer;
+  color: #444;
+  white-space: nowrap;
+  transition: all .12s;
+}
+.nav-btn:last-child { border-right: none; }
+.nav-btn:hover { background: #e0e0e0; color: #111; }
+.nav-btn.active { background: #111; color: #fff; }
+
+/* ── DATELINE ── */
+.dateline {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 3px 24px;
+  border-bottom: 2px solid #111;
+  font-size: .55rem;
+  text-transform: uppercase;
+  letter-spacing: .5px;
+  color: #444;
+}
+.dateline-center { font-weight: 700; color: #111; font-size: .58rem; }
+
+/* ── PAGE BODY ── */
+.page { padding: 16px 24px 40px; }
+
+/* ── SECTION FLAGS ── */
+.flag {
+  font-family: 'Playfair Display', serif;
+  font-size: .55rem;
+  font-weight: 700;
+  letter-spacing: 3px;
+  text-transform: uppercase;
+  color: #f2f2f2;
+  background: #111;
+  display: inline-block;
+  padding: 2px 8px;
+  margin-bottom: 4px;
+}
+.section-divider {
+  border: none;
+  border-top: 3px solid #111;
+  margin: 18px 0 12px;
+}
+.section-divider-thin {
+  border: none;
+  border-top: 1px solid #999;
+  margin: 14px 0 10px;
+}
+.section-label {
+  font-family: 'Playfair Display', serif;
+  font-size: .58rem;
+  font-weight: 700;
+  letter-spacing: 2.5px;
+  text-transform: uppercase;
+  border-top: 3px solid #111;
+  border-bottom: 1px solid #111;
+  padding: 3px 0;
+  margin: 18px 0 10px;
+}
+
+/* ── KICKER / HEADLINE ── */
+.kicker {
+  display: block;
+  font-size: .5rem;
+  letter-spacing: 2.5px;
+  text-transform: uppercase;
+  color: #111;
+  font-weight: 700;
+  margin-bottom: 2px;
+  border-bottom: 1px solid #111;
+  padding-bottom: 2px;
+  display: inline-block;
+}
+h1.headline {
+  font-family: 'Playfair Display', serif;
+  font-size: clamp(1.9rem, 4vw, 3.2rem);
+  font-weight: 900;
+  line-height: 1.02;
+  letter-spacing: -.5px;
+  margin-bottom: 5px;
+}
+h2.headline {
+  font-family: 'Playfair Display', serif;
+  font-size: clamp(1.1rem, 2.5vw, 1.5rem);
+  font-weight: 900;
+  line-height: 1.05;
+  letter-spacing: -.3px;
+  margin-bottom: 4px;
+}
+h3.headline {
+  font-family: 'Playfair Display', serif;
+  font-size: clamp(.9rem, 1.8vw, 1.1rem);
+  font-weight: 700;
+  line-height: 1.1;
+  margin-bottom: 3px;
+}
+.deck {
+  font-family: 'Playfair Display', serif;
+  font-size: .88rem;
+  font-style: italic;
+  color: #333;
+  line-height: 1.4;
+  margin-bottom: 4px;
+  border-bottom: 1px solid #ccc;
+  padding-bottom: 4px;
+}
+.byline {
+  font-size: .54rem;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  color: #555;
+  margin-bottom: 8px;
+}
+
+/* ── STORY BODY ── */
+.story-body {
+  font-size: .79rem;
+  line-height: 1.75;
+  text-align: justify;
+  hyphens: auto;
+}
+.story-body p + p { text-indent: 1.3em; }
+.story-2col { column-count: 2; column-gap: 18px; column-rule: 1px solid #ccc; }
+.story-3col { column-count: 3; column-gap: 16px; column-rule: 1px solid #ccc; }
+
+/* ── FRONT PAGE GRID ── */
+.front-grid {
+  display: grid;
+  grid-template-columns: 1fr 190px;
+  gap: 0;
+  padding-bottom: 16px;
+  border-bottom: 2px solid #111;
+  margin-bottom: 14px;
+}
+.front-main { border-right: 1.5px solid #111; padding-right: 18px; }
+.front-sidebar { padding-left: 10px; }
+
+/* ── SCORE SIDEBAR ── */
+.scores-head {
+  font-family: 'Playfair Display', serif;
+  font-size: .68rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  border-top: 2px solid #111;
+  border-bottom: 2px solid #111;
+  padding: 2px 0;
+  margin-bottom: 6px;
+}
+.scores-sport-lbl {
+  font-size: .48rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 2px;
+  color: #555;
+  margin: 7px 0 2px;
+  border-bottom: 1px solid #bbb;
+  padding-bottom: 1px;
+}
+.score-game { padding: 2px 0; border-bottom: 1px solid #ddd; }
+.score-row { display: flex; justify-content: space-between; font-size: .65rem; line-height: 1.55; }
+.score-team { flex: 1; }
+.score-val { font-weight: 700; min-width: 18px; text-align: right; font-family: 'Playfair Display', serif; }
+.score-status { font-size: .48rem; color: #666; font-style: italic; text-align: right; }
+
+/* ── SECONDARY STORIES (3-col) ── */
+.sec-stories-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 0 0;
+  margin-bottom: 14px;
+}
+.sec-story { border-right: 1px solid #bbb; padding: 0 14px; }
+.sec-story:first-child { padding-left: 0; }
+.sec-story:last-child { border-right: none; padding-right: 0; }
+
+/* ── OPINION ── */
+.opinion-wrap {
+  display: grid;
+  grid-template-columns: 80px 1fr;
+  gap: 0 14px;
+  border-top: 3px double #111;
+  padding-top: 12px;
+  margin-top: 16px;
+}
+.opinion-label {
+  border-right: 1.5px solid #111;
+  padding-right: 14px;
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+.opinion-tag {
+  font-size: .48rem;
+  font-weight: 700;
+  letter-spacing: 2px;
+  text-transform: uppercase;
+  color: #111;
+}
+.opinion-title {
+  font-family: 'Playfair Display', serif;
+  font-size: 1.3rem;
+  font-style: italic;
+  line-height: 1.1;
+}
+
+/* ── SPORT SECTION LAYOUT ── */
+.sport-main-grid {
+  display: grid;
+  grid-template-columns: 1fr 220px;
+  gap: 0;
+  padding-bottom: 14px;
+  border-bottom: 2px solid #111;
+  margin-bottom: 14px;
+}
+.sport-left { border-right: 1.5px solid #111; padding-right: 18px; }
+.sport-right { padding-left: 8px; }
+
+/* ── SCHEDULE ── */
+.schedule-head {
+  font-family: 'Playfair Display', serif;
+  font-size: .7rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  border-top: 2px solid #111;
+  border-bottom: 2px solid #111;
+  padding: 2px 0;
+  margin-bottom: 6px;
+}
+.schedule-item {
+  padding: 5px 0;
+  border-bottom: 1px dotted #bbb;
+}
+.sched-time { font-size: .52rem; text-transform: uppercase; letter-spacing: .8px; color: #666; margin-bottom: 1px; }
+.sched-matchup { font-family: 'Playfair Display', serif; font-size: .85rem; font-weight: 700; line-height: 1.2; margin-bottom: 1px; }
+.sched-pitchers { font-size: .64rem; font-style: italic; color: #444; }
+.sched-note { font-size: .52rem; font-weight: 700; text-transform: uppercase; letter-spacing: .5px; margin-top: 1px; }
+
+/* ── BOX SCORES ── */
+.bs-section-head {
+  font-size: .6rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 2px;
+  border-top: 3px solid #111;
+  border-bottom: 2px solid #111;
+  padding: 3px 0;
+  margin: 16px 0 10px;
+}
+.bs-game { margin-bottom: 20px; }
+.bs-game-title {
+  font-family: 'Playfair Display', serif;
+  font-size: 1.05rem;
+  font-weight: 900;
+  margin-bottom: 5px;
+  border-bottom: 1px solid #111;
+  padding-bottom: 3px;
+}
+/* Linescore */
+.linescore-wrap { overflow-x: auto; margin-bottom: 6px; }
+table.linescore {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: .62rem;
+  font-family: 'Playfair Display', serif;
+}
+.linescore th {
+  padding: 2px 5px;
+  text-align: center;
+  font-weight: 700;
+  font-size: .55rem;
+  text-transform: uppercase;
+  border-bottom: 2px solid #111;
+  border-top: 1px solid #111;
+  background: #111;
+  color: #f2f2f2;
+  white-space: nowrap;
+}
+.linescore th:first-child { text-align: left; min-width: 100px; }
+.linescore td { padding: 2px 5px; text-align: center; border-bottom: 1px solid #ddd; }
+.linescore td:first-child { text-align: left; font-weight: 700; }
+.linescore .tot { font-weight: 700; background: #e0e0e0; }
+/* Batting box */
+table.btbl {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: .62rem;
+  font-family: 'Playfair Display', serif;
+  margin-bottom: 4px;
+}
+.btbl th {
+  text-align: right;
+  font-weight: 700;
+  font-size: .52rem;
+  text-transform: uppercase;
+  border-top: 1px solid #111;
+  border-bottom: 1px solid #111;
+  padding: 2px 4px;
+  background: #e0e0e0;
+}
+.btbl th:first-child { text-align: left; }
+.btbl td { padding: 1px 4px; border-bottom: 1px solid #e0e0e0; text-align: right; }
+.btbl td:first-child { text-align: left; }
+.btbl .team-hdr td { font-weight: 700; font-size: .58rem; text-transform: uppercase; letter-spacing: 1px; background: #ddd; text-align: left !important; padding: 3px 4px; }
+.btbl .totals-row td { font-weight: 700; border-top: 1px solid #111; border-bottom: 2px solid #111; background: #eee; }
+/* NFL stat tables */
+.nfl-stat-lbl { font-size: .54rem; font-weight: 700; text-transform: uppercase; letter-spacing: 1.5px; border-bottom: 1px solid #999; margin: 8px 0 3px; padding-bottom: 2px; }
+table.nfltbl {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: .61rem;
+  margin-bottom: 4px;
+}
+.nfltbl th { text-align: right; font-weight: 700; font-size: .52rem; text-transform: uppercase; border-bottom: 1px solid #999; padding: 1px 4px; background: #e0e0e0; }
+.nfltbl th:first-child, .nfltbl th:nth-child(2) { text-align: left; }
+.nfltbl td { padding: 1px 4px; border-bottom: 1px solid #e0e0e0; text-align: right; }
+.nfltbl td:first-child, .nfltbl td:nth-child(2) { text-align: left; }
+.bs-notes {
+  font-size: .6rem;
+  font-style: italic;
+  color: #444;
+  line-height: 1.55;
+  border-top: 1px solid #ccc;
+  padding-top: 4px;
+  margin-top: 4px;
+}
+
+/* ── STANDINGS ── */
+.standings-wrap { overflow-x: auto; }
+table.std-tbl {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: .62rem;
+  font-family: 'Playfair Display', serif;
+  margin-bottom: 4px;
+}
+.std-tbl th {
+  text-align: right;
+  font-weight: 700;
+  font-size: .52rem;
+  text-transform: uppercase;
+  letter-spacing: .3px;
+  border-top: 1px solid #111;
+  border-bottom: 2px solid #111;
+  padding: 2px 4px;
+  white-space: nowrap;
+  background: #e0e0e0;
+}
+.std-tbl th:first-child { text-align: left; min-width: 130px; }
+.std-tbl td { padding: 2px 4px; border-bottom: 1px solid #ddd; text-align: right; white-space: nowrap; }
+.std-tbl td:first-child { text-align: left; }
+.std-tbl tr:first-child td { font-weight: 700; }
+.std-div-lbl {
+  font-size: .54rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 2px;
+  margin: 12px 0 3px;
+  padding-bottom: 2px;
+  border-bottom: 1px solid #aaa;
+}
+
+/* ── LEAGUE LEADERS ── */
+.leaders-split { display: grid; grid-template-columns: 1fr 1fr; gap: 0 20px; }
+.leaders-col-head {
+  font-family: 'Playfair Display', serif;
+  font-size: .78rem;
+  font-weight: 900;
+  text-transform: uppercase;
+  text-align: center;
+  border-top: 2px solid #111;
+  border-bottom: 2px solid #111;
+  padding: 3px 0;
+  margin-bottom: 8px;
+  letter-spacing: 1px;
+}
+.leader-block { margin-bottom: 10px; }
+.leader-cat {
+  font-size: .54rem;
+  font-weight: 700;
+  font-style: normal;
+  text-transform: uppercase;
+  letter-spacing: 1.5px;
+  border-bottom: 1px solid #999;
+  padding-bottom: 2px;
+  margin-bottom: 2px;
+}
+table.ldr-tbl {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: .61rem;
+  font-family: 'Playfair Display', serif;
+}
+.ldr-tbl th { text-align: left; font-weight: 700; font-size: .5rem; text-transform: uppercase; border-bottom: 1px solid #ccc; padding: 1px 3px; }
+.ldr-tbl th:not(:first-child) { text-align: right; }
+.ldr-tbl td { padding: 1px 3px; border-bottom: 1px solid #eee; }
+.ldr-tbl td:not(:first-child) { text-align: right; }
+
+/* ── BRACKET ── */
+.bracket-wrap { display: flex; overflow-x: auto; padding: 4px 0 8px; gap: 0; }
+.brk-round { flex: none; min-width: 150px; padding: 0 8px; border-right: 1px solid #bbb; }
+.brk-round:last-child { border-right: none; }
+.brk-round-lbl { font-size: .5rem; font-weight: 700; text-transform: uppercase; letter-spacing: 1.5px; text-align: center; border-bottom: 1px solid #bbb; padding-bottom: 3px; margin-bottom: 5px; }
+.brk-series { border: 1px solid #bbb; margin: 3px 0; background: #fff; }
+.brk-team { padding: 3px 6px; display: flex; justify-content: space-between; font-size: .6rem; border-bottom: 1px solid #eee; }
+.brk-team:last-of-type { border-bottom: none; }
+.brk-team.won { font-weight: 700; background: #e0e0e0; }
+.brk-status { font-size: .49rem; color: #555; font-style: italic; text-align: center; padding: 2px; border-top: 1px solid #eee; background: #f5f5f5; }
+
+/* ── FOOTER ── */
+.footer {
+  border-top: 3px double #111;
+  padding: 7px 24px;
+  display: flex;
+  justify-content: space-between;
+  font-size: .54rem;
+  color: #555;
+  text-transform: uppercase;
+  letter-spacing: .5px;
+  background: #f5f5f5;
+}
+
+/* ── RESPONSIVE ── */
+@media (max-width: 760px) {
+  .page { padding: 10px 14px 28px; }
+  .dateline { padding: 3px 14px; flex-direction: column; gap: 2px; text-align: center; }
+  .front-grid, .sport-main-grid { grid-template-columns: 1fr; }
+  .front-main, .sport-left { border-right: none; padding-right: 0; border-bottom: 2px solid #111; padding-bottom: 14px; margin-bottom: 12px; }
+  .front-sidebar, .sport-right { padding-left: 0; }
+  .story-2col, .story-3col { column-count: 1; }
+  .sec-stories-grid { grid-template-columns: 1fr; }
+  .sec-story { border-right: none; padding: 0; border-bottom: 1px solid #bbb; padding-bottom: 12px; margin-bottom: 12px; }
+  .sec-story:last-child { border-bottom: none; }
+  .opinion-wrap { grid-template-columns: 1fr; }
+  .opinion-label { border-right: none; flex-direction: row; align-items: center; gap: 8px; border-bottom: 1px solid #111; padding-bottom: 5px; margin-bottom: 8px; }
+  .leaders-split { grid-template-columns: 1fr; }
+  .footer { padding: 7px 14px; flex-direction: column; gap: 2px; text-align: center; }
+}
+
+@media (max-width: 600px) {
+  .sp-nav-btn { flex: none; padding: 8px 10px; font-size: .54rem; letter-spacing: .8px; }
+}
+@media (max-width: 480px) {
+  .masthead-name { font-size: 1.6rem; }
+  .sp-name { font-size: 2.2rem; }
+  .nav-btn { font-size: .5rem; padding: 7px 6px; }
+  .sp-nav-btn {
+    font-size: .52rem;
+    letter-spacing: .5px;
+    padding: 8px 8px;
+    border-right: 1px solid #bbb;
+  }
+}
+
+/* Extra styles for HTML version */
+.page { display: none; padding: 16px 24px 40px; }
+.page.active { display: block; }
+#paper { display: none; max-width: 1200px; margin: 0 auto; background:#fff; border:1px solid #ccc; box-shadow: 0 2px 16px rgba(0,0,0,0.10); }
+#loading { min-height: 100vh; display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 20px; padding: 24px; background: #fff; }
+.ld-name { font-family: 'UnifrakturMaguntia', cursive; font-size: clamp(2rem,8vw,5rem); color: #111; }
+.ld-rule { width: 200px; border: none; border-top: 1px solid #111; }
+.ld-msg  { font-style: italic; color: #666; font-size: .82rem; }
+
+/* ── Extra classes referenced by JS renderer ── */
+.sp-body { font-size:.8rem; line-height:1.74; text-align:justify; hyphens:auto; }
+.sp-body p+p { text-indent:1.3em; }
+.sp-hl-body { column-count:2; column-gap:16px; column-rule:1px solid #ccc; }
+.sp-op-body { column-count:2; column-gap:16px; column-rule:1px solid #ccc; font-size:.78rem; line-height:1.74; text-align:justify; hyphens:auto; }
+.sp-op-body p+p { text-indent:1.3em; }
+.sp-hl-body p+p { text-indent:1.3em; }
+.sp-front-grid { display:grid; grid-template-columns:1fr 190px; gap:0; padding-bottom:16px; border-bottom:2px solid #111; margin-bottom:14px; }
+.sp-score-sidebar { padding-left:10px; }
+.sp-sport-main-grid { display:grid; grid-template-columns:1fr 220px; gap:0; padding-bottom:14px; border-bottom:2px solid #111; margin-bottom:14px; }
+.sp-sport-left { border-right:1.5px solid #111; padding-right:18px; }
+.sp-sport-right { padding-left:8px; }
+.sp-sec-grid { display:grid; grid-template-columns:repeat(3,1fr); gap:0 14px; margin-top:10px; }
+.sp-sec-story { border-right:1px solid #ccc; padding-right:14px; }
+.sp-sec-story:last-child { border-right:none; padding-right:0; }
+.sp-sec-head { font-family:'Playfair Display',serif; font-size:clamp(.85rem,1.5vw,1.1rem); font-weight:700; line-height:1.1; margin-bottom:3px; }
+.sp-sec-s-deck { font-family:'Playfair Display',serif; font-size:.72rem; font-style:italic; color:#444; margin-bottom:3px; border-bottom:1px solid #ddd; padding-bottom:3px; }
+.sp-sec-s-byline { font-size:.52rem; text-transform:uppercase; letter-spacing:1px; color:#666; margin-bottom:5px; }
+.sp-sec-s-body { font-size:.73rem; line-height:1.68; text-align:justify; hyphens:auto; }
+.sp-opinion { display:grid; grid-template-columns:80px 1fr; gap:0 14px; border-top:3px double #111; padding-top:12px; margin-top:16px; }
+.sp-opinion-label { border-right:1.5px solid #111; padding-right:14px; display:flex; flex-direction:column; gap:4px; }
+.sp-op-tag { font-size:.5rem; font-weight:700; letter-spacing:2px; text-transform:uppercase; }
+.sp-op-title { font-family:'Playfair Display',serif; font-size:1.3rem; font-style:italic; line-height:1.1; }
+.sp-op-head { font-family:'Playfair Display',serif; font-size:clamp(.95rem,1.8vw,1.2rem); font-weight:700; line-height:1.1; margin-bottom:4px; }
+.sp-op-byline { font-size:.56rem; text-transform:uppercase; letter-spacing:1px; color:#555; margin-bottom:8px; border-bottom:1px solid #ccc; padding-bottom:3px; }
+.sp-rule-thin { border:none; border-top:1px solid #ccc; margin:12px 0; }
+.sp-sec-head-red { color:#8B0000; }
+.sp-div-label { font-size:.58rem; font-weight:700; text-transform:uppercase; letter-spacing:1.5px; color:#8B0000; margin:12px 0 3px; padding-bottom:2px; border-bottom:1px solid #ccc; }
+.sp-std-wrap { overflow-x:auto; -webkit-overflow-scrolling:touch; }
+.sp-std-tbl { min-width:420px; width:100%; border-collapse:collapse; font-size:.61rem; }
+.sp-std-tbl th { text-align:right; font-weight:700; font-size:.52rem; text-transform:uppercase; border-top:1px solid #111; border-bottom:2px solid #111; padding:2px 4px; background:#e0e0e0; white-space:nowrap; }
+.sp-std-tbl th:first-child { text-align:left; }
+.sp-std-tbl td { padding:2px 4px; border-bottom:1px solid #ddd; text-align:right; white-space:nowrap; }
+.sp-std-tbl td:first-child { text-align:left; }
+.sp-std-tbl tr:first-child td { font-weight:700; }
+.leaders-split { display:grid; grid-template-columns:1fr 1fr; gap:0 20px; }
+.leaders-col-head { font-family:'Playfair Display',serif; font-size:.78rem; font-weight:900; text-transform:uppercase; text-align:center; border-top:2px solid #111; border-bottom:2px solid #111; padding:3px 0; margin-bottom:8px; letter-spacing:1px; }
+.leader-block { margin-bottom:10px; }
+.leader-cat { font-size:.54rem; font-weight:700; text-transform:uppercase; letter-spacing:1.5px; border-bottom:1px solid #999; padding-bottom:2px; margin-bottom:2px; }
+.ldr-tbl { width:100%; border-collapse:collapse; font-size:.6rem; }
+.ldr-tbl th { text-align:left; font-weight:700; font-size:.5rem; text-transform:uppercase; border-bottom:1px solid #ccc; padding:1px 3px; }
+.ldr-tbl th:not(:first-child) { text-align:right; }
+.ldr-tbl td { padding:2px 3px; border-bottom:1px solid #eee; }
+.ldr-tbl td:not(:first-child) { text-align:right; }
+.bracket-wrap { display:flex; overflow-x:auto; padding:4px 0 8px; }
+.brk-round { flex:none; min-width:148px; padding:0 6px; border-right:1px solid #bbb; }
+.brk-round:last-child { border-right:none; }
+.brk-round-lbl { font-size:.5rem; font-weight:700; text-transform:uppercase; letter-spacing:1.5px; text-align:center; border-bottom:1px solid #bbb; padding-bottom:3px; margin-bottom:5px; }
+.brk-series { border:1px solid #bbb; margin:3px 0; background:#fff; }
+.brk-team { padding:3px 6px; display:flex; justify-content:space-between; font-size:.6rem; border-bottom:1px solid #eee; }
+.brk-team:last-of-type { border-bottom:none; }
+.brk-team.won { font-weight:700; background:#e0e0e0; }
+.brk-status { font-size:.49rem; color:#555; font-style:italic; text-align:center; padding:2px; border-top:1px solid #eee; background:#f5f5f5; }
+.linescore { width:100%; border-collapse:collapse; font-size:.6rem; margin-bottom:4px; }
+.linescore th { background:#111; color:#fff; padding:2px 4px; text-align:center; font-weight:700; font-size:.53rem; text-transform:uppercase; }
+.linescore th:first-child { text-align:left; min-width:90px; }
+.linescore td { padding:2px 5px; text-align:center; border-bottom:1px solid #e0e0e0; }
+.linescore td:first-child { text-align:left; font-weight:700; }
+.tot { background:#e0e0e0; font-weight:700; }
+.btbl { width:100%; border-collapse:collapse; font-size:.6rem; margin-top:6px; }
+.btbl th { text-align:right; font-weight:700; border-bottom:1px solid #111; border-top:1px solid #111; padding:2px 4px; font-size:.52rem; text-transform:uppercase; background:#e8e8e8; }
+.btbl th:first-child { text-align:left; }
+.btbl td { padding:1px 4px; border-bottom:1px solid #ebebeb; text-align:right; }
+.btbl td:first-child { text-align:left; }
+.team-hdr td { background:#ddd; font-weight:700; font-size:.59rem; text-transform:uppercase; letter-spacing:1px; padding:3px 4px; text-align:left!important; }
+.totals-row td { font-weight:700; border-top:1px solid #111; border-bottom:2px solid #111; background:#f0f0f0; }
+.nfl-stat-lbl { font-size:.54rem; font-weight:700; text-transform:uppercase; letter-spacing:1.5px; border-bottom:1px solid #999; margin:8px 0 3px; padding-bottom:2px; }
+.nfltbl { width:100%; border-collapse:collapse; font-size:.6rem; }
+.nfltbl th { text-align:right; font-weight:700; font-size:.52rem; text-transform:uppercase; border-bottom:1px solid #999; padding:1px 4px; background:#e0e0e0; }
+.nfltbl th:first-child,.nfltbl th:nth-child(2) { text-align:left; }
+.nfltbl td { padding:1px 4px; border-bottom:1px solid #eee; text-align:right; }
+.nfltbl td:first-child,.nfltbl td:nth-child(2) { text-align:left; }
+.bs-game { margin-bottom:20px; }
+.bs-game-title { font-family:'Playfair Display',serif; font-size:1.05rem; font-weight:900; margin-bottom:5px; border-bottom:1px solid #111; padding-bottom:3px; display:flex; justify-content:space-between; align-items:center; }
+.bs-game-title:hover { color:#8B0000; }
+.bs-toggle { font-size:.64rem; color:#8B0000; font-weight:400; }
+.bs-notes { font-size:.6rem; font-style:italic; color:#444; line-height:1.55; border-top:1px solid #ccc; padding-top:4px; margin-top:4px; }
+.schedule-head { font-family:'Playfair Display',serif; font-size:.7rem; font-weight:700; text-transform:uppercase; letter-spacing:1px; border-top:2px solid #111; border-bottom:2px solid #111; padding:2px 0; margin-bottom:6px; }
+.sched-item { padding:5px 0; border-bottom:1px dotted #bbb; }
+.sched-time { font-size:.52rem; text-transform:uppercase; letter-spacing:.8px; color:#666; margin-bottom:1px; }
+.sched-matchup { font-family:'Playfair Display',serif; font-size:.85rem; font-weight:700; margin-bottom:1px; }
+.sched-pitchers { font-size:.64rem; font-style:italic; color:#444; }
+.sched-note { font-size:.52rem; font-weight:700; text-transform:uppercase; letter-spacing:.5px; margin-top:1px; }
+@media(max-width:760px){
+  .sp-front-grid,.sp-sport-main-grid{grid-template-columns:1fr}
+  .sp-sport-left,.sp-front-grid>div:first-child{border-right:none;padding-right:0;border-bottom:2px solid #111;padding-bottom:14px;margin-bottom:12px}
+  .sp-score-sidebar,.sp-sport-right{padding-left:0}
+  .sp-hl-body{column-count:1}
+  .sp-op-body{column-count:1}
+  .sp-sec-grid{grid-template-columns:1fr}
+  .sp-sec-story{border-right:none;padding-right:0;border-bottom:1px solid #ccc;padding-bottom:12px;margin-bottom:12px}
+  .sp-sec-story:last-child{border-bottom:none}
+  .sp-opinion{grid-template-columns:1fr}
+  .sp-opinion-label{border-right:none;flex-direction:row;align-items:center;gap:8px;border-bottom:1px solid #111;padding-bottom:5px;margin-bottom:8px}
+  .leaders-split{grid-template-columns:1fr}
+}
+
+
+/* ── MASTHEAD ── */
+.sp-name {
+  font-family: 'UnifrakturMaguntia', cursive;
+  font-size: clamp(2.6rem, 9vw, 6.5rem);
+  line-height: 1;
+  letter-spacing: 2px;
+  color: #111;
+}
+.sp-tagline {
+  font-size: .56rem;
+  letter-spacing: 4px;
+  text-transform: uppercase;
+  color: #444;
+  margin-top: 4px;
+  padding-bottom: 8px;
+}
+.masthead {
+  text-align: center;
+  border-top: 6px double #111;
+  padding: 12px 24px 0;
+}
+
+/* ── SECTION NAV ── */
+.sp-nav {
+  display: flex;
+  border-top: 3px solid #111;
+  border-bottom: 3px solid #111;
+  overflow-x: auto;
+  scrollbar-width: none;
+}
+.sp-nav::-webkit-scrollbar { display: none; }
+.sp-nav-btn {
+  flex: 1;
+  padding: 8px 14px;
+  font-family: 'Playfair Display', serif;
+  font-size: .6rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 1.5px;
+  background: none;
+  border: none;
+  border-right: 1px solid #bbb;
+  cursor: pointer;
+  color: #444;
+  white-space: nowrap;
+  transition: all .12s;
+}
+.sp-nav-btn:last-child { border-right: none; }
+.sp-nav-btn:hover { background: #e8e8e8; color: #111; }
+.sp-nav-btn.active { background: #111 !important; color: #fff !important; }
+
+/* ── DATELINE ── */
+.sp-dateline {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 3px 24px;
+  border-bottom: 2px solid #111;
+  font-size: .55rem;
+  text-transform: uppercase;
+  letter-spacing: .5px;
+  color: #444;
+}
+
+/* ── KICKER / FLAG ── */
+.sp-kicker {
+  display: inline-block;
+  font-family: 'Playfair Display', serif;
+  font-size: .5rem;
+  font-weight: 700;
+  letter-spacing: 3px;
+  text-transform: uppercase;
+  color: #fff;
+  background: #111;
+  padding: 2px 7px;
+  margin-bottom: 4px;
+}
+
+/* ── SECTION HEAD ── */
+.sp-sec-head {
+  font-size: .58rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 2.5px;
+  border-top: 3px solid #111;
+  border-bottom: 1px solid #111;
+  padding: 3px 0;
+  margin: 18px 0 10px;
+}
+.sp-sec-head-red { color: #8B0000; }
+
+/* ── HEADLINES ── */
+.sp-hl-head {
+  font-family: 'Playfair Display', serif;
+  font-size: clamp(1.8rem, 4vw, 3.2rem);
+  font-weight: 900;
+  line-height: 1.02;
+  letter-spacing: -.5px;
+  margin-bottom: 5px;
+}
+.sp-hl-deck {
+  font-family: 'Playfair Display', serif;
+  font-size: .88rem;
+  font-style: italic;
+  color: #333;
+  line-height: 1.4;
+  margin-bottom: 4px;
+  border-bottom: 1px solid #ccc;
+  padding-bottom: 4px;
+}
+.sp-byline {
+  font-size: .54rem;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  color: #555;
+  margin-bottom: 8px;
+}
+.sp-hl-body {
+  column-count: 2;
+  column-gap: 16px;
+  column-rule: 1px solid #ccc;
+}
+.sp-body { font-size: .8rem; line-height: 1.75; text-align: justify; hyphens: auto; }
+.sp-body p+p { text-indent: 1.3em; }
+
+/* ── SPORT PAGE GRID ── */
+.sp-sport-main-grid {
+  display: grid;
+  grid-template-columns: 1fr 220px;
+  gap: 0;
+  padding-bottom: 14px;
+  border-bottom: 2px solid #111;
+  margin-bottom: 14px;
+}
+.sp-sport-left { border-right: 1.5px solid #111; padding-right: 18px; }
+.sp-sport-right { padding-left: 8px; }
+
+/* ── FRONT GRID ── */
+.sp-front-grid {
+  display: grid;
+  grid-template-columns: 1fr 190px;
+  gap: 0;
+  padding-bottom: 16px;
+  border-bottom: 2px solid #111;
+  margin-bottom: 14px;
+}
+
+/* ── SECONDARY STORIES ── */
+.sp-sec-grid { display: grid; grid-template-columns: repeat(3,1fr); gap: 0 14px; margin-top: 10px; }
+.sp-sec-story { border-right: 1px solid #ccc; padding-right: 14px; }
+.sp-sec-story:last-child { border-right: none; padding-right: 0; }
+.sp-sec-s-head { font-family: 'Playfair Display', serif; font-size: clamp(.85rem,1.5vw,1.1rem); font-weight: 700; line-height: 1.1; margin-bottom: 3px; }
+.sp-sec-s-deck { font-family: 'Playfair Display', serif; font-size: .72rem; font-style: italic; color: #444; margin-bottom: 3px; border-bottom: 1px solid #ddd; padding-bottom: 3px; }
+.sp-sec-s-byline { font-size: .52rem; text-transform: uppercase; letter-spacing: 1px; color: #666; margin-bottom: 5px; }
+.sp-sec-s-body { font-size: .73rem; line-height: 1.68; text-align: justify; hyphens: auto; }
+
+/* ── OPINION ── */
+.sp-opinion { display: grid; grid-template-columns: 80px 1fr; gap: 0 14px; border-top: 3px double #111; padding-top: 12px; margin-top: 16px; }
+.sp-opinion-label { border-right: 1.5px solid #111; padding-right: 14px; display: flex; flex-direction: column; gap: 4px; }
+.sp-op-tag { font-size: .5rem; font-weight: 700; letter-spacing: 2px; text-transform: uppercase; }
+.sp-op-title { font-family: 'Playfair Display', serif; font-size: 1.3rem; font-style: italic; line-height: 1.1; }
+.sp-op-head { font-family: 'Playfair Display', serif; font-size: clamp(.95rem,1.8vw,1.2rem); font-weight: 700; line-height: 1.1; margin-bottom: 4px; }
+.sp-op-byline { font-size: .56rem; text-transform: uppercase; letter-spacing: 1px; color: #555; margin-bottom: 8px; border-bottom: 1px solid #ccc; padding-bottom: 3px; }
+.sp-op-body { column-count: 2; column-gap: 16px; column-rule: 1px solid #ccc; font-size: .78rem; line-height: 1.74; text-align: justify; hyphens: auto; }
+.sp-op-body p+p { text-indent: 1.3em; }
+
+/* ── SCORE SIDEBAR ── */
+.sp-score-sidebar { padding-left: 10px; }
+.sp-col-head { font-family: 'Playfair Display', serif; font-size: .68rem; font-weight: 700; text-transform: uppercase; letter-spacing: 1px; border-top: 2px solid #111; border-bottom: 2px solid #111; padding: 2px 0; margin-bottom: 6px; }
+
+/* ── BOX SCORE ── */
+.bs-game { margin-bottom: 16px; break-inside: avoid; }
+.bs-game-title { font-family: 'Playfair Display', serif; font-size: .9rem; font-weight: 900; margin-bottom: 4px; border-bottom: 1px solid #111; padding-bottom: 2px; }
+.bs-notes { font-size: .58rem; font-style: italic; color: #444; line-height: 1.5; border-top: 1px solid #e0e0e0; padding-top: 3px; margin-top: 3px; }
+
+/* ── FOOTER ── */
+.sp-footer { border-top: 3px double #111; padding: 7px 24px; display: flex; justify-content: space-between; font-size: .54rem; color: #555; text-transform: uppercase; letter-spacing: .5px; background: #f0f0f0; }
+
+/* ── SCHEDULE ── */
+.schedule-head { font-family: 'Playfair Display', serif; font-size: .7rem; font-weight: 700; text-transform: uppercase; letter-spacing: 1px; border-top: 2px solid #111; border-bottom: 2px solid #111; padding: 2px 0; margin-bottom: 6px; }
+.sched-item { padding: 5px 0; border-bottom: 1px dotted #bbb; }
+.sched-time { font-size: .52rem; text-transform: uppercase; letter-spacing: .8px; color: #666; margin-bottom: 1px; }
+.sched-matchup { font-family: 'Playfair Display', serif; font-size: .85rem; font-weight: 700; margin-bottom: 1px; }
+.sched-pitchers { font-size: .64rem; font-style: italic; color: #444; }
+.sched-note { font-size: .52rem; font-weight: 700; text-transform: uppercase; margin-top: 1px; }
+
+/* ── RESPONSIVE ── */
+@media (min-width: 761px) {
+  .std-hide-mobile { display: table-cell !important; }
+  .standings-two-col { display: grid; grid-template-columns: 1fr 1fr; gap: 0 20px; align-items: start; }
+}
+@media (max-width: 760px) {
+  .standings-two-col { display: block; }
+  .leaders-split { grid-template-columns: 1fr; }
+}
+@media (max-width: 760px) {
+  .sp-sport-main-grid, .sp-front-grid { grid-template-columns: 1fr; }
+  /* Hide extra standings columns on mobile — show only Team W L Pct GB */
+  .std-hide-mobile { display: none; }
+  .sp-sport-left { border-right: none; padding-right: 0; border-bottom: 2px solid #111; padding-bottom: 14px; margin-bottom: 12px; }
+  .sp-sport-right { padding-left: 0; }
+  .sp-hl-body, .sp-op-body { column-count: 1; }
+  .sp-sec-grid { grid-template-columns: 1fr; }
+  .sp-sec-story { border-right: none; padding-right: 0; border-bottom: 1px solid #ccc; padding-bottom: 12px; margin-bottom: 12px; }
+  .sp-opinion { grid-template-columns: 1fr; }
+  .sp-opinion-label { border-right: none; flex-direction: row; align-items: center; gap: 8px; border-bottom: 1px solid #111; padding-bottom: 5px; margin-bottom: 8px; }
+  .sp-dateline { flex-direction: column; gap: 2px; text-align: center; padding: 3px 14px; }
+  .sp-footer { flex-direction: column; gap: 2px; text-align: center; }
+}
+@media (max-width: 480px) { .sp-name { font-size: 2.4rem; } }
+
+
+/* ── EDITOR'S NOTE / SUPPORT MODULE ── */
+.editors-note {
+  border: 1px solid #bbb;
+  border-top: 3px solid #111;
+  padding: 12px 14px;
+  margin: 16px 0;
+  background: #fafafa;
+  font-family: 'Libre Baskerville', Georgia, serif;
+}
+.editors-note-tag {
+  font-size: .48rem;
+  font-weight: 700;
+  letter-spacing: 2.5px;
+  text-transform: uppercase;
+  color: #8B0000;
+  display: block;
+  margin-bottom: 6px;
+  border-bottom: 1px solid #ddd;
+  padding-bottom: 4px;
+}
+.editors-note-head {
+  font-family: 'Playfair Display', serif;
+  font-size: .9rem;
+  font-weight: 700;
+  font-style: italic;
+  margin-bottom: 6px;
+  line-height: 1.2;
+}
+.editors-note-body {
+  font-size: .68rem;
+  line-height: 1.7;
+  color: #333;
+  margin-bottom: 10px;
+}
+.editors-note-body p + p {
+  margin-top: 5px;
+}
+.editors-note-link {
+  display: block;
+  text-align: center;
+  font-size: .58rem;
+  font-weight: 700;
+  letter-spacing: 1.5px;
+  text-transform: uppercase;
+  color: #111;
+  border: 1px solid #111;
+  padding: 5px 10px;
+  text-decoration: none;
+  transition: background .15s, color .15s;
+  font-family: 'Libre Baskerville', serif;
+}
+.editors-note-link:hover {
+  background: #111;
+  color: #fff;
+}
+
+</style>
+</head>
+<body>
+
+<div id="loading">
+  <div class="ld-name">The Sports Page</div>
+  <hr class="ld-rule"/>
+  <p class="ld-msg">Setting type on the presses...</p>
+</div>
+
+<div id="paper">
+  <div class="masthead">
+    <div class="sp-name">The Sports Page</div>
+    <div class="sp-tagline">All the Sports News Fit to Print &middot; Est. 2026</div>
+  </div>
+  <nav class="sp-nav" id="main-nav"></nav>
+  <div class="sp-dateline">
+    <span id="dl-edition"></span>
+    <span id="dl-date" style="font-weight:700;color:#111"></span>
+  </div>
+  <div id="front" class="page active"></div>
+  <div id="mlb"   class="page"></div>
+  <div id="nba"   class="page"></div>
+  <div id="nhl"   class="page"></div>
+  <div id="nfl"   class="page"></div>
+  <div class="sp-footer">
+    <span>&copy; The Sports Page &middot; Est. 2026</span>
+    <span>Updated Daily &middot; Powered by Claude AI</span>
+  </div>
+</div>
+
+<script>
+// ═══════════════════════════════════════════
+// ALL DATA
+// ═══════════════════════════════════════════
+const mlb = {
+  story: {
+    kicker:"Baseball",
+    headline:"OHTANI'S HISTORIC PACE PUTS HIM ON TRACK FOR 53 HOME RUNS",
+    deck:"No player since Bonds in 2001 has reached 15 home runs this early in a season",
+    byline:"By Andrew Dobrow, Baseball Writer",
+    body:"Shohei Ohtani arrived in Los Angeles with absurd expectations and has somehow exceeded them. Through 46 games he has 15 home runs, 42 RBI, and a .321 batting average — a pace that would produce 53 home runs and 148 RBI over a full season.\n\nWhat makes his production historically unusual is the consistency. He has not gone more than four consecutive games without a home run. He has hit them to all fields, off fastballs and off sliders, and pitchers who have tried to work around him have watched him draw walks and steal bases.\n\n\"He is operating at a level that makes you rethink what is possible,\" Dodgers manager Dave Roberts said. \"I have managed for a long time. I have not seen anything like what he does every day.\""
+  },
+  schedule: [
+    {time:"1:05 PM ET", away:"NY Yankees",    home:"Baltimore",     asp:"Fried (4-2, 2.91)",    hsp:"Bradish (1-5, 4.83)"},
+    {time:"1:10 PM ET", away:"LA Angels",      home:"Cleveland",     asp:"Detmers (1-3, 4.33)",  hsp:"Messick (4-1, 2.30)"},
+    {time:"6:40 PM ET", away:"Washington",     home:"Cincinnati",    asp:"JIrvin (1-4, 5.22)",   hsp:"Lodolo (0-1, 6.75)"},
+    {time:"6:40 PM ET", away:"Colorado",       home:"Pittsburgh",    asp:"Quintana (1-2, 3.90)", hsp:"MKeller (4-1, 2.87)"},
+    {time:"6:45 PM ET", away:"Philadelphia",   home:"Boston",        asp:"Painter (1-4, 6.89)",  hsp:"SGray (3-1, 3.54)"},
+    {time:"7:07 PM ET", away:"Tampa Bay",      home:"Toronto",       asp:"Jax (1-2, 5.00)",      hsp:"Cease (3-1, 2.58)"},
+    {time:"7:10 PM ET", away:"Detroit",        home:"NY Mets",       asp:"FValdez (2-2, 4.57)",  hsp:"Scott (0-0, 3.27)"},
+    {time:"7:15 PM ET", away:"Chi Cubs",       home:"Atlanta",       asp:"Imanaga (4-2, 2.28)",  hsp:"Ritchie (1-0, 3.63)"},
+    {time:"7:40 PM ET", away:"Kansas City",    home:"Chi White Sox", asp:"SLugo (1-2, 3.21)",    hsp:"Schultz (2-2, 4.68)"},
+    {time:"8:10 PM ET", away:"Minnesota",      home:"Houston",       asp:"Ober (3-2, 3.18)",     hsp:"Blanco (2-3, 4.92)"},
+    {time:"9:40 PM ET", away:"St. Louis",      home:"LA Dodgers",    asp:"Mikolas (2-3, 4.44)",  hsp:"Glasnow (4-1, 2.88)"},
+    {time:"9:40 PM ET", away:"San Francisco",  home:"San Diego",     asp:"Webb (3-2, 3.11)",     hsp:"Darvish (2-2, 3.75)"},
+    {time:"10:10 PM ET",away:"Milwaukee",      home:"Arizona",       asp:"Peralta (1-3, 5.22)",  hsp:"Pfaadt (2-2, 3.98)"},
+  ],
+  boxScores: [
+    { title:"Guardians 3, Angels 2",
+      linescore:{away:{name:"Los Angeles",scores:[0,0,0,0,0,1,0,1,0],r:2,h:8,e:1},home:{name:"Cleveland",scores:[0,0,1,0,1,1,0,"x"],r:3,h:4,e:0}},
+      batting:[
+        {team:"Los Angeles",players:[
+          {name:"Neto ss",ab:4,r:0,h:0,bi:0,bb:1,so:2,avg:".216"},
+          {name:"Trout cf",ab:4,r:0,h:2,bi:0,bb:1,so:1,avg:".255"},
+          {name:"Schanuel 1b",ab:5,r:0,h:2,bi:0,bb:0,so:2,avg:".261"},
+          {name:"Soler dh",ab:4,r:0,h:1,bi:0,bb:0,so:2,avg:".227"},
+          {name:"Grissom 2b",ab:4,r:1,h:1,bi:1,bb:0,so:1,avg:".271"},
+          {name:"Moncada 3b",ab:2,r:0,h:1,bi:0,bb:0,so:0,avg:".194"},
+          {name:"a-OPeraza ph-3b",ab:2,r:1,h:1,bi:0,bb:0,so:0,avg:".280"},
+          {name:"Adell rf",ab:2,r:0,h:0,bi:1,bb:1,so:0,avg:".275"},
+          {name:"JLowe lf",ab:3,r:0,h:0,bi:0,bb:1,so:2,avg:".160"},
+          {name:"OMartinez c",ab:2,r:0,h:0,bi:0,bb:0,so:1,avg:".333"},
+          {name:"b-Rivero ph-c",ab:2,r:0,h:0,bi:0,bb:0,so:2,avg:".125"},
+        ],totals:{ab:34,r:2,h:8,bi:2,bb:4,so:13}},
+        {team:"Cleveland",players:[
+          {name:"Kwan lf",ab:3,r:0,h:1,bi:0,bb:1,so:0,avg:".206"},
+          {name:"DeLauter dh",ab:3,r:0,h:0,bi:0,bb:1,so:0,avg:".286"},
+          {name:"JoRamirez 3b",ab:4,r:0,h:0,bi:0,bb:0,so:1,avg:".210"},
+          {name:"Manzardo 1b",ab:4,r:0,h:0,bi:0,bb:0,so:1,avg:".205"},
+          {name:"Bazzana 2b",ab:3,r:0,h:0,bi:0,bb:0,so:1,avg:".195"},
+          {name:"Schneemann cf",ab:1,r:1,h:0,bi:0,bb:1,so:1,avg:".270"},
+          {name:"a-Hoskins ph",ab:0,r:0,h:0,bi:0,bb:1,so:0,avg:".185"},
+          {name:"1-Halpin pr-cf",ab:0,r:1,h:0,bi:0,bb:0,so:0,avg:".111"},
+          {name:"AMartinez rf",ab:3,r:1,h:2,bi:1,bb:0,so:0,avg:".260"},
+          {name:"Bailey c",ab:2,r:0,h:0,bi:1,bb:0,so:0,avg:".138"},
+          {name:"b-Fry ph",ab:1,r:0,h:0,bi:0,bb:0,so:0,avg:".268"},
+          {name:"Hedges c",ab:0,r:0,h:0,bi:0,bb:0,so:0,avg:".294"},
+          {name:"Rocchio ss",ab:2,r:0,h:1,bi:1,bb:0,so:0,avg:".281"},
+        ],totals:{ab:26,r:3,h:4,bi:3,bb:4,so:4}},
+      ],
+      notes:"a-Tripled for Moncada in 6th. b-Struck out for OMartinez in 7th. a-Walked for Schneemann in 7th. b-Flied out for Bailey in 7th. 1-Ran for Hoskins in 7th. E: OPeraza (2). LOB: LA 10, CLE 4. 2B: Trout (7), Schanuel (8). 3B: OPeraza (1). HR: Grissom (5). WP: Messick (4-1). LP: Detmers (1-4). SV: CSmith (12)."},
+    { title:"Yankees 6, Red Sox 4",
+      linescore:{away:{name:"NY Yankees",scores:[0,2,0,1,0,0,2,0,1],r:6,h:11,e:0},home:{name:"Boston",scores:[0,0,2,0,1,0,0,1,0],r:4,h:9,e:1}},
+      batting:[
+        {team:"NY Yankees",players:[
+          {name:"Chisholm 3b",ab:4,r:1,h:2,bi:1,bb:1,so:1,avg:".298"},{name:"Soto rf",ab:5,r:1,h:2,bi:1,bb:0,so:1,avg:".312"},
+          {name:"Judge dh",ab:4,r:1,h:1,bi:2,bb:1,so:2,avg:".310"},{name:"Bellinger cf",ab:5,r:0,h:2,bi:0,bb:0,so:1,avg:".271"},
+          {name:"Torres ss",ab:4,r:1,h:1,bi:0,bb:1,so:1,avg:".244"},{name:"Rizzo 1b",ab:4,r:1,h:1,bi:1,bb:0,so:2,avg:".228"},
+          {name:"Volpe lf",ab:4,r:0,h:1,bi:0,bb:0,so:1,avg:".239"},{name:"Wells c",ab:4,r:1,h:1,bi:1,bb:0,so:2,avg:".252"},
+          {name:"LeMahieu 2b",ab:3,r:0,h:0,bi:0,bb:1,so:1,avg:".216"},
+        ],totals:{ab:37,r:6,h:11,bi:6,bb:4,so:12}},
+        {team:"Boston",players:[
+          {name:"JaDuran cf",ab:4,r:1,h:2,bi:0,bb:1,so:1,avg:".283"},{name:"Casas 1b",ab:4,r:1,h:1,bi:1,bb:1,so:2,avg:".265"},
+          {name:"Devers 3b",ab:5,r:0,h:2,bi:1,bb:0,so:1,avg:".291"},{name:"ONeill lf",ab:4,r:1,h:2,bi:0,bb:0,so:1,avg:".275"},
+          {name:"Yoshida dh",ab:4,r:0,h:1,bi:1,bb:0,so:0,avg:".270"},{name:"McGuire c",ab:4,r:0,h:1,bi:0,bb:0,so:2,avg:".211"},
+          {name:"Hamilton rf",ab:3,r:1,h:0,bi:0,bb:1,so:2,avg:".188"},{name:"Story ss",ab:4,r:0,h:0,bi:1,bb:0,so:3,avg:".198"},
+          {name:"Arroyo 2b",ab:3,r:0,h:0,bi:0,bb:1,so:2,avg:".201"},
+        ],totals:{ab:35,r:4,h:9,bi:4,bb:4,so:14}},
+      ],
+      notes:"HR: Judge (16), Rizzo (7). 2B: Chisholm (8), Devers (11). WP: Schmidt (3-2). LP: Sale (3-3). SV: CSmith (12). A: 36,741."},
+    { title:"Dodgers 9, Giants 2",
+      linescore:{away:{name:"Los Angeles",scores:[0,2,0,3,0,0,4,0,0],r:9,h:14,e:0},home:{name:"San Francisco",scores:[0,0,0,0,1,0,1,0,0],r:2,h:6,e:1}},
+      batting:[
+        {team:"Los Angeles",players:[
+          {name:"Betts rf",ab:5,r:2,h:3,bi:2,bb:0,so:0,avg:".318"},{name:"Ohtani dh",ab:4,r:2,h:2,bi:4,bb:1,so:1,avg:".321"},
+          {name:"Freeman 1b",ab:5,r:1,h:2,bi:1,bb:0,so:1,avg:".289"},{name:"Muncy 3b",ab:4,r:1,h:2,bi:1,bb:1,so:1,avg:".244"},
+          {name:"Smith c",ab:4,r:1,h:2,bi:0,bb:0,so:1,avg:".295"},{name:"Hernandez ss",ab:4,r:1,h:1,bi:1,bb:0,so:1,avg:".248"},
+          {name:"Pages cf",ab:4,r:0,h:1,bi:0,bb:0,so:2,avg:".211"},{name:"Outman lf",ab:3,r:1,h:1,bi:0,bb:1,so:1,avg:".239"},
+          {name:"Rojas 2b",ab:3,r:0,h:0,bi:0,bb:1,so:1,avg:".222"},
+        ],totals:{ab:36,r:9,h:14,bi:9,bb:4,so:9}},
+        {team:"San Francisco",players:[
+          {name:"Bailey cf",ab:4,r:0,h:1,bi:0,bb:0,so:2,avg:".241"},{name:"Yastrzemski rf",ab:3,r:0,h:1,bi:0,bb:1,so:1,avg:".248"},
+          {name:"Conforto lf",ab:4,r:1,h:1,bi:0,bb:0,so:2,avg:".258"},{name:"Ruf dh",ab:4,r:0,h:1,bi:1,bb:0,so:1,avg:".241"},
+          {name:"Flores 1b",ab:4,r:0,h:1,bi:0,bb:0,so:1,avg:".271"},{name:"Longoria 3b",ab:3,r:1,h:1,bi:1,bb:1,so:0,avg:".234"},
+          {name:"Davis c",ab:3,r:0,h:0,bi:0,bb:0,so:2,avg:".198"},{name:"Fitzgerald ss",ab:3,r:0,h:0,bi:0,bb:0,so:2,avg:".201"},
+          {name:"Garcia 2b",ab:3,r:0,h:0,bi:0,bb:0,so:2,avg:".218"},
+        ],totals:{ab:31,r:2,h:6,bi:2,bb:2,so:13}},
+      ],
+      notes:"HR: Ohtani (14), Ohtani (15). 2B: Betts (9), Freeman (10). WP: Glasnow (4-1). LP: Webb (3-3). A: 40,312."},
+    { title:"Braves 7, Phillies 3",
+      linescore:{away:{name:"Philadelphia",scores:[0,0,1,0,0,2,0,0,0],r:3,h:7,e:0},home:{name:"Atlanta",scores:[2,0,0,3,0,0,2,0,"x"],r:7,h:12,e:0}},
+      batting:[
+        {team:"Philadelphia",players:[
+          {name:"Schwarber lf",ab:3,r:1,h:1,bi:1,bb:1,so:2,avg:".244"},{name:"Turner ss",ab:4,r:0,h:1,bi:0,bb:0,so:1,avg:".278"},
+          {name:"Harper dh",ab:4,r:1,h:2,bi:1,bb:0,so:0,avg:".301"},{name:"Castellanos rf",ab:4,r:0,h:1,bi:1,bb:0,so:1,avg:".261"},
+          {name:"Marsh cf",ab:4,r:1,h:2,bi:0,bb:0,so:0,avg:".350"},{name:"Bohm 3b",ab:3,r:0,h:0,bi:0,bb:1,so:2,avg:".272"},
+          {name:"Realmuto c",ab:4,r:0,h:0,bi:0,bb:0,so:2,avg:".241"},{name:"Stubbs 1b",ab:3,r:0,h:0,bi:0,bb:0,so:2,avg:".211"},
+          {name:"Stott 2b",ab:3,r:0,h:0,bi:0,bb:0,so:1,avg:".238"},
+        ],totals:{ab:32,r:3,h:7,bi:3,bb:2,so:11}},
+        {team:"Atlanta",players:[
+          {name:"Acuna rf",ab:4,r:1,h:2,bi:1,bb:1,so:0,avg:".311"},{name:"Olson 1b",ab:5,r:2,h:2,bi:3,bb:0,so:1,avg:".259"},
+          {name:"Riley 3b",ab:4,r:1,h:2,bi:1,bb:0,so:1,avg:".285"},{name:"Ozuna dh",ab:4,r:0,h:1,bi:0,bb:0,so:2,avg:".271"},
+          {name:"Murphy c",ab:3,r:1,h:1,bi:0,bb:1,so:1,avg:".261"},{name:"Harris cf",ab:4,r:1,h:2,bi:0,bb:0,so:1,avg:".268"},
+          {name:"Albies 2b",ab:4,r:0,h:1,bi:1,bb:0,so:1,avg:".258"},{name:"Rosario lf",ab:4,r:1,h:1,bi:1,bb:0,so:1,avg:".244"},
+          {name:"Swanson ss",ab:3,r:0,h:0,bi:0,bb:1,so:2,avg:".228"},
+        ],totals:{ab:35,r:7,h:12,bi:7,bb:3,so:10}},
+      ],
+      notes:"HR: Olson (8), Acuna (7). 2B: Riley (9), Harris (7). WP: Fried (5-1). LP: Painter (1-4). A: 41,088."},
+    { title:"Blue Jays 8, Orioles 3",
+      linescore:{away:{name:"Toronto",scores:[0,3,0,2,0,0,2,1,0],r:8,h:13,e:0},home:{name:"Baltimore",scores:[0,0,1,0,0,0,2,0,0],r:3,h:7,e:1}},
+      batting:[
+        {team:"Toronto",players:[
+          {name:"Springer cf",ab:4,r:2,h:2,bi:1,bb:1,so:1,avg:".279"},{name:"Bichette ss",ab:5,r:1,h:2,bi:1,bb:0,so:2,avg:".288"},
+          {name:"Guerrero 1b",ab:4,r:2,h:3,bi:2,bb:1,so:0,avg:".312"},{name:"Varsho lf",ab:5,r:0,h:1,bi:1,bb:0,so:2,avg:".241"},
+          {name:"Kirk c",ab:4,r:1,h:2,bi:2,bb:0,so:0,avg:".281"},{name:"Biggio 2b",ab:4,r:1,h:1,bi:0,bb:1,so:1,avg:".251"},
+          {name:"Davis dh",ab:4,r:0,h:1,bi:1,bb:0,so:2,avg:".244"},{name:"McKinney rf",ab:4,r:1,h:1,bi:0,bb:0,so:1,avg:".218"},
+          {name:"Chapman 3b",ab:3,r:0,h:0,bi:0,bb:1,so:1,avg:".231"},
+        ],totals:{ab:37,r:8,h:13,bi:8,bb:4,so:10}},
+        {team:"Baltimore",players:[
+          {name:"Mullins cf",ab:4,r:0,h:1,bi:0,bb:0,so:1,avg:".239"},{name:"Henderson 3b",ab:4,r:1,h:2,bi:1,bb:0,so:1,avg:".271"},
+          {name:"Santander rf",ab:4,r:1,h:2,bi:1,bb:0,so:1,avg:".259"},{name:"Mountcastle 1b",ab:4,r:0,h:1,bi:0,bb:0,so:2,avg:".244"},
+          {name:"Westburg 2b",ab:3,r:0,h:0,bi:0,bb:1,so:1,avg:".218"},{name:"OHearn lf",ab:4,r:0,h:0,bi:0,bb:0,so:2,avg:".211"},
+          {name:"Rutschman c",ab:3,r:1,h:1,bi:1,bb:1,so:0,avg:".261"},{name:"Mateo ss",ab:3,r:0,h:0,bi:0,bb:0,so:2,avg:".204"},
+          {name:"Urias dh",ab:3,r:0,h:0,bi:0,bb:0,so:2,avg:".221"},
+        ],totals:{ab:32,r:3,h:7,bi:3,bb:2,so:12}},
+      ],
+      notes:"HR: Guerrero (9), Kirk (4). WP: Cease (4-1). LP: Bradish (1-6). A: 28,453."},
+    { title:"Cubs 4, Cardinals 4 (F/11)",
+      linescore:{away:{name:"Chicago",scores:[0,0,0,2,0,2,0,0,0,0,0],r:4,h:9,e:0},home:{name:"St. Louis",scores:[0,0,1,0,0,1,2,0,0,0,0],r:4,h:10,e:2}},
+      batting:[
+        {team:"Chicago",players:[
+          {name:"Hoerner 2b",ab:5,r:1,h:2,bi:1,bb:1,so:0,avg:".282"},{name:"Swanson ss",ab:5,r:1,h:2,bi:1,bb:0,so:1,avg:".228"},
+          {name:"Bellinger cf",ab:5,r:0,h:2,bi:0,bb:0,so:1,avg:".264"},{name:"Suzuki rf",ab:4,r:0,h:1,bi:0,bb:1,so:2,avg:".291"},
+          {name:"Wisdom 3b",ab:5,r:1,h:1,bi:1,bb:0,so:3,avg:".241"},{name:"Contreras c",ab:4,r:0,h:0,bi:1,bb:1,so:2,avg:".254"},
+          {name:"Tauchman lf",ab:4,r:0,h:0,bi:0,bb:1,so:2,avg:".228"},{name:"Busch 1b",ab:4,r:1,h:1,bi:0,bb:0,so:1,avg:".211"},
+          {name:"Madrigal dh",ab:4,r:0,h:0,bi:0,bb:0,so:1,avg:".219"},
+        ],totals:{ab:40,r:4,h:9,bi:4,bb:4,so:13}},
+        {team:"St. Louis",players:[
+          {name:"Carlson cf",ab:5,r:1,h:2,bi:0,bb:0,so:1,avg:".258"},{name:"Nootbaar rf",ab:4,r:0,h:1,bi:0,bb:1,so:2,avg:".262"},
+          {name:"Goldschmidt 1b",ab:4,r:1,h:2,bi:1,bb:1,so:1,avg:".281"},{name:"Arenado 3b",ab:5,r:0,h:2,bi:1,bb:0,so:0,avg:".271"},
+          {name:"Gorman 2b",ab:4,r:0,h:1,bi:0,bb:1,so:2,avg:".244"},{name:"ONeill lf",ab:5,r:1,h:1,bi:1,bb:0,so:2,avg:".248"},
+          {name:"Contreras c",ab:4,r:0,h:0,bi:0,bb:0,so:2,avg:".241"},{name:"Donovan ss",ab:4,r:1,h:1,bi:1,bb:0,so:1,avg:".268"},
+          {name:"Walker dh",ab:4,r:0,h:0,bi:0,bb:0,so:1,avg:".221"},
+        ],totals:{ab:39,r:4,h:10,bi:4,bb:3,so:12}},
+      ],
+      notes:"Game suspended in 11th; resumes Friday. HR: Swanson (4), Wisdom (6). A: 34,217."},
+    { title:"Guardians 2, Tigers 1",
+      linescore:{away:{name:"Cleveland",scores:[0,0,0,0,0,0,1,0,1],r:2,h:5,e:0},home:{name:"Detroit",scores:[0,0,1,0,0,0,0,0,0],r:1,h:4,e:0}},
+      batting:[
+        {team:"Cleveland",players:[
+          {name:"Kwan lf",ab:4,r:0,h:1,bi:0,bb:0,so:0,avg:".206"},{name:"DeLauter dh",ab:3,r:0,h:0,bi:0,bb:1,so:1,avg:".286"},
+          {name:"JoRamirez 3b",ab:4,r:1,h:2,bi:1,bb:0,so:0,avg:".210"},{name:"Manzardo 1b",ab:4,r:0,h:1,bi:0,bb:0,so:1,avg:".205"},
+          {name:"Bazzana 2b",ab:3,r:1,h:1,bi:0,bb:1,so:0,avg:".195"},{name:"AMartinez rf",ab:4,r:0,h:0,bi:1,bb:0,so:2,avg:".260"},
+          {name:"Schneemann cf",ab:3,r:0,h:0,bi:0,bb:0,so:1,avg:".270"},{name:"Bailey c",ab:3,r:0,h:0,bi:0,bb:0,so:2,avg:".138"},
+          {name:"Rocchio ss",ab:3,r:0,h:0,bi:0,bb:0,so:1,avg:".281"},
+        ],totals:{ab:31,r:2,h:5,bi:2,bb:2,so:8}},
+        {team:"Detroit",players:[
+          {name:"Torkelson 1b",ab:4,r:0,h:1,bi:0,bb:0,so:2,avg:".241"},{name:"Greene rf",ab:4,r:0,h:1,bi:0,bb:0,so:1,avg:".315"},
+          {name:"Meadows lf",ab:4,r:0,h:1,bi:0,bb:0,so:2,avg:".261"},{name:"Reyes 3b",ab:3,r:1,h:1,bi:1,bb:1,so:0,avg:".271"},
+          {name:"Vierling cf",ab:4,r:0,h:0,bi:0,bb:0,so:2,avg:".238"},{name:"Kreidler ss",ab:3,r:0,h:0,bi:0,bb:0,so:1,avg:".201"},
+          {name:"McKinstry dh",ab:3,r:0,h:0,bi:0,bb:0,so:2,avg:".218"},{name:"Haase c",ab:3,r:0,h:0,bi:0,bb:0,so:2,avg:".188"},
+          {name:"Carpenter 2b",ab:2,r:0,h:0,bi:0,bb:1,so:1,avg:".224"},
+        ],totals:{ab:30,r:1,h:4,bi:1,bb:2,so:13}},
+      ],
+      notes:"HR: JoRamirez (9). WP: GWilliams (4-1). LP: Skubal (4-2). SV: CSmith (13). A: 22,318."},
+    { title:"Mariners 6, Athletics 0",
+      linescore:{away:{name:"Seattle",scores:[2,0,1,0,0,0,3,0,0],r:6,h:9,e:0},home:{name:"Oakland",scores:[0,0,0,0,0,0,0,0,0],r:0,h:3,e:2}},
+      batting:[
+        {team:"Seattle",players:[
+          {name:"France 1b",ab:4,r:1,h:2,bi:1,bb:1,so:0,avg:".281"},{name:"Kelenic lf",ab:5,r:1,h:2,bi:2,bb:0,so:1,avg:".261"},
+          {name:"Hernandez cf",ab:4,r:1,h:1,bi:0,bb:1,so:1,avg:".258"},{name:"Raleigh c",ab:4,r:1,h:1,bi:1,bb:0,so:1,avg:".244"},
+          {name:"Suarez 3b",ab:4,r:0,h:1,bi:1,bb:0,so:1,avg:".241"},{name:"Winker dh",ab:3,r:1,h:1,bi:0,bb:1,so:1,avg:".258"},
+          {name:"Moore rf",ab:4,r:0,h:0,bi:0,bb:0,so:2,avg:".218"},{name:"Crawford ss",ab:4,r:1,h:1,bi:1,bb:0,so:1,avg:".238"},
+          {name:"Pollock 2b",ab:3,r:0,h:0,bi:0,bb:1,so:1,avg:".221"},
+        ],totals:{ab:35,r:6,h:9,bi:6,bb:4,so:9}},
+        {team:"Oakland",players:[
+          {name:"Langeliers c",ab:3,r:0,h:1,bi:0,bb:0,so:1,avg:".340"},{name:"Brown 1b",ab:3,r:0,h:1,bi:0,bb:0,so:1,avg:".251"},
+          {name:"Bleday lf",ab:3,r:0,h:0,bi:0,bb:0,so:2,avg:".234"},{name:"Rooker dh",ab:3,r:0,h:0,bi:0,bb:0,so:2,avg:".241"},
+          {name:"JWilson 2b",ab:3,r:0,h:1,bi:0,bb:0,so:0,avg:".305"},{name:"Thompson rf",ab:3,r:0,h:0,bi:0,bb:0,so:2,avg:".218"},
+          {name:"Ruiz ss",ab:2,r:0,h:0,bi:0,bb:1,so:1,avg:".201"},{name:"Gelof 3b",ab:3,r:0,h:0,bi:0,bb:0,so:2,avg:".221"},
+          {name:"Diaz cf",ab:2,r:0,h:0,bi:0,bb:1,so:2,avg:".188"},
+        ],totals:{ab:25,r:0,h:3,bi:0,bb:2,so:13}},
+      ],
+      notes:"CG SHO: Castillo (5-1). LP: Nola (0-4). HR: Arozarena (6). A: 12,044."},
+    { title:"Mets 5, Nationals 3",
+      linescore:{away:{name:"Washington",scores:[0,1,0,2,0,0,0,0,0],r:3,h:7,e:1},home:{name:"NY Mets",scores:[2,0,1,0,0,0,2,0,"x"],r:5,h:10,e:0}},
+      batting:[
+        {team:"Washington",players:[
+          {name:"Garcia 2b",ab:4,r:0,h:1,bi:0,bb:0,so:2,avg:".271"},{name:"Abrams ss",ab:4,r:1,h:2,bi:0,bb:0,so:1,avg:".258"},
+          {name:"Thomas cf",ab:4,r:1,h:1,bi:1,bb:0,so:1,avg:".244"},{name:"Meneses 1b",ab:3,r:0,h:1,bi:1,bb:1,so:1,avg:".261"},
+          {name:"Ruiz c",ab:4,r:0,h:1,bi:0,bb:0,so:1,avg:".248"},{name:"Call lf",ab:4,r:0,h:0,bi:0,bb:0,so:2,avg:".218"},
+          {name:"Hassell rf",ab:3,r:1,h:1,bi:1,bb:1,so:1,avg:".231"},{name:"Rodgers 3b",ab:4,r:0,h:0,bi:0,bb:0,so:2,avg:".221"},
+          {name:"Young dh",ab:3,r:0,h:0,bi:0,bb:1,so:2,avg:".201"},
+        ],totals:{ab:33,r:3,h:7,bi:3,bb:3,so:13}},
+        {team:"NY Mets",players:[
+          {name:"Nimmo cf",ab:4,r:1,h:2,bi:0,bb:1,so:0,avg:".278"},{name:"Marte 2b",ab:5,r:1,h:2,bi:1,bb:0,so:1,avg:".291"},
+          {name:"Alonso 1b",ab:4,r:1,h:2,bi:2,bb:1,so:1,avg:".281"},{name:"Lindor ss",ab:4,r:1,h:1,bi:1,bb:0,so:1,avg:".264"},
+          {name:"Vientos 3b",ab:4,r:0,h:1,bi:0,bb:0,so:2,avg:".248"},{name:"Alvarez c",ab:4,r:0,h:1,bi:0,bb:0,so:1,avg:".261"},
+          {name:"Taylor lf",ab:3,r:0,h:0,bi:1,bb:1,so:2,avg:".238"},{name:"Winker rf",ab:4,r:1,h:1,bi:0,bb:0,so:1,avg:".244"},
+          {name:"Quintana dh",ab:3,r:0,h:0,bi:0,bb:1,so:2,avg:".188"},
+        ],totals:{ab:35,r:5,h:10,bi:5,bb:4,so:11}},
+      ],
+      notes:"HR: Alonso (8), Lindor (5). 2B: Nimmo (6), Marte (9). WP: Scott (1-0). LP: JIrvin (1-4). SV: Robertson (6). A: 28,841."},
+    { title:"Rays 4, Blue Jays 2",
+      linescore:{away:{name:"Tampa Bay",scores:[0,0,1,0,2,0,0,1,0],r:4,h:8,e:0},home:{name:"Toronto",scores:[1,0,0,0,0,0,1,0,0],r:2,h:6,e:1}},
+      batting:[
+        {team:"Tampa Bay",players:[
+          {name:"Arozarena lf",ab:4,r:1,h:2,bi:1,bb:0,so:1,avg:".303"},{name:"Walls ss",ab:3,r:1,h:1,bi:0,bb:1,so:1,avg:".228"},
+          {name:"Aranda dh",ab:4,r:0,h:2,bi:2,bb:0,so:0,avg:".298"},{name:"Ramirez 1b",ab:4,r:0,h:1,bi:0,bb:0,so:1,avg:".241"},
+          {name:"Caminero 3b",ab:4,r:1,h:1,bi:1,bb:0,so:1,avg:".271"},{name:"Lowe 2b",ab:3,r:0,h:0,bi:0,bb:1,so:1,avg:".238"},
+          {name:"Pinto c",ab:4,r:0,h:0,bi:0,bb:0,so:2,avg:".218"},{name:"Siri cf",ab:3,r:1,h:1,bi:0,bb:1,so:1,avg:".244"},
+          {name:"Choi rf",ab:4,r:0,h:0,bi:0,bb:0,so:2,avg:".201"},
+        ],totals:{ab:33,r:4,h:8,bi:4,bb:3,so:10}},
+        {team:"Toronto",players:[
+          {name:"Springer cf",ab:4,r:1,h:1,bi:0,bb:0,so:1,avg:".279"},{name:"Bichette ss",ab:4,r:0,h:1,bi:1,bb:0,so:1,avg:".288"},
+          {name:"Guerrero 1b",ab:3,r:0,h:1,bi:0,bb:1,so:1,avg:".312"},{name:"Varsho lf",ab:4,r:0,h:1,bi:0,bb:0,so:2,avg:".241"},
+          {name:"Kirk c",ab:4,r:0,h:0,bi:0,bb:0,so:2,avg:".281"},{name:"Biggio 2b",ab:3,r:0,h:1,bi:0,bb:1,so:1,avg:".251"},
+          {name:"Davis dh",ab:4,r:0,h:0,bi:1,bb:0,so:2,avg:".244"},{name:"McKinney rf",ab:3,r:1,h:1,bi:0,bb:1,so:1,avg:".218"},
+          {name:"Chapman 3b",ab:3,r:0,h:0,bi:0,bb:0,so:2,avg:".231"},
+        ],totals:{ab:32,r:2,h:6,bi:2,bb:3,so:13}},
+      ],
+      notes:"HR: Caminero (11), Arozarena (6). 2B: Aranda (8). WP: Jax (2-2). LP: Yusei Kikuchi (3-3). SV: Baker (11). A: 24,112."},
+    { title:"Royals 7, White Sox 2",
+      linescore:{away:{name:"Kansas City",scores:[2,0,0,3,0,1,0,1,0],r:7,h:12,e:0},home:{name:"Chi White Sox",scores:[0,0,1,0,0,0,0,1,0],r:2,h:5,e:2}},
+      batting:[
+        {team:"Kansas City",players:[
+          {name:"WittJr ss",ab:5,r:2,h:3,bi:2,bb:0,so:0,avg:".305"},{name:"Perez c",ab:4,r:1,h:2,bi:1,bb:1,so:1,avg:".281"},
+          {name:"Pasquantino 1b",ab:5,r:0,h:2,bi:1,bb:0,so:1,avg:".271"},{name:"Renfroe rf",ab:5,r:1,h:2,bi:1,bb:0,so:1,avg:".258"},
+          {name:"Isbel lf",ab:4,r:1,h:1,bi:0,bb:1,so:1,avg:".241"},{name:"Melendez dh",ab:4,r:1,h:1,bi:1,bb:0,so:2,avg:".248"},
+          {name:"Maier cf",ab:4,r:0,h:1,bi:0,bb:0,so:1,avg:".228"},{name:"Pratto 3b",ab:3,r:1,h:0,bi:0,bb:1,so:2,avg:".201"},
+          {name:"Massey 2b",ab:4,r:0,h:0,bi:1,bb:0,so:2,avg:".218"},
+        ],totals:{ab:38,r:7,h:12,bi:7,bb:3,so:11}},
+        {team:"Chi White Sox",players:[
+          {name:"Murakami dh",ab:4,r:1,h:2,bi:1,bb:0,so:1,avg:".294"},{name:"Robert cf",ab:4,r:0,h:1,bi:0,bb:0,so:2,avg:".248"},
+          {name:"Sheets rf",ab:4,r:0,h:1,bi:0,bb:0,so:2,avg:".258"},{name:"Montgomery 1b",ab:3,r:0,h:0,bi:0,bb:1,so:1,avg:".261"},
+          {name:"Benintendi lf",ab:4,r:0,h:0,bi:0,bb:0,so:2,avg:".238"},{name:"Colas 3b",ab:3,r:0,h:0,bi:0,bb:0,so:2,avg:".201"},
+          {name:"Sosa ss",ab:3,r:0,h:0,bi:0,bb:0,so:1,avg:".211"},{name:"Grandal c",ab:3,r:1,h:1,bi:1,bb:0,so:0,avg:".241"},
+          {name:"Remy 2b",ab:2,r:0,h:0,bi:0,bb:1,so:1,avg:".188"},
+        ],totals:{ab:30,r:2,h:5,bi:2,bb:2,so:12}},
+      ],
+      notes:"HR: WittJr (7), Murakami (15). 2B: Perez (6), Renfroe (8). WP: Lugo (2-2). LP: Schultz (2-3). A: 14,204."},
+    { title:"Twins 6, Astros 4",
+      linescore:{away:{name:"Minnesota",scores:[0,2,0,0,3,0,0,0,1],r:6,h:11,e:0},home:{name:"Houston",scores:[0,0,2,0,0,1,0,1,0],r:4,h:8,e:1}},
+      batting:[
+        {team:"Minnesota",players:[
+          {name:"Correa ss",ab:5,r:1,h:2,bi:1,bb:0,so:1,avg:".271"},{name:"Buxton cf",ab:4,r:2,h:2,bi:2,bb:1,so:1,avg:".281"},
+          {name:"KAT dh",ab:5,r:1,h:2,bi:1,bb:0,so:1,avg:".264"},{name:"Larnach lf",ab:4,r:0,h:1,bi:1,bb:0,so:2,avg:".248"},
+          {name:"Kepler rf",ab:4,r:0,h:1,bi:0,bb:0,so:1,avg:".238"},{name:"Miranda 3b",ab:4,r:1,h:1,bi:0,bb:1,so:1,avg:".261"},
+          {name:"Vaz 1b",ab:4,r:0,h:1,bi:1,bb:0,so:1,avg:".224"},{name:"Jeffers c",ab:4,r:1,h:1,bi:0,bb:0,so:2,avg:".241"},
+          {name:"Arraez 2b",ab:3,r:0,h:0,bi:0,bb:1,so:0,avg:".311"},
+        ],totals:{ab:37,r:6,h:11,bi:6,bb:3,so:10}},
+        {team:"Houston",players:[
+          {name:"Altuve 2b",ab:4,r:1,h:2,bi:0,bb:0,so:0,avg:".288"},{name:"YAlvarez lf",ab:4,r:1,h:2,bi:2,bb:0,so:1,avg:".308"},
+          {name:"Bregman 3b",ab:4,r:0,h:1,bi:1,bb:0,so:1,avg:".271"},{name:"Tucker rf",ab:4,r:1,h:1,bi:0,bb:0,so:1,avg:".258"},
+          {name:"Abreu 1b",ab:3,r:0,h:0,bi:0,bb:1,so:2,avg:".244"},{name:"Walker dh",ab:4,r:0,h:1,bi:1,bb:0,so:1,avg:".261"},
+          {name:"McCormick cf",ab:4,r:0,h:0,bi:0,bb:0,so:2,avg:".228"},{name:"Maldonado c",ab:3,r:1,h:1,bi:0,bb:1,so:1,avg:".198"},
+          {name:"Pena ss",ab:4,r:0,h:0,bi:0,bb:0,so:2,avg:".231"},
+        ],totals:{ab:34,r:4,h:8,bi:4,bb:2,so:11}},
+      ],
+      notes:"HR: Buxton (13), YAlvarez (13). 2B: Correa (7), Altuve (9). WP: Ober (4-2). LP: Blanco (2-4). SV: Duran (9). A: 31,048."},
+    { title:"Brewers 3, Diamondbacks 1",
+      linescore:{away:{name:"Milwaukee",scores:[0,0,1,0,0,2,0,0,0],r:3,h:7,e:0},home:{name:"Arizona",scores:[0,0,0,1,0,0,0,0,0],r:1,h:5,e:1}},
+      batting:[
+        {team:"Milwaukee",players:[
+          {name:"Cain cf",ab:4,r:0,h:1,bi:0,bb:0,so:1,avg:".248"},{name:"Adames ss",ab:4,r:1,h:2,bi:1,bb:0,so:1,avg:".274"},
+          {name:"Yelich lf",ab:3,r:1,h:1,bi:0,bb:1,so:1,avg:".284"},{name:"Tellez 1b",ab:4,r:0,h:1,bi:1,bb:0,so:2,avg:".258"},
+          {name:"Wiemer rf",ab:4,r:0,h:1,bi:0,bb:0,so:2,avg:".241"},{name:"Perkins 3b",ab:3,r:1,h:1,bi:1,bb:1,so:1,avg:".261"},
+          {name:"Turang 2b",ab:4,r:0,h:0,bi:0,bb:0,so:2,avg:".228"},{name:"Murphy c",ab:3,r:0,h:0,bi:0,bb:1,so:1,avg:".238"},
+          {name:"Lauer dh",ab:3,r:0,h:0,bi:0,bb:0,so:2,avg:".148"},
+        ],totals:{ab:32,r:3,h:7,bi:3,bb:3,so:13}},
+        {team:"Arizona",players:[
+          {name:"Carroll cf",ab:4,r:0,h:1,bi:0,bb:0,so:2,avg:".268"},{name:"Thomas rf",ab:4,r:0,h:1,bi:0,bb:0,so:1,avg:".271"},
+          {name:"Walker 1b",ab:4,r:0,h:1,bi:0,bb:0,so:2,avg:".261"},{name:"Moreno c",ab:3,r:1,h:1,bi:1,bb:1,so:0,avg:".281"},
+          {name:"Marte 2b",ab:4,r:0,h:0,bi:0,bb:0,so:2,avg:".244"},{name:"Varsho lf",ab:3,r:0,h:0,bi:0,bb:1,so:1,avg:".238"},
+          {name:"VarGaspar 3b",ab:4,r:0,h:1,bi:0,bb:0,so:2,avg:".248"},{name:"Longoria dh",ab:3,r:0,h:0,bi:0,bb:0,so:1,avg:".221"},
+          {name:"Perdomo ss",ab:3,r:0,h:0,bi:0,bb:0,so:2,avg:".211"},
+        ],totals:{ab:32,r:1,h:5,bi:1,bb:2,so:13}},
+      ],
+      notes:"HR: Perkins (4), Moreno (6). 2B: Yelich (8), Adames (7). WP: Peralta (2-3). LP: Pfaadt (2-3). SV: Devin Williams (8). A: 22,314."},
+    { title:"Rockies 5, Pirates 4",
+      linescore:{away:{name:"Colorado",scores:[0,0,2,0,0,2,0,0,1],r:5,h:9,e:1},home:{name:"Pittsburgh",scores:[2,0,0,1,0,0,0,1,0],r:4,h:8,e:0}},
+      batting:[
+        {team:"Colorado",players:[
+          {name:"Doyle cf",ab:4,r:1,h:2,bi:0,bb:1,so:1,avg:".268"},{name:"Tovar ss",ab:5,r:1,h:2,bi:2,bb:0,so:1,avg:".281"},
+          {name:"Hampson 2b",ab:4,r:1,h:2,bi:0,bb:0,so:0,avg:".274"},{name:"McMahon 3b",ab:5,r:0,h:1,bi:1,bb:0,so:2,avg:".244"},
+          {name:"Grichuk rf",ab:4,r:1,h:1,bi:1,bb:0,so:2,avg:".238"},{name:"Cron 1b",ab:4,r:0,h:0,bi:0,bb:0,so:2,avg:".218"},
+          {name:"Blackmon dh",ab:3,r:1,h:1,bi:1,bb:1,so:1,avg:".254"},{name:"Diaz c",ab:4,r:0,h:0,bi:0,bb:0,so:2,avg:".201"},
+          {name:"Hilliard lf",ab:3,r:0,h:0,bi:0,bb:0,so:1,avg:".211"},
+        ],totals:{ab:36,r:5,h:9,bi:5,bb:2,so:12}},
+        {team:"Pittsburgh",players:[
+          {name:"Hayes 3b",ab:4,r:1,h:2,bi:0,bb:0,so:0,avg:".281"},{name:"Cruz 1b",ab:4,r:1,h:2,bi:1,bb:0,so:1,avg:".271"},
+          {name:"McCutchen dh",ab:4,r:0,h:1,bi:1,bb:0,so:1,avg:".261"},{name:"Suwinski lf",ab:4,r:0,h:1,bi:1,bb:0,so:2,avg:".248"},
+          {name:"Davis cf",ab:4,r:0,h:0,bi:0,bb:0,so:2,avg:".238"},{name:"Delay c",ab:3,r:1,h:1,bi:0,bb:1,so:1,avg:".218"},
+          {name:"Castro 2b",ab:4,r:0,h:0,bi:0,bb:0,so:2,avg:".221"},{name:"Mitchell rf",ab:3,r:1,h:1,bi:1,bb:1,so:0,avg:".258"},
+          {name:"Gonzales ss",ab:4,r:0,h:0,bi:0,bb:0,so:2,avg:".321"},
+        ],totals:{ab:34,r:4,h:8,bi:4,bb:2,so:11}},
+      ],
+      notes:"HR: Tovar (4), Grichuk (6), Mitchell (5). 2B: Hayes (8), Cruz (9). WP: Quintana (2-2). LP: MKeller (4-2). A: 18,441."},
+    { title:"Reds 6, Nationals 3",
+      linescore:{away:{name:"Washington",scores:[0,0,1,0,1,0,0,1,0],r:3,h:6,e:2},home:{name:"Cincinnati",scores:[2,0,0,1,0,2,0,1,"x"],r:6,h:11,e:0}},
+      batting:[
+        {team:"Washington",players:[
+          {name:"Garcia 2b",ab:4,r:0,h:1,bi:0,bb:0,so:1,avg:".271"},{name:"Abrams ss",ab:4,r:1,h:2,bi:0,bb:0,so:1,avg:".258"},
+          {name:"Thomas cf",ab:4,r:1,h:1,bi:1,bb:0,so:2,avg:".244"},{name:"Meneses 1b",ab:3,r:0,h:1,bi:1,bb:1,so:1,avg:".261"},
+          {name:"Ruiz c",ab:4,r:0,h:0,bi:0,bb:0,so:2,avg:".248"},{name:"Call lf",ab:4,r:0,h:0,bi:0,bb:0,so:2,avg:".218"},
+          {name:"Hassell rf",ab:3,r:1,h:1,bi:1,bb:1,so:1,avg:".231"},{name:"Rodgers 3b",ab:4,r:0,h:0,bi:0,bb:0,so:2,avg:".221"},
+          {name:"Young dh",ab:3,r:0,h:0,bi:0,bb:1,so:2,avg:".201"},
+        ],totals:{ab:33,r:3,h:6,bi:3,bb:3,so:14}},
+        {team:"Cincinnati",players:[
+          {name:"India 2b",ab:5,r:1,h:2,bi:1,bb:0,so:1,avg:".278"},{name:"Fairchild rf",ab:4,r:1,h:2,bi:0,bb:1,so:1,avg:".261"},
+          {name:"Friedl cf",ab:4,r:1,h:1,bi:0,bb:1,so:1,avg:".271"},{name:"Benson lf",ab:4,r:1,h:2,bi:2,bb:0,so:1,avg:".284"},
+          {name:"Stephenson c",ab:4,r:0,h:1,bi:1,bb:0,so:1,avg:".271"},{name:"Votto 1b",ab:3,r:1,h:1,bi:0,bb:1,so:1,avg:".258"},
+          {name:"McLain ss",ab:4,r:0,h:1,bi:1,bb:0,so:1,avg:".248"},{name:"Encarnacion-Strand 3b",ab:4,r:1,h:1,bi:1,bb:0,so:2,avg:".261"},
+          {name:"Papierski dh",ab:3,r:0,h:0,bi:0,bb:1,so:2,avg:".188"},
+        ],totals:{ab:35,r:6,h:11,bi:6,bb:4,so:11}},
+      ],
+      notes:"HR: Benson (7), Encarnacion-Strand (6). 2B: India (8), Fairchild (5). WP: Lodolo (1-1). LP: JIrvin (1-5). A: 19,204."},
+  ],
+  standings: [
+    {label:"AL East",teams:[
+      {name:"Tampa Bay",  w:28,l:13,pct:".683",gb:"-",   l10:"9-1",strk:"W3",home:"14-4", away:"14-9"},
+      {name:"NY Yankees", w:27,l:16,pct:".628",gb:"2.0", l10:"5-5",strk:"W1",home:"14-6", away:"13-10"},
+      {name:"Baltimore",  w:19,l:24,pct:".442",gb:"10.0",l10:"4-6",strk:"L1",home:"11-12",away:"8-12"},
+      {name:"Toronto",    w:18,l:24,pct:".429",gb:"10.5",l10:"3-7",strk:"L3",home:"12-11",away:"6-13"},
+      {name:"Boston",     w:17,l:24,pct:".415",gb:"11.0",l10:"5-5",strk:"L2",home:"7-13", away:"10-11"},
+    ]},
+    {label:"AL Central",teams:[
+      {name:"Cleveland",     w:23,l:21,pct:".523",gb:"-",  l10:"5-5",strk:"W2",home:"12-9", away:"11-12"},
+      {name:"Chi White Sox", w:20,l:21,pct:".488",gb:"1.5",l10:"6-4",strk:"W3",home:"10-9", away:"10-12"},
+      {name:"Minnesota",     w:19,l:23,pct:".452",gb:"3.0",l10:"5-5",strk:"W3",home:"11-10",away:"8-13"},
+      {name:"Kansas City",   w:19,l:23,pct:".452",gb:"3.0",l10:"6-4",strk:"L2",home:"13-10",away:"6-13"},
+      {name:"Detroit",       w:19,l:23,pct:".452",gb:"3.0",l10:"3-7",strk:"L1",home:"12-6", away:"7-17"},
+    ]},
+    {label:"AL West",teams:[
+      {name:"Athletics", w:21,l:20,pct:".512",gb:"-",  l10:"4-6",strk:"L2",home:"8-9",  away:"13-11"},
+      {name:"Seattle",   w:21,l:22,pct:".488",gb:"1.0",l10:"5-5",strk:"W2",home:"12-11",away:"9-11"},
+      {name:"Texas",     w:20,l:22,pct:".476",gb:"1.5",l10:"4-6",strk:"W1",home:"10-10",away:"10-12"},
+      {name:"LA Angels", w:16,l:27,pct:".372",gb:"6.0",l10:"4-6",strk:"L2",home:"8-10", away:"8-17"},
+      {name:"Houston",   w:16,l:27,pct:".372",gb:"6.0",l10:"4-6",strk:"L4",home:"9-12", away:"7-15"},
+    ]},
+    {label:"NL East",teams:[
+      {name:"Atlanta",      w:29,l:13,pct:".690",gb:"-",   l10:"7-3",strk:"W3",home:"13-6", away:"16-7"},
+      {name:"Philadelphia", w:20,l:22,pct:".476",gb:"9.0", l10:"7-3",strk:"W3",home:"12-12",away:"8-10"},
+      {name:"Washington",   w:20,l:22,pct:".476",gb:"9.0", l10:"5-5",strk:"W1",home:"6-13", away:"14-9"},
+      {name:"Miami",        w:19,l:23,pct:".452",gb:"10.0",l10:"4-6",strk:"L1",home:"14-12",away:"5-11"},
+      {name:"NY Mets",      w:16,l:25,pct:".390",gb:"12.5",l10:"6-4",strk:"W1",home:"7-12", away:"9-13"},
+    ]},
+    {label:"NL Central",teams:[
+      {name:"Chi Cubs",   w:27,l:15,pct:".643",gb:"-",  l10:"7-3",strk:"L3",home:"18-5", away:"9-10"},
+      {name:"Milwaukee",  w:23,l:16,pct:".590",gb:"2.5",l10:"8-2",strk:"W5",home:"14-8", away:"9-8"},
+      {name:"St. Louis",  w:24,l:17,pct:".585",gb:"2.5",l10:"6-4",strk:"W1",home:"10-10",away:"14-7"},
+      {name:"Pittsburgh", w:23,l:19,pct:".548",gb:"4.0",l10:"7-3",strk:"W1",home:"12-9", away:"11-10"},
+      {name:"Cincinnati", w:22,l:20,pct:".524",gb:"5.0",l10:"2-8",strk:"L1",home:"12-10",away:"10-10"},
+    ]},
+    {label:"NL West",teams:[
+      {name:"San Diego",     w:24,l:17,pct:".585",gb:"-",  l10:"5-5",strk:"L1",home:"13-10",away:"11-7"},
+      {name:"LA Dodgers",    w:24,l:18,pct:".571",gb:"0.5",l10:"4-6",strk:"L4",home:"13-10",away:"11-8"},
+      {name:"Arizona",       w:20,l:21,pct:".488",gb:"4.0",l10:"4-6",strk:"L1",home:"12-9", away:"8-12"},
+      {name:"San Francisco", w:18,l:24,pct:".429",gb:"6.5",l10:"5-5",strk:"W3",home:"10-12",away:"8-12"},
+      {name:"Colorado",      w:16,l:26,pct:".381",gb:"8.5",l10:"2-8",strk:"L3",home:"8-11", away:"8-15"},
+    ]},
+  ],
+  leaders: {
+    left: {label:"American League",cats:[
+      {cat:"Batting Average",cols:["Player","Team","G","AB","H","Avg"],rows:[
+        ["Langeliers","Athletics","37","153","52",".340"],["JoJung","Texas","39","147","47",".320"],
+        ["RGreene","Detroit","42","149","47",".315"],["Simpson","Tampa Bay","40","156","49",".314"],
+        ["Rice","NY Yankees","38","129","40",".310"],["YAlvarez","Houston","43","159","49",".308"],
+        ["WittJr","Kansas City","43","167","51",".305"],["YDiaz","Tampa Bay","39","150","44",".293"],
+      ]},
+      {cat:"Home Runs",cols:["Player","Team","HR"],rows:[
+        ["Judge","NY Yankees","16"],["Murakami","Chi White Sox","15"],["YAlvarez","Houston","13"],
+        ["Buxton","Minnesota","13"],["Rice","NY Yankees","13"],["Langeliers","Athletics","12"],
+        ["Caminero","Tampa Bay","11"],["Trout","LA Angels","11"],
+      ]},
+      {cat:"Runs Batted In",cols:["Player","Team","RBI"],rows:[
+        ["Aranda","Tampa Bay","33"],["Judge","NY Yankees","30"],["YAlvarez","Houston","29"],
+        ["Bellinger","NY Yankees","29"],["Murakami","CWS","29"],["Rice","NY Yankees","29"],
+        ["CMontgomery","CWS","28"],["Soler","LA Angels","28"],["CWalker","Houston","28"],
+      ]},
+      {cat:"Hits",cols:["Player","Team","H"],rows:[
+        ["Langeliers","Athletics","52"],["WittJr","Kansas City","51"],["YAlvarez","Houston","49"],
+        ["Clement","Toronto","49"],["Simpson","Tampa Bay","49"],["Arozarena","Seattle","47"],
+        ["RGreene","Detroit","47"],["JoJung","Texas","47"],["JWilson","Athletics","47"],
+      ]},
+      {cat:"Stolen Bases",cols:["Player","Team","SB"],rows:[
+        ["JoRamirez","Cleveland","16"],["Simpson","Tampa Bay","14"],["Caballero","NY Yankees","13"],
+        ["WittJr","Kansas City","12"],["ChisholmJr","NY Yankees","11"],["Arozarena","Seattle","10"],
+        ["JaDuran","Boston","9"],["Keaschall","Minnesota","9"],
+      ]},
+      {cat:"Pitching — ERA",cols:["Pitcher","Team","IP","ERA"],rows:[
+        ["Messick","Cleveland","58.1","2.30"],["JSoriano","LA Angels","56.2","2.55"],
+        ["Cease","Toronto","62.0","2.58"],["GWilliams","Cleveland","54.1","3.12"],
+        ["Ober","Minnesota","52.0","3.18"],["SGray","Boston","58.2","3.54"],
+      ]},
+      {cat:"Strikeouts",cols:["Pitcher","Team","K"],rows:[
+        ["Cease","Toronto","66"],["GWilliams","Cleveland","66"],["JSoriano","LA Angels","61"],
+        ["Schlittler","NY Yankees","59"],["WWarren","NY Yankees","59"],
+        ["deGrom","Texas","57"],["Weathers","NY Yankees","54"],["Gore","Texas","53"],
+      ]},
+      {cat:"Saves",cols:["Pitcher","Team","SV"],rows:[
+        ["CSmith","Cleveland","12"],["Baker","Tampa Bay","11"],["Erceg","Kansas City","10"],
+        ["Chapman","Boston","8"],["AMunoz","Seattle","8"],["KJansen","Detroit","7"],
+      ]},
+    ]},
+    right: {label:"National League",cats:[
+      {cat:"Batting Average",cols:["Player","Team","G","AB","H","Avg"],rows:[
+        ["Marsh","Philadelphia","38","137","48",".350"],["OLopez","Miami","41","163","55",".337"],
+        ["IVargas","Arizona","34","134","45",".336"],["TJohnston","Colorado","38","122","40",".328"],
+        ["Ohtani","LA Dodgers","46","168","54",".321"],["NGonzales","Pittsburgh","38","140","45",".321"],
+        ["APages","LA Dodgers","42","154","49",".318"],["XEdwards","Miami","42","153","48",".314"],
+      ]},
+      {cat:"Home Runs",cols:["Player","Team","HR"],rows:[
+        ["Ohtani","LA Dodgers","15"],["Harper","Philadelphia","13"],["Acuna","Atlanta","11"],
+        ["Olson","Atlanta","8"],["Alonso","NY Mets","8"],["Longoria","San Francisco","7"],
+        ["Machado","San Diego","7"],["Arenado","St. Louis","7"],
+      ]},
+      {cat:"Runs Batted In",cols:["Player","Team","RBI"],rows:[
+        ["Ohtani","LA Dodgers","42"],["Alonso","NY Mets","27"],["Olson","Atlanta","26"],
+        ["Harper","Philadelphia","25"],["Goldschmidt","St. Louis","24"],["Machado","San Diego","24"],
+        ["Freeman","LA Dodgers","23"],["Swanson","Chi Cubs","22"],
+      ]},
+      {cat:"Hits",cols:["Player","Team","H"],rows:[
+        ["OLopez","Miami","55"],["Marsh","Philadelphia","48"],["Ohtani","LA Dodgers","54"],
+        ["APages","LA Dodgers","49"],["NGonzales","Pittsburgh","45"],["IVargas","Arizona","45"],
+        ["Freeman","LA Dodgers","44"],["Acuna","Atlanta","44"],
+      ]},
+      {cat:"Stolen Bases",cols:["Player","Team","SB"],rows:[
+        ["Acuna","Atlanta","18"],["Betts","LA Dodgers","14"],["Rojas","LA Dodgers","12"],
+        ["Hampson","Colorado","11"],["Newman","Pittsburgh","10"],["Stott","Philadelphia","9"],
+      ]},
+      {cat:"Pitching — ERA",cols:["Pitcher","Team","IP","ERA"],rows:[
+        ["Imanaga","Chi Cubs","61.0","2.28"],["MKeller","Pittsburgh","57.2","2.87"],
+        ["Glasnow","LA Dodgers","56.0","2.88"],["Webb","San Francisco","61.1","3.11"],
+        ["Darvish","San Diego","58.0","3.75"],["Mikolas","St. Louis","54.1","4.44"],
+      ]},
+      {cat:"Strikeouts",cols:["Pitcher","Team","K"],rows:[
+        ["Imanaga","Chi Cubs","52"],["MKeller","Pittsburgh","48"],["Glasnow","LA Dodgers","46"],
+        ["Webb","San Francisco","44"],["Darvish","San Diego","43"],["Pfaadt","Arizona","41"],
+      ]},
+      {cat:"Saves",cols:["Pitcher","Team","SV"],rows:[
+        ["Bednar","Pittsburgh","10"],["Helsley","St. Louis","7"],["Iglesias","Miami","7"],
+        ["Robertson","Chi Cubs","6"],["Knebel","Philadelphia","6"],["Kimbrel","LA Dodgers","5"],
+      ]},
+    ]},
+  },
+};
+
+// ── NBA ────────────────────────────────────────────────────────────────────────
+const nba = {
+  story:{kicker:"NBA Playoffs",headline:"BRUNSON HAS BECOME THE MOST UNGUARDABLE PLAYER IN THESE PLAYOFFS",deck:"No defense has found an answer for New York's point guard through two rounds",byline:"By Andrew Dobrow, Sports Writer",body:"There is a moment in every great playoff run when a player stops being good and starts being inevitable. For Jalen Brunson, that moment arrived in the second quarter of Game 4 against Indiana, and nothing the Pacers threw at him Wednesday changed the equation.\n\nBrunson is averaging 36.4 points through six games against Indiana, shooting 48 percent from the floor and 42 percent from three. He has scored at least 30 in four consecutive games, a feat no Knick has accomplished since Walt Frazier in 1970.\n\n\"You just try to make him work,\" Indiana coach Rick Carlisle said. \"But he makes everything work. That's the problem.\""},
+  schedule:[
+    {time:"8:00 PM ET",away:"Indiana Pacers",home:"New York Knicks",note:"Game 7 — Series tied 3-3"},
+    {time:"10:30 PM ET",away:"Minnesota Timberwolves",home:"Golden State Warriors",note:"Game 6 — MIN leads 3-2"},
+  ],
+  bracket:[
+    {label:"First Round",series:[
+      {teams:[{n:"CLE",wins:4,won:true},{n:"MIA",wins:0}],status:"CLE wins 4-0"},
+      {teams:[{n:"BOS",wins:4,won:true},{n:"ORL",wins:1}],status:"BOS wins 4-1"},
+      {teams:[{n:"NYK",wins:4,won:true},{n:"PHI",wins:2}],status:"NYK wins 4-2"},
+      {teams:[{n:"IND",wins:4,won:true},{n:"MIL",wins:2}],status:"IND wins 4-2"},
+      {teams:[{n:"OKC",wins:4,won:true},{n:"LAC",wins:0}],status:"OKC wins 4-0"},
+      {teams:[{n:"DEN",wins:4,won:true},{n:"LAL",wins:1}],status:"DEN wins 4-1"},
+      {teams:[{n:"MIN",wins:4,won:true},{n:"PHX",wins:1}],status:"MIN wins 4-1"},
+      {teams:[{n:"GSW",wins:4,won:true},{n:"SAC",wins:2}],status:"GSW wins 4-2"},
+    ]},
+    {label:"Conf. Semis",series:[
+      {teams:[{n:"CLE",wins:3},{n:"BOS",wins:3}],status:"Tied 3-3"},
+      {teams:[{n:"NYK",wins:3},{n:"IND",wins:3}],status:"Tied 3-3"},
+      {teams:[{n:"OKC",wins:4,won:true},{n:"DEN",wins:1}],status:"OKC wins 4-1"},
+      {teams:[{n:"MIN",wins:3,won:true},{n:"GSW",wins:2}],status:"MIN leads 3-2"},
+    ]},
+    {label:"Conf. Finals",series:[
+      {teams:[{n:"CLE/BOS",wins:0},{n:"NYK/IND",wins:0}],status:"TBD"},
+      {teams:[{n:"OKC",wins:0},{n:"MIN",wins:0}],status:"TBD"},
+    ]},
+    {label:"NBA Finals",series:[
+      {teams:[{n:"East",wins:0},{n:"West",wins:0}],status:"TBD — June"},
+    ]},
+  ],
+  boxScores:[
+    {title:"Knicks 118, Pacers 112 (OT)",
+     linescore:{away:{name:"Indiana",scores:[28,30,24,18,12],r:112},home:{name:"New York",scores:[22,31,24,23,18],r:118}},
+     batting:[
+       {team:"Indiana",players:[
+         {name:"Siakam sf",min:"42",fg:"7-18",tp:"1-4",ft:"2-2",reb:"9",ast:"4",pts:"17"},
+         {name:"Turner c",min:"38",fg:"5-10",tp:"2-5",ft:"1-2",reb:"8",ast:"2",pts:"13"},
+         {name:"Haliburton pg",min:"44",fg:"5-17",tp:"2-8",ft:"2-2",reb:"4",ast:"9",pts:"14"},
+         {name:"Mathurin sg",min:"36",fg:"8-14",tp:"3-6",ft:"5-6",reb:"5",ast:"1",pts:"24"},
+         {name:"Nembhard g",min:"40",fg:"6-11",tp:"4-7",ft:"0-0",reb:"3",ast:"5",pts:"16"},
+         {name:"Sheppard",min:"26",fg:"5-9",tp:"2-4",ft:"2-2",reb:"2",ast:"3",pts:"14"},
+         {name:"McConnell",min:"28",fg:"4-7",tp:"0-1",ft:"0-0",reb:"3",ast:"6",pts:"8"},
+         {name:"Toppin",min:"11",fg:"2-3",tp:"0-0",ft:"2-2",reb:"3",ast:"0",pts:"6"},
+       ],totals:{fg:"42-89",tp:"14-35",ft:"14-16",reb:"37",ast:"30",pts:"112"}},
+       {team:"New York",players:[
+         {name:"Anunoby sf",min:"44",fg:"7-14",tp:"2-5",ft:"2-2",reb:"6",ast:"2",pts:"18"},
+         {name:"Towns c",min:"40",fg:"8-16",tp:"2-5",ft:"4-5",reb:"11",ast:"3",pts:"22"},
+         {name:"Brunson pg",min:"47",fg:"14-26",tp:"3-8",ft:"13-15",reb:"3",ast:"6",pts:"44"},
+         {name:"Hart sg",min:"38",fg:"3-8",tp:"1-4",ft:"2-2",reb:"7",ast:"4",pts:"9"},
+         {name:"Bridges g",min:"42",fg:"4-12",tp:"2-7",ft:"1-2",reb:"4",ast:"3",pts:"11"},
+         {name:"McBride",min:"20",fg:"2-5",tp:"1-3",ft:"2-2",reb:"1",ast:"2",pts:"7"},
+         {name:"Robinson",min:"14",fg:"1-3",tp:"1-3",ft:"0-0",reb:"2",ast:"0",pts:"3"},
+         {name:"Precious",min:"10",fg:"2-3",tp:"0-0",ft:"0-0",reb:"3",ast:"0",pts:"4"},
+       ],totals:{fg:"41-87",tp:"12-35",ft:"24-28",reb:"37",ast:"20",pts:"118"}},
+     ],
+     notes:"3-pt FG: IND 14-35 (Nembhard 4-7, Mathurin 3-6, Haliburton 2-8); NYK 12-35 (Brunson 3-8, Bridges 2-7). T: 3. A: 19,812."},
+    {title:"Thunder 107, Nuggets 99",
+     linescore:{away:{name:"Oklahoma City",scores:[28,24,30,25],r:107},home:{name:"Denver",scores:[22,26,27,24],r:99}},
+     batting:[
+       {team:"Oklahoma City",players:[
+         {name:"SGA pg",min:"42",fg:"11-22",tp:"4-9",ft:"5-6",reb:"4",ast:"7",pts:"31"},
+         {name:"Holmgren c",min:"36",fg:"7-14",tp:"2-4",ft:"3-4",reb:"9",ast:"2",pts:"19"},
+         {name:"Williams pf",min:"30",fg:"5-10",tp:"1-3",ft:"2-2",reb:"8",ast:"1",pts:"13"},
+         {name:"Dort sg",min:"34",fg:"4-9",tp:"2-5",ft:"1-2",reb:"3",ast:"2",pts:"11"},
+         {name:"Wallace sf",min:"28",fg:"3-7",tp:"1-3",ft:"1-2",reb:"4",ast:"3",pts:"8"},
+         {name:"Giddey",min:"22",fg:"3-6",tp:"0-2",ft:"2-2",reb:"5",ast:"5",pts:"8"},
+         {name:"Caruso",min:"18",fg:"2-4",tp:"1-3",ft:"2-2",reb:"2",ast:"3",pts:"7"},
+         {name:"Gilgeous",min:"10",fg:"2-3",tp:"0-0",ft:"6-6",reb:"0",ast:"0",pts:"10"},
+       ],totals:{fg:"37-75",tp:"11-29",ft:"22-26",reb:"35",ast:"23",pts:"107"}},
+       {team:"Denver",players:[
+         {name:"Jokic c",min:"40",fg:"10-19",tp:"1-3",ft:"6-6",reb:"14",ast:"9",pts:"27"},
+         {name:"Murray pg",min:"42",fg:"8-21",tp:"3-9",ft:"3-4",reb:"4",ast:"8",pts:"22"},
+         {name:"MPJ sf",min:"34",fg:"6-14",tp:"3-7",ft:"1-2",reb:"5",ast:"2",pts:"16"},
+         {name:"Gordon pf",min:"30",fg:"4-9",tp:"1-3",ft:"2-2",reb:"7",ast:"2",pts:"11"},
+         {name:"KCP sg",min:"28",fg:"3-8",tp:"2-5",ft:"0-0",reb:"2",ast:"1",pts:"8"},
+         {name:"Braun",min:"22",fg:"2-5",tp:"1-3",ft:"3-4",reb:"3",ast:"2",pts:"8"},
+         {name:"Strawther",min:"14",fg:"2-4",tp:"1-2",ft:"0-0",reb:"2",ast:"1",pts:"5"},
+         {name:"JWilliams",min:"10",fg:"1-3",tp:"0-1",ft:"0-0",reb:"0",ast:"0",pts:"2"},
+       ],totals:{fg:"36-83",tp:"12-33",ft:"15-18",reb:"37",ast:"25",pts:"99"}},
+     ],
+     notes:"OKC wins series 4-1. SGA 31 pts, 7 ast. Jokic 27-14-9. A: 18,203."},
+    {title:"Wolves 93, Warriors 88",
+     linescore:{away:{name:"Minnesota",scores:[26,21,23,23],r:93},home:{name:"Golden State",scores:[24,18,24,22],r:88}},
+     batting:[
+       {team:"Minnesota",players:[
+         {name:"Edwards sg",min:"40",fg:"10-22",tp:"2-8",ft:"6-8",reb:"6",ast:"4",pts:"28"},
+         {name:"Gobert c",min:"32",fg:"5-8",tp:"0-0",ft:"4-6",reb:"14",ast:"1",pts:"14"},
+         {name:"KAT pf",min:"30",fg:"4-10",tp:"1-4",ft:"4-5",reb:"8",ast:"3",pts:"13"},
+         {name:"McDaniels sf",min:"28",fg:"3-7",tp:"2-4",ft:"3-4",reb:"4",ast:"1",pts:"11"},
+         {name:"Conley pg",min:"34",fg:"3-8",tp:"2-5",ft:"0-0",reb:"3",ast:"7",pts:"8"},
+         {name:"Reid",min:"22",fg:"3-6",tp:"1-3",ft:"2-2",reb:"5",ast:"0",pts:"9"},
+         {name:"Alexander-Walker",min:"14",fg:"2-5",tp:"1-3",ft:"2-2",reb:"1",ast:"2",pts:"7"},
+         {name:"Vanderbilt",min:"10",fg:"1-2",tp:"0-0",ft:"1-2",reb:"4",ast:"0",pts:"3"},
+       ],totals:{fg:"31-68",tp:"9-27",ft:"22-29",reb:"45",ast:"18",pts:"93"}},
+       {team:"Golden State",players:[
+         {name:"Curry pg",min:"40",fg:"8-22",tp:"7-15",ft:"3-4",reb:"4",ast:"7",pts:"26"},
+         {name:"Thompson sg",min:"36",fg:"5-14",tp:"3-9",ft:"2-2",reb:"3",ast:"1",pts:"15"},
+         {name:"Wiggins sf",min:"32",fg:"4-10",tp:"1-4",ft:"4-5",reb:"4",ast:"2",pts:"13"},
+         {name:"Paul pg",min:"28",fg:"3-7",tp:"0-2",ft:"6-7",reb:"3",ast:"6",pts:"12"},
+         {name:"Green pf",min:"28",fg:"2-4",tp:"1-2",ft:"3-4",reb:"7",ast:"4",pts:"8"},
+         {name:"Looney c",min:"24",fg:"3-5",tp:"0-0",ft:"1-2",reb:"9",ast:"2",pts:"7"},
+         {name:"Poole",min:"16",fg:"1-6",tp:"1-3",ft:"0-0",reb:"1",ast:"1",pts:"3"},
+         {name:"Kuminga",min:"12",fg:"2-4",tp:"0-1",ft:"0-0",reb:"2",ast:"0",pts:"4"},
+       ],totals:{fg:"28-72",tp:"13-36",ft:"19-24",reb:"33",ast:"23",pts:"88"}},
+     ],
+     notes:"MIN leads series 3-2. Edwards 28 pts, 6 reb. Curry 26 pts, 7 threes. Gobert 14 pts, 14 reb, 4 blk. A: 18,064."},
+    {title:"Celtics 101, Cavaliers 98",
+     linescore:{away:{name:"Boston",scores:[24,28,22,27],r:101},home:{name:"Cleveland",scores:[26,22,28,22],r:98}},
+     batting:[
+       {team:"Boston",players:[
+         {name:"Tatum sf",min:"44",fg:"11-24",tp:"4-10",ft:"8-9",reb:"11",ast:"4",pts:"34"},
+         {name:"Brown sg",min:"40",fg:"8-18",tp:"2-6",ft:"4-5",reb:"6",ast:"3",pts:"22"},
+         {name:"Holiday pg",min:"36",fg:"4-10",tp:"2-5",ft:"2-2",reb:"5",ast:"6",pts:"12"},
+         {name:"Porzingis c",min:"28",fg:"3-8",tp:"1-3",ft:"2-2",reb:"7",ast:"1",pts:"9"},
+         {name:"White g",min:"32",fg:"3-8",tp:"1-4",ft:"2-2",reb:"3",ast:"4",pts:"9"},
+         {name:"Hauser",min:"20",fg:"2-5",tp:"2-4",ft:"1-2",reb:"2",ast:"1",pts:"7"},
+         {name:"Nesmith",min:"16",fg:"2-4",tp:"1-2",ft:"0-0",reb:"3",ast:"1",pts:"5"},
+         {name:"Kornet",min:"8",fg:"1-2",tp:"1-2",ft:"0-0",reb:"2",ast:"0",pts:"3"},
+       ],totals:{fg:"34-79",tp:"14-36",ft:"19-22",reb:"39",ast:"20",pts:"101"}},
+       {team:"Cleveland",players:[
+         {name:"Mitchell sg",min:"42",fg:"10-22",tp:"3-8",ft:"6-7",reb:"4",ast:"9",pts:"29"},
+         {name:"Garland pg",min:"38",fg:"8-18",tp:"3-7",ft:"3-4",reb:"3",ast:"7",pts:"22"},
+         {name:"Mobley pf",min:"34",fg:"5-11",tp:"0-1",ft:"3-5",reb:"9",ast:"2",pts:"13"},
+         {name:"Allen c",min:"28",fg:"4-8",tp:"0-0",ft:"4-6",reb:"11",ast:"1",pts:"12"},
+         {name:"Strus sg",min:"30",fg:"3-8",tp:"2-5",ft:"3-4",reb:"3",ast:"2",pts:"11"},
+         {name:"Dean Wade",min:"20",fg:"2-5",tp:"1-3",ft:"2-3",reb:"2",ast:"1",pts:"7"},
+         {name:"J.Wade",min:"14",fg:"1-4",tp:"1-2",ft:"1-2",reb:"1",ast:"3",pts:"4"},
+       ],totals:{fg:"33-76",tp:"10-26",ft:"22-31",reb:"33",ast:"25",pts:"98"}},
+     ],
+     notes:"Series tied 3-3. Tatum 34 pts, 11 reb. Mitchell 29 pts, 9 ast. Holiday 5 stl. A: 19,432."},
+  ],
+  standings:[
+    {label:"Eastern Conference — Playoffs",teams:[
+      {name:"Cleveland Cavaliers",   w:64,l:18,pct:".780",gb:"—",note:"vs BOS — Tied 3-3"},
+      {name:"Boston Celtics",        w:61,l:21,pct:".744",gb:"3", note:"vs CLE — Tied 3-3"},
+      {name:"New York Knicks",       w:51,l:31,pct:".622",gb:"13",note:"vs IND — Tied 3-3"},
+      {name:"Indiana Pacers",        w:46,l:36,pct:".561",gb:"18",note:"vs NYK — Tied 3-3"},
+    ]},
+    {label:"Western Conference — Playoffs",teams:[
+      {name:"Oklahoma City Thunder", w:68,l:14,pct:".829",gb:"—",note:"vs DEN — OKC wins 4-1"},
+      {name:"Minnesota Timberwolves",w:53,l:29,pct:".646",gb:"15",note:"vs GSW — MIN leads 3-2"},
+      {name:"Denver Nuggets",        w:57,l:25,pct:".695",gb:"11",note:"Eliminated"},
+      {name:"Golden State Warriors", w:48,l:34,pct:".585",gb:"20",note:"vs MIN — Trail 2-3"},
+    ]},
+  ],
+  leaders:{
+    left:{label:"Eastern Conference",cats:[
+      {cat:"Scoring (Playoffs — PPG)",cols:["Player","Team","G","Pts","PPG"],rows:[
+        ["Brunson","New York","14","510","36.4"],["Tatum","Boston","14","441","31.5"],
+        ["Mitchell","Cleveland","14","407","29.1"],["Haliburton","Indiana","14","378","27.0"],
+        ["Brown","Boston","14","364","26.0"],["Garland","Cleveland","14","336","24.0"],
+      ]},
+      {cat:"Rebounding (Playoffs — RPG)",cols:["Player","Team","G","Reb","RPG"],rows:[
+        ["Towns","New York","14","154","11.0"],["Allen","Cleveland","14","144","10.3"],
+        ["Turner","Indiana","14","138","9.9"],["Porzingis","Boston","12","108","9.0"],
+        ["Holiday","Boston","14","121","8.6"],
+      ]},
+      {cat:"Assists (Playoffs — APG)",cols:["Player","Team","G","Ast","APG"],rows:[
+        ["Haliburton","Indiana","14","123","8.8"],["Brunson","New York","14","98","7.0"],
+        ["Garland","Cleveland","14","96","6.9"],["Holiday","Boston","14","88","6.3"],
+      ]},
+      {cat:"Full Season — Scoring (PPG)",cols:["Player","Team","G","PPG"],rows:[
+        ["Embiid","Philadelphia","39","33.6"],["Brunson","New York","76","28.7"],
+        ["Tatum","Boston","74","27.9"],["Mitchell","Cleveland","73","26.0"],
+        ["Banchero","Orlando","71","24.1"],
+      ]},
+    ]},
+    right:{label:"Western Conference",cats:[
+      {cat:"Scoring (Playoffs — PPG)",cols:["Player","Team","G","Pts","PPG"],rows:[
+        ["SGA","Oklahoma City","14","455","32.5"],["Edwards","Minnesota","13","390","30.0"],
+        ["Jokic","Denver","13","376","28.9"],["Curry","Golden State","13","342","26.3"],
+        ["MPJ","Denver","13","321","24.7"],["Murray","Denver","13","288","22.2"],
+      ]},
+      {cat:"Rebounding (Playoffs — RPG)",cols:["Player","Team","G","Reb","RPG"],rows:[
+        ["Jokic","Denver","13","143","11.0"],["Gobert","Minnesota","13","128","9.8"],
+        ["Holmgren","Oklahoma City","14","128","9.1"],["Green","Golden State","13","109","8.4"],
+      ]},
+      {cat:"Assists (Playoffs — APG)",cols:["Player","Team","G","Ast","APG"],rows:[
+        ["Jokic","Denver","13","110","8.5"],["SGA","Oklahoma City","14","96","6.9"],
+        ["Murray","Denver","13","88","6.8"],["Paul","Golden State","13","82","6.3"],
+      ]},
+      {cat:"Full Season — Scoring (PPG)",cols:["Player","Team","G","PPG"],rows:[
+        ["SGA","Oklahoma City","78","32.5"],["Jokic","Denver","79","29.8"],
+        ["Booker","Phoenix","72","27.1"],["Edwards","Minnesota","77","26.4"],
+        ["Morant","Memphis","58","24.4"],
+      ]},
+    ]},
+  },
+};
+
+// ── NHL ────────────────────────────────────────────────────────────────────────
+const nhl = {
+  story:{kicker:"NHL Playoffs",headline:"REINHART ENDS MARATHON: PANTHERS SURVIVE BRUINS IN DOUBLE OT",deck:"Florida takes 3-2 series lead; Bobrovsky stops 44 shots in a landmark performance",byline:"By Andrew Dobrow, Hockey Writer",body:"Sam Reinhart ended one of the most gripping games of this postseason at 6:42 of the second overtime, burying a rebound off a Dmitry Kulikov point shot to give the Florida Panthers a 4-3 victory over the Boston Bruins at Amerant Bank Arena.\n\nSergei Bobrovsky was the story through 80 minutes, stopping 44 of 47 shots including a penalty shot by David Pastrnak midway through the second period. The Panthers killed four penalties in regulation before Reinhart delivered the winner.\n\n\"Bob made some incredible saves. That's playoff hockey,\" said Boston's Brad Marchand, who had two goals and an assist in a losing effort."},
+  schedule:[
+    {time:"7:30 PM ET",away:"Boston Bruins",home:"Florida Panthers",note:"Game 6 — FLA leads series 3-2"},
+    {time:"9:30 PM ET",away:"Vancouver Canucks",home:"Edmonton Oilers",note:"Game 6 — EDM leads series 4-1"},
+  ],
+  bracket:[
+    {label:"First Round",series:[
+      {teams:[{n:"FLA",wins:4,won:true},{n:"TBL",wins:1}],status:"FLA wins 4-1"},
+      {teams:[{n:"BOS",wins:4,won:true},{n:"TOR",wins:1}],status:"BOS wins 4-1"},
+      {teams:[{n:"CAR",wins:4,won:true},{n:"NJD",wins:2}],status:"CAR wins 4-2"},
+      {teams:[{n:"WSH",wins:4,won:true},{n:"NYR",wins:3}],status:"WSH wins 4-3"},
+      {teams:[{n:"EDM",wins:4,won:true},{n:"CGY",wins:0}],status:"EDM wins 4-0"},
+      {teams:[{n:"VAN",wins:4,won:true},{n:"NSH",wins:1}],status:"VAN wins 4-1"},
+      {teams:[{n:"DAL",wins:4,won:true},{n:"COL",wins:2}],status:"DAL wins 4-2"},
+      {teams:[{n:"WPG",wins:4,won:true},{n:"STL",wins:1}],status:"WPG wins 4-1"},
+    ]},
+    {label:"Second Round",series:[
+      {teams:[{n:"FLA",wins:3,won:true},{n:"BOS",wins:2}],status:"FLA leads 3-2"},
+      {teams:[{n:"CAR",wins:4,won:true},{n:"WSH",wins:2}],status:"CAR wins 4-2"},
+      {teams:[{n:"EDM",wins:4,won:true},{n:"VAN",wins:1}],status:"EDM wins 4-1"},
+      {teams:[{n:"DAL",wins:3,won:true},{n:"WPG",wins:1}],status:"DAL leads 3-1"},
+    ]},
+    {label:"Conf. Finals",series:[
+      {teams:[{n:"FLA/BOS",wins:0},{n:"CAR",wins:0}],status:"TBD"},
+      {teams:[{n:"EDM",wins:0},{n:"DAL",wins:0}],status:"TBD"},
+    ]},
+    {label:"Stanley Cup",series:[
+      {teams:[{n:"East Champ",wins:0},{n:"West Champ",wins:0}],status:"TBD — June"},
+    ]},
+  ],
+  boxScores:[
+    {title:"Panthers 4, Bruins 3 (2OT)",
+     linescore:{away:{name:"Boston",scores:[1,1,1,0,0],r:3},home:{name:"Florida",scores:[1,2,0,0,1],r:4}},
+     batting:[
+       {team:"Boston",players:[
+         {name:"Marchand lw",g:"2",a:"1",pts:"3",pm:"+1",pim:"4",sog:"5"},
+         {name:"Pastrnak rw",g:"0",a:"1",pts:"1",pm:"-1",pim:"0",sog:"7"},
+         {name:"Bergeron c",g:"1",a:"0",pts:"1",pm:"0",pim:"0",sog:"3"},
+         {name:"McAvoy d",g:"0",a:"1",pts:"1",pm:"+1",pim:"2",sog:"4"},
+         {name:"DeBrusk lw",g:"0",a:"1",pts:"1",pm:"0",pim:"0",sog:"3"},
+         {name:"Coyle c",g:"0",a:"0",pts:"0",pm:"-1",pim:"0",sog:"2"},
+         {name:"Haula c",g:"0",a:"0",pts:"0",pm:"0",pim:"6",sog:"1"},
+         {name:"Carlo d",g:"0",a:"0",pts:"0",pm:"0",pim:"2",sog:"2"},
+         {name:"Forbort d",g:"0",a:"0",pts:"0",pm:"-1",pim:"2",sog:"2"},
+       ],totals:{sog:"33",pim:"16"}},
+       {team:"Florida",players:[
+         {name:"Reinhart rw",g:"1",a:"1",pts:"2",pm:"+2",pim:"0",sog:"5"},
+         {name:"Tkachuk lw",g:"1",a:"1",pts:"2",pm:"+1",pim:"10",sog:"6"},
+         {name:"Barkov c",g:"1",a:"0",pts:"1",pm:"+1",pim:"0",sog:"4"},
+         {name:"Verhaeghe rw",g:"1",a:"0",pts:"1",pm:"0",pim:"0",sog:"3"},
+         {name:"Forsling d",g:"0",a:"1",pts:"1",pm:"+2",pim:"2",sog:"3"},
+         {name:"Kulikov d",g:"0",a:"1",pts:"1",pm:"+1",pim:"0",sog:"2"},
+         {name:"Lundell c",g:"0",a:"1",pts:"1",pm:"0",pim:"0",sog:"2"},
+         {name:"Montour d",g:"0",a:"0",pts:"0",pm:"+1",pim:"0",sog:"3"},
+         {name:"Bennett c",g:"0",a:"0",pts:"0",pm:"0",pim:"0",sog:"2"},
+       ],totals:{sog:"47",pim:"12"}},
+     ],
+     notes:"Goalies: BOS: Swayman (L) 43 svs/47 shots. FLA: Bobrovsky (W) 44 svs/47 shots. PP: BOS 0/3, FLA 1/4. A: 19,250."},
+    {title:"Oilers 3, Canucks 2 (OT)",
+     linescore:{away:{name:"Edmonton",scores:[1,0,1,1],r:3},home:{name:"Vancouver",scores:[1,1,0,0],r:2}},
+     batting:[
+       {team:"Edmonton",players:[
+         {name:"McDavid c",g:"1",a:"1",pts:"2",pm:"+2",pim:"2",sog:"7"},
+         {name:"Draisaitl lw",g:"1",a:"2",pts:"3",pm:"+1",pim:"0",sog:"5"},
+         {name:"Hyman lw",g:"1",a:"0",pts:"1",pm:"+1",pim:"0",sog:"4"},
+         {name:"Nurse d",g:"0",a:"1",pts:"1",pm:"+1",pim:"2",sog:"3"},
+         {name:"Bouchard d",g:"0",a:"1",pts:"1",pm:"0",pim:"0",sog:"3"},
+         {name:"Nuge c",g:"0",a:"0",pts:"0",pm:"0",pim:"0",sog:"2"},
+         {name:"Yamamoto rw",g:"0",a:"0",pts:"0",pm:"-1",pim:"0",sog:"2"},
+         {name:"Foegele lw",g:"0",a:"0",pts:"0",pm:"0",pim:"0",sog:"2"},
+       ],totals:{sog:"30",pim:"4"}},
+       {team:"Vancouver",players:[
+         {name:"Pettersson c",g:"1",a:"0",pts:"1",pm:"-1",pim:"0",sog:"6"},
+         {name:"JTMiller lw",g:"0",a:"1",pts:"1",pm:"-1",pim:"2",sog:"4"},
+         {name:"Boeser rw",g:"1",a:"0",pts:"1",pm:"0",pim:"0",sog:"5"},
+         {name:"Q.Hughes d",g:"0",a:"1",pts:"1",pm:"-1",pim:"0",sog:"4"},
+         {name:"Garland rw",g:"0",a:"0",pts:"0",pm:"0",pim:"0",sog:"3"},
+         {name:"Schenn c",g:"0",a:"0",pts:"0",pm:"-1",pim:"4",sog:"2"},
+         {name:"Myers d",g:"0",a:"0",pts:"0",pm:"-1",pim:"0",sog:"2"},
+         {name:"Wolanin d",g:"0",a:"0",pts:"0",pm:"0",pim:"0",sog:"2"},
+       ],totals:{sog:"28",pim:"8"}},
+     ],
+     notes:"EDM wins series 4-1. McDavid OT winner 4:33. Skinner 25 svs. Demko (L) 27 svs. Draisaitl 1G 2A."},
+    {title:"Hurricanes 5, Devils 1",
+     linescore:{away:{name:"Carolina",scores:[2,2,1],r:5},home:{name:"New Jersey",scores:[0,0,1],r:1}},
+     batting:[
+       {team:"Carolina",players:[
+         {name:"Aho c",g:"3",a:"1",pts:"4",pm:"+3",pim:"0",sog:"7"},
+         {name:"Svechnikov lw",g:"1",a:"1",pts:"2",pm:"+2",pim:"0",sog:"5"},
+         {name:"Burns d",g:"1",a:"0",pts:"1",pm:"+1",pim:"0",sog:"4"},
+         {name:"Necas rw",g:"0",a:"1",pts:"1",pm:"+1",pim:"0",sog:"3"},
+         {name:"Slavin d",g:"0",a:"1",pts:"1",pm:"+1",pim:"0",sog:"2"},
+         {name:"Kotkaniemi c",g:"0",a:"1",pts:"1",pm:"+1",pim:"0",sog:"3"},
+         {name:"Fast rw",g:"0",a:"0",pts:"0",pm:"+1",pim:"0",sog:"2"},
+         {name:"Domi c",g:"0",a:"0",pts:"0",pm:"0",pim:"2",sog:"2"},
+       ],totals:{sog:"31",pim:"4"}},
+       {team:"New Jersey",players:[
+         {name:"J.Hughes c",g:"1",a:"0",pts:"1",pm:"-2",pim:"0",sog:"5"},
+         {name:"Bratt lw",g:"0",a:"0",pts:"0",pm:"-2",pim:"2",sog:"3"},
+         {name:"Tatar rw",g:"0",a:"1",pts:"1",pm:"-1",pim:"0",sog:"2"},
+         {name:"Hischier c",g:"0",a:"0",pts:"0",pm:"-2",pim:"0",sog:"3"},
+         {name:"Mercer c",g:"0",a:"0",pts:"0",pm:"-1",pim:"2",sog:"2"},
+         {name:"Haula c",g:"0",a:"0",pts:"0",pm:"-1",pim:"0",sog:"1"},
+         {name:"Smith d",g:"0",a:"0",pts:"0",pm:"-1",pim:"0",sog:"2"},
+       ],totals:{sog:"22",pim:"6"}},
+     ],
+     notes:"Aho hat trick — first in 2025 playoffs. CAR wins series 4-2, advances to Eastern Conference Finals. Andersen 21 svs."},
+    {title:"Capitals 4, Rangers 2",
+     linescore:{away:{name:"NY Rangers",scores:[0,1,1],r:2},home:{name:"Washington",scores:[2,2,0],r:4}},
+     batting:[
+       {team:"NY Rangers",players:[
+         {name:"Panarin lw",g:"1",a:"0",pts:"1",pm:"-1",pim:"0",sog:"5"},
+         {name:"Zibanejad c",g:"0",a:"1",pts:"1",pm:"-1",pim:"0",sog:"4"},
+         {name:"Kreider lw",g:"1",a:"0",pts:"1",pm:"-1",pim:"0",sog:"3"},
+         {name:"A.Fox d",g:"0",a:"1",pts:"1",pm:"-1",pim:"0",sog:"4"},
+         {name:"Trocheck c",g:"0",a:"0",pts:"0",pm:"-2",pim:"2",sog:"2"},
+         {name:"Lafreniere lw",g:"0",a:"0",pts:"0",pm:"-1",pim:"0",sog:"2"},
+         {name:"Goodrow c",g:"0",a:"0",pts:"0",pm:"-1",pim:"4",sog:"1"},
+         {name:"R.Miller d",g:"0",a:"0",pts:"0",pm:"0",pim:"0",sog:"2"},
+       ],totals:{sog:"26",pim:"6"}},
+       {team:"Washington",players:[
+         {name:"Ovechkin lw",g:"2",a:"0",pts:"2",pm:"+2",pim:"2",sog:"6"},
+         {name:"Backstrom c",g:"0",a:"2",pts:"2",pm:"+2",pim:"0",sog:"3"},
+         {name:"Oshie rw",g:"1",a:"0",pts:"1",pm:"+1",pim:"0",sog:"4"},
+         {name:"Carlson d",g:"0",a:"1",pts:"1",pm:"+1",pim:"0",sog:"4"},
+         {name:"Mantha rw",g:"0",a:"1",pts:"1",pm:"+1",pim:"0",sog:"3"},
+         {name:"Wilson rw",g:"1",a:"0",pts:"1",pm:"0",pim:"14",sog:"3"},
+         {name:"Eller c",g:"0",a:"0",pts:"0",pm:"0",pim:"0",sog:"1"},
+         {name:"Orlov d",g:"0",a:"0",pts:"0",pm:"+1",pim:"2",sog:"2"},
+       ],totals:{sog:"28",pim:"18"}},
+     ],
+     notes:"Series tied 3-3. Ovechkin 2G (career playoff goal 88). Shesterkin (L) 24 svs. Lindgren 27 svs. Game 7 Saturday."},
+  ],
+  standings:[
+    {label:"Eastern Conference",teams:[
+      {name:"Florida Panthers",    w:52,l:20,pct:".715",gb:"—", l10:"7-3",strk:"W1",home:"28-9", away:"24-11"},
+      {name:"Boston Bruins",       w:51,l:21,pct:".708",gb:"1", l10:"6-4",strk:"L1",home:"27-10",away:"24-11"},
+      {name:"Carolina Hurricanes", w:49,l:23,pct:".681",gb:"3", l10:"7-3",strk:"W4",home:"27-11",away:"22-12"},
+      {name:"Toronto Maple Leafs", w:46,l:26,pct:".639",gb:"6", l10:"6-4",strk:"W2",home:"25-11",away:"21-15"},
+      {name:"New York Rangers",    w:47,l:25,pct:".653",gb:"5", l10:"5-5",strk:"W1",home:"25-12",away:"22-13"},
+      {name:"Washington Capitals", w:44,l:28,pct:".611",gb:"8", l10:"6-4",strk:"L1",home:"23-13",away:"21-15"},
+      {name:"New Jersey Devils",   w:44,l:28,pct:".611",gb:"8", l10:"4-6",strk:"L4",home:"24-14",away:"20-14"},
+      {name:"Tampa Bay Lightning", w:42,l:30,pct:".583",gb:"10",l10:"5-5",strk:"L2",home:"22-14",away:"20-16"},
+    ]},
+    {label:"Western Conference",teams:[
+      {name:"Edmonton Oilers",     w:54,l:18,pct:".750",gb:"—", l10:"8-2",strk:"W3",home:"29-8", away:"25-10"},
+      {name:"Vancouver Canucks",   w:50,l:22,pct:".694",gb:"4", l10:"6-4",strk:"L1",home:"26-10",away:"24-12"},
+      {name:"Dallas Stars",        w:48,l:24,pct:".667",gb:"6", l10:"5-5",strk:"L1",home:"25-11",away:"23-13"},
+      {name:"Winnipeg Jets",       w:44,l:28,pct:".611",gb:"10",l10:"5-5",strk:"W1",home:"24-12",away:"20-16"},
+      {name:"Colorado Avalanche",  w:45,l:27,pct:".625",gb:"9", l10:"6-4",strk:"W2",home:"24-13",away:"21-14"},
+      {name:"Nashville Predators", w:38,l:34,pct:".528",gb:"16",l10:"4-6",strk:"L3",home:"20-16",away:"18-18"},
+      {name:"Calgary Flames",      w:36,l:36,pct:".500",gb:"18",l10:"4-6",strk:"W1",home:"19-17",away:"17-19"},
+      {name:"St. Louis Blues",     w:33,l:39,pct:".458",gb:"21",l10:"3-7",strk:"L2",home:"18-19",away:"15-20"},
+    ]},
+  ],
+  leaders:{
+    left:{label:"Eastern Conference",cats:[
+      {cat:"Goals — Season",cols:["Player","Team","G"],rows:[
+        ["Ovechkin","Washington","52"],["Tkachuk","Florida","44"],
+        ["Reinhart","Florida","42"],["Aho","Carolina","40"],
+        ["Marchand","Boston","30"],["Matthews","Toronto","39"],
+      ]},
+      {cat:"Points — Season",cols:["Player","Team","G","A","Pts"],rows:[
+        ["Marchand","Boston","30","58","88"],["Tkachuk","Florida","44","43","87"],
+        ["Matthews","Toronto","39","40","79"],["Reinhart","Florida","42","37","79"],
+        ["Aho","Carolina","40","38","78"],
+      ]},
+      {cat:"Goals — Playoffs",cols:["Player","Team","G"],rows:[
+        ["Reinhart","Florida","9"],["Tkachuk","Florida","8"],
+        ["Aho","Carolina","7"],["Marchand","Boston","6"],
+        ["Verhaeghe","Florida","6"],
+      ]},
+      {cat:"Goaltending (GAA)",cols:["Goalie","Team","GP","GAA","SV%"],rows:[
+        ["Bobrovsky","Florida","62","2.31",".921"],
+        ["Swayman","Boston","60","2.44",".918"],
+        ["Andersen","Carolina","58","2.51",".916"],
+        ["Shesterkin","NY Rangers","61","2.55",".914"],
+      ]},
+    ]},
+    right:{label:"Western Conference",cats:[
+      {cat:"Goals — Season",cols:["Player","Team","G"],rows:[
+        ["Draisaitl","Edmonton","48"],["McDavid","Edmonton","38"],
+        ["Kaprizov","Minnesota","39"],["Rantanen","Colorado","36"],
+        ["Scheifele","Winnipeg","32"],["Pavelski","Dallas","31"],
+      ]},
+      {cat:"Points — Season",cols:["Player","Team","G","A","Pts"],rows:[
+        ["McDavid","Edmonton","38","67","105"],["Draisaitl","Edmonton","48","54","102"],
+        ["Rantanen","Colorado","36","58","94"],["Hertl","Vegas","28","56","84"],
+        ["Kaprizov","Minnesota","39","41","80"],
+      ]},
+      {cat:"Goals — Playoffs",cols:["Player","Team","G"],rows:[
+        ["Draisaitl","Edmonton","8"],["McDavid","Edmonton","7"],
+        ["Hyman","Edmonton","5"],["Rantanen","Colorado","5"],
+        ["Pavelski","Dallas","4"],
+      ]},
+      {cat:"Goaltending (GAA)",cols:["Goalie","Team","GP","GAA","SV%"],rows:[
+        ["Hellebuyck","Winnipeg","72","2.29",".923"],
+        ["Demko","Vancouver","59","2.62",".912"],
+        ["Skinner","Edmonton","62","2.71",".912"],
+        ["Oettinger","Dallas","64","2.77",".910"],
+      ]},
+    ]},
+  },
+};
+
+// ── NFL ────────────────────────────────────────────────────────────────────────
+const nfl = {
+  story:{kicker:"NFL Offseason",headline:"RAVENS LOCK UP JACKSON THROUGH 2030 IN RECORD-SETTING DEAL",deck:"Reigning MVP secured with $275 million guaranteed, the most in NFL history",byline:"By Andrew Dobrow, NFL Writer",body:"The Baltimore Ravens agreed Wednesday on a contract extension with quarterback Lamar Jackson that makes him the highest-paid player in NFL history. The deal runs through the 2030 season and includes $275 million in fully guaranteed money.\n\nJackson, 28, is coming off his second MVP season, having thrown for 3,984 yards and 37 touchdowns while rushing for 846 yards in 2024. He led Baltimore to a 13-4 regular season record before falling to Kansas City in the AFC Championship.\n\n\"Lamar is the heartbeat of this franchise,\" Ravens GM Eric DeCosta said. \"This extension reflects our belief that he is not only the best player in football, but the right leader for everything we want to build.\""},
+  schedule:[
+    {time:"May 22",away:"Deadline",home:"Fifth-Year Options",note:"Teams must exercise options for 2022 first-round picks"},
+    {time:"June 1",away:"Cutdown",home:"Roster Moves",note:"Post-June 1 designations take effect; cap savings accelerate"},
+    {time:"July 24",away:"Training",home:"Camps Open",note:"Veteran reporting date for all 32 teams"},
+  ],
+  boxScores:[
+    {title:"Super Bowl LIX: Eagles 38, 49ers 10",
+     linescore:{away:{name:"Philadelphia",scores:[10,14,7,7],r:38},home:{name:"San Francisco",scores:[3,0,7,0],r:10}},
+     batting:[],
+     nflStats:[
+       {label:"Passing",cols:["Player","Team","Att","Cmp","Yds","TD","Int","Rating"],rows:[
+         ["Hurts","PHI","31","22","221","2","0","112.3"],
+         ["Purdy","SF","27","16","142","0","2","48.1"],
+       ]},
+       {label:"Rushing",cols:["Player","Team","Car","Yds","Avg","TD"],rows:[
+         ["Hurts","PHI","12","72","6.0","1"],["Henry","PHI","22","88","4.0","1"],
+         ["McCaffrey","SF","8","31","3.9","0"],["Mitchell","SF","6","18","3.0","0"],
+       ]},
+       {label:"Receiving",cols:["Player","Team","Rec","Tgt","Yds","Avg","TD"],rows:[
+         ["AJBrown","PHI","6","8","82","13.7","1"],["DeVonta Smith","PHI","5","7","62","12.4","1"],
+         ["Goedert","PHI","4","5","44","11.0","0"],["Aiyuk","SF","6","9","58","9.7","0"],
+         ["Kittle","SF","4","6","44","11.0","0"],["McCaffrey","SF","4","5","38","9.5","0"],
+       ]},
+     ],
+     notes:"MVP: Jalen Hurts. Eagles win first championship since Super Bowl LII. Halftime: PHI 24, SF 3."},
+    {title:"AFC Championship: Ravens 27, Chiefs 24",
+     linescore:{away:{name:"Baltimore",scores:[3,10,7,7],r:27},home:{name:"Kansas City",scores:[7,10,0,7],r:24}},
+     batting:[],
+     nflStats:[
+       {label:"Passing",cols:["Player","Team","Att","Cmp","Yds","TD","Int","Rating"],rows:[
+         ["Jackson","BAL","38","28","312","2","1","94.1"],
+         ["Mahomes","KC","47","29","281","1","2","69.8"],
+       ]},
+       {label:"Rushing",cols:["Player","Team","Car","Yds","Avg","TD"],rows:[
+         ["Henry","BAL","21","98","4.7","1"],["Jackson","BAL","7","44","6.3","0"],
+         ["Pacheco","KC","18","74","4.1","1"],
+       ]},
+       {label:"Receiving",cols:["Player","Team","Rec","Tgt","Yds","Avg","TD"],rows:[
+         ["Andrews","BAL","8","11","92","11.5","1"],["Agholor","BAL","5","7","68","13.6","0"],
+         ["Kelce","KC","11","16","108","9.8","1"],["Rice","KC","4","7","44","11.0","0"],
+       ]},
+     ],
+     notes:"Tucker 47-yd FG with 0:08 remaining. Henry 98 yds, 1 TD. Jackson 28/38, 2 TD."},
+    {title:"NFC Championship: Eagles 21, Lions 17",
+     linescore:{away:{name:"Philadelphia",scores:[7,7,0,7],r:21},home:{name:"Detroit",scores:[7,3,7,0],r:17}},
+     batting:[],
+     nflStats:[
+       {label:"Passing",cols:["Player","Team","Att","Cmp","Yds","TD","Int","Rating"],rows:[
+         ["Hurts","PHI","34","21","198","1","0","88.1"],
+         ["Goff","DET","42","29","307","2","1","84.3"],
+       ]},
+       {label:"Rushing",cols:["Player","Team","Car","Yds","Avg","TD"],rows:[
+         ["Hurts","PHI","14","88","6.3","1"],["Henry","PHI","17","79","4.6","0"],
+         ["Montgomery","DET","12","44","3.7","0"],["Gibbs","DET","8","38","4.8","0"],
+       ]},
+       {label:"Receiving",cols:["Player","Team","Rec","Tgt","Yds","Avg","TD"],rows:[
+         ["Smith","PHI","9","12","102","11.3","1"],["Brown","PHI","5","8","62","12.4","0"],
+         ["LaPorta","DET","5","7","67","13.4","1"],["Gibbs","DET","6","7","58","9.7","0"],
+         ["Nacua","DET","5","8","55","11.0","1"],
+       ]},
+     ],
+     notes:"Hurts 18-yd scramble for go-ahead TD with 2:12 left. Goff 29/42, 307 yds, 2 TD."},
+    {title:"AFC Divisional: Ravens 34, Bills 31",
+     linescore:{away:{name:"Baltimore",scores:[7,14,3,10],r:34},home:{name:"Buffalo",scores:[7,7,10,7],r:31}},
+     batting:[],
+     nflStats:[
+       {label:"Passing",cols:["Player","Team","Att","Cmp","Yds","TD","Int","Rating"],rows:[
+         ["Jackson","BAL","44","31","275","3","1","91.4"],
+         ["Allen","BUF","54","38","349","2","1","82.3"],
+       ]},
+       {label:"Rushing",cols:["Player","Team","Car","Yds","Avg","TD"],rows:[
+         ["Henry","BAL","24","131","5.5","2"],["Jackson","BAL","8","52","6.5","0"],
+         ["Cook","BUF","14","62","4.4","1"],
+       ]},
+       {label:"Receiving",cols:["Player","Team","Rec","Tgt","Yds","Avg","TD"],rows:[
+         ["Andrews","BAL","9","12","98","10.9","1"],["Flowers","BAL","6","9","74","12.3","1"],
+         ["Diggs","BUF","9","13","121","13.4","1"],["Knox","BUF","5","7","62","12.4","1"],
+       ]},
+     ],
+     notes:"Henry 24 car, 131 yds, 2 TD. Tucker 52-yd FG in 4th. Jackson 31/44, 3 TD."},
+  ],
+  standings:[
+    {label:"AFC East",teams:[
+      {name:"Buffalo Bills",       w:13,l:4, pct:".765",gb:"—",note:"Lost AFC Divisional"},
+      {name:"Miami Dolphins",      w:9, l:8, pct:".529",gb:"4", note:"Missed playoffs"},
+      {name:"NY Jets",             w:7, l:10,pct:".412",gb:"6", note:"Missed playoffs"},
+      {name:"New England Patriots",w:4, l:13,pct:".235",gb:"9", note:"Missed playoffs"},
+    ]},
+    {label:"AFC North",teams:[
+      {name:"Baltimore Ravens",    w:13,l:4, pct:".765",gb:"—",note:"Lost AFC Championship"},
+      {name:"Pittsburgh Steelers", w:10,l:7, pct:".588",gb:"3", note:"Lost Wild Card"},
+      {name:"Cleveland Browns",    w:8, l:9, pct:".471",gb:"5", note:"Missed playoffs"},
+      {name:"Cincinnati Bengals",  w:7, l:10,pct:".412",gb:"6", note:"Missed playoffs"},
+    ]},
+    {label:"AFC South",teams:[
+      {name:"Houston Texans",      w:10,l:7, pct:".588",gb:"—",note:"Lost AFC Divisional"},
+      {name:"Indianapolis Colts",  w:9, l:8, pct:".529",gb:"1", note:"Missed playoffs"},
+      {name:"Jacksonville Jaguars",w:4, l:13,pct:".235",gb:"6", note:"Missed playoffs"},
+      {name:"Tennessee Titans",    w:3, l:14,pct:".176",gb:"7", note:"Missed playoffs"},
+    ]},
+    {label:"AFC West",teams:[
+      {name:"Kansas City Chiefs",  w:15,l:2, pct:".882",gb:"—",note:"Lost AFC Championship"},
+      {name:"Denver Broncos",      w:10,l:7, pct:".588",gb:"5", note:"Lost Wild Card"},
+      {name:"LA Chargers",         w:8, l:9, pct:".471",gb:"7", note:"Missed playoffs"},
+      {name:"Las Vegas Raiders",   w:4, l:13,pct:".235",gb:"11",note:"Missed playoffs"},
+    ]},
+    {label:"NFC East",teams:[
+      {name:"Philadelphia Eagles",   w:14,l:3, pct:".824",gb:"—",note:"Super Bowl Champions"},
+      {name:"Dallas Cowboys",        w:10,l:7, pct:".588",gb:"4", note:"Missed playoffs"},
+      {name:"Washington Commanders", w:9, l:8, pct:".529",gb:"5", note:"Lost Wild Card"},
+      {name:"NY Giants",             w:4, l:13,pct:".235",gb:"10",note:"Missed playoffs"},
+    ]},
+    {label:"NFC North",teams:[
+      {name:"Detroit Lions",         w:15,l:2, pct:".882",gb:"—",note:"Lost NFC Championship"},
+      {name:"Minnesota Vikings",     w:14,l:3, pct:".824",gb:"1", note:"Lost NFC Divisional"},
+      {name:"Green Bay Packers",     w:11,l:6, pct:".647",gb:"4", note:"Lost NFC Divisional"},
+      {name:"Chicago Bears",         w:6, l:11,pct:".353",gb:"9", note:"Missed playoffs"},
+    ]},
+    {label:"NFC South",teams:[
+      {name:"Tampa Bay Buccaneers",  w:10,l:7, pct:".588",gb:"—",note:"Lost Wild Card"},
+      {name:"Atlanta Falcons",       w:9, l:8, pct:".529",gb:"1", note:"Missed playoffs"},
+      {name:"New Orleans Saints",    w:5, l:12,pct:".294",gb:"5", note:"Missed playoffs"},
+      {name:"Carolina Panthers",     w:3, l:14,pct:".176",gb:"7", note:"Missed playoffs"},
+    ]},
+    {label:"NFC West",teams:[
+      {name:"San Francisco 49ers",   w:13,l:4, pct:".765",gb:"—",note:"Lost Super Bowl"},
+      {name:"LA Rams",               w:10,l:7, pct:".588",gb:"3", note:"Lost NFC Divisional"},
+      {name:"Seattle Seahawks",      w:10,l:7, pct:".588",gb:"3", note:"Lost Wild Card"},
+      {name:"Arizona Cardinals",     w:8, l:9, pct:".471",gb:"5", note:"Missed playoffs"},
+    ]},
+  ],
+  leaders:{
+    left:{label:"AFC",cats:[
+      {cat:"Passing Yards",cols:["Player","Team","Att","Cmp","Yds","TD","Int"],rows:[
+        ["Allen, Buffalo","BUF","581","387","4,306","34","12"],
+        ["Jackson, Baltimore","BAL","468","302","3,984","37","11"],
+        ["Mahomes, Kansas City","KC","542","348","4,021","32","11"],
+        ["Herbert, LA Chargers","LAC","511","328","3,876","28","10"],
+      ]},
+      {cat:"Rushing Yards",cols:["Player","Team","Car","Yds","Avg","TD"],rows:[
+        ["Henry, Baltimore","BAL","287","1,459","5.1","17"],
+        ["Chubb, Cleveland","CLE","231","1,101","4.8","9"],
+        ["Pacheco, Kansas City","KC","218","921","4.2","8"],
+        ["Jackson, Baltimore","BAL","152","846","5.6","5"],
+        ["Cook, Buffalo","BUF","201","822","4.1","7"],
+      ]},
+      {cat:"Receiving Yards",cols:["Player","Team","Rec","Yds","Avg","TD"],rows:[
+        ["Hill, Miami","MIA","108","1,799","16.7","13"],
+        ["Diggs, Buffalo","BUF","96","1,291","13.4","9"],
+        ["Andrews, Baltimore","BAL","91","1,187","13.0","8"],
+        ["Kelce, Kansas City","KC","88","1,011","11.5","7"],
+      ]},
+      {cat:"Sacks",cols:["Player","Team","Sacks"],rows:[
+        ["Watt, Pittsburgh","PIT","13.0"],["Burns, Buffalo","BUF","11.5"],
+        ["Bosa, New England","NE","11.0"],["Jefferson, Houston","HOU","10.5"],
+      ]},
+    ]},
+    right:{label:"NFC",cats:[
+      {cat:"Passing Yards",cols:["Player","Team","Att","Cmp","Yds","TD","Int"],rows:[
+        ["Hurts, Philadelphia","PHI","512","341","4,021","36","7"],
+        ["Goff, Detroit","DET","563","376","4,010","30","9"],
+        ["Stafford, LA Rams","LAR","541","357","3,992","28","11"],
+        ["Cousins, Atlanta","ATL","498","318","3,814","26","10"],
+      ]},
+      {cat:"Rushing Yards",cols:["Player","Team","Car","Yds","Avg","TD"],rows:[
+        ["McCaffrey, San Francisco","SF","298","1,411","4.7","14"],
+        ["Gibbs, Detroit","DET","241","1,088","4.5","11"],
+        ["Hurts, Philadelphia","PHI","171","922","5.4","8"],
+        ["Jones, Green Bay","GB","261","1,044","4.0","9"],
+      ]},
+      {cat:"Receiving Yards",cols:["Player","Team","Rec","Yds","Avg","TD"],rows:[
+        ["Smith, Philadelphia","PHI","97","1,401","14.4","11"],
+        ["Jefferson, Minnesota","MIN","91","1,377","15.1","10"],
+        ["Nacua, LA Rams","LAR","105","1,314","12.5","8"],
+        ["Brown, Philadelphia","PHI","88","1,278","14.5","9"],
+      ]},
+      {cat:"Sacks",cols:["Player","Team","Sacks"],rows:[
+        ["Bosa, San Francisco","SF","17.5"],["Parsons, Dallas","DAL","14.0"],
+        ["Hutchinson, Detroit","DET","13.5"],["Sweat, Philadelphia","PHI","10.5"],
+      ]},
+    ]},
+  },
+};
+
+// ── FRONT PAGE DATA ────────────────────────────────────────────────────────────
+const front = {
+  headline:{kicker:"NBA Playoffs",headline:"KNICKS STUN PACERS IN OVERTIME CLASSIC TO EVEN SERIES",deck:"Brunson pours in 44 points as New York forces Game 7 with a gritty Garden performance",byline:"By Andrew Dobrow, Sports Writer",body:"Jalen Brunson delivered one of the most commanding playoff performances in Madison Square Garden history Wednesday night, scoring 44 points, including six in overtime, as the New York Knicks defeated the Indiana Pacers 118-112 to even their second-round series at three games apiece.\n\nKarl-Anthony Towns added 22 points and 11 rebounds in a rugged interior battle, and OG Anunoby locked down Tyrese Haliburton, held to just 14 points on 5-of-17 shooting, for stretches of the second half.\n\nGame 7 is Saturday in Indianapolis, where the Pacers have won nine straight playoff games. \"We know what we have to do,\" Brunson said. \"This group doesn't flinch.\""},
+  secondary:[
+    {kicker:"Baseball",headline:"OHTANI GOES DEEP TWICE AS DODGERS ROUT GIANTS, 9-2",deck:"Los Angeles slugger moves within two of the NL lead with 15 home runs",byline:"By Andrew Dobrow",body:"Shohei Ohtani launched a pair of home runs at Dodger Stadium, connecting for a two-run shot in the third and a solo blast in the sixth as Los Angeles beat San Francisco 9-2.\n\nOhtani, batting .321, is now tied with Philadelphia's Bryce Harper for second in the National League home run race with 15."},
+    {kicker:"NHL Playoffs",headline:"PANTHERS EDGE BRUINS IN DOUBLE OVERTIME THRILLER",deck:"Reinhart's winner at 6:42 of the second extra period sends Florida to Game 6",byline:"By Andrew Dobrow",body:"Sam Reinhart ended one of the most gripping games of this postseason, burying a rebound at 6:42 of the second overtime to give Florida a 4-3 win over Boston at Amerant Bank Arena.\n\nSergei Bobrovsky stopped 44 of 47 shots for the Panthers, including a penalty shot from David Pastrnak."},
+    {kicker:"NFL Offseason",headline:"RAVENS LOCK UP JACKSON FOR RECORD $275 MILLION",deck:"Reigning two-time MVP signed through 2030 in the richest deal in league history",byline:"By Andrew Dobrow",body:"The Baltimore Ravens agreed Wednesday on an extension with quarterback Lamar Jackson making him the highest-paid player in NFL history, with $275 million fully guaranteed through the 2030 season.\n\nJackson is coming off his second consecutive MVP campaign, leading Baltimore to a 13-4 record."},
+  ],
+  column:{tag:"From the Press Box",headline:"STOP BLAMING THE REFS: YOUR TEAM JUST ISN'T GOOD ENOUGH",byline:"By Andrew Dobrow",body:"Every spring, as the playoffs narrow the field and the losses sting sharper, a familiar ritual begins: the officiating becomes the story. Social media floods with freeze-frames. Coaches bite their lips at the podium. Fans who watched their team get outrebounded by twelve somehow locate a missed call in the third quarter as the true cause of defeat.\n\nHere is what the tape actually shows: the teams still standing in May are there because they execute better, defend harder, and adjust faster. Bad calls happen in every series, to every team. The difference between champions and complainers is what you do on the next possession."},
+  scores:{
+    nba:[
+      {away:"Indiana",as:112,home:"New York",hs:118,note:"OT — NYK leads 3-3"},
+      {away:"Oklahoma City",as:107,home:"Denver",hs:99,note:"OKC wins 4-1"},
+      {away:"Minnesota",as:93,home:"Golden State",hs:88,note:"MIN leads 3-2"},
+      {away:"Boston",as:101,home:"Cleveland",hs:98,note:"Series tied 3-3"},
+    ],
+    mlb:[
+      {away:"LA Angels",as:2,home:"Cleveland",hs:3,note:"Final"},
+      {away:"NY Yankees",as:6,home:"Boston",hs:4,note:"Final"},
+      {away:"LA Dodgers",as:9,home:"San Francisco",hs:2,note:"Final"},
+      {away:"Atlanta",as:7,home:"Philadelphia",hs:3,note:"Final"},
+      {away:"Chicago",as:4,home:"St. Louis",hs:4,note:"F/11 — Suspended"},
+      {away:"Cleveland",as:2,home:"Detroit",hs:1,note:"Final"},
+      {away:"Seattle",as:6,home:"Oakland",hs:0,note:"Final"},
+      {away:"Toronto",as:8,home:"Baltimore",hs:3,note:"Final"},
+    ],
+    nhl:[
+      {away:"Boston",as:3,home:"Florida",hs:4,note:"2OT — FLA leads 3-2"},
+      {away:"Edmonton",as:3,home:"Vancouver",hs:2,note:"OT — EDM wins 4-1"},
+      {away:"Carolina",as:5,home:"New Jersey",hs:1,note:"CAR wins 4-2"},
+      {away:"NY Rangers",as:2,home:"Washington",hs:4,note:"Series tied 3-3"},
+    ],
+  }
+};
+
+// ── SECTIONS ──────────────────────────────────────────────────────────────────
+const SECTIONS = [
+  {id:"front",label:"Front Page"},
+  {id:"mlb",  label:"Baseball"},
+  {id:"nba",  label:"Basketball"},
+  {id:"nhl",  label:"Hockey"},
+  {id:"nfl",  label:"Football"},
+];
+const META = {date:"Thursday, May 14, 2026", edition:"Vol. CXLVIII · No. 134", weather:"Fair, 76°F"};
+
+// ── FRONT PAGE ─────────────────────────────────────────────────────────────────
+
+// ═══════════════════════════════════════════
+// HELPERS
+// ═══════════════════════════════════════════
+function paras(text) {
+  if (!text) return '';
+  return text.split(/\n\n+/).filter(Boolean).map(p => `<p>${p.trim()}</p>`).join('');
+}
+function secHead(label) {
+  return `<div class="sp-sec-head"><span class="sp-sec-head-red">◆</span>${label}</div>`;
+}
+function kicker(t) { return t ? `<span class="sp-kicker">${t}</span>` : ''; }
+function story(s, hLevel, bodyClass) {
+  if (!s) return '';
+  return `${kicker(s.kicker)}
+    <h${hLevel} class="sp-hl-head" style="margin-top:4px">${s.headline||''}</h${hLevel}>
+    ${s.deck   ? `<p class="sp-hl-deck">${s.deck}</p>`    : ''}
+    ${s.byline ? `<p class="sp-byline">${s.byline}</p>` : ''}
+    <div class="sp-body ${bodyClass||''}">${paras(s.body||''||s.story?.body||'')}</div>`;
+}
+
+// ── SCORES ───────────────────────────────────────────────────────────────────
+function scoreGame(g) {
+  return `<div style="padding:2px 0;border-bottom:1px solid #ddd;font-size:.65rem;font-family:'Libre Baskerville', serif">
+    <div style="display:flex;justify-content:space-between;line-height:1.55"><span style="flex:1">${g.away||g.away_team||''}</span><span style="font-weight:700;min-width:18px;text-align:right">${g.away_score||g.as||0}</span></div>
+    <div style="display:flex;justify-content:space-between;line-height:1.55"><span style="flex:1">${g.home||g.home_team||''}</span><span style="font-weight:700;min-width:18px;text-align:right">${g.home_score||g.hs||0}</span></div>
+    <div style="font-size:.48rem;color:#666;font-style:italic;text-align:right">${g.status||g.note||'Final'}</div>
+  </div>`;
+}
+
+function renderSidebar(scores) {
+  let html = `<div class="sp-score-col-head">Yesterday's Scores</div>`;
+  const sports = ['nba','mlb','nhl'];
+  sports.forEach(key => {
+    const games = (scores[key]||[]).filter(g=>(g.away||g.away_team)&&(g.home||g.home_team));
+    if (!games.length) return;
+    const lbl = {nba:'NBA',mlb:'Baseball',nhl:'Hockey'}[key];
+    html += `<div style="font-size:.48rem;font-weight:700;text-transform:uppercase;letter-spacing:1.8px;color:#8B0000;margin:7px 0 2px;border-bottom:1px solid #bbb;padding-bottom:1px">${lbl}</div>`;
+    games.filter(g=>(g.away||g.away_team)&&(g.home||g.home_team)).forEach(g => { html += scoreGame(g); });
+  });
+  return html;
+}
+
+// ── SCHEDULE ────────────────────────────────────────────────────────────────
+function renderSchedule(games, label) {
+  if (!games || !games.length) return '';
+  const GS = 'padding:6px 8px;border-bottom:1px dotted #ccc;border-right:1px dotted #ccc';
+  let html = `<div class="schedule-head">${label||"Today's Games"}</div><div style="display:grid;grid-template-columns:repeat(auto-fill,minmax(210px,1fr));border-top:1px solid #ccc">`;
+  games.forEach(g => {
+    html += `<div style="${GS}">
+      <div class="sched-time">${g.time||''}</div>
+      <div class="sched-matchup">${g.away||''} at ${g.home||''}</div>
+      ${(g.asp||g.hsp)?`<div class="sched-pitchers">${g.asp||''} vs. ${g.hsp||''}</div>`:''}
+      ${g.note?`<div class="sched-note">${g.note}</div>`:''}
+    </div>`;
+  });
+  html += '</div>';
+  return html;
+}
+
+function renderLinescore(ls, sport) {
+  const isBB = sport==='mlb', isHK = sport==='nhl';
+  const scores = ls.away.scores;
+  const cols = isBB ? scores.map((_,i)=>i+1)
+    : isHK ? ['1','2','3','OT','SO'].slice(0,scores.length)
+    : ['Q1','Q2','Q3','Q4','OT'].slice(0,scores.length);
+
+  const TH = 'background:#111;color:#fff;font-size:.5rem;font-weight:700;text-transform:uppercase;text-align:center;padding:2px 4px;white-space:nowrap;min-width:18px';
+  const THL = 'background:#111;color:#fff;font-size:.5rem;font-weight:700;text-transform:uppercase;text-align:left;padding:2px 6px;min-width:120px';
+  const TD = 'text-align:center;font-size:.62rem;padding:2px 4px;border-bottom:1px solid #e0e0e0;font-family:"Libre Baskerville",serif;white-space:nowrap';
+  const TDL = 'text-align:left;font-size:.62rem;font-weight:700;padding:2px 6px;border-bottom:1px solid #e0e0e0;font-family:"Libre Baskerville",serif;white-space:nowrap';
+  const TDTOT = 'text-align:center;font-size:.62rem;font-weight:700;padding:2px 4px;border-bottom:1px solid #e0e0e0;background:#e0e0e0;font-family:"Libre Baskerville",serif;white-space:nowrap';
+  const SEP = 'text-align:center;font-size:.6rem;color:#999;padding:0 3px;border-bottom:1px solid #e0e0e0';
+
+  const rows = [ls.away, ls.home].map(side => {
+    const scoreCells = (side.scores||[]).map(s=>`<td style="${TD}">${s}</td>`).join('');
+    const totals = isBB
+      ? `<td style="${SEP}">—</td><td style="${TDTOT}">${side.r}</td><td style="${TDTOT}">${side.h}</td><td style="${TDTOT}">${side.e}</td>`
+      : `<td style="${SEP}">—</td><td style="${TDTOT}">${side.r}</td>`;
+    return `<tr><td style="${TDL}">${side.name}</td>${scoreCells}${totals}</tr>`;
+  });
+
+  const rhe = isBB
+    ? `<th style="${TH}">R</th><th style="${TH}">H</th><th style="${TH}">E</th>`
+    : `<th style="${TH}">T</th>`;
+
+  return `<div style="overflow-x:auto;margin-bottom:6px"><table style="border-collapse:collapse;width:100%">
+    <thead><tr>
+      <th style="${THL}">Team</th>
+      ${cols.map(c=>`<th style="${TH}">${c}</th>`).join('')}
+      <th style="padding:0 3px;background:#111"></th>
+      ${rhe}
+    </tr></thead>
+    <tbody>${rows.join('')}</tbody>
+  </table></div>`;
+}
+
+
+function renderBatting(batting, sport) {
+  if (!batting || !batting.some(t=>t.players&&t.players.length)) return '';
+  const isBB=sport==='mlb', isHK=sport==='nhl';
+  const cols = isBB?['AB','R','H','BI','BB','SO','Avg']:isHK?['G','A','Pts','+/-','PIM','SOG']:['Min','FG','3P','FT','Reb','Ast','Pts'];
+  let html = '<div style="overflow-x:auto"><table class="btbl">';
+  batting.forEach(tm => {
+    html += `<thead>
+      <tr class="team-hdr"><td colspan="${cols.length+1}">${tm.team}</td></tr>
+      <tr><th>Player</th>${cols.map(c=>`<th>${c}</th>`).join('')}</tr>
+    </thead><tbody>`;
+    tm.players.forEach(p => {
+      const vals = isBB?[p.ab,p.r,p.h,p.bi,p.bb,p.so,p.avg]:isHK?[p.g,p.a,p.pts,p.pm,p.pim,p.sog]:[p.min,p.fg,p.tp,p.ft,p.reb,p.ast,p.pts];
+      html += `<tr><td>${p.name}</td>${vals.map(v=>`<td>${v}</td>`).join('')}</tr>`;
+    });
+    if (tm.totals) {
+      const tvals = isBB?[tm.totals.ab,tm.totals.r,tm.totals.h,tm.totals.bi,tm.totals.bb,tm.totals.so,'']:isHK?['','','','',tm.totals.pim,tm.totals.sog]:Object.values(tm.totals);
+      html += `<tr class="totals-row"><td>Totals</td>${tvals.map(v=>`<td>${v}</td>`).join('')}</tr>`;
+    }
+    html += '</tbody>';
+  });
+  html += '</table></div>';
+  return html;
+}
+
+function renderBoxScores(boxScores, sport, label) {
+  if (!boxScores || !boxScores.length) return '';
+  let html = `${secHead(label||'Yesterday\'s Box Scores')}
+    <p style="font-size:.62rem;font-style:italic;color:#666;margin-bottom:8px">Click any game to expand full box score.</p>`;
+  boxScores.forEach((game, idx) => {
+    const id = `bs-${sport}-${idx}`;
+    const hasBatting = game.batting && game.batting.some(t=>t.players&&t.players.length);
+    const hasNFL = sport==='nfl' && game.nflStats;
+    const canExpand = hasBatting || hasNFL;
+    html += `<div class="bs-game">
+      <div class="bs-game-title" style="font-size:.85rem" ${canExpand?`onclick="toggleBS('${id}')" style="cursor:pointer"`:''}>
+        ${game.title}
+        ${canExpand?`<span id="${id}-toggle" style="font-size:.64rem;color:#8B0000;font-weight:400;float:right">▼ Full Box Score</span>`:''}
+      </div>
+      ${renderLinescore(game.linescore, sport)}
+      <div id="${id}" style="display:none">
+        ${hasBatting ? renderBatting(game.batting, sport) : ''}
+        ${hasNFL ? renderNFLStats(game.nflStats) : ''}
+      </div>
+      ${game.notes ? `<p class="bs-notes">${game.notes}</p>` : ''}
+    </div>`;
+  });
+  return html;
+}
+
+function renderPitching(pitching) {
+  if (!pitching || !pitching.some(t=>t.pitchers&&t.pitchers.length)) return '';
+  const TH = 'text-align:right;font-weight:700;border-bottom:1px solid #111;border-top:1px solid #111;padding:1px 3px;font-size:.49rem;text-transform:uppercase;background:#e0e0e0';
+  const TD = 'padding:0 3px;border-bottom:1px solid #ebebeb;text-align:right;font-size:.58rem;font-family:"Libre Baskerville",serif';
+  let html = '<table style="border-collapse:collapse;width:100%;margin-top:4px">';
+  pitching.forEach(tm => {
+    if (!tm.pitchers||!tm.pitchers.length) return;
+    html += `<thead>
+      <tr><td colspan="9" style="font-weight:700;font-size:.58rem;text-transform:uppercase;letter-spacing:1px;background:#ddd;padding:2px 3px;text-align:left">${tm.team}</td></tr>
+      <tr><th style="${TH};text-align:left">Pitcher</th><th style="${TH}">IP</th><th style="${TH}">H</th><th style="${TH}">R</th><th style="${TH}">ER</th><th style="${TH}">BB</th><th style="${TH}">SO</th><th style="${TH}">NP</th><th style="${TH}">ERA</th></tr>
+    </thead><tbody>`;
+    tm.pitchers.forEach(p => {
+      html += `<tr>
+        <td style="${TD};text-align:left">${p.name||''}</td>
+        <td style="${TD}">${p.ip||''}</td><td style="${TD}">${p.h||0}</td>
+        <td style="${TD}">${p.r||0}</td><td style="${TD}">${p.er||0}</td>
+        <td style="${TD}">${p.bb||0}</td><td style="${TD}">${p.so||0}</td>
+        <td style="${TD}">${p.np||0}</td><td style="${TD}">${p.era||'—'}</td>
+      </tr>`;
+    });
+    html += '</tbody>';
+  });
+  html += '</table>';
+  return html;
+}
+
+function toggleBS(id) {
+  const el = document.getElementById(id);
+  const tog = document.getElementById(id+'-toggle');
+  if (el.style.display==='none') { el.style.display='block'; tog.textContent='▲ Collapse'; }
+  else { el.style.display='none'; tog.textContent='▼ Full Box Score'; }
+}
+
+function renderNFLStats(nflStats) {
+  if (!nflStats) return '';
+  return nflStats.map(sec => `
+    <div class="nfl-stat-lbl">${sec.label}</div>
+    <table class="nfltbl"><thead><tr>${sec.cols.map(c=>`<th>${c}</th>`).join('')}</tr></thead>
+    <tbody>${sec.rows.map(row=>`<tr>${row.map(cell=>`<td>${cell}</td>`).join('')}</tr>`).join('')}</tbody></table>
+  `).join('');
+}
+
+// ── STANDINGS ────────────────────────────────────────────────────────────────
+function renderStandings(divisions, hasSplit) {
+  if (!divisions||!divisions.length||!Array.isArray(divisions)) return '';
+  const TH = 'text-align:right;font-weight:700;font-size:.52rem;text-transform:uppercase;border-top:1px solid #111;border-bottom:2px solid #111;padding:2px 4px;background:#e0e0e0;white-space:nowrap';
+  const TD = 'padding:2px 4px;border-bottom:1px solid #e0e0e0;text-align:right;white-space:nowrap;font-size:.61rem;font-family:"Libre Baskerville",serif';
+
+  function renderDiv(div) {
+    if (!div || !div.teams || !div.teams.length) return '';
+    const hasNote = div.teams[0] && div.teams[0].note;
+    return `<div style="margin-bottom:14px;break-inside:avoid">
+      <div style="font-size:.54rem;font-weight:700;text-transform:uppercase;letter-spacing:2px;margin-bottom:4px;padding-bottom:2px;border-bottom:1px solid #aaa;color:#8B0000">${div.label||''}</div>
+      <div style="overflow-x:auto;-webkit-overflow-scrolling:touch">
+        <table style="min-width:${hasSplit?'420px':'240px'};width:100%;border-collapse:collapse;table-layout:auto">
+          <thead><tr>
+            <th style="${TH};text-align:left;min-width:140px;width:35%">Team</th>
+            <th style="${TH}">W</th><th style="${TH}">L</th><th style="${TH}">Pct</th><th style="${TH}">GB</th>
+            ${hasSplit?`<th style="${TH}" class="std-hide-mobile">L10</th><th style="${TH}" class="std-hide-mobile">Str</th><th style="${TH}" class="std-hide-mobile">Home</th><th style="${TH}" class="std-hide-mobile">Away</th>`:''}
+            ${hasNote?`<th style="${TH};text-align:left">Note</th>`:''}
+          </tr></thead>
+          <tbody>
+            ${div.teams.map((t,i)=>`<tr>
+              <td style="${TD};text-align:left;font-weight:${i===0?'700':'400'};min-width:130px">${t.name||''}</td>
+              <td style="${TD};font-weight:${i===0?'700':'400'}">${t.w||''}</td>
+              <td style="${TD};font-weight:${i===0?'700':'400'}">${t.l||''}</td>
+              <td style="${TD};font-weight:${i===0?'700':'400'}">${t.pct||''}</td>
+              <td style="${TD};font-weight:${i===0?'700':'400'}">${t.gb||''}</td>
+              ${hasSplit?`<td style="${TD}" class="std-hide-mobile">${t.l10||''}</td><td style="${TD}" class="std-hide-mobile">${t.strk||''}</td><td style="${TD}" class="std-hide-mobile">${t.home||''}</td><td style="${TD}" class="std-hide-mobile">${t.away||''}</td>`:''}
+              ${t.note?`<td style="${TD};text-align:left;font-size:.52rem;color:#555;font-style:italic">${t.note}</td>`:''}
+            </tr>`).join('')}
+          </tbody>
+        </table>
+      </div>
+    </div>`;
+  }
+
+  // For MLB (6 divisions): split AL (first 3) and NL (last 3) into explicit columns
+  if (divisions.length === 6) {
+    const left  = divisions.slice(0,3);
+    const right = divisions.slice(3,6);
+    return `<div class="standings-two-col">
+      <div>${left.map(renderDiv).join('')}</div>
+      <div>${right.map(renderDiv).join('')}</div>
+    </div>`;
+  }
+
+  // For other sports (2 divisions): same two-column split
+  if (divisions.length === 2) {
+    return `<div class="standings-two-col">
+      <div>${renderDiv(divisions[0])}</div>
+      <div>${renderDiv(divisions[1])}</div>
+    </div>`;
+  }
+
+  // Default: single column
+  return `<div>${divisions.map(renderDiv).join('')}</div>`;
+}
+
+
+function renderLeaders(leaders) {
+  if (!leaders) return '';
+  const { left, right } = leaders;
+  if (!left || !right) return '';
+  function buildCol(side) {
+    if (!side || !side.cats) return '';
+    let html = '<div>';
+    html += '<div style="font-family:Playfair Display,serif;font-size:.78rem;font-weight:900;text-transform:uppercase;text-align:center;border-top:2px solid #111;border-bottom:2px solid #111;padding:3px 0;margin-bottom:8px;letter-spacing:1px">' + (side.label||'') + '</div>';
+    (side.cats||[]).forEach(cat => {
+      const cols = cat.cols||[];
+      const rows = (cat.rows||[]).slice(0,8);
+      const n = cols.length;
+      const restPct = n > 1 ? Math.floor(55/(n-1)) : 55;
+      html += '<div style="margin-bottom:12px">';
+      html += '<div style="font-size:.54rem;font-weight:700;text-transform:uppercase;letter-spacing:1.5px;border-bottom:1px solid #999;padding-bottom:2px;margin-bottom:3px">' + (cat.cat||'') + '</div>';
+      html += '<table style="width:100%;border-collapse:collapse;table-layout:fixed">';
+      // Header
+      html += '<thead><tr>';
+      cols.forEach((c,i) => {
+        const w = i===0 ? '45%' : restPct+'%';
+        const align = i===0 ? 'left' : 'right';
+        html += '<th style="font-weight:700;font-size:.5rem;text-transform:uppercase;border-top:2px solid #111;border-bottom:1px solid #111;padding:3px 4px;background:#e8e8e8;white-space:nowrap;width:'+w+';text-align:'+align+'">' + c + '</th>';
+      });
+      html += '</tr></thead>';
+      // Rows
+      html += '<tbody>';
+      rows.forEach(row => {
+        html += '<tr>';
+        (row||[]).forEach((cell,k) => {
+          const align = k===0 ? 'left' : 'right';
+          html += '<td style="padding:2px 4px;border-bottom:1px solid #eee;font-size:.6rem;font-family:Libre Baskerville,serif;white-space:nowrap;text-align:'+align+'">' + cell + '</td>';
+        });
+        html += '</tr>';
+      });
+      html += '</tbody></table></div>';
+    });
+    html += '</div>';
+    return html;
+  }
+  return '<div class="leaders-split">' + buildCol(left) + buildCol(right) + '</div>';
+}
+
+
+
+// ── BRACKET ──────────────────────────────────────────────────────────────────
+function renderBracket(rounds) {
+  if (!rounds||!rounds.length) return '';
+  return `<div class="bracket-wrap">${rounds.map(r=>`
+    <div class="brk-round">
+      <div class="brk-round-lbl">${r.label}</div>
+      ${r.series.map(s=>`<div class="brk-series">
+        ${s.teams.map(t=>`<div class="brk-team${t.won?' won':''}">${t.n}<span>${t.wins}</span></div>`).join('')}
+        <div class="brk-status">${s.status}</div>
+      </div>`).join('')}
+    </div>`).join('')}</div>`;
+}
+
+// ═══════════════════════════════════════════
+// BUILD PAGES
+// ═══════════════════════════════════════════
+
+
+
+
+function renderEditorsNote() {
+  return `<div class="editors-note">
+    <span class="editors-note-tag">From the Editor</span>
+    <p class="editors-note-head">This site is built by a lifelong sports fan who misses the ritual of reading the morning sports section.</p>
+    <div class="editors-note-body">
+      <p>No autoplay videos. No clickbait. No gambling spam.</p>
+      <p>Just scores, stories, standings, and the joy of sports.</p>
+      <p>If you'd like to help keep the presses running:</p>
+    </div>
+    <a class="editors-note-link" href="https://buymeacoffee.com/thesportspage" target="_blank" rel="noopener">Support The Sports Page</a>
+  </div>`;
+}
+
+function buildFront(overrides) {
+  // Use overrides from data.json if available, else use static front data
+  const hl  = (overrides && overrides.headline)  || front.headline;
+  const sec = (overrides && overrides.secondary) || front.secondary;
+  const col = (overrides && overrides.column)    || front.column;
+  const sc  = (overrides && overrides.scores)    || front.scores;
+
+  document.getElementById('front').innerHTML = `
+    <div class="sp-front-grid" style="align-items:start" style="align-items:start">
+      <div style="padding-right:18px">
+        ${story(hl, 1, 'sp-hl-body')}
+      </div>
+      <div class="sp-score-sidebar">
+        ${renderSidebar(sc)}
+      </div>
+    </div>
+    ${renderEditorsNote()}
+    <hr class="sp-rule-thin"/>
+    <div class="sp-sec-grid">
+      ${sec.map(s=>`<div class="sp-sec-story">
+        ${kicker(s.kicker)}
+        <h3 class="sp-sec-head" style="margin-top:4px">${s.headline||''}</h3>
+        ${s.deck?`<p class="sp-sec-s-deck">${s.deck}</p>`:''}
+        ${s.byline?`<p class="sp-sec-s-byline">${s.byline}</p>`:''}
+        <div class="sp-sec-s-body">${paras(s.body||'')}  </div>
+      </div>`).join('')}
+    </div>
+    <div class="sp-opinion">
+      <div class="sp-opinion-label">
+        <span class="sp-op-tag">${col.tag||'Press Box'}</span>
+        <span class="sp-op-title">Opinion</span>
+      </div>
+      <div>
+        <h2 class="sp-op-head">${col.headline||''}</h2>
+        ${col.byline?`<p class="sp-op-byline">${col.byline}</p>`:''}
+        <div class="sp-op-body">${paras(col.body||'')}  </div>
+      </div>
+    </div>`;
+}
+
+function buildSport(id, overrides) {
+  const d = {mlb,nba,nhl,nfl}[id];
+  const storyData   = (overrides && overrides.story)     || d.story;
+  const schedData   = (overrides && overrides.schedule)  || d.schedule;
+  const scoresData  = (overrides && overrides.scores)    || d.scores;
+  const stdsData    = (overrides && overrides.standings) || d.standings;
+  const boxData     = (overrides && overrides.boxScores) || d.boxScores || [];
+  const leadersData = (overrides && overrides.leaders)   || d.leaders;
+  const hasSplit   = id==='mlb'||id==='nhl';
+  const hasBracket = id==='nba'||id==='nhl';
+  const isNFL      = id==='nfl';
+  const stdsCount  = (stdsData||[]).length;
+
+  document.getElementById(id).innerHTML = `
+    <div style="padding-bottom:14px;border-bottom:2px solid #111;margin-bottom:14px">
+      ${story(storyData, 1, 'sp-hl-body')}
+    </div>
+    ${renderEditorsNote()}
+    ${(schedData&&schedData.filter(g=>g.away&&g.home).length) ? `<div style="margin-bottom:14px">
+      ${renderSchedule(schedData.filter(g=>g.away&&g.home), isNFL?'Offseason Calendar':'Today\'s Schedule')}
+    </div>` : ''}
+    ${hasBracket ? secHead('Playoff Bracket')+renderBracket(d.bracket) : ''}
+    ${secHead(isNFL?'Postseason Results':'Yesterday\'s Box Scores')}
+    <div style="display:grid;grid-template-columns:repeat(auto-fill,minmax(320px,1fr));gap:0 20px;align-items:start">
+    ${boxData.map((game,idx)=>{
+      const bid = `bs-${id}-${idx}`;
+      const hasBatting = game.batting&&game.batting.some(t=>t.players&&t.players.length);
+      const hasNFL2 = id==='nfl'&&game.nflStats;
+      const canExpand = hasBatting||hasNFL2;
+      return `<div class="bs-game">
+        <div class="bs-game-title" style="font-size:.85rem" >
+          <span>${game.title}</span>
+          
+        </div>
+        ${renderLinescore(game.linescore,id)}
+        <div id="${bid}" style="display:block">
+          ${hasBatting?renderBatting(game.batting,id):''}
+          ${id==='mlb'&&game.pitching&&game.pitching.some(t=>t.pitchers&&t.pitchers.length)?renderPitching(game.pitching):''}
+          ${hasNFL2?renderNFLStats(game.nflStats):''}
+        </div>
+        ${game.notes?(()=>{
+  // Handle both double-space and ". " separators
+  const raw = game.notes;
+  // Split on double-space, or ". " followed by an uppercase word and colon
+  let parts = raw.split('  ').filter(Boolean);
+  if (parts.length <= 1) {
+    // Try splitting on period-space before a stat label
+    parts = raw.split(/\.\s+(?=[A-Z]{1,4}:)/).filter(Boolean);
+  }
+  if (parts.length <= 1) parts = [raw];
+  const formatted = parts.map(part => {
+    part = part.replace(/\.\s*$/, '').trim();
+    const colon = part.indexOf(':');
+    if (colon === -1) return part;
+    const lbl = part.slice(0, colon).trim();
+    const val = part.slice(colon + 1).trim();
+    return '<b>' + lbl + ':</b> ' + val;
+  }).filter(Boolean).join(' &nbsp;&nbsp; ');
+  return '<p class="bs-notes">' + formatted + '</p>';
+})():''}
+      </div>`;
+    }).join('')}
+    </div>
+    ${secHead(isNFL?'Final Standings':id==='nba'?'Playoff Standings':'Standings')}
+    ${renderStandings(stdsData||[],hasSplit)}
+    ${leadersData ? secHead('League Leaders')+renderLeaders(leadersData) : ''}`;
+}
+
+function renderScores(games, label) {
+  if (!games||!games.length) return '';
+  let html = `<div class="sp-col-head">${label}</div>`;
+  games.forEach(g => { html += scoreGame(g); });
+  return html;
+}
+
+// ═══════════════════════════════════════════
+// NAV
+// ═══════════════════════════════════════════
+function buildNav() {
+  const nav = document.getElementById('main-nav');
+  SECTIONS.forEach(s => {
+    const btn = document.createElement('button');
+    btn.className = 'sp-nav-btn' + (s.id==='front'?' active':'');
+    btn.setAttribute('data-id', s.id);
+    btn.textContent = s.label;
+    
+    
+    btn.onclick = () => {
+      document.querySelectorAll('.page').forEach(p=>p.classList.remove('active'));
+      document.querySelectorAll('.sp-nav-btn').forEach(b=>{b.classList.remove('active');b.style.background='';b.style.color='';});
+      document.getElementById(s.id).classList.add('active');
+      btn.classList.add('active');
+      try { localStorage.setItem('sp-tab', s.id); } catch(e) {}
+    };
+    nav.appendChild(btn);
+  });
+  // Archive link (static — links to separate page)
+  const arc = document.createElement('a');
+  arc.href = 'archive.html';
+  arc.className = 'sp-nav-btn';
+  arc.textContent = 'Archive';
+  nav.appendChild(arc);
+}
+
+// ═══════════════════════════════════════════
+// INIT
+// ═══════════════════════════════════════════
+async function init() {
+  // Always build with static data first
+  buildNav();
+  document.getElementById('dl-edition').textContent = META.edition;
+  document.getElementById('dl-date').textContent    = META.date;
+  
+  buildFront(null);
+  SECTIONS.filter(s=>s.id!=='front').forEach(s => buildSport(s.id, null));
+
+  // Show the paper immediately
+  document.getElementById('loading').style.display = 'none';
+  document.getElementById('paper').style.display   = 'block';
+
+  // Restore last active tab
+  try {
+    const saved = localStorage.getItem('sp-tab');
+    if (saved && document.getElementById(saved)) {
+      document.querySelectorAll('.page').forEach(p=>p.classList.remove('active'));
+      document.querySelectorAll('.sp-nav-btn').forEach(b=>b.classList.remove('active'));
+      document.getElementById(saved).classList.add('active');
+      document.querySelector(`.sp-nav-btn[data-id="${saved}"]`)?.classList.add('active');
+    }
+  } catch(e) {}
+
+  // Then try to overlay live data from pipeline
+  try {
+    const res = await fetch('data.json?t=' + Date.now());
+    if (!res.ok) throw new Error('data.json not found');
+    const text = await res.text();
+    if (!text || text.trim()[0] !== '{') throw new Error('data.json is not JSON');
+    const d = JSON.parse(text);
+    // Update dateline if available
+    if (d.date)    document.getElementById('dl-date').textContent    = d.date;
+    if (d.edition) document.getElementById('dl-edition').textContent = d.edition;
+    // Update stories and scores from pipeline
+    if (d.front)   buildFront(d.front);
+    if (d.mlb)     buildSport('mlb', d.mlb);
+    if (d.nba)     buildSport('nba', d.nba);
+    if (d.nhl)     buildSport('nhl', d.nhl);
+    if (d.nfl)     buildSport('nfl', d.nfl);
+  } catch(e) {
+    // No data.json — static data already showing, no problem
+  }
+}
+
+document.addEventListener('DOMContentLoaded', init);
+</script>
+</body>
+</html>
