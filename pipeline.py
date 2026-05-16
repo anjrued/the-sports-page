@@ -725,19 +725,39 @@ def build_nba(client, today_str, yesterday_str, nba_season):
         yesterday_games = espn_nba_scores(yesterday_str)
     if board:
         try:
-            sb = board.score_board.get_data_frame()
-            for _, g in sb.iterrows():
+            # Try multiple V3 attribute names
+            df = None
+            for attr in ['score_board','games','game_header','scoreboard']:
+                if hasattr(board, attr):
+                    try:
+                        df = getattr(board, attr).get_data_frame()
+                        break
+                    except Exception:
+                        continue
+            if df is None:
+                raise ValueError("No valid ScoreboardV3 attribute found")
+            # Handle both V2-style and V3-style column names
+            for _, g in df.iterrows():
+                game_id = str(g.get("gameId", g.get("GAME_ID","")))
+                away = g.get("awayTeamCity","") + " " + g.get("awayTeamName","")
+                if not away.strip():
+                    away = g.get("VISITOR_TEAM_CITY","") + " " + g.get("VISITOR_TEAM_NICKNAME","")
+                home = g.get("homeTeamCity","") + " " + g.get("homeTeamName","")
+                if not home.strip():
+                    home = g.get("HOME_TEAM_CITY","") + " " + g.get("HOME_TEAM_NICKNAME","")
+                away_score = int(g.get("awayTeamScore", g.get("PTS_AWAY",0)) or 0)
+                home_score = int(g.get("homeTeamScore", g.get("PTS_HOME",0)) or 0)
+                status = g.get("gameStatusText", g.get("GAME_STATUS_TEXT","Final"))
                 yesterday_games.append({
-                    "game_id": str(g.get("gameId","")),
-                    "away": g.get("awayTeamCity","") + " " + g.get("awayTeamName",""),
-                    "home": g.get("homeTeamCity","") + " " + g.get("homeTeamName",""),
-                    "away_score": int(g.get("awayTeamScore",0) or 0),
-                    "home_score": int(g.get("homeTeamScore",0) or 0),
-                    "status": g.get("gameStatusText","Final"),
+                    "game_id": game_id,
+                    "away": away.strip(),
+                    "home": home.strip(),
+                    "away_score": away_score,
+                    "home_score": home_score,
+                    "status": status,
                 })
         except Exception as e:
             print(f"    NBA scoreboard parse error: {e}")
-            # Fallback: try ESPN for NBA scores
             yesterday_games = espn_nba_scores(yesterday_str)
 
     # Today's schedule
@@ -747,11 +767,20 @@ def build_nba(client, today_str, yesterday_str, nba_season):
         schedule = espn_nba_schedule(today_str)
     if today_board:
         try:
-            sb = today_board.score_board.get_data_frame()
-            for _, g in sb.iterrows():
+            df = None
+            for attr in ['score_board','games','game_header','scoreboard']:
+                if hasattr(today_board, attr):
+                    try:
+                        df = getattr(today_board, attr).get_data_frame()
+                        break
+                    except Exception:
+                        continue
+            if df is None:
+                raise ValueError("No valid ScoreboardV3 attribute")
+            for _, g in df.iterrows():
                 away = g.get("awayTeamCity","") + " " + g.get("awayTeamName","")
                 home = g.get("homeTeamCity","") + " " + g.get("homeTeamName","")
-                time_et = g.get("gameStatusText","TBD")
+                time_et = g.get("gameStatusText", g.get("GAME_STATUS_TEXT","TBD"))
                 entry = {"time": time_et, "away": away.strip(), "home": home.strip()}
                 series = g.get("seriesText","") or g.get("seriesStatusText","")
                 if series:
@@ -759,7 +788,6 @@ def build_nba(client, today_str, yesterday_str, nba_season):
                 schedule.append(entry)
         except Exception as e:
             print(f"    NBA today schedule parse error: {e}")
-            # Fallback to ESPN
             schedule = espn_nba_schedule(today_str)
 
     # Box scores
@@ -1495,30 +1523,25 @@ Return JSON:
     this_day = {"items": []}
     try:
         import re as _re
-        otd_raw = api_get("https://on-this-day.com/cgi-bin/otd/sportsotd.pl")
-        if otd_raw:
-            print("    This Day: on-this-day.com returned unexpected format")
-        else:
-            # api_get won't parse HTML — use requests directly
-            import requests as _req
-            resp = _req.get("https://on-this-day.com/cgi-bin/otd/sportsotd.pl",
-                           headers={"User-Agent": "TheSportsPage/1.0"}, timeout=15)
-            if resp.status_code == 200:
-                # Parse bold year entries: **1941** - text
-                matches = _re.findall(r'\*\*(\d{4})\*\*\s*[-\u2013]\s*([^*]+?)(?=\s*\*\*|\s*Sports Quote|$)', resp.text, _re.DOTALL)
-                events = [{"year": m[0], "text": m[1].strip().replace("  "," ")} for m in matches if len(m[1].strip()) > 20]
-                print(f"    This Day: {len(events)} events found on on-this-day.com")
-                if events:
-                    events_json = json.dumps(events)
-                    result = claude_call(client, f"""Pick the 3 most interesting and impactful sports history facts from this list and rewrite each in one punchy newspaper sentence. Keep the year exactly as given.
+        # Fetch HTML directly — api_get expects JSON
+        import requests as _req
+        resp = _req.get("https://on-this-day.com/cgi-bin/otd/sportsotd.pl",
+                       headers={"User-Agent": "Mozilla/5.0 (compatible; TheSportsPage/1.0)"}, timeout=15)
+        if resp.status_code == 200:
+            matches = _re.findall(r'\*\*(\d{4})\*\*\s*[-–]\s*([^*]+?)(?=\s*\*\*|\s*Sports Quote|$)', resp.text, _re.DOTALL)
+            events = [{"year": m[0], "text": m[1].strip().replace("  "," ")} for m in matches if len(m[1].strip()) > 20]
+            print(f"    This Day: {len(events)} events found on on-this-day.com")
+            if events:
+                events_json = json.dumps(events)
+                result = claude_call(client, f"""Pick the 3 most interesting and impactful sports history facts from this list and rewrite each in one punchy newspaper sentence. Keep the year exactly as given.
 Events: {events_json}
-Favor dramatic, memorable moments over administrative or minor events.
+Favor dramatic moments over administrative events.
 Return JSON: {{"items": [{{"year": "1941", "text": "Vivid sentence."}}]}}""", max_tokens=400)
-                    items = result.get("items", []) if isinstance(result, dict) else []
-                    valid_years = {{e["year"] for e in events}}
-                    items = [i for i in items if i.get("year","") in valid_years]
-                    this_day = {"items": items[:3]}
-                    print(f"    This Day: {len(this_day['items'])} entries selected")
+                items = result.get("items", []) if isinstance(result, dict) else []
+                valid_years = {e["year"] for e in events}
+                items = [i for i in items if i.get("year","") in valid_years]
+                this_day = {"items": items[:3]}
+                print(f"    This Day: {len(this_day['items'])} entries selected")
     except Exception as e:
         print(f"    This Day in Sports error: {e}")
         this_day = {"items": []}
