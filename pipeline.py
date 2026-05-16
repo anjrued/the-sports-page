@@ -105,7 +105,6 @@ def mlb_games_on(game_date):
     data = api_get(f"{MLB}/schedule", {
         "sportId": 1,
         "date": game_date,
-        "hydrate": "linescore,team",
     })
     games = []
     if not data:
