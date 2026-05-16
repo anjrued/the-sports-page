@@ -551,6 +551,9 @@ def fmt_mlb_leaders_side(season, league_id, label):
 def build_mlb(client, today_str, yesterday_str, mlb_season):
     print("  MLB: fetching data...")
     yesterday_games = mlb_games_on(yesterday_str)
+    # If no Final games yet, keep empty — scheduled 7AM UTC run always catches them
+    if not yesterday_games:
+        print(f"    No Final games for {yesterday_str} — games may still be in progress")
     today_games_raw = mlb_today(today_str)
     standings_raw   = mlb_standings(mlb_season)
     print(f"    {len(yesterday_games)} games yesterday, {len(today_games_raw)} today")
@@ -1551,8 +1554,17 @@ def main():
 
     client = anthropic.Anthropic(api_key=os.environ["ANTHROPIC_API_KEY"])
 
-    today     = now.date().strftime("%Y-%m-%d")
-    yesterday = (now.date() - timedelta(days=1)).strftime("%Y-%m-%d")
+    # Use Eastern Time for dates — MLB games end by midnight ET
+    try:
+        from zoneinfo import ZoneInfo
+        et = ZoneInfo("America/New_York")
+    except ImportError:
+        from datetime import timezone as _tz
+        et = _tz(timedelta(hours=-4))  # EDT fallback
+    now_et    = now.astimezone(et)
+    today     = now_et.date().strftime("%Y-%m-%d")
+    yesterday = (now_et.date() - timedelta(days=1)).strftime("%Y-%m-%d")
+    print(f"  Dates (ET): today={today}, yesterday={yesterday}")
     mlb_s, nba_s, nhl_s = season_ids()
 
     print("Building sections...")
