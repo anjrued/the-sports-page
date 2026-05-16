@@ -1588,15 +1588,20 @@ def main():
         json.dump(output, f, indent=2)
     print(f"\n✓ docs/data.json written ({len(json.dumps(output)):,} bytes)")
 
-    # Generate edition archive files
-    edition_html = generate_edition_html(output, today)
-    if edition_html:
-        os.makedirs("docs/editions", exist_ok=True)
-        edition_path = f"docs/editions/{today}.html"
-        with open(edition_path, "w") as f:
-            f.write(edition_html)
-        print(f"✓ Edition page written: {edition_path}")
-    update_edition_index(output, today)
+    # Generate edition archive files — only once per day
+    os.makedirs("docs/editions", exist_ok=True)
+    edition_path = f"docs/editions/{today}.html"
+    if not os.path.exists(edition_path):
+        edition_html = generate_edition_html(output, today)
+        if edition_html:
+            with open(edition_path, "w") as f:
+                f.write(edition_html)
+            print(f"✓ Edition page written: {edition_path}")
+            update_edition_index(output, today)
+        else:
+            print("  Edition page skipped (generation failed)")
+    else:
+        print(f"  Edition page already exists for {today} — skipping")
     print("✓ Pipeline complete.")
 
 def generate_edition_html(data, date_str):
