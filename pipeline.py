@@ -577,10 +577,15 @@ def build_mlb(client, today_str, yesterday_str, mlb_season):
     # Claude writes story
     print("    Writing MLB story...")
     scores_txt = "; ".join(b["title"] for b in box_scores[:6])
-    story = claude_call(client, f"""Write the lead baseball story for The Sports Page dated {today_str}.
-These are the ACTUAL MLB games from {yesterday_str}: {scores_txt}
-Write ONLY about these specific real games — do not reference any other games or historical events.
-Return JSON: {{"kicker":"BASEBALL","headline":"HEADLINE ALL CAPS","deck":"Under 20 words","byline":"By Andrew Dobrow, Baseball Writer","body":"Three vivid paragraphs separated by \\n\\n."}}""")
+    if scores_txt:
+        mlb_story_prompt = f"""Write the lead baseball story for The Sports Page dated {today_str}.
+Yesterday\'s MLB results ({yesterday_str}): {scores_txt}
+Write about these specific games. Return JSON: {{"kicker":"BASEBALL","headline":"HEADLINE ALL CAPS","deck":"Under 20 words","byline":"By Andrew Dobrow, Baseball Writer","body":"Three vivid paragraphs separated by \\n\\n."}}"""
+    else:
+        mlb_story_prompt = f"""Write a baseball preview/analysis story for The Sports Page dated {today_str}.
+There were no MLB games yesterday. Write about today\'s upcoming games, standings races, or a player/team storyline worth following.
+Return JSON: {{"kicker":"BASEBALL","headline":"HEADLINE ALL CAPS","deck":"Under 20 words","byline":"By Andrew Dobrow, Baseball Writer","body":"Three vivid paragraphs separated by \\n\\n."}}"""
+    story = claude_call(client, mlb_story_prompt)
 
     return {"story": story, "schedule": schedule,
             "boxScores": box_scores, "standings": standings, "leaders": leaders}
@@ -833,9 +838,11 @@ def build_nba(client, today_str, yesterday_str, nba_season):
         f"{g['away'].split()[-1]}s {g['away_score']}, {g['home'].split()[-1]}s {g['home_score']}"
         for g in yesterday_games[:4]
     )
-    story = claude_call(client, f"""Write the lead basketball story for today's Sports Page.
-Yesterday's NBA results: {scores_txt if scores_txt else 'No games yesterday'}
-Return JSON: {{"kicker":"NBA PLAYOFFS","headline":"HEADLINE ALL CAPS","deck":"Under 20 words","byline":"By Andrew Dobrow, Basketball Writer","body":"Three paragraphs separated by \\n\\n."}}""")
+    if scores_txt:
+        nba_prompt = f"Write the lead basketball story for The Sports Page dated {today_str}. Yesterday\'s NBA results: {scores_txt}. Return JSON: {{\"kicker\":\"NBA PLAYOFFS\",\"headline\":\"HEADLINE ALL CAPS\",\"deck\":\"Under 20 words\",\"byline\":\"By Andrew Dobrow, Basketball Writer\",\"body\":\"Three vivid paragraphs separated by \\\\n\\\\n.\"}}"
+    else:
+        nba_prompt = f"Write an NBA playoffs preview for The Sports Page dated {today_str}. No games yesterday — write about upcoming matchups or series storylines. Return JSON: {{\"kicker\":\"NBA PLAYOFFS\",\"headline\":\"HEADLINE ALL CAPS\",\"deck\":\"Under 20 words\",\"byline\":\"By Andrew Dobrow, Basketball Writer\",\"body\":\"Three vivid paragraphs separated by \\\\n\\\\n.\"}}"
+    story = claude_call(client, nba_prompt)
 
     return {"story": story, "schedule": schedule,
             "boxScores": box_scores, "standings": standings, "leaders": leaders}
@@ -1052,9 +1059,11 @@ def build_nhl(client, today_str, yesterday_str, nhl_season_id):
     # Story
     print("    Writing NHL story...")
     scores_txt = "; ".join(b["title"] for b in box_scores[:4])
-    story = claude_call(client, f"""Write the lead hockey story for today's Sports Page.
-Yesterday's NHL results: {scores_txt if scores_txt else 'No games yesterday'}
-Return JSON: {{"kicker":"NHL PLAYOFFS","headline":"HEADLINE ALL CAPS","deck":"Under 20 words","byline":"By Andrew Dobrow, Hockey Writer","body":"Three paragraphs separated by \\n\\n."}}""")
+    if scores_txt:
+        nhl_prompt = f"Write the lead hockey story for The Sports Page dated {today_str}. Yesterday\'s NHL results: {scores_txt}. Return JSON: {{\"kicker\":\"NHL PLAYOFFS\",\"headline\":\"HEADLINE ALL CAPS\",\"deck\":\"Under 20 words\",\"byline\":\"By Andrew Dobrow, Hockey Writer\",\"body\":\"Three vivid paragraphs separated by \\\\n\\\\n.\"}}"
+    else:
+        nhl_prompt = f"Write an NHL playoffs preview for The Sports Page dated {today_str}. No games yesterday — write about upcoming matchups or series storylines. Return JSON: {{\"kicker\":\"NHL PLAYOFFS\",\"headline\":\"HEADLINE ALL CAPS\",\"deck\":\"Under 20 words\",\"byline\":\"By Andrew Dobrow, Hockey Writer\",\"body\":\"Three vivid paragraphs separated by \\\\n\\\\n.\"}}"
+    story = claude_call(client, nhl_prompt)
 
     return {"story": story, "schedule": schedule,
             "boxScores": box_scores, "standings": standings, "leaders": leaders}
