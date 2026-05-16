@@ -2497,6 +2497,12 @@ function buildNav() {
     };
     nav.appendChild(btn);
   });
+  // Archive link (static — links to separate page)
+  const arc = document.createElement('a');
+  arc.href = 'archive.html';
+  arc.className = 'sp-nav-btn';
+  arc.textContent = 'Archive';
+  nav.appendChild(arc);
 }
 
 // ═══════════════════════════════════════════
