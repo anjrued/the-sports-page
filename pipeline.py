@@ -19,6 +19,26 @@ No em-dashes. No first person.
 Use ONLY the byline provided in the JSON template — do not invent other author names.
 Respond ONLY with a valid JSON object. First char { last char }. No markdown, no backticks."""
 
+def fetch_sport_news(sport_path, limit=5):
+    """Fetch latest news headlines from ESPN for a sport."""
+    data = api_get(
+        f"https://site.api.espn.com/apis/site/v2/sports/{sport_path}/news",
+        {"limit": limit}
+    )
+    if not data:
+        return ""
+    headlines = []
+    for article in data.get("articles", [])[:limit]:
+        headline = article.get("headline","")
+        desc = article.get("description","") or article.get("summary","")
+        if headline:
+            entry = f"- {headline}"
+            if desc:
+                entry += f": {desc[:120]}"
+            headlines.append(entry)
+    return chr(10).join(headlines)
+
+
 # ── SHARED HELPERS ────────────────────────────────────────────────────────────
 
 def api_get(url, params=None, headers=None, timeout=20):
@@ -578,13 +598,17 @@ def build_mlb(client, today_str, yesterday_str, mlb_season):
     # Claude writes story
     print("    Writing MLB story...")
     scores_txt = "; ".join(b["title"] for b in box_scores[:6])
+    mlb_news = fetch_sport_news("baseball/mlb")
+    mlb_news_ctx = (chr(10) + "Major MLB news today (use only if genuinely significant):" + chr(10) + mlb_news) if mlb_news else ""
     if scores_txt:
         mlb_story_prompt = f"""Write the lead baseball story for The Sports Page dated {today_str}.
-Yesterday\'s MLB results ({yesterday_str}): {scores_txt}
-Write about these specific games. Return JSON: {{"kicker":"BASEBALL","headline":"HEADLINE ALL CAPS","deck":"Under 20 words","byline":"By Andrew Dobrow, Baseball Writer","body":"Three vivid paragraphs separated by \\n\\n."}}"""
+Yesterday\'s MLB results ({yesterday_str}): {scores_txt}{mlb_news_ctx}
+Only lead with breaking news if it is genuinely major — a star player death, season-ending injury to a franchise player, blockbuster trade, or league suspension. Routine injuries, minor trades, and lineup moves should be ignored. Otherwise always lead with the best game story.
+Return JSON: {{"kicker":"BASEBALL","headline":"HEADLINE ALL CAPS","deck":"Under 20 words","byline":"By Andrew Dobrow, Baseball Writer","body":"Three vivid paragraphs separated by \\n\\n."}}"""
     else:
-        mlb_story_prompt = f"""Write a baseball preview/analysis story for The Sports Page dated {today_str}.
-There were no MLB games yesterday. Write about today\'s upcoming games, standings races, or a player/team storyline worth following.
+        mlb_story_prompt = f"""Write a baseball story for The Sports Page dated {today_str}.
+No games yesterday.{mlb_news_ctx}
+If there is breaking news lead with that, otherwise write a standings or preview piece.
 Return JSON: {{"kicker":"BASEBALL","headline":"HEADLINE ALL CAPS","deck":"Under 20 words","byline":"By Andrew Dobrow, Baseball Writer","body":"Three vivid paragraphs separated by \\n\\n."}}"""
     story = claude_call(client, mlb_story_prompt)
 
@@ -839,10 +863,12 @@ def build_nba(client, today_str, yesterday_str, nba_season):
         f"{g['away'].split()[-1]}s {g['away_score']}, {g['home'].split()[-1]}s {g['home_score']}"
         for g in yesterday_games[:4]
     )
+    nba_news = fetch_sport_news("basketball/nba")
+    nba_news_ctx = f"\nBreaking NBA news today:\n{nba_news}" if nba_news else ""
     if scores_txt:
-        nba_prompt = f"Write the lead basketball story for The Sports Page dated {today_str}. Yesterday\'s NBA results: {scores_txt}. Return JSON: {{\"kicker\":\"NBA PLAYOFFS\",\"headline\":\"HEADLINE ALL CAPS\",\"deck\":\"Under 20 words\",\"byline\":\"By Andrew Dobrow, Basketball Writer\",\"body\":\"Three vivid paragraphs separated by \\\\n\\\\n.\"}}"
+        nba_prompt = f"Write the lead basketball story for The Sports Page dated {today_str}. Yesterday\'s NBA results: {scores_txt}.{nba_news_ctx} Only reference breaking news if it is genuinely major (death, season-ending injury to a star, blockbuster trade). Routine news should be ignored — always prefer a compelling game story. Return JSON: {{\"kicker\":\"NBA PLAYOFFS\",\"headline\":\"HEADLINE ALL CAPS\",\"deck\":\"Under 20 words\",\"byline\":\"By Andrew Dobrow, Basketball Writer\",\"body\":\"Three vivid paragraphs separated by \\\\n\\\\n.\"}}"
     else:
-        nba_prompt = f"Write an NBA playoffs preview for The Sports Page dated {today_str}. No games yesterday — write about upcoming matchups or series storylines. Return JSON: {{\"kicker\":\"NBA PLAYOFFS\",\"headline\":\"HEADLINE ALL CAPS\",\"deck\":\"Under 20 words\",\"byline\":\"By Andrew Dobrow, Basketball Writer\",\"body\":\"Three vivid paragraphs separated by \\\\n\\\\n.\"}}"
+        nba_prompt = f"Write an NBA story for The Sports Page dated {today_str}. No games yesterday.{nba_news_ctx} Lead with breaking news if available, otherwise write a playoff preview. Return JSON: {{\"kicker\":\"NBA PLAYOFFS\",\"headline\":\"HEADLINE ALL CAPS\",\"deck\":\"Under 20 words\",\"byline\":\"By Andrew Dobrow, Basketball Writer\",\"body\":\"Three vivid paragraphs separated by \\\\n\\\\n.\"}}"
     story = claude_call(client, nba_prompt)
 
     return {"story": story, "schedule": schedule,
@@ -1060,10 +1086,12 @@ def build_nhl(client, today_str, yesterday_str, nhl_season_id):
     # Story
     print("    Writing NHL story...")
     scores_txt = "; ".join(b["title"] for b in box_scores[:4])
+    nhl_news = fetch_sport_news("hockey/nhl")
+    nhl_news_ctx = f"\nBreaking NHL news today:\n{nhl_news}" if nhl_news else ""
     if scores_txt:
-        nhl_prompt = f"Write the lead hockey story for The Sports Page dated {today_str}. Yesterday\'s NHL results: {scores_txt}. Return JSON: {{\"kicker\":\"NHL PLAYOFFS\",\"headline\":\"HEADLINE ALL CAPS\",\"deck\":\"Under 20 words\",\"byline\":\"By Andrew Dobrow, Hockey Writer\",\"body\":\"Three vivid paragraphs separated by \\\\n\\\\n.\"}}"
+        nhl_prompt = f"Write the lead hockey story for The Sports Page dated {today_str}. Yesterday\'s NHL results: {scores_txt}.{nhl_news_ctx} Only reference breaking news if it is genuinely major (death, season-ending injury to a star, blockbuster trade). Routine news should be ignored — always prefer a compelling game story. Return JSON: {{\"kicker\":\"NHL PLAYOFFS\",\"headline\":\"HEADLINE ALL CAPS\",\"deck\":\"Under 20 words\",\"byline\":\"By Andrew Dobrow, Hockey Writer\",\"body\":\"Three vivid paragraphs separated by \\\\n\\\\n.\"}}"
     else:
-        nhl_prompt = f"Write an NHL playoffs preview for The Sports Page dated {today_str}. No games yesterday — write about upcoming matchups or series storylines. Return JSON: {{\"kicker\":\"NHL PLAYOFFS\",\"headline\":\"HEADLINE ALL CAPS\",\"deck\":\"Under 20 words\",\"byline\":\"By Andrew Dobrow, Hockey Writer\",\"body\":\"Three vivid paragraphs separated by \\\\n\\\\n.\"}}"
+        nhl_prompt = f"Write an NHL story for The Sports Page dated {today_str}. No games yesterday.{nhl_news_ctx} Lead with breaking news if available, otherwise write a playoff preview. Return JSON: {{\"kicker\":\"NHL PLAYOFFS\",\"headline\":\"HEADLINE ALL CAPS\",\"deck\":\"Under 20 words\",\"byline\":\"By Andrew Dobrow, Hockey Writer\",\"body\":\"Three vivid paragraphs separated by \\\\n\\\\n.\"}}"
     story = claude_call(client, nhl_prompt)
 
     return {"story": story, "schedule": schedule,
@@ -1391,7 +1419,23 @@ def build_front(client, mlb_data, nba_data, nhl_data, nfl_data, today_str='today
     nba_scores = [b["title"] for b in nba_data.get("boxScores",[])[:3]]
     nhl_scores = [b["title"] for b in nhl_data.get("boxScores",[])[:3]]
 
-    nba_ctx = '; '.join(nba_scores) if nba_scores else "NBA Playoffs ongoing — conference semifinals in progress"
+    # Pass already-written sport headlines so front page doesn't duplicate them
+    mlb_hl = mlb_data.get("story",{}).get("headline","")
+    nba_hl = nba_data.get("story",{}).get("headline","")
+    nhl_hl = nhl_data.get("story",{}).get("headline","")
+    nfl_hl = nfl_data.get("story",{}).get("headline","")
+    existing = ", ".join(h for h in [mlb_hl,nba_hl,nhl_hl,nfl_hl] if h)
+
+    # Fetch breaking news for front page context
+    all_news = {}
+    for sport_key, path in [("mlb","baseball/mlb"),("nba","basketball/nba"),("nhl","hockey/nhl"),("nfl","football/nfl")]:
+        news = fetch_sport_news(path, limit=3)
+        if news: all_news[sport_key] = news
+    news_summary = ""
+    if all_news:
+        news_summary = "\nMajor breaking sports news today (only use if genuinely significant — death, star player season-ending injury, blockbuster trade):\n" + "\n".join(f"{k.upper()}: {v}" for k,v in all_news.items())
+
+        nba_ctx = '; '.join(nba_scores) if nba_scores else "NBA Playoffs ongoing — conference semifinals in progress"
     nhl_ctx = '; '.join(nhl_scores) if nhl_scores else "NHL Playoffs ongoing — second round in progress"
     mlb_ctx = '; '.join(mlb_scores) if mlb_scores else "No MLB games yesterday"
 
@@ -1401,12 +1445,13 @@ Sports context:
 MLB (yesterday\'s results): {mlb_ctx}
 NBA Playoffs (May 2026, conference semifinals): {nba_ctx}
 NHL Playoffs (May 2026, second round): {nhl_ctx}
-NFL: Offseason — the 2025 season ended February 2026 with Super Bowl LX
+NFL: Offseason — the 2025 season ended February 2026 with Super Bowl LX{news_summary}
 
 EDITORIAL RULES:
 - Choose the single most newsworthy story across all sports — a walk-off grand slam, a Game 7 win, or a historic pitching performance beats a routine playoff game every time
 - If the NBA or NHL had a dramatic result, that leads. If baseball had the best story, baseball leads. Pick like a real editor.
 - The three secondary stories should cover different sports when possible — avoid running two baseball stories if there is NHL or NBA news
+- The sport section pages already cover these headlines: {existing} — do not repeat the exact same angle; find a fresh frame or different story
 - Write specific journalism with real team names and playoff context
 - It is May 2026. The NBA and NHL playoffs are in the second round. The NFL is in the offseason.
 - Never mention an upcoming Super Bowl or suggest the NFL season is ongoing
