@@ -1562,13 +1562,13 @@ Events: {events_json}
 Return JSON: {{"items": [{{"year": "1980", "text": "One vivid sentence."}}]}}
 Return ONLY the JSON.""", max_tokens=500)
                 items = result.get("items", []) if isinstance(result, dict) else []
-                valid_years = {{e["year"] for e in all_events}}
+                valid_years = {e["year"] for e in all_events}
                 items = [i for i in items if i.get("year","") in valid_years]
-                this_day = {{"items": items[:3]}}
+                this_day = {"items": items[:3]}
                 print(f"    This Day: {len(this_day['items'])} sports entries selected")
     except Exception as e:
         print(f"    This Day in Sports error: {{e}}")
-        this_day = {{"items": []}}
+        this_day = {"items": []}
 
 
     return {
