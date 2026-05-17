@@ -2087,7 +2087,7 @@ function scoreGame(g) {
   </div>`;
 }
 
-function renderSidebar(scores) {
+function renderSidebar(scores, schedule) {
   let html = `<div class="sp-score-col-head">Yesterday's Scores</div>`;
   const sports = ['nba','mlb','nhl'];
   sports.forEach(key => {
@@ -2095,8 +2095,21 @@ function renderSidebar(scores) {
     if (!games.length) return;
     const lbl = {nba:'NBA',mlb:'Baseball',nhl:'Hockey'}[key];
     html += `<div style="font-size:.48rem;font-weight:700;text-transform:uppercase;letter-spacing:1.8px;color:#8B0000;margin:7px 0 2px;border-bottom:1px solid #bbb;padding-bottom:1px">${lbl}</div>`;
-    games.filter(g=>(g.away||g.away_team)&&(g.home||g.home_team)).forEach(g => { html += scoreGame(g); });
+    games.forEach(g => { html += scoreGame(g); });
   });
+  // Fill remaining space with today's schedule
+  if (schedule && schedule.length) {
+    html += `<div style="font-size:.48rem;font-weight:700;text-transform:uppercase;letter-spacing:1.8px;color:#8B0000;margin:10px 0 2px;border-bottom:1px solid #bbb;padding-bottom:1px">Today's Games</div>`;
+    schedule.slice(0,8).forEach(g => {
+      if (!g.away || !g.home) return;
+      html += `<div style="padding:2px 0;border-bottom:1px solid #ddd;font-size:.62rem;font-family:'Libre Baskerville',serif">
+        <div style="display:flex;justify-content:space-between;line-height:1.55">
+          <span style="flex:1">${g.away} at ${g.home}</span>
+        </div>
+        <div style="font-size:.48rem;color:#666;font-style:italic">${g.time||''}</div>
+      </div>`;
+    });
+  }
   return html;
 }
 
@@ -2381,7 +2394,7 @@ function renderEditorsNote() {
   </div>`;
 }
 
-function buildFront(overrides) {
+function buildFront(overrides, liveSchedule) {
   // Use overrides from data.json if available, else use static front data
   const hl  = (overrides && overrides.headline)  || front.headline;
   const sec = (overrides && overrides.secondary) || front.secondary;
@@ -2396,7 +2409,7 @@ function buildFront(overrides) {
         ${renderEditorsNote()}
       </div>
       <div class="sp-score-sidebar">
-        ${renderSidebar(sc)}
+        ${renderSidebar(sc, liveSchedule || mlb.schedule)}
       </div>
     </div>
     <hr class="sp-rule-thin"/>
@@ -2535,7 +2548,7 @@ async function init() {
   document.getElementById('dl-edition').textContent = META.edition;
   document.getElementById('dl-date').textContent    = META.date;
   
-  buildFront(null);
+  buildFront(null, null);
   SECTIONS.filter(s=>s.id!=='front').forEach(s => buildSport(s.id, null));
 
   // Show the paper immediately
@@ -2566,7 +2579,7 @@ async function init() {
     if (d.date)    document.getElementById('dl-date').textContent    = d.date;
     if (d.edition) document.getElementById('dl-edition').textContent = d.edition;
     // Update stories and scores from pipeline
-    if (d.front)   buildFront(d.front);
+    if (d.front)   buildFront(d.front, d.mlb && d.mlb.schedule);
     if (d.mlb)     buildSport('mlb', d.mlb);
     if (d.nba)     buildSport('nba', d.nba);
     if (d.nhl)     buildSport('nhl', d.nhl);
