@@ -873,7 +873,7 @@ a.sp-nav-btn:hover { background: #e8e8e8; color: #111; }
   border-top: 3px solid #111;
   padding: 12px 14px;
   margin: 16px 0;
-  background: #fafafa;
+  background: #f0eeeb;
   font-family: 'Libre Baskerville', Georgia, serif;
 }
 .editors-note-tag {
@@ -2392,12 +2392,13 @@ function buildFront(overrides) {
     <div class="sp-front-grid" style="align-items:start" style="align-items:start">
       <div style="padding-right:18px">
         ${story(hl, 1, 'sp-hl-body')}
+        <hr class="sp-rule-thin" style="border-top:2px solid #111;margin:14px 0"/>
+        ${renderEditorsNote()}
       </div>
       <div class="sp-score-sidebar">
         ${renderSidebar(sc)}
       </div>
     </div>
-    ${renderEditorsNote()}
     <hr class="sp-rule-thin"/>
     <div class="sp-sec-grid">
       ${sec.map(s=>`<div class="sp-sec-story">
