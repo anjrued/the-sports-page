@@ -677,10 +677,6 @@ table.ldr-tbl {
   border-bottom: 3px solid #111;
   overflow-x: auto;
   scrollbar-width: none;
-  position: sticky;
-  top: 0;
-  z-index: 100;
-  background: #fff;
 }
 .sp-nav::-webkit-scrollbar { display: none; }
 .sp-nav-btn {
@@ -873,7 +869,7 @@ a.sp-nav-btn:hover { background: #e8e8e8; color: #111; }
   border-top: 3px solid #111;
   padding: 12px 14px;
   margin: 16px 0;
-  background: #f0eeeb;
+  background: #fafafa;
   font-family: 'Libre Baskerville', Georgia, serif;
 }
 .editors-note-tag {
@@ -2087,7 +2083,7 @@ function scoreGame(g) {
   </div>`;
 }
 
-function renderSidebar(scores, schedule) {
+function renderSidebar(scores) {
   let html = `<div class="sp-score-col-head">Yesterday's Scores</div>`;
   const sports = ['nba','mlb','nhl'];
   sports.forEach(key => {
@@ -2095,21 +2091,8 @@ function renderSidebar(scores, schedule) {
     if (!games.length) return;
     const lbl = {nba:'NBA',mlb:'Baseball',nhl:'Hockey'}[key];
     html += `<div style="font-size:.48rem;font-weight:700;text-transform:uppercase;letter-spacing:1.8px;color:#8B0000;margin:7px 0 2px;border-bottom:1px solid #bbb;padding-bottom:1px">${lbl}</div>`;
-    games.forEach(g => { html += scoreGame(g); });
+    games.filter(g=>(g.away||g.away_team)&&(g.home||g.home_team)).forEach(g => { html += scoreGame(g); });
   });
-  // Fill remaining space with today's schedule
-  if (schedule && schedule.length) {
-    html += `<div style="font-size:.48rem;font-weight:700;text-transform:uppercase;letter-spacing:1.8px;color:#8B0000;margin:10px 0 2px;border-bottom:1px solid #bbb;padding-bottom:1px">Today's Games</div>`;
-    schedule.slice(0,8).forEach(g => {
-      if (!g.away || !g.home) return;
-      html += `<div style="padding:2px 0;border-bottom:1px solid #ddd;font-size:.62rem;font-family:'Libre Baskerville',serif">
-        <div style="display:flex;justify-content:space-between;line-height:1.55">
-          <span style="flex:1">${g.away} at ${g.home}</span>
-        </div>
-        <div style="font-size:.48rem;color:#666;font-style:italic">${g.time||''}</div>
-      </div>`;
-    });
-  }
   return html;
 }
 
@@ -2394,7 +2377,7 @@ function renderEditorsNote() {
   </div>`;
 }
 
-function buildFront(overrides, liveSchedule) {
+function buildFront(overrides) {
   // Use overrides from data.json if available, else use static front data
   const hl  = (overrides && overrides.headline)  || front.headline;
   const sec = (overrides && overrides.secondary) || front.secondary;
@@ -2405,13 +2388,12 @@ function buildFront(overrides, liveSchedule) {
     <div class="sp-front-grid" style="align-items:start" style="align-items:start">
       <div style="padding-right:18px">
         ${story(hl, 1, 'sp-hl-body')}
-        <hr class="sp-rule-thin" style="border-top:2px solid #111;margin:14px 0"/>
-        ${renderEditorsNote()}
       </div>
       <div class="sp-score-sidebar">
-        ${renderSidebar(sc, liveSchedule || mlb.schedule)}
+        ${renderSidebar(sc)}
       </div>
     </div>
+    ${renderEditorsNote()}
     <hr class="sp-rule-thin"/>
     <div class="sp-sec-grid">
       ${sec.map(s=>`<div class="sp-sec-story">
@@ -2548,7 +2530,7 @@ async function init() {
   document.getElementById('dl-edition').textContent = META.edition;
   document.getElementById('dl-date').textContent    = META.date;
   
-  buildFront(null, null);
+  buildFront(null);
   SECTIONS.filter(s=>s.id!=='front').forEach(s => buildSport(s.id, null));
 
   // Show the paper immediately
@@ -2579,7 +2561,7 @@ async function init() {
     if (d.date)    document.getElementById('dl-date').textContent    = d.date;
     if (d.edition) document.getElementById('dl-edition').textContent = d.edition;
     // Update stories and scores from pipeline
-    if (d.front)   buildFront(d.front, d.mlb && d.mlb.schedule);
+    if (d.front)   buildFront(d.front);
     if (d.mlb)     buildSport('mlb', d.mlb);
     if (d.nba)     buildSport('nba', d.nba);
     if (d.nhl)     buildSport('nhl', d.nhl);
