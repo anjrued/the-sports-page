@@ -1602,6 +1602,9 @@ def main():
             print("  Edition page skipped (generation failed)")
     else:
         print(f"  Edition page already exists for {today} — skipping")
+
+    # Generate RSS feed
+    generate_rss("docs/editions/index.json", "docs/feed.xml")
     print("✓ Pipeline complete.")
 
 def generate_edition_html(data, date_str):
@@ -1724,6 +1727,63 @@ def update_edition_index(data, date_str):
     with open(index_path, "w") as f:
         json.dump(index, f, indent=2)
     print(f"  Edition index updated: {len(index['editions'])} editions")
+
+
+def generate_rss(edition_index_path, output_path):
+    """Generate an RSS feed from the edition index."""
+    try:
+        with open(edition_index_path, "r") as f:
+            index = json.load(f)
+    except (FileNotFoundError, json.JSONDecodeError):
+        print("  RSS: no edition index found, skipping")
+        return
+
+    editions = index.get("editions", [])[:30]
+    now_rfc = datetime.now(timezone.utc).strftime("%a, %d %b %Y %H:%M:%S +0000")
+
+    items = []
+    for ed in editions:
+        date_label = ed.get("label", ed.get("date",""))
+        headline   = ed.get("headline","The Sports Page").replace("&","&amp;").replace("<","&lt;").replace(">","&gt;")
+        deck       = ed.get("deck","").replace("&","&amp;").replace("<","&lt;").replace(">","&gt;")
+        url        = f"https://thesportspage.app/{ed.get('url','')}"
+        # Parse date for pubDate
+        try:
+            d = datetime.strptime(ed["date"], "%Y-%m-%d").replace(tzinfo=timezone.utc)
+            pub_date = d.strftime("%a, %d %b %Y 09:00:00 +0000")
+        except Exception:
+            pub_date = now_rfc
+
+        items.append(f"""  <item>
+    <title>{date_label}: {headline}</title>
+    <link>{url}</link>
+    <guid isPermaLink="true">{url}</guid>
+    <pubDate>{pub_date}</pubDate>
+    <description>{deck}</description>
+    <category>Sports</category>
+  </item>""")
+
+    rss = f"""<?xml version="1.0" encoding="UTF-8"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+<channel>
+  <title>The Sports Page</title>
+  <link>https://thesportspage.app</link>
+  <description>Daily sports journalism — box scores, standings, and original stories across MLB, NBA, NHL, and NFL.</description>
+  <language>en-us</language>
+  <lastBuildDate>{now_rfc}</lastBuildDate>
+  <atom:link href="https://thesportspage.app/feed.xml" rel="self" type="application/rss+xml"/>
+  <image>
+    <url>https://thesportspage.app/favicon.ico</url>
+    <title>The Sports Page</title>
+    <link>https://thesportspage.app</link>
+  </image>
+{chr(10).join(items)}
+</channel>
+</rss>"""
+
+    with open(output_path, "w", encoding="utf-8") as f:
+        f.write(rss)
+    print(f"✓ RSS feed written: {output_path} ({len(editions)} items)")
 
 
 if __name__ == "__main__":
