@@ -2497,7 +2497,7 @@ function buildNav() {
       document.querySelectorAll('.sp-nav-btn').forEach(b=>{b.classList.remove('active');b.style.background='';b.style.color='';});
       document.getElementById(s.id).classList.add('active');
       btn.classList.add('active');
-      try { localStorage.setItem('sp-tab', s.id); } catch(e) {}
+      try { const td = new Date().toISOString().slice(0,10); localStorage.setItem('sp-tab', s.id); localStorage.setItem('sp-tab-date', td); } catch(e) {}
     };
     nav.appendChild(btn);
   });
@@ -2525,10 +2525,12 @@ async function init() {
   document.getElementById('loading').style.display = 'none';
   document.getElementById('paper').style.display   = 'block';
 
-  // Restore last active tab
+  // Restore last active tab — only if saved today
   try {
-    const saved = localStorage.getItem('sp-tab');
-    if (saved && document.getElementById(saved)) {
+    const saved     = localStorage.getItem('sp-tab');
+    const savedDate = localStorage.getItem('sp-tab-date');
+    const today     = new Date().toISOString().slice(0,10);
+    if (saved && savedDate === today && document.getElementById(saved)) {
       document.querySelectorAll('.page').forEach(p=>p.classList.remove('active'));
       document.querySelectorAll('.sp-nav-btn').forEach(b=>b.classList.remove('active'));
       document.getElementById(saved).classList.add('active');
