@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+<channel>
+  <title>The Sports Page</title>
+  <link>https://thesportspage.app</link>
+  <description>Daily sports journalism — box scores, standings, and original stories across MLB, NBA, NHL, and NFL.</description>
+  <language>en-us</language>
+  <lastBuildDate>Sun, 17 May 2026 01:58:09 +0000</lastBuildDate>
+  <atom:link href="https://thesportspage.app/feed.xml" rel="self" type="application/rss+xml"/>
+  <image>
+    <url>https://thesportspage.app/favicon.ico</url>
+    <title>The Sports Page</title>
+    <link>https://thesportspage.app</link>
+  </image>
+  <item>
+    <title>Saturday, May 16, 2026: SPURS TORCH WOLVES BY 30, ADVANCE TO CONFERENCE FINALS WITH DOMINANT 139-109 DEMOLITION</title>
+    <link>https://thesportspage.app/editions/2026-05-16.html</link>
+    <guid isPermaLink="true">https://thesportspage.app/editions/2026-05-16.html</guid>
+    <pubDate>Sat, 16 May 2026 09:00:00 +0000</pubDate>
+    <description>San Antonio's offensive explosion sends Minnesota packing as Spurs roll into the final four.</description>
+    <category>Sports</category>
+  </item>
+</channel>
+</rss>
