@@ -5,13 +5,21 @@
   <link>https://thesportspage.app</link>
   <description>Daily sports journalism — box scores, standings, and original stories across MLB, NBA, NHL, and NFL.</description>
   <language>en-us</language>
-  <lastBuildDate>Sun, 17 May 2026 01:58:09 +0000</lastBuildDate>
+  <lastBuildDate>Sun, 17 May 2026 10:25:58 +0000</lastBuildDate>
   <atom:link href="https://thesportspage.app/feed.xml" rel="self" type="application/rss+xml"/>
   <image>
     <url>https://thesportspage.app/favicon.ico</url>
     <title>The Sports Page</title>
     <link>https://thesportspage.app</link>
   </image>
+  <item>
+    <title>Sunday, May 17, 2026: LUUKKONEN SLAMS THE DOOR AS BUFFALO ERUPTS FOR EIGHT TO STAY ALIVE</title>
+    <link>https://thesportspage.app/editions/2026-05-17.html</link>
+    <guid isPermaLink="true">https://thesportspage.app/editions/2026-05-17.html</guid>
+    <pubDate>Sun, 17 May 2026 09:00:00 +0000</pubDate>
+    <description>Sabres rally from early goalie crisis to blast Canadiens 8-3, forcing a winner-take-all Game 7</description>
+    <category>Sports</category>
+  </item>
   <item>
     <title>Saturday, May 16, 2026: SPURS TORCH WOLVES BY 30, ADVANCE TO CONFERENCE FINALS WITH DOMINANT 139-109 DEMOLITION</title>
     <link>https://thesportspage.app/editions/2026-05-16.html</link>

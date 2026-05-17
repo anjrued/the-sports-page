@@ -1,6 +1,18 @@
 {
   "editions": [
     {
+      "date": "2026-05-17",
+      "label": "Sunday, May 17, 2026",
+      "headline": "LUUKKONEN SLAMS THE DOOR AS BUFFALO ERUPTS FOR EIGHT TO STAY ALIVE",
+      "deck": "Sabres rally from early goalie crisis to blast Canadiens 8-3, forcing a winner-take-all Game 7",
+      "kicker": "NHL PLAYOFFS",
+      "sports": [
+        "mlb",
+        "nhl"
+      ],
+      "url": "editions/2026-05-17.html"
+    },
+    {
       "date": "2026-05-16",
       "label": "Saturday, May 16, 2026",
       "headline": "SPURS TORCH WOLVES BY 30, ADVANCE TO CONFERENCE FINALS WITH DOMINANT 139-109 DEMOLITION",
