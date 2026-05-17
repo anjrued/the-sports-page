@@ -2090,15 +2090,18 @@ function scoreGame(g) {
 function renderSidebar(scores) {
   let html = `<div class="sp-score-col-head">Yesterday's Scores</div>`;
   const sports = ['nba','mlb','nhl'];
+  const sectionLabels = {nba:'Basketball',mlb:'Baseball',nhl:'Hockey'};
   sports.forEach(key => {
     const games = (scores[key]||[]).filter(g=>(g.away||g.away_team)&&(g.home||g.home_team));
     if (!games.length) return;
     const lbl = {nba:'NBA',mlb:'Baseball',nhl:'Hockey'}[key];
     html += `<div style="font-size:.48rem;font-weight:700;text-transform:uppercase;letter-spacing:1.8px;color:#8B0000;margin:7px 0 2px;border-bottom:1px solid #bbb;padding-bottom:1px">${lbl}</div>`;
-    games.filter(g=>(g.away||g.away_team)&&(g.home||g.home_team)).forEach(g => { html += scoreGame(g); });
+    games.forEach(g => { html += scoreGame(g); });
+    html += `<div style="font-size:.58rem;font-style:italic;color:#666;text-align:right;padding:3px 0 5px;margin-bottom:2px">See ${sectionLabels[key]} section for more &#8594;</div>`;
   });
   return html;
 }
+
 
 // ── SCHEDULE ────────────────────────────────────────────────────────────────
 function renderSchedule(games, label) {
