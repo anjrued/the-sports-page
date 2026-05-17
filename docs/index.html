@@ -2087,6 +2087,16 @@ function scoreGame(g) {
   </div>`;
 }
 
+function switchTab(id) {
+  document.querySelectorAll('.page').forEach(p=>p.classList.remove('active'));
+  document.querySelectorAll('.sp-nav-btn').forEach(b=>b.classList.remove('active'));
+  document.getElementById(id).classList.add('active');
+  const btn = document.querySelector('.sp-nav-btn[data-id="'+id+'"]');
+  if (btn) btn.classList.add('active');
+  try { localStorage.setItem('sp-tab',id); localStorage.setItem('sp-tab-date',new Date().toISOString().slice(0,10)); } catch(e) {}
+  window.scrollTo(0,0);
+}
+
 function renderSidebar(scores) {
   let html = `<div class="sp-score-col-head">Yesterday's Scores</div>`;
   const sports = ['nba','mlb','nhl'];
@@ -2097,7 +2107,7 @@ function renderSidebar(scores) {
     const lbl = {nba:'NBA',mlb:'Baseball',nhl:'Hockey'}[key];
     html += `<div style="font-size:.48rem;font-weight:700;text-transform:uppercase;letter-spacing:1.8px;color:#8B0000;margin:7px 0 2px;border-bottom:1px solid #bbb;padding-bottom:1px">${lbl}</div>`;
     games.forEach(g => { html += scoreGame(g); });
-    html += `<div style="font-size:.58rem;font-style:italic;color:#666;text-align:right;padding:3px 0 5px;margin-bottom:2px">See ${sectionLabels[key]} section for more &#8594;</div>`;
+    html += '<div style="font-size:.72rem;font-style:italic;text-align:right;padding:4px 0 6px;margin-bottom:2px"><a href="#" onclick="switchTab(\''+key+'\'); return false;" style="color:#8B0000;text-decoration:none;">See ' + sectionLabels[key] + ' Section for More &#8594;</a></div>';
   });
   return html;
 }
