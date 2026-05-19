@@ -1,6 +1,19 @@
 {
   "editions": [
     {
+      "date": "2026-05-19",
+      "label": "Tuesday, May 19, 2026",
+      "headline": "WEMBANYAMA HANDS MVP GILGEOUS-ALEXANDER A LESSON IN OKLAHOMA CITY",
+      "deck": "Spurs stun top-seeded Thunder 122-115, seize Game 1 edge in Western semis",
+      "kicker": "NBA PLAYOFFS",
+      "sports": [
+        "mlb",
+        "nba",
+        "nhl"
+      ],
+      "url": "editions/2026-05-19.html"
+    },
+    {
       "date": "2026-05-18",
       "label": "Monday, May 18, 2026",
       "headline": "WINNER TAKE ALL: SABRES AND CANADIENS MEET IN GAME 7 FOR A SHOT AT THE HURRICANES",

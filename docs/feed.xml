@@ -5,13 +5,21 @@
   <link>https://thesportspage.app</link>
   <description>Daily sports journalism — box scores, standings, and original stories across MLB, NBA, NHL, and NFL.</description>
   <language>en-us</language>
-  <lastBuildDate>Mon, 18 May 2026 13:08:35 +0000</lastBuildDate>
+  <lastBuildDate>Tue, 19 May 2026 09:15:40 +0000</lastBuildDate>
   <atom:link href="https://thesportspage.app/feed.xml" rel="self" type="application/rss+xml"/>
   <image>
     <url>https://thesportspage.app/favicon.ico</url>
     <title>The Sports Page</title>
     <link>https://thesportspage.app</link>
   </image>
+  <item>
+    <title>Tuesday, May 19, 2026: WEMBANYAMA HANDS MVP GILGEOUS-ALEXANDER A LESSON IN OKLAHOMA CITY</title>
+    <link>https://thesportspage.app/editions/2026-05-19.html</link>
+    <guid isPermaLink="true">https://thesportspage.app/editions/2026-05-19.html</guid>
+    <pubDate>Tue, 19 May 2026 09:00:00 +0000</pubDate>
+    <description>Spurs stun top-seeded Thunder 122-115, seize Game 1 edge in Western semis</description>
+    <category>Sports</category>
+  </item>
   <item>
     <title>Monday, May 18, 2026: WINNER TAKE ALL: SABRES AND CANADIENS MEET IN GAME 7 FOR A SHOT AT THE HURRICANES</title>
     <link>https://thesportspage.app/editions/2026-05-18.html</link>
