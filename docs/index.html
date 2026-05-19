@@ -866,6 +866,13 @@ a.sp-nav-btn:hover { background: #e8e8e8; color: #111; }
 }
 @media (max-width: 480px) { .sp-name { font-size: 2.4rem; } }
 
+/* ── EDITORS NOTE PLACEMENT ── */
+.sp-editors-note-mobile { display: none; }
+@media (max-width: 760px) {
+  .sp-editors-note-desktop { display: none; }
+  .sp-editors-note-mobile  { display: block; }
+}
+
 /* ── MOBILE EDITORS NOTE ORDER ── */
 @media (max-width: 760px) {
   .sp-front-wrapper { display: flex; flex-direction: column; }
@@ -2507,7 +2514,7 @@ function buildSport(id, overrides) {
     <div style="padding-bottom:14px;border-bottom:2px solid #111;margin-bottom:14px">
       ${story(storyData, 1, 'sp-hl-body', true)}
     </div>
-    ${renderEditorsNote()}
+    <div class="sp-editors-note-desktop">${renderEditorsNote()}</div>
     ${(schedData&&schedData.filter(g=>g.away&&g.home).length) ? `<div style="margin-bottom:14px">
       ${renderSchedule(schedData.filter(g=>g.away&&g.home), isNFL?'Offseason Calendar':'Today\'s Schedule')}
     </div>` : ''}
@@ -2553,6 +2560,7 @@ function buildSport(id, overrides) {
       </div>`;
     }).join('')}
     </div>
+    <div class="sp-editors-note-mobile">${renderEditorsNote()}</div>
     ${secHead(isNFL?'Final Standings':id==='nba'?'Playoff Standings':'Standings')}
     ${renderStandings(stdsData||[],hasSplit)}
     ${leadersData ? secHead('League Leaders')+renderLeaders(leadersData) : ''}`;
