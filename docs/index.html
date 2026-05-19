@@ -2121,9 +2121,10 @@ function kicker(t) { return t ? `<span class="sp-kicker">${t}</span>` : ''; }
 function story(s, hLevel, bodyClass, collapsible) {
   if (!s) return '';
   const bodyHtml = paras(s.body||''||s.story?.body||'');
+  const uid = collapsible ? 'lead-' + (Math.random().toString(36).slice(2,7)) : '';
   const bodyEl = collapsible
-    ? `<div id="lead-body-${hLevel}" class="sp-body ${bodyClass||''} sp-lead-body-collapsed">${bodyHtml}</div>
-       <button class="sp-lead-expand" id="lead-expand-${hLevel}" onclick="expandLead(${hLevel})">Continue Reading &#8594;</button>`
+    ? `<div id="lb-${uid}" class="sp-body ${bodyClass||''} sp-lead-body-collapsed">${bodyHtml}</div>
+       <button class="sp-lead-expand" onclick="expandLead('${uid}')">Continue Reading &#8594;</button>`
     : `<div class="sp-body ${bodyClass||''}">${bodyHtml}</div>`;
   return `${kicker(s.kicker)}
     <h${hLevel} class="sp-hl-head" style="margin-top:4px">${s.headline||''}</h${hLevel}>
@@ -2132,11 +2133,13 @@ function story(s, hLevel, bodyClass, collapsible) {
     ${bodyEl}`;
 }
 
-function expandLead(hLevel) {
-  const body = document.getElementById('lead-body-'+hLevel);
-  const btn  = document.getElementById('lead-expand-'+hLevel);
-  if (body) { body.classList.remove('sp-lead-body-collapsed'); }
-  if (btn)  { btn.style.display = 'none'; }
+function expandLead(uid) {
+  const body = document.getElementById('lb-'+uid);
+  if (body) {
+    body.classList.remove('sp-lead-body-collapsed');
+    body.nextElementSibling && body.nextElementSibling.classList.contains('sp-lead-expand')
+      ? body.nextElementSibling.style.display = 'none' : null;
+  }
 }
 
 // ── SCORES ───────────────────────────────────────────────────────────────────
