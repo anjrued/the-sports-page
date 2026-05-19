@@ -2521,6 +2521,7 @@ function buildSport(id, overrides) {
     ${(schedData&&schedData.filter(g=>g.away&&g.home).length) ? `<div style="margin-bottom:14px">
       ${renderSchedule(schedData.filter(g=>g.away&&g.home), isNFL?'Offseason Calendar':'Today\'s Schedule')}
     </div>` : ''}
+    <div class="sp-editors-note-mobile">${renderEditorsNote()}</div>
     ${hasBracket ? secHead('Playoff Bracket')+renderBracket(d.bracket) : ''}
     ${secHead(isNFL?'Postseason Results':'Yesterday\'s Box Scores')}
     <div style="display:grid;grid-template-columns:repeat(auto-fill,minmax(320px,1fr));gap:0 20px;align-items:start">
@@ -2563,7 +2564,6 @@ function buildSport(id, overrides) {
       </div>`;
     }).join('')}
     </div>
-    <div class="sp-editors-note-mobile">${renderEditorsNote()}</div>
     ${secHead(isNFL?'Final Standings':id==='nba'?'Playoff Standings':'Standings')}
     ${renderStandings(stdsData||[],hasSplit)}
     ${leadersData ? secHead('League Leaders')+renderLeaders(leadersData) : ''}`;
