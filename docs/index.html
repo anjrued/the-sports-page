@@ -866,6 +866,14 @@ a.sp-nav-btn:hover { background: #e8e8e8; color: #111; }
 }
 @media (max-width: 480px) { .sp-name { font-size: 2.4rem; } }
 
+/* ── MOBILE EDITORS NOTE ORDER ── */
+@media (max-width: 760px) {
+  .sp-front-wrapper { display: flex; flex-direction: column; }
+  .sp-front-wrapper .sp-front-grid { order: 1; }
+  .sp-front-wrapper .editors-note  { order: 3; }
+  .sp-front-wrapper .sp-rule-thin  { order: 3; }
+}
+
 /* ── MOBILE LEAD ARTICLE TRUNCATION ── */
 @media (max-width: 760px) {
   .sp-lead-body-collapsed { max-height: 120px; overflow: hidden; position: relative; }
@@ -2448,7 +2456,8 @@ function buildFront(overrides) {
   const sc  = (overrides && overrides.scores)    || front.scores;
 
   document.getElementById('front').innerHTML = `
-    <div class="sp-front-grid" style="align-items:start" style="align-items:start">
+    <div class="sp-front-wrapper">
+    <div class="sp-front-grid" style="align-items:start">
       <div style="padding-right:18px">
         ${story(hl, 1, 'sp-hl-body', true)}
       </div>
@@ -2458,6 +2467,7 @@ function buildFront(overrides) {
     </div>
     ${renderEditorsNote()}
     <hr class="sp-rule-thin"/>
+    </div>
     <div class="sp-sec-grid">
       ${sec.map(s=>`<div class="sp-sec-story">
         ${kicker(s.kicker)}
