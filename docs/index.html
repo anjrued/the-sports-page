@@ -866,6 +866,40 @@ a.sp-nav-btn:hover { background: #e8e8e8; color: #111; }
 }
 @media (max-width: 480px) { .sp-name { font-size: 2.4rem; } }
 
+/* ── MOBILE LEAD ARTICLE TRUNCATION ── */
+@media (max-width: 760px) {
+  .sp-lead-body-collapsed { max-height: 120px; overflow: hidden; position: relative; }
+  .sp-lead-body-collapsed::after {
+    content: '';
+    position: absolute;
+    bottom: 0; left: 0; right: 0;
+    height: 48px;
+    background: linear-gradient(transparent, #fff);
+    pointer-events: none;
+  }
+  .sp-lead-expand {
+    display: block;
+    font-size: .68rem;
+    font-style: italic;
+    color: #8B0000;
+    text-align: center;
+    padding: 6px 0 4px;
+    cursor: pointer;
+    border-top: 1px solid #e0e0e0;
+    margin-top: 4px;
+    background: none;
+    border-left: none;
+    border-right: none;
+    border-bottom: none;
+    font-family: 'Playfair Display', serif;
+    width: 100%;
+    text-decoration: none;
+  }
+}
+@media (min-width: 761px) {
+  .sp-lead-expand { display: none; }
+}
+
 
 /* ── EDITOR'S NOTE / SUPPORT MODULE ── */
 .editors-note {
@@ -2069,13 +2103,25 @@ function secHead(label) {
   return `<div class="sp-sec-head"><span class="sp-sec-head-red">◆</span>${label}</div>`;
 }
 function kicker(t) { return t ? `<span class="sp-kicker">${t}</span>` : ''; }
-function story(s, hLevel, bodyClass) {
+function story(s, hLevel, bodyClass, collapsible) {
   if (!s) return '';
+  const bodyHtml = paras(s.body||''||s.story?.body||'');
+  const bodyEl = collapsible
+    ? `<div id="lead-body-${hLevel}" class="sp-body ${bodyClass||''} sp-lead-body-collapsed">${bodyHtml}</div>
+       <button class="sp-lead-expand" id="lead-expand-${hLevel}" onclick="expandLead(${hLevel})">Continue Reading &#8594;</button>`
+    : `<div class="sp-body ${bodyClass||''}">${bodyHtml}</div>`;
   return `${kicker(s.kicker)}
     <h${hLevel} class="sp-hl-head" style="margin-top:4px">${s.headline||''}</h${hLevel}>
     ${s.deck   ? `<p class="sp-hl-deck">${s.deck}</p>`    : ''}
     ${s.byline ? `<p class="sp-byline">${s.byline}</p>` : ''}
-    <div class="sp-body ${bodyClass||''}">${paras(s.body||''||s.story?.body||'')}</div>`;
+    ${bodyEl}`;
+}
+
+function expandLead(hLevel) {
+  const body = document.getElementById('lead-body-'+hLevel);
+  const btn  = document.getElementById('lead-expand-'+hLevel);
+  if (body) { body.classList.remove('sp-lead-body-collapsed'); }
+  if (btn)  { btn.style.display = 'none'; }
 }
 
 // ── SCORES ───────────────────────────────────────────────────────────────────
@@ -2404,7 +2450,7 @@ function buildFront(overrides) {
   document.getElementById('front').innerHTML = `
     <div class="sp-front-grid" style="align-items:start" style="align-items:start">
       <div style="padding-right:18px">
-        ${story(hl, 1, 'sp-hl-body')}
+        ${story(hl, 1, 'sp-hl-body', true)}
       </div>
       <div class="sp-score-sidebar">
         ${renderSidebar(sc)}
@@ -2449,7 +2495,7 @@ function buildSport(id, overrides) {
 
   document.getElementById(id).innerHTML = `
     <div style="padding-bottom:14px;border-bottom:2px solid #111;margin-bottom:14px">
-      ${story(storyData, 1, 'sp-hl-body')}
+      ${story(storyData, 1, 'sp-hl-body', true)}
     </div>
     ${renderEditorsNote()}
     ${(schedData&&schedData.filter(g=>g.away&&g.home).length) ? `<div style="margin-bottom:14px">
