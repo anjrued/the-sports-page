@@ -1,6 +1,18 @@
 {
   "editions": [
     {
+      "date": "2026-05-20",
+      "label": "Wednesday, May 20, 2026",
+      "headline": "BRUNSON DRAGS KNICKS PAST CAVS IN OVERTIME THRILLER",
+      "deck": "New York outlasts Cleveland 115-104 in OT to seize Game 1 edge",
+      "kicker": "NBA PLAYOFFS",
+      "sports": [
+        "mlb",
+        "nba"
+      ],
+      "url": "editions/2026-05-20.html"
+    },
+    {
       "date": "2026-05-19",
       "label": "Tuesday, May 19, 2026",
       "headline": "WEMBANYAMA HANDS MVP GILGEOUS-ALEXANDER A LESSON IN OKLAHOMA CITY",

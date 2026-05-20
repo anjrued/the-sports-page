@@ -5,13 +5,21 @@
   <link>https://thesportspage.app</link>
   <description>Daily sports journalism — box scores, standings, and original stories across MLB, NBA, NHL, and NFL.</description>
   <language>en-us</language>
-  <lastBuildDate>Tue, 19 May 2026 09:15:40 +0000</lastBuildDate>
+  <lastBuildDate>Wed, 20 May 2026 09:15:20 +0000</lastBuildDate>
   <atom:link href="https://thesportspage.app/feed.xml" rel="self" type="application/rss+xml"/>
   <image>
     <url>https://thesportspage.app/favicon.ico</url>
     <title>The Sports Page</title>
     <link>https://thesportspage.app</link>
   </image>
+  <item>
+    <title>Wednesday, May 20, 2026: BRUNSON DRAGS KNICKS PAST CAVS IN OVERTIME THRILLER</title>
+    <link>https://thesportspage.app/editions/2026-05-20.html</link>
+    <guid isPermaLink="true">https://thesportspage.app/editions/2026-05-20.html</guid>
+    <pubDate>Wed, 20 May 2026 09:00:00 +0000</pubDate>
+    <description>New York outlasts Cleveland 115-104 in OT to seize Game 1 edge</description>
+    <category>Sports</category>
+  </item>
   <item>
     <title>Tuesday, May 19, 2026: WEMBANYAMA HANDS MVP GILGEOUS-ALEXANDER A LESSON IN OKLAHOMA CITY</title>
     <link>https://thesportspage.app/editions/2026-05-19.html</link>
