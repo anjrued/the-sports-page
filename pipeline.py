@@ -624,13 +624,42 @@ def build_mlb(client, today_str, yesterday_str, mlb_season):
 
     # Claude writes story
     print("    Writing MLB story...")
-    scores_txt = "; ".join(b["title"] for b in box_scores[:6])
+    # Build factual game summaries with linescore context
+    def fmt_game_summary(b):
+        ls = b.get("linescore", {})
+        away = ls.get("away", {})
+        home = ls.get("home", {})
+        away_name = away.get("name", "")
+        home_name = home.get("name", "")
+        away_scores = away.get("scores", [])
+        home_scores = home.get("scores", [])
+        away_r = away.get("r", 0)
+        home_r = home.get("r", 0)
+        # Build inning-by-inning line
+        innings = []
+        for i, (a, h) in enumerate(zip(away_scores, home_scores)):
+            innings.append(f"Inn{i+1}: {a}-{h}")
+        inning_str = ", ".join(innings) if innings else ""
+        notes = b.get("notes", "")
+        return f"{b.get('title','')} | Innings: {inning_str} | Notes: {notes}"
+
+    game_summaries = [fmt_game_summary(b) for b in box_scores[:8]]
+    scores_txt = chr(10).join(game_summaries)
+
     mlb_news = fetch_sport_news("baseball/mlb")
     mlb_news_ctx = (chr(10) + "Major MLB news today (use only if genuinely significant):" + chr(10) + mlb_news) if mlb_news else ""
     if scores_txt:
         mlb_story_prompt = f"""Write the lead baseball story for The Sports Page dated {today_str}.
-Yesterday\'s MLB results ({yesterday_str}): {scores_txt}{mlb_news_ctx}
-Only lead with breaking news if it is genuinely major — a star player death, season-ending injury to a franchise player, blockbuster trade, or league suspension. Routine injuries, minor trades, and lineup moves should be ignored. Otherwise always lead with the best game story.
+Yesterday\'s MLB results ({yesterday_str}) with inning-by-inning scores and game notes:
+{scores_txt}{mlb_news_ctx}
+
+CRITICAL RULES:
+- Write ONLY what the data shows. Do not invent atmosphere, momentum, or narrative not supported by the linescore.
+- If a game was tied late, say so explicitly. If a team scored most runs in one inning, say so.
+- Reference specific innings, players, and stats from the notes provided.
+- Only lead with breaking news if it is genuinely major — a star player death, season-ending injury, blockbuster trade, or league suspension.
+- Otherwise lead with the most interesting game story the data actually tells.
+
 Return JSON: {{"kicker":"BASEBALL","headline":"HEADLINE ALL CAPS","deck":"Under 20 words","byline":"By Jack Mercer","body":"Three vivid paragraphs separated by \\n\\n."}}"""
     else:
         mlb_story_prompt = f"""Write a baseball story for The Sports Page dated {today_str}.
@@ -1141,11 +1170,34 @@ def build_nhl(client, today_str, yesterday_str, nhl_season_id):
 
     # Story
     print("    Writing NHL story...")
-    scores_txt = "; ".join(b["title"] for b in box_scores[:4])
+    # Build factual NHL game summaries with period scores
+    def fmt_nhl_game_summary(b):
+        ls = b.get("linescore", {})
+        away = ls.get("away", {})
+        home = ls.get("home", {})
+        periods = list(zip(away.get("scores",[]), home.get("scores",[])))
+        period_labels = ["P1","P2","P3","OT","SO"]
+        p_str = ", ".join(f"{period_labels[i]}: {a}-{h}" for i,(a,h) in enumerate(periods))
+        notes = b.get("notes", "")
+        return f"{b.get('title','')} | {p_str} | {notes}"
+
+    nhl_game_summaries = chr(10).join(fmt_nhl_game_summary(b) for b in box_scores[:4])
+    scores_txt = nhl_game_summaries if nhl_game_summaries else ""
     nhl_news = fetch_sport_news("hockey/nhl")
     nhl_news_ctx = f"\nBreaking NHL news today:\n{nhl_news}" if nhl_news else ""
     if scores_txt:
-        nhl_prompt = f"Write the lead hockey story for The Sports Page dated {today_str}. Yesterday\'s NHL results: {scores_txt}.{nhl_news_ctx} Only reference breaking news if it is genuinely major (death, season-ending injury to a star, blockbuster trade). Routine news should be ignored — always prefer a compelling game story. Return JSON: {{\"kicker\":\"NHL PLAYOFFS\",\"headline\":\"HEADLINE ALL CAPS\",\"deck\":\"Under 20 words\",\"byline\":\"By Dan Callahan\",\"body\":\"Three vivid paragraphs separated by \\\\n\\\\n.\"}}"
+        nhl_prompt = f"""Write the lead hockey story for The Sports Page dated {today_str}.
+Yesterday\'s NHL results with period-by-period scores:
+{scores_txt}{nhl_news_ctx}
+
+CRITICAL RULES:
+- Write ONLY what the data shows. Do not invent atmosphere or narrative not supported by the period scores.
+- If a game went to overtime, say so and reference when the winning goal came.
+- Reference specific periods, players, and stats from the notes provided.
+- Only lead with breaking news if genuinely major (death, season-ending injury, blockbuster trade).
+- Otherwise lead with the most compelling game story the data actually tells.
+
+Return JSON: {{\"kicker\":\"NHL PLAYOFFS\",\"headline\":\"HEADLINE ALL CAPS\",\"deck\":\"Under 20 words\",\"byline\":\"By Dan Callahan\",\"body\":\"Three vivid paragraphs separated by \\\\n\\\\n.\"}}"""
     else:
         nhl_prompt = f"Write an NHL story for The Sports Page dated {today_str}. No games yesterday.{nhl_news_ctx} Lead with breaking news if available, otherwise write a playoff preview. Return JSON: {{\"kicker\":\"NHL PLAYOFFS\",\"headline\":\"HEADLINE ALL CAPS\",\"deck\":\"Under 20 words\",\"byline\":\"By Dan Callahan\",\"body\":\"Three vivid paragraphs separated by \\\\n\\\\n.\"}}"
     story = claude_call(client, nhl_prompt)
@@ -1471,9 +1523,25 @@ def fmt_espn_nfl_standings(raw):
 
 def build_front(client, mlb_data, nba_data, nhl_data, nfl_data, today_str='today', now_str='today'):
     print("  Writing front page...")
-    mlb_scores = [b["title"] for b in mlb_data.get("boxScores",[])[:5]]
-    nba_scores = [b["title"] for b in nba_data.get("boxScores",[])[:3]]
-    nhl_scores = [b["title"] for b in nhl_data.get("boxScores",[])[:3]]
+    # Build factual game summaries for front page context
+    def front_game_summary(b, sport):
+        ls = b.get("linescore", {})
+        away = ls.get("away", {})
+        home = ls.get("home", {})
+        scores = list(zip(away.get("scores",[]), home.get("scores",[])))
+        if sport == "mlb":
+            labels = [str(i+1) for i in range(len(scores))]
+        elif sport == "nhl":
+            labels = ["P1","P2","P3","OT","SO"][:len(scores)]
+        else:
+            labels = ["Q1","Q2","Q3","Q4","OT"][:len(scores)]
+        s_str = ", ".join(f"{l}:{a}-{h}" for l,(a,h) in zip(labels, scores))
+        notes = b.get("notes","")[:120]
+        return f"{b.get('title','')} [{s_str}] {notes}"
+
+    mlb_scores = [front_game_summary(b,"mlb") for b in mlb_data.get("boxScores",[])[:5]]
+    nba_scores = [front_game_summary(b,"nba") for b in nba_data.get("boxScores",[])[:3]]
+    nhl_scores = [front_game_summary(b,"nhl") for b in nhl_data.get("boxScores",[])[:3]]
 
     # Pass already-written sport headlines so front page doesn't duplicate them
     mlb_hl = mlb_data.get("story",{}).get("headline","")
@@ -1502,6 +1570,12 @@ MLB (yesterday\'s results): {mlb_ctx}
 NBA Playoffs (May 2026, conference semifinals): {nba_ctx}
 NHL Playoffs (May 2026, second round): {nhl_ctx}
 NFL: Offseason — the 2025 season ended February 2026 with Super Bowl LX{news_summary}
+
+CRITICAL FACTUAL RULES:
+- Write ONLY what the game data shows. The linescore context includes period/inning/quarter scores — use them.
+- Do not invent atmosphere, momentum, or narrative not supported by the data.
+- If a game was tied late and decided by a late run/goal/score, say so explicitly.
+- Reference specific innings, quarters, periods, players, and stats from the notes provided.
 
 EDITORIAL RULES:
 - Choose the single most newsworthy story across all sports — a walk-off grand slam, a Game 7 win, or a historic pitching performance beats a routine playoff game every time
@@ -1576,6 +1650,7 @@ def main():
     output = {
         "date":    now.strftime("%A, %B %-d, %Y"),
         "edition": f"Vol. CXLVIII · No. {now.timetuple().tm_yday + 133}",
+        "generated_at": now.strftime("%Y-%m-%dT%H:%M:%SZ"),
         "front":   front,
         "mlb":     mlb,
         "nba":     nba,
@@ -1690,6 +1765,11 @@ window.__EDITION_DATE__ = "{date_str}";
         "fetch('data.json?t='",
         "fetch('../data.json?t='"
     )
+    # Fix nav Archive link to use absolute path
+    base_html = base_html.replace(
+        "arc.href = 'archive.html';",
+        "arc.href = '../archive.html';"
+    )
 
     return base_html
 
@@ -1788,3 +1868,4 @@ def generate_rss(edition_index_path, output_path):
 
 if __name__ == "__main__":
     main()
+
