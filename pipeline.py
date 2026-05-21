@@ -629,19 +629,19 @@ def build_mlb(client, today_str, yesterday_str, mlb_season):
         ls = b.get("linescore", {})
         away = ls.get("away", {})
         home = ls.get("home", {})
-        away_name = away.get("name", "")
-        home_name = home.get("name", "")
+        away_name = away.get("name", "Away")
+        home_name = home.get("name", "Home")
         away_scores = away.get("scores", [])
         home_scores = home.get("scores", [])
         away_r = away.get("r", 0)
         home_r = home.get("r", 0)
-        # Build inning-by-inning line
+        # Build inning-by-inning line with explicit team labels
         innings = []
         for i, (a, h) in enumerate(zip(away_scores, home_scores)):
-            innings.append(f"Inn{i+1}: {a}-{h}")
-        inning_str = ", ".join(innings) if innings else ""
+            innings.append(f"Inn{i+1}: {away_name} {a}, {home_name} {h}")
+        inning_str = " | ".join(innings) if innings else ""
         notes = b.get("notes", "")
-        return f"{b.get('title','')} | Innings: {inning_str} | Notes: {notes}"
+        return f"{b.get('title','')} | AWAY={away_name} FINAL={away_r}, HOME={home_name} FINAL={home_r} | {inning_str} | Notes: {notes}"
 
     game_summaries = [fmt_game_summary(b) for b in box_scores[:8]]
     scores_txt = chr(10).join(game_summaries)
@@ -944,14 +944,37 @@ def build_nba(client, today_str, yesterday_str, nba_season):
 
     # Story
     print("    Writing NBA story...")
-    scores_txt = "; ".join(
-        f"{g['away'].split()[-1]}s {g['away_score']}, {g['home'].split()[-1]}s {g['home_score']}"
+    def fmt_nba_summary(b):
+        ls = b.get("linescore", {})
+        away = ls.get("away", {})
+        home = ls.get("home", {})
+        away_name = away.get("name", "Away")
+        home_name = home.get("name", "Home")
+        quarters = list(zip(away.get("scores",[]), home.get("scores",[])))
+        q_str = ", ".join(f"Q{i+1}: {away_name} {a}, {home_name} {h}" for i,(a,h) in enumerate(quarters))
+        notes = b.get("notes", "")
+        return f"{b.get('title','')} | AWAY={away_name} FINAL={away.get('r',0)}, HOME={home_name} FINAL={home.get('r',0)} | {q_str} | {notes}"
+
+    nba_summaries = [fmt_nba_summary(b) for b in box_scores[:4]] if box_scores else []
+    scores_txt = chr(10).join(nba_summaries) if nba_summaries else "; ".join(
+        f"{g.get('away','')} {g.get('away_score',0)}, {g.get('home','')} {g.get('home_score',0)}"
         for g in yesterday_games[:4]
     )
     nba_news = fetch_sport_news("basketball/nba")
     nba_news_ctx = f"\nBreaking NBA news today:\n{nba_news}" if nba_news else ""
     if scores_txt:
-        nba_prompt = f"Write the lead basketball story for The Sports Page dated {today_str}. Yesterday\'s NBA results: {scores_txt}.{nba_news_ctx} Only reference breaking news if it is genuinely major (death, season-ending injury to a star, blockbuster trade). Routine news should be ignored — always prefer a compelling game story. Return JSON: {{\"kicker\":\"NBA PLAYOFFS\",\"headline\":\"HEADLINE ALL CAPS\",\"deck\":\"Under 20 words\",\"byline\":\"By Marcus Webb\",\"body\":\"Three vivid paragraphs separated by \\\\n\\\\n.\"}}"
+        nba_prompt = f"""Write the lead basketball story for The Sports Page dated {today_str}.
+Yesterday\'s NBA results with quarter-by-quarter scores:
+{scores_txt}{nba_news_ctx}
+
+CRITICAL RULES:
+- Write ONLY what the data shows. Do not invent atmosphere or narrative not supported by the quarter scores.
+- Each line shows AWAY team name, HOME team name, and their scores per quarter — use these explicitly.
+- If a game was close throughout, say so. If one team dominated, say so. If a team came back, say so.
+- Only lead with breaking news if genuinely major (death, season-ending injury, blockbuster trade).
+- Otherwise lead with the most compelling game story the data actually tells.
+
+Return JSON: {{\"kicker\":\"NBA PLAYOFFS\",\"headline\":\"HEADLINE ALL CAPS\",\"deck\":\"Under 20 words\",\"byline\":\"By Marcus Webb\",\"body\":\"Three vivid paragraphs separated by \\\\n\\\\n.\"}}"""
     else:
         nba_prompt = f"Write an NBA story for The Sports Page dated {today_str}. No games yesterday.{nba_news_ctx} Lead with breaking news if available, otherwise write a playoff preview. Return JSON: {{\"kicker\":\"NBA PLAYOFFS\",\"headline\":\"HEADLINE ALL CAPS\",\"deck\":\"Under 20 words\",\"byline\":\"By Marcus Webb\",\"body\":\"Three vivid paragraphs separated by \\\\n\\\\n.\"}}"
     story = claude_call(client, nba_prompt)
@@ -1175,11 +1198,13 @@ def build_nhl(client, today_str, yesterday_str, nhl_season_id):
         ls = b.get("linescore", {})
         away = ls.get("away", {})
         home = ls.get("home", {})
+        away_name = away.get("name", "Away")
+        home_name = home.get("name", "Home")
         periods = list(zip(away.get("scores",[]), home.get("scores",[])))
         period_labels = ["P1","P2","P3","OT","SO"]
-        p_str = ", ".join(f"{period_labels[i]}: {a}-{h}" for i,(a,h) in enumerate(periods))
+        p_str = ", ".join(f"{period_labels[i]}: {away_name} {a}, {home_name} {h}" for i,(a,h) in enumerate(periods))
         notes = b.get("notes", "")
-        return f"{b.get('title','')} | {p_str} | {notes}"
+        return f"{b.get('title','')} | AWAY={away_name} FINAL={away.get('r',0)}, HOME={home_name} FINAL={home.get('r',0)} | {p_str} | {notes}"
 
     nhl_game_summaries = chr(10).join(fmt_nhl_game_summary(b) for b in box_scores[:4])
     scores_txt = nhl_game_summaries if nhl_game_summaries else ""
@@ -1528,6 +1553,8 @@ def build_front(client, mlb_data, nba_data, nhl_data, nfl_data, today_str='today
         ls = b.get("linescore", {})
         away = ls.get("away", {})
         home = ls.get("home", {})
+        away_name = away.get("name", "Away")
+        home_name = home.get("name", "Home")
         scores = list(zip(away.get("scores",[]), home.get("scores",[])))
         if sport == "mlb":
             labels = [str(i+1) for i in range(len(scores))]
@@ -1535,9 +1562,9 @@ def build_front(client, mlb_data, nba_data, nhl_data, nfl_data, today_str='today
             labels = ["P1","P2","P3","OT","SO"][:len(scores)]
         else:
             labels = ["Q1","Q2","Q3","Q4","OT"][:len(scores)]
-        s_str = ", ".join(f"{l}:{a}-{h}" for l,(a,h) in zip(labels, scores))
+        s_str = ", ".join(f"{l}: {away_name} {a}, {home_name} {h}" for l,(a,h) in zip(labels, scores))
         notes = b.get("notes","")[:120]
-        return f"{b.get('title','')} [{s_str}] {notes}"
+        return f"{b.get('title','')} | AWAY={away_name} FINAL={away.get('r',0)}, HOME={home_name} FINAL={home.get('r',0)} | {s_str} | {notes}"
 
     mlb_scores = [front_game_summary(b,"mlb") for b in mlb_data.get("boxScores",[])[:5]]
     nba_scores = [front_game_summary(b,"nba") for b in nba_data.get("boxScores",[])[:3]]
@@ -1868,4 +1895,3 @@ def generate_rss(edition_index_path, output_path):
 
 if __name__ == "__main__":
     main()
-
