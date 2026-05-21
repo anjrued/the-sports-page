@@ -1493,17 +1493,17 @@ const nba = {
       {teams:[{n:"GSW",wins:4,won:true},{n:"SAC",wins:2}],status:"GSW wins 4-2"},
     ]},
     {label:"Conf. Semis",series:[
-      {teams:[{n:"CLE",wins:3},{n:"BOS",wins:3}],status:"Tied 3-3"},
-      {teams:[{n:"NYK",wins:3},{n:"IND",wins:3}],status:"Tied 3-3"},
+      {teams:[{n:"CLE",wins:4,won:true},{n:"BOS",wins:1}],status:"CLE wins 4-1"},
+      {teams:[{n:"NYK",wins:4,won:true},{n:"IND",wins:3}],status:"NYK wins 4-3"},
       {teams:[{n:"OKC",wins:4,won:true},{n:"DEN",wins:1}],status:"OKC wins 4-1"},
-      {teams:[{n:"MIN",wins:3,won:true},{n:"GSW",wins:2}],status:"MIN leads 3-2"},
+      {teams:[{n:"MIN",wins:4,won:true},{n:"GSW",wins:2}],status:"MIN wins 4-2"},
     ]},
     {label:"Conf. Finals",series:[
-      {teams:[{n:"CLE/BOS",wins:0},{n:"NYK/IND",wins:0}],status:"TBD"},
-      {teams:[{n:"OKC",wins:0},{n:"MIN",wins:0}],status:"TBD"},
+      {teams:[{n:"CLE",wins:0},{n:"NYK",wins:0}],status:"Series starts May 19"},
+      {teams:[{n:"OKC",wins:0},{n:"MIN",wins:0}],status:"Series starts May 20"},
     ]},
     {label:"NBA Finals",series:[
-      {teams:[{n:"East",wins:0},{n:"West",wins:0}],status:"TBD — June"},
+      {teams:[{n:"East Champ",wins:0},{n:"West Champ",wins:0}],status:"TBD — June"},
     ]},
   ],
   boxScores:[
@@ -2428,14 +2428,50 @@ function renderLeaders(leaders) {
 // ── BRACKET ──────────────────────────────────────────────────────────────────
 function renderBracket(rounds) {
   if (!rounds||!rounds.length) return '';
-  return `<div class="bracket-wrap">${rounds.map(r=>`
-    <div class="brk-round">
-      <div class="brk-round-lbl">${r.label}</div>
-      ${r.series.map(s=>`<div class="brk-series">
-        ${s.teams.map(t=>`<div class="brk-team${t.won?' won':''}">${t.n}<span>${t.wins}</span></div>`).join('')}
-        <div class="brk-status">${s.status}</div>
-      </div>`).join('')}
-    </div>`).join('')}</div>`;
+  // Identify active round (has at least one series not yet won)
+  const activeRoundIdx = rounds.findIndex(r => r.series.some(s => !s.teams.some(t=>t.won)));
+
+  return `<div style="overflow-x:auto;padding-bottom:8px">
+    <div style="display:flex;gap:0;min-width:600px">
+    ${rounds.map((r, ri) => {
+      const isActive = ri === activeRoundIdx;
+      return `<div style="flex:1;border-right:1px solid #ddd;padding:0 8px;min-width:140px">
+        <div style="font-size:.5rem;font-weight:700;text-transform:uppercase;letter-spacing:1.5px;
+          text-align:center;padding:4px 0;margin-bottom:8px;
+          ${isActive ? 'border-top:3px solid #8B0000;color:#8B0000;' : 'border-top:2px solid #ccc;color:#999;'}">
+          ${r.label}${isActive ? ' ◀ NOW' : ''}
+        </div>
+        ${r.series.map(s => {
+          const t0 = s.teams[0], t1 = s.teams[1];
+          const done = t0.won || t1.won;
+          const active = !done && ri === activeRoundIdx;
+          return `<div style="border:${active ? '2px solid #8B0000' : '1px solid #ddd'};
+            margin-bottom:8px;background:#fff;border-radius:2px;">
+            <div style="display:flex;justify-content:space-between;align-items:center;
+              padding:5px 8px;border-bottom:1px solid #eee;
+              background:${t0.won ? '#111' : '#fff'};
+              color:${t0.won ? '#fff' : '#111'};">
+              <span style="font-size:.68rem;font-weight:${t0.won?'700':'400'}">${t0.n||'TBD'}</span>
+              <span style="font-size:.75rem;font-weight:700;min-width:16px;text-align:right">${t0.wins !== undefined ? t0.wins : ''}</span>
+            </div>
+            <div style="display:flex;justify-content:space-between;align-items:center;
+              padding:5px 8px;
+              background:${t1.won ? '#111' : '#fff'};
+              color:${t1.won ? '#fff' : '#111'};">
+              <span style="font-size:.68rem;font-weight:${t1.won?'700':'400'}">${t1.n||'TBD'}</span>
+              <span style="font-size:.75rem;font-weight:700;min-width:16px;text-align:right">${t1.wins !== undefined ? t1.wins : ''}</span>
+            </div>
+            <div style="font-size:.5rem;color:${active?'#8B0000':'#888'};font-style:italic;
+              text-align:center;padding:3px 6px;background:${active?'#fff8f8':'#f8f8f8'};
+              border-top:1px solid #eee;font-weight:${active?'700':'400'}">
+              ${s.status}
+            </div>
+          </div>`;
+        }).join('')}
+      </div>`;
+    }).join('')}
+    </div>
+  </div>`;
 }
 
 // ═══════════════════════════════════════════
@@ -2522,7 +2558,7 @@ function buildSport(id, overrides) {
       ${renderSchedule(schedData.filter(g=>g.away&&g.home), isNFL?'Offseason Calendar':'Today\'s Schedule')}
     </div>` : ''}
     <div class="sp-editors-note-mobile">${renderEditorsNote()}</div>
-    ${hasBracket ? secHead('Playoff Bracket')+renderBracket(d.bracket) : ''}
+    ${hasBracket ? secHead('Playoff Bracket')+renderBracket((overrides && overrides.bracket) || d.bracket) : ''}
     ${secHead(isNFL?'Postseason Results':'Yesterday\'s Box Scores')}
     <div style="display:grid;grid-template-columns:repeat(auto-fill,minmax(320px,1fr));gap:0 20px;align-items:start">
     ${boxData.map((game,idx)=>{
