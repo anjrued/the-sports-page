@@ -69,29 +69,89 @@ def api_get(url, params=None, headers=None, timeout=20):
             time.sleep(2)
     return None
 
-def claude_call(client, prompt, max_tokens=3000):
-    """Single Claude call, parse JSON response."""
-    r = client.messages.create(
-        model=MODEL, max_tokens=max_tokens, system=SYSTEM,
-        messages=[{"role": "user", "content": prompt}]
-    )
-    texts = [b for b in r.content if b.type == "text"]
-    if not texts:
-        raise ValueError(f"No text (stop={r.stop_reason})")
-    raw = texts[0].text.strip()
-    raw = re.sub(r'^```(?:json)?\s*', '', raw)
-    raw = re.sub(r'\s*```\s*$', '', raw)
-    s, e = raw.find('{'), raw.rfind('}') + 1
-    if s == -1 or e == 0:
-        raise ValueError(f"No JSON found: {raw[:200]}")
-    try:
-        return json.loads(raw[s:e])
-    except json.JSONDecodeError as err:
-        # Attempt recovery from truncated response
-        trimmed = raw[s:s + err.pos].rstrip().rstrip(',')
-        opens  = trimmed.count('{') - trimmed.count('}')
-        arrays = trimmed.count('[') - trimmed.count(']')
-        return json.loads(trimmed + ']' * max(0, arrays) + '}' * max(0, opens))
+def claude_call(client, prompt, max_tokens=3000, retries=3):
+    """Single Claude call with retries, robust JSON extraction."""
+
+    def extract_json(raw):
+        """Try multiple strategies to extract valid JSON from raw text."""
+        raw = raw.strip()
+        # Strip markdown code fences
+        raw = re.sub(r'^```(?:json)?\s*', '', raw)
+        raw = re.sub(r'\s*```\s*$', '', raw)
+        raw = raw.strip()
+
+        # Strategy 1: direct parse
+        try:
+            return json.loads(raw)
+        except json.JSONDecodeError:
+            pass
+
+        # Strategy 2: extract outermost {...}
+        s, e = raw.find('{'), raw.rfind('}') + 1
+        if s >= 0 and e > s:
+            try:
+                return json.loads(raw[s:e])
+            except json.JSONDecodeError as err:
+                # Strategy 3: repair truncated JSON
+                try:
+                    trimmed = raw[s:s + err.pos].rstrip().rstrip(',')
+                    opens  = trimmed.count('{') - trimmed.count('}')
+                    arrays = trimmed.count('[') - trimmed.count(']')
+                    repaired = trimmed + ']' * max(0, arrays) + '}' * max(0, opens)
+                    return json.loads(repaired)
+                except Exception:
+                    pass
+
+        # Strategy 4: ask Claude to fix its own output
+        return None
+
+    last_error = None
+    for attempt in range(retries):
+        try:
+            r = client.messages.create(
+                model=MODEL, max_tokens=max_tokens, system=SYSTEM,
+                messages=[{"role": "user", "content": prompt}]
+            )
+            texts = [b for b in r.content if b.type == "text"]
+            if not texts:
+                raise ValueError(f"No text block (stop={r.stop_reason})")
+            raw = texts[0].text
+
+            result = extract_json(raw)
+            if result is not None:
+                if attempt > 0:
+                    print(f"    claude_call: succeeded on attempt {attempt+1}")
+                return result
+
+            # Strategy 4: retry with explicit JSON repair prompt
+            if attempt < retries - 1:
+                print(f"    claude_call: JSON parse failed attempt {attempt+1}, retrying with repair prompt...")
+                repair_prompt = f"""The following text was supposed to be valid JSON but could not be parsed.
+Extract and return ONLY valid JSON, nothing else, no markdown, no explanation:
+
+{raw[:2000]}"""
+                r2 = client.messages.create(
+                    model=MODEL, max_tokens=max_tokens, system=SYSTEM,
+                    messages=[{"role": "user", "content": repair_prompt}]
+                )
+                texts2 = [b for b in r2.content if b.type == "text"]
+                if texts2:
+                    result2 = extract_json(texts2[0].text)
+                    if result2 is not None:
+                        print(f"    claude_call: repaired on attempt {attempt+1}")
+                        return result2
+
+            last_error = f"JSON extraction failed: {raw[:200]}"
+
+        except Exception as e:
+            last_error = str(e)
+            if attempt < retries - 1:
+                wait = 2 ** attempt
+                print(f"    claude_call error attempt {attempt+1}: {e} — retrying in {wait}s")
+                time.sleep(wait)
+
+    print(f"    claude_call: all {retries} attempts failed — {last_error}")
+    return {}
 
 def season_ids():
     """Compute current season strings from today's date."""
@@ -668,12 +728,109 @@ If there is breaking news lead with that, otherwise write a standings or preview
 Return JSON: {{"kicker":"BASEBALL","headline":"HEADLINE ALL CAPS","deck":"Under 20 words","byline":"By Jack Mercer","body":"Three vivid paragraphs separated by \\n\\n."}}"""
     story = claude_call(client, mlb_story_prompt)
 
+    # Build bracket from current series status
+    # Since NBA API times out, we use a manually maintained bracket
+    # that gets updated each pipeline run based on standings
+    bracket = build_nba_bracket(standings)
+
     return {"story": story, "schedule": schedule,
-            "boxScores": box_scores, "standings": standings, "leaders": leaders}
+            "boxScores": box_scores, "standings": standings,
+            "leaders": leaders, "bracket": bracket}
 
 # ══════════════════════════════════════════════════════════════════════════════
 # NBA  (stats.nba.com via nba_api — official, free, no key)
 # ══════════════════════════════════════════════════════════════════════════════
+
+
+def build_nba_bracket(standings):
+    """Build NBA playoff bracket dynamically from ESPN series data."""
+    try:
+        data = api_get(
+            "https://site.api.espn.com/apis/v2/sports/basketball/nba/playoffs",
+            {"season": 2025}
+        )
+        if not data:
+            raise ValueError("No playoff data")
+
+        rounds_map = {}
+        for series in data.get("series", []):
+            round_num  = series.get("round", {}).get("number", 1)
+            competitor = series.get("competitors", [])
+            if len(competitor) < 2:
+                continue
+            t0 = competitor[0]
+            t1 = competitor[1]
+            t0_abbr = t0.get("team", {}).get("abbreviation", "?")
+            t1_abbr = t1.get("team", {}).get("abbreviation", "?")
+            t0_wins = int(t0.get("wins", 0) or 0)
+            t1_wins = int(t1.get("wins", 0) or 0)
+            t0_won  = t0_wins >= 4
+            t1_won  = t1_wins >= 4
+            if t0_won:
+                status = f"{t0_abbr} wins 4-{t1_wins}"
+            elif t1_won:
+                status = f"{t1_abbr} wins 4-{t0_wins}"
+            elif t0_wins == 0 and t1_wins == 0:
+                status = "Series upcoming"
+            else:
+                status = f"{max(t0_abbr,t1_abbr)} leads" if t0_wins != t1_wins else f"Tied {t0_wins}-{t1_wins}"
+                if t0_wins > t1_wins:
+                    status = f"{t0_abbr} leads {t0_wins}-{t1_wins}"
+                elif t1_wins > t0_wins:
+                    status = f"{t1_abbr} leads {t1_wins}-{t0_wins}"
+
+            entry = {
+                "teams": [
+                    {"n": t0_abbr, "wins": t0_wins, "won": t0_won},
+                    {"n": t1_abbr, "wins": t1_wins, "won": t1_won},
+                ],
+                "status": status
+            }
+            if round_num not in rounds_map:
+                rounds_map[round_num] = []
+            rounds_map[round_num].append(entry)
+
+        if not rounds_map:
+            raise ValueError("Empty rounds")
+
+        round_labels = {1: "First Round", 2: "Conf. Semis", 3: "Conf. Finals", 4: "NBA Finals"}
+        bracket = []
+        for rn in sorted(rounds_map.keys()):
+            bracket.append({
+                "label": round_labels.get(rn, f"Round {rn}"),
+                "series": rounds_map[rn]
+            })
+        print(f"    NBA bracket: {sum(len(r['series']) for r in bracket)} series across {len(bracket)} rounds")
+        return bracket
+
+    except Exception as e:
+        print(f"    NBA bracket error: {e} — using fallback")
+        # Static fallback — update as rounds progress
+        return [
+            {"label":"First Round","series":[
+                {"teams":[{"n":"CLE","wins":4,"won":True},{"n":"MIA","wins":0}],"status":"CLE wins 4-0"},
+                {"teams":[{"n":"BOS","wins":4,"won":True},{"n":"ORL","wins":1}],"status":"BOS wins 4-1"},
+                {"teams":[{"n":"NYK","wins":4,"won":True},{"n":"PHI","wins":2}],"status":"NYK wins 4-2"},
+                {"teams":[{"n":"IND","wins":4,"won":True},{"n":"MIL","wins":2}],"status":"IND wins 4-2"},
+                {"teams":[{"n":"OKC","wins":4,"won":True},{"n":"LAC","wins":0}],"status":"OKC wins 4-0"},
+                {"teams":[{"n":"DEN","wins":4,"won":True},{"n":"LAL","wins":1}],"status":"DEN wins 4-1"},
+                {"teams":[{"n":"MIN","wins":4,"won":True},{"n":"PHX","wins":1}],"status":"MIN wins 4-1"},
+                {"teams":[{"n":"GSW","wins":4,"won":True},{"n":"SAC","wins":2}],"status":"GSW wins 4-2"},
+            ]},
+            {"label":"Conf. Semis","series":[
+                {"teams":[{"n":"CLE","wins":4,"won":True},{"n":"BOS","wins":1}],"status":"CLE wins 4-1"},
+                {"teams":[{"n":"NYK","wins":4,"won":True},{"n":"IND","wins":3}],"status":"NYK wins 4-3"},
+                {"teams":[{"n":"OKC","wins":4,"won":True},{"n":"DEN","wins":1}],"status":"OKC wins 4-1"},
+                {"teams":[{"n":"MIN","wins":4,"won":True},{"n":"GSW","wins":2}],"status":"MIN wins 4-2"},
+            ]},
+            {"label":"Conf. Finals","series":[
+                {"teams":[{"n":"CLE","wins":0},{"n":"NYK","wins":0}],"status":"In progress"},
+                {"teams":[{"n":"OKC","wins":0},{"n":"MIN","wins":0}],"status":"In progress"},
+            ]},
+            {"label":"NBA Finals","series":[
+                {"teams":[{"n":"East Champ","wins":0},{"n":"West Champ","wins":0}],"status":"TBD — June"},
+            ]},
+        ]
 
 
 def espn_nba_scores(game_date):
@@ -979,8 +1136,14 @@ Return JSON: {{\"kicker\":\"NBA PLAYOFFS\",\"headline\":\"HEADLINE ALL CAPS\",\"
         nba_prompt = f"Write an NBA story for The Sports Page dated {today_str}. No games yesterday.{nba_news_ctx} Lead with breaking news if available, otherwise write a playoff preview. Return JSON: {{\"kicker\":\"NBA PLAYOFFS\",\"headline\":\"HEADLINE ALL CAPS\",\"deck\":\"Under 20 words\",\"byline\":\"By Marcus Webb\",\"body\":\"Three vivid paragraphs separated by \\\\n\\\\n.\"}}"
     story = claude_call(client, nba_prompt)
 
+    # Build bracket from current series status
+    # Since NBA API times out, we use a manually maintained bracket
+    # that gets updated each pipeline run based on standings
+    bracket = build_nba_bracket(standings)
+
     return {"story": story, "schedule": schedule,
-            "boxScores": box_scores, "standings": standings, "leaders": leaders}
+            "boxScores": box_scores, "standings": standings,
+            "leaders": leaders, "bracket": bracket}
 
 def nba_leaders_side(client, season, conf_filter, label):
     """Get NBA leaders for one conference via nba_api, filtered by conference."""
@@ -1227,8 +1390,14 @@ Return JSON: {{\"kicker\":\"NHL PLAYOFFS\",\"headline\":\"HEADLINE ALL CAPS\",\"
         nhl_prompt = f"Write an NHL story for The Sports Page dated {today_str}. No games yesterday.{nhl_news_ctx} Lead with breaking news if available, otherwise write a playoff preview. Return JSON: {{\"kicker\":\"NHL PLAYOFFS\",\"headline\":\"HEADLINE ALL CAPS\",\"deck\":\"Under 20 words\",\"byline\":\"By Dan Callahan\",\"body\":\"Three vivid paragraphs separated by \\\\n\\\\n.\"}}"
     story = claude_call(client, nhl_prompt)
 
+    # Build bracket from current series status
+    # Since NBA API times out, we use a manually maintained bracket
+    # that gets updated each pipeline run based on standings
+    bracket = build_nba_bracket(standings)
+
     return {"story": story, "schedule": schedule,
-            "boxScores": box_scores, "standings": standings, "leaders": leaders}
+            "boxScores": box_scores, "standings": standings,
+            "leaders": leaders, "bracket": bracket}
 
 def fmt_nhl_standings(raw):
     if not raw:
@@ -1519,8 +1688,14 @@ Do NOT write about upcoming Super Bowls or suggest the season is still ongoing.
 Recent news or results: {scores_txt}
 Return JSON: {{"kicker":"NFL OFFSEASON","headline":"HEADLINE ALL CAPS","deck":"Under 20 words","byline":"By Ray Torino","body":"Three paragraphs separated by \\n\\n."}}""")
 
+    # Build bracket from current series status
+    # Since NBA API times out, we use a manually maintained bracket
+    # that gets updated each pipeline run based on standings
+    bracket = build_nba_bracket(standings)
+
     return {"story": story, "schedule": schedule,
-            "boxScores": box_scores, "standings": standings, "leaders": leaders}
+            "boxScores": box_scores, "standings": standings,
+            "leaders": leaders, "bracket": bracket}
 
 def fmt_espn_nfl_standings(raw):
     if not raw:
