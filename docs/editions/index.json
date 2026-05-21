@@ -1,6 +1,19 @@
 {
   "editions": [
     {
+      "date": "2026-05-21",
+      "label": "Thursday, May 21, 2026",
+      "headline": "GILGEOUS-ALEXANDER SILENCES SPURS, THUNDER ROAR BACK TO TIE SERIES",
+      "deck": "SGA's 30-point masterclass forces a pivotal Game 3 in San Antonio",
+      "kicker": "NBA PLAYOFFS",
+      "sports": [
+        "mlb",
+        "nba",
+        "nhl"
+      ],
+      "url": "editions/2026-05-21.html"
+    },
+    {
       "date": "2026-05-20",
       "label": "Wednesday, May 20, 2026",
       "headline": "BRUNSON DRAGS KNICKS PAST CAVS IN OVERTIME THRILLER",
