@@ -1202,6 +1202,96 @@ Return JSON: {"kicker":"NBA PLAYOFFS","headline":"HEADLINE","deck":"Deck","bylin
 # ══════════════════════════════════════════════════════════════════════════════
 NHL = "https://api-web.nhle.com/v1"
 
+def build_nhl_bracket():
+    """Build NHL playoff bracket dynamically from ESPN series data."""
+    try:
+        data = api_get(
+            "https://site.api.espn.com/apis/v2/sports/hockey/nhl/playoffs",
+            {"season": 2025}
+        )
+        if not data:
+            raise ValueError("No playoff data")
+
+        rounds_map = {}
+        for series in data.get("series", []):
+            round_num  = series.get("round", {}).get("number", 1)
+            competitors = series.get("competitors", [])
+            if len(competitors) < 2:
+                continue
+            t0 = competitors[0]
+            t1 = competitors[1]
+            t0_abbr = t0.get("team", {}).get("abbreviation", "?")
+            t1_abbr = t1.get("team", {}).get("abbreviation", "?")
+            t0_wins = int(t0.get("wins", 0) or 0)
+            t1_wins = int(t1.get("wins", 0) or 0)
+            t0_won  = t0_wins >= 4
+            t1_won  = t1_wins >= 4
+            if t0_won:
+                status = f"{t0_abbr} wins 4-{t1_wins}"
+            elif t1_won:
+                status = f"{t1_abbr} wins 4-{t0_wins}"
+            elif t0_wins == 0 and t1_wins == 0:
+                status = "Series upcoming"
+            elif t0_wins > t1_wins:
+                status = f"{t0_abbr} leads {t0_wins}-{t1_wins}"
+            elif t1_wins > t0_wins:
+                status = f"{t1_abbr} leads {t1_wins}-{t0_wins}"
+            else:
+                status = f"Tied {t0_wins}-{t1_wins}"
+
+            entry = {
+                "teams": [
+                    {"n": t0_abbr, "wins": t0_wins, "won": t0_won},
+                    {"n": t1_abbr, "wins": t1_wins, "won": t1_won},
+                ],
+                "status": status
+            }
+            if round_num not in rounds_map:
+                rounds_map[round_num] = []
+            rounds_map[round_num].append(entry)
+
+        if not rounds_map:
+            raise ValueError("Empty rounds")
+
+        round_labels = {1: "First Round", 2: "Second Round", 3: "Conf. Finals", 4: "Stanley Cup"}
+        bracket = []
+        for rn in sorted(rounds_map.keys()):
+            bracket.append({
+                "label": round_labels.get(rn, f"Round {rn}"),
+                "series": rounds_map[rn]
+            })
+        print(f"    NHL bracket: {sum(len(r['series']) for r in bracket)} series across {len(bracket)} rounds")
+        return bracket
+
+    except Exception as e:
+        print(f"    NHL bracket error: {e} — using fallback")
+        return [
+            {"label":"First Round","series":[
+                {"teams":[{"n":"FLA","wins":4,"won":True},{"n":"TBL","wins":1}],"status":"FLA wins 4-1"},
+                {"teams":[{"n":"BOS","wins":4,"won":True},{"n":"TOR","wins":1}],"status":"BOS wins 4-1"},
+                {"teams":[{"n":"CAR","wins":4,"won":True},{"n":"NJD","wins":2}],"status":"CAR wins 4-2"},
+                {"teams":[{"n":"WSH","wins":4,"won":True},{"n":"NYR","wins":3}],"status":"WSH wins 4-3"},
+                {"teams":[{"n":"EDM","wins":4,"won":True},{"n":"CGY","wins":0}],"status":"EDM wins 4-0"},
+                {"teams":[{"n":"VAN","wins":4,"won":True},{"n":"NSH","wins":1}],"status":"VAN wins 4-1"},
+                {"teams":[{"n":"DAL","wins":4,"won":True},{"n":"COL","wins":2}],"status":"DAL wins 4-2"},
+                {"teams":[{"n":"WPG","wins":4,"won":True},{"n":"STL","wins":1}],"status":"WPG wins 4-1"},
+            ]},
+            {"label":"Second Round","series":[
+                {"teams":[{"n":"FLA","wins":0},{"n":"BOS","wins":0}],"status":"In progress"},
+                {"teams":[{"n":"CAR","wins":0},{"n":"WSH","wins":0}],"status":"In progress"},
+                {"teams":[{"n":"EDM","wins":0},{"n":"VAN","wins":0}],"status":"In progress"},
+                {"teams":[{"n":"DAL","wins":0},{"n":"WPG","wins":0}],"status":"In progress"},
+            ]},
+            {"label":"Conf. Finals","series":[
+                {"teams":[{"n":"East","wins":0},{"n":"East","wins":0}],"status":"TBD"},
+                {"teams":[{"n":"West","wins":0},{"n":"West","wins":0}],"status":"TBD"},
+            ]},
+            {"label":"Stanley Cup","series":[
+                {"teams":[{"n":"East Champ","wins":0},{"n":"West Champ","wins":0}],"status":"TBD — June"},
+            ]},
+        ]
+
+
 def build_nhl(client, today_str, yesterday_str, nhl_season_id):
     print("  NHL: fetching data...")
 
@@ -1390,10 +1480,7 @@ Return JSON: {{\"kicker\":\"NHL PLAYOFFS\",\"headline\":\"HEADLINE ALL CAPS\",\"
         nhl_prompt = f"Write an NHL story for The Sports Page dated {today_str}. No games yesterday.{nhl_news_ctx} Lead with breaking news if available, otherwise write a playoff preview. Return JSON: {{\"kicker\":\"NHL PLAYOFFS\",\"headline\":\"HEADLINE ALL CAPS\",\"deck\":\"Under 20 words\",\"byline\":\"By Dan Callahan\",\"body\":\"Three vivid paragraphs separated by \\\\n\\\\n.\"}}"
     story = claude_call(client, nhl_prompt)
 
-    # Build bracket from current series status
-    # Since NBA API times out, we use a manually maintained bracket
-    # that gets updated each pipeline run based on standings
-    bracket = build_nba_bracket(standings)
+    bracket = build_nhl_bracket()
 
     return {"story": story, "schedule": schedule,
             "boxScores": box_scores, "standings": standings,
