@@ -1267,24 +1267,24 @@ def build_nhl_bracket():
         print(f"    NHL bracket error: {e} — using fallback")
         return [
             {"label":"First Round","series":[
-                {"teams":[{"n":"FLA","wins":4,"won":True},{"n":"TBL","wins":1}],"status":"FLA wins 4-1"},
-                {"teams":[{"n":"BOS","wins":4,"won":True},{"n":"TOR","wins":1}],"status":"BOS wins 4-1"},
-                {"teams":[{"n":"CAR","wins":4,"won":True},{"n":"NJD","wins":2}],"status":"CAR wins 4-2"},
-                {"teams":[{"n":"WSH","wins":4,"won":True},{"n":"NYR","wins":3}],"status":"WSH wins 4-3"},
-                {"teams":[{"n":"EDM","wins":4,"won":True},{"n":"CGY","wins":0}],"status":"EDM wins 4-0"},
-                {"teams":[{"n":"VAN","wins":4,"won":True},{"n":"NSH","wins":1}],"status":"VAN wins 4-1"},
-                {"teams":[{"n":"DAL","wins":4,"won":True},{"n":"COL","wins":2}],"status":"DAL wins 4-2"},
-                {"teams":[{"n":"WPG","wins":4,"won":True},{"n":"STL","wins":1}],"status":"WPG wins 4-1"},
+                {"teams":[{"n":"CAR","wins":4,"won":True},{"n":"OTT","wins":0}],"status":"CAR wins 4-0"},
+                {"teams":[{"n":"MTL","wins":4,"won":True},{"n":"TBL","wins":3}],"status":"MTL wins 4-3"},
+                {"teams":[{"n":"BUF","wins":4,"won":True},{"n":"BOS","wins":2}],"status":"BUF wins 4-2"},
+                {"teams":[{"n":"PHI","wins":4,"won":True},{"n":"PIT","wins":2}],"status":"PHI wins 4-2"},
+                {"teams":[{"n":"COL","wins":4,"won":True},{"n":"LAK","wins":0}],"status":"COL wins 4-0"},
+                {"teams":[{"n":"VGK","wins":4,"won":True},{"n":"UTA","wins":2}],"status":"VGK wins 4-2"},
+                {"teams":[{"n":"ANA","wins":4,"won":True},{"n":"NSH","wins":2}],"status":"ANA wins 4-2"},
+                {"teams":[{"n":"EDM","wins":4,"won":True},{"n":"CGY","wins":1}],"status":"EDM wins 4-1"},
             ]},
             {"label":"Second Round","series":[
-                {"teams":[{"n":"FLA","wins":0},{"n":"BOS","wins":0}],"status":"In progress"},
-                {"teams":[{"n":"CAR","wins":0},{"n":"WSH","wins":0}],"status":"In progress"},
-                {"teams":[{"n":"EDM","wins":0},{"n":"VAN","wins":0}],"status":"In progress"},
-                {"teams":[{"n":"DAL","wins":0},{"n":"WPG","wins":0}],"status":"In progress"},
+                {"teams":[{"n":"CAR","wins":4,"won":True},{"n":"BUF","wins":0}],"status":"CAR wins 4-0"},
+                {"teams":[{"n":"MTL","wins":4,"won":True},{"n":"PHI","wins":3}],"status":"MTL wins 4-3"},
+                {"teams":[{"n":"COL","wins":4,"won":True},{"n":"MIN","wins":1}],"status":"COL wins 4-1"},
+                {"teams":[{"n":"VGK","wins":4,"won":True},{"n":"ANA","wins":2}],"status":"VGK wins 4-2"},
             ]},
             {"label":"Conf. Finals","series":[
-                {"teams":[{"n":"East","wins":0},{"n":"East","wins":0}],"status":"TBD"},
-                {"teams":[{"n":"West","wins":0},{"n":"West","wins":0}],"status":"TBD"},
+                {"teams":[{"n":"CAR","wins":0},{"n":"MTL","wins":0}],"status":"Series starts May 21"},
+                {"teams":[{"n":"COL","wins":0},{"n":"VGK","wins":0}],"status":"Game 1: VGK wins 4-2"},
             ]},
             {"label":"Stanley Cup","series":[
                 {"teams":[{"n":"East Champ","wins":0},{"n":"West Champ","wins":0}],"status":"TBD — June"},
