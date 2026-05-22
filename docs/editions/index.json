@@ -1,6 +1,19 @@
 {
   "editions": [
     {
+      "date": "2026-05-22",
+      "label": "Friday, May 22, 2026",
+      "headline": "HART ERUPTS FOR 26, KNICKS ONE FOOT IN NBA FINALS",
+      "deck": "Brunson adds 19 points and 14 assists as New York goes up 2-0 on Cleveland",
+      "kicker": "NBA PLAYOFFS",
+      "sports": [
+        "mlb",
+        "nba",
+        "nhl"
+      ],
+      "url": "editions/2026-05-22.html"
+    },
+    {
       "date": "2026-05-21",
       "label": "Thursday, May 21, 2026",
       "headline": "GILGEOUS-ALEXANDER SILENCES SPURS, THUNDER ROAR BACK TO TIE SERIES",
