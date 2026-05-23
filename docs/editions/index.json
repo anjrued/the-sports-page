@@ -1,6 +1,19 @@
 {
   "editions": [
     {
+      "date": "2026-05-23",
+      "label": "Saturday, May 23, 2026",
+      "headline": "MANZARDO WALK-OFF BLAST SILENCES PHILLY IN THE NINTH",
+      "deck": "Cleveland first baseman's fifth homer delivers Guardians a 1-0 stunner at Philadelphia",
+      "kicker": "MLB",
+      "sports": [
+        "mlb",
+        "nba",
+        "nhl"
+      ],
+      "url": "editions/2026-05-23.html"
+    },
+    {
       "date": "2026-05-22",
       "label": "Friday, May 22, 2026",
       "headline": "HART ERUPTS FOR 26, KNICKS ONE FOOT IN NBA FINALS",

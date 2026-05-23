@@ -5,13 +5,21 @@
   <link>https://thesportspage.app</link>
   <description>Daily sports journalism — box scores, standings, and original stories across MLB, NBA, NHL, and NFL.</description>
   <language>en-us</language>
-  <lastBuildDate>Fri, 22 May 2026 09:15:36 +0000</lastBuildDate>
+  <lastBuildDate>Sat, 23 May 2026 09:16:02 +0000</lastBuildDate>
   <atom:link href="https://thesportspage.app/feed.xml" rel="self" type="application/rss+xml"/>
   <image>
     <url>https://thesportspage.app/favicon.ico</url>
     <title>The Sports Page</title>
     <link>https://thesportspage.app</link>
   </image>
+  <item>
+    <title>Saturday, May 23, 2026: MANZARDO WALK-OFF BLAST SILENCES PHILLY IN THE NINTH</title>
+    <link>https://thesportspage.app/editions/2026-05-23.html</link>
+    <guid isPermaLink="true">https://thesportspage.app/editions/2026-05-23.html</guid>
+    <pubDate>Sat, 23 May 2026 09:00:00 +0000</pubDate>
+    <description>Cleveland first baseman's fifth homer delivers Guardians a 1-0 stunner at Philadelphia</description>
+    <category>Sports</category>
+  </item>
   <item>
     <title>Friday, May 22, 2026: HART ERUPTS FOR 26, KNICKS ONE FOOT IN NBA FINALS</title>
     <link>https://thesportspage.app/editions/2026-05-22.html</link>
