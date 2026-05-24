@@ -1,6 +1,19 @@
 {
   "editions": [
     {
+      "date": "2026-05-24",
+      "label": "Sunday, May 24, 2026",
+      "headline": "",
+      "deck": "",
+      "kicker": "",
+      "sports": [
+        "mlb",
+        "nba",
+        "nhl"
+      ],
+      "url": "editions/2026-05-24.html"
+    },
+    {
       "date": "2026-05-23",
       "label": "Saturday, May 23, 2026",
       "headline": "MANZARDO WALK-OFF BLAST SILENCES PHILLY IN THE NINTH",
