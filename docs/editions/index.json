@@ -1,6 +1,19 @@
 {
   "editions": [
     {
+      "date": "2026-05-25",
+      "label": "Monday, May 25, 2026",
+      "headline": "THUNDER SILENCED: SPURS EVEN SERIES WITH DOMINANT GAME 4 ROUT",
+      "deck": "San Antonio holds Oklahoma City to 82 points as series heads to Game 5 tied 2-2",
+      "kicker": "NBA PLAYOFFS",
+      "sports": [
+        "mlb",
+        "nba",
+        "nhl"
+      ],
+      "url": "editions/2026-05-25.html"
+    },
+    {
       "date": "2026-05-24",
       "label": "Sunday, May 24, 2026",
       "headline": "",

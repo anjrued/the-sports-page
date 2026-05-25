@@ -5,13 +5,21 @@
   <link>https://thesportspage.app</link>
   <description>Daily sports journalism — box scores, standings, and original stories across MLB, NBA, NHL, and NFL.</description>
   <language>en-us</language>
-  <lastBuildDate>Sun, 24 May 2026 09:14:57 +0000</lastBuildDate>
+  <lastBuildDate>Mon, 25 May 2026 09:15:35 +0000</lastBuildDate>
   <atom:link href="https://thesportspage.app/feed.xml" rel="self" type="application/rss+xml"/>
   <image>
     <url>https://thesportspage.app/favicon.ico</url>
     <title>The Sports Page</title>
     <link>https://thesportspage.app</link>
   </image>
+  <item>
+    <title>Monday, May 25, 2026: THUNDER SILENCED: SPURS EVEN SERIES WITH DOMINANT GAME 4 ROUT</title>
+    <link>https://thesportspage.app/editions/2026-05-25.html</link>
+    <guid isPermaLink="true">https://thesportspage.app/editions/2026-05-25.html</guid>
+    <pubDate>Mon, 25 May 2026 09:00:00 +0000</pubDate>
+    <description>San Antonio holds Oklahoma City to 82 points as series heads to Game 5 tied 2-2</description>
+    <category>Sports</category>
+  </item>
   <item>
     <title>Sunday, May 24, 2026: </title>
     <link>https://thesportspage.app/editions/2026-05-24.html</link>
