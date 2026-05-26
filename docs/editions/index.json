@@ -1,6 +1,19 @@
 {
   "editions": [
     {
+      "date": "2026-05-26",
+      "label": "Tuesday, May 26, 2026",
+      "headline": "KNICKS ROLL INTO NBA FINALS WITH 130-93 DEMOLITION OF CAVALIERS",
+      "deck": "New York completes sweep, reaches Finals for first time since 1999",
+      "kicker": "NBA PLAYOFFS",
+      "sports": [
+        "mlb",
+        "nba",
+        "nhl"
+      ],
+      "url": "editions/2026-05-26.html"
+    },
+    {
       "date": "2026-05-25",
       "label": "Monday, May 25, 2026",
       "headline": "THUNDER SILENCED: SPURS EVEN SERIES WITH DOMINANT GAME 4 ROUT",
